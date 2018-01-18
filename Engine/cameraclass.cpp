@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "cameraclass.h"
 
+CameraClass* CameraClass::activeCamera = 0;
 
 CameraClass::CameraClass()
 {
@@ -15,6 +16,7 @@ CameraClass::CameraClass()
 	m_rotationZ = 0.0f;
 	m_baseViewMatrix = XMMATRIX();
 	m_viewMatrix = XMMATRIX();
+	m_position = XMFLOAT3();
 }
 
 
@@ -30,6 +32,9 @@ CameraClass::~CameraClass()
 
 void CameraClass::SetPosition(float x, float y, float z)
 {
+	m_position.x = x;
+	m_position.y = y;
+	m_position.z = z;
 	m_positionX = x;
 	m_positionY = y;
 	m_positionZ = z;
@@ -49,7 +54,7 @@ void CameraClass::SetRotation(float x, float y, float z)
 
 XMFLOAT3 CameraClass::GetPosition()
 {
-	return XMFLOAT3(m_positionX, m_positionY, m_positionZ);
+	return m_position;
 }
 
 
@@ -178,4 +183,14 @@ void CameraClass::GetBaseViewMatrix(XMMATRIX& viewMatrix)
 {
 	viewMatrix = m_baseViewMatrix;
 	return;
+}
+
+CameraClass* CameraClass::GetActiveCamera()
+{
+	return activeCamera;
+}
+
+void CameraClass::SetActiveCamera()
+{
+	activeCamera = this;
 }

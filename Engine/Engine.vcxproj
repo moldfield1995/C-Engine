@@ -58,6 +58,7 @@
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="PeformanceMonerting.h" />
     <ClInclude Include="positionclass.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="shadermanagerclass.h" />
     <ClInclude Include="skydomeclass.h" />
     <ClInclude Include="skydomeshaderclass.h" />

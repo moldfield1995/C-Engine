@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "d3dclass.h"
 
+D3DClass* D3DClass::instance = 0;
 
 D3DClass::D3DClass()
 {
@@ -460,6 +461,7 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
 	{
 		return false;
 	}
+	instance = this;
     return true;
 }
 
@@ -741,4 +743,9 @@ void D3DClass::DisableWireframe()
 	m_deviceContext->RSSetState(m_rasterState);
 
 	return;
+}
+
+D3DClass * D3DClass::GetInstance()
+{
+	return instance;
 }

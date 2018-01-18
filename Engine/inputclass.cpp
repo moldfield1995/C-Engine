@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "inputclass.h"
 
+InputClass* InputClass::instance = 0;
 
 InputClass::InputClass()
 {
@@ -108,6 +109,7 @@ bool InputClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidth, int
 	m_PlusToggle = false;
 	m_AToggle = false;
 	m_ZToggle = false;
+	instance = this;
 	return true;
 }
 
@@ -234,6 +236,11 @@ void InputClass::ProcessInput()
 	}
 
 	return;
+}
+
+InputClass* InputClass::GetInstance()
+{
+	return instance;
 }
 
 

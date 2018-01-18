@@ -2,7 +2,7 @@
 // Filename: shadermanagerclass.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "shadermanagerclass.h"
-
+ShaderManagerClass* ShaderManagerClass::instance = 0;
 
 ShaderManagerClass::ShaderManagerClass()
 {
@@ -14,6 +14,7 @@ ShaderManagerClass::ShaderManagerClass()
 	m_TerrainShader = 0;
 	m_LightShader = 0;
 	m_LightShading = 0;
+	
 }
 
 
@@ -30,8 +31,16 @@ ShaderManagerClass::~ShaderManagerClass()
 bool ShaderManagerClass::Initialize(ID3D11Device* device, HWND hwnd)
 {
 	bool result;
-
-
+	m_shaders = vector<Shader*>();
+	CreateShader(new ColorShaderClass, device, hwnd);
+	CreateShader(new TextureShaderClass, device, hwnd);
+	CreateShader(new LightShaderClass, device, hwnd);
+	CreateShader(new FontShaderClass, device, hwnd);
+	CreateShader(new TerrainShaderClass, device, hwnd);
+	CreateShader(new LightShader, device, hwnd);
+	CreateShader(new BumpMapShaderClass, device, hwnd);
+	CreateShader(new SkyDomeShaderClass, device, hwnd);
+	instance = this;
 	// Create the color shader object.
 	m_ColorShader = new ColorShaderClass;
 	if(!m_ColorShader)
@@ -41,7 +50,7 @@ bool ShaderManagerClass::Initialize(ID3D11Device* device, HWND hwnd)
 
 	// Initialize the color shader object.
 	result = m_ColorShader->Initialize(device, hwnd);
-	if(!result)
+	if(!m_ColorShader)
 	{
 		return false;
 	}
@@ -203,7 +212,7 @@ bool ShaderManagerClass::RenderColorShader(ID3D11DeviceContext* deviceContext, i
 bool ShaderManagerClass::RenderTextureShader(ID3D11DeviceContext* deviceContext, int indexCount, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, 
 											 const XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* texture)
 {
-	return m_TextureShader->Render(deviceContext, indexCount, worldMatrix, viewMatrix, projectionMatrix, texture);
+	return m_TextureShader->Render(deviceContext, indexCount, worldMatrix, viewMatrix, projectionMatrix, texture,0);
 }
 
 
@@ -255,3 +264,19 @@ bool ShaderManagerClass::RenderBumpMapShader(ID3D11DeviceContext* deviceContext,
 	result = m_bumpmapShader->Render(deviceContext, indexCount, worldMatrix, viewMatrix, projectionMatrix, colorTexture, normalMapTexture, lightDirection, diffuseColor, ambientColor);
 	return result;
 }
+
+bool ShaderManagerClass::CreateShader(Shader * shader, ID3D11Device* device, HWND hwnd)
+{
+	if (!shader)
+		return false;
+	if (!shader->Initialize(device,hwnd))
+		return false;
+	m_shaders.push_back(shader);
+	return true;
+}
+
+ShaderManagerClass * ShaderManagerClass::GetInstance()
+{
+	return instance;
+}
+

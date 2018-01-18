@@ -49,6 +49,25 @@ void TerrainShaderClass::Shutdown()
 	return;
 }
 
+bool TerrainShaderClass::Render(ID3D11DeviceContext * context, int indexCount, const XMMATRIX & worldMatrix, const XMMATRIX & viewMatrix, const XMMATRIX & projectionMatrix, ID3D11ShaderResourceView * textures, LightClass * light, XMFLOAT4* colour)
+{
+	bool result;
+
+
+	// Set the shader parameters that it will use for rendering.
+	result = SetShaderParameters(context, worldMatrix, viewMatrix, projectionMatrix, textures,
+		light->GetDirection(), light->GetDiffuseColor());
+	if (!result)
+	{
+		return false;
+	}
+
+	// Now render the prepared buffers with the shader.
+	RenderShader(context, indexCount);
+
+	return true;
+}
+
 
 bool TerrainShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix,
 								const XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* texture, ID3D11ShaderResourceView* normalMap,
@@ -355,6 +374,71 @@ void TerrainShaderClass::OutputShaderErrorMessage(ID3D10Blob* errorMessage, HWND
 	MessageBox(hwnd, L"Error compiling shader.  Check shader-error.txt for message.", shaderFilename, MB_OK);
 
 	return;
+}
+
+bool TerrainShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix,
+	const XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* textures,
+	XMFLOAT3 lightDirection, XMFLOAT4 diffuseColor)
+{
+	HRESULT result;
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+	MatrixBufferType* dataPtr;
+	unsigned int bufferNumber;
+	LightBufferType* dataPtr2;
+
+	// Xu's test line. Lock the constant buffer so it can be written to.
+	result = deviceContext->Map(m_matrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Xu's test line. Get a pointer to the data in the constant buffer.
+	dataPtr = (MatrixBufferType*)mappedResource.pData;
+
+	// Transpose the matrices to prepare them for the shader.
+	// Copy the matrices into the constant buffer.
+	dataPtr->world = XMMatrixTranspose(worldMatrix);
+	dataPtr->view = XMMatrixTranspose(viewMatrix);
+	dataPtr->projection = XMMatrixTranspose(projectionMatrix);
+
+	// Unlock the constant buffer.
+	deviceContext->Unmap(m_matrixBuffer, 0);
+
+	// Set the position of the constant buffer in the vertex shader.
+	bufferNumber = 0;
+
+	// Finanly set the constant buffer in the vertex shader with the updated values.
+	deviceContext->VSSetConstantBuffers(bufferNumber, 1, &m_matrixBuffer);
+
+	// Set shader texture resources in the pixel shader.
+	deviceContext->PSSetShaderResources(0, 4, &textures);
+
+	// Lock the light constant buffer so it can be written to.
+	result = deviceContext->Map(m_lightBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Get a pointer to the data in the light constant buffer.
+	dataPtr2 = (LightBufferType*)mappedResource.pData;
+
+	// Copy the lighting variables into the constant buffer.
+	dataPtr2->diffuseColor = diffuseColor;
+	dataPtr2->lightDirection = lightDirection;
+	dataPtr2->padding = 0.0f;
+
+	// Unlock the light constant buffer.
+	deviceContext->Unmap(m_lightBuffer, 0);
+
+	// Set the position of the light constant buffer in the pixel shader.
+	bufferNumber = 0;
+
+	// Finally set the light constant buffer in the pixel shader with the updated values.
+	deviceContext->PSSetConstantBuffers(bufferNumber, 1, &m_lightBuffer);
+
+	return true;
 }
 
 

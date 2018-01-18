@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "texturemanagerclass.h"
 
+TextureManagerClass* TextureManagerClass::instance = 0;
 
 TextureManagerClass::TextureManagerClass()
 {
@@ -25,12 +26,7 @@ bool TextureManagerClass::Initialize()//int count)
 	//m_textureCount = count;
 	textures = std::map<int, TextureClass*>();
 	storedTextures = std::vector<int>();
-	/* Create the color texture object.
-	m_TextureArray = new TextureClass[m_textureCount];
-	if(!m_TextureArray)
-	{
-		return false;
-	}//*/
+	instance = this;
 
 	return true;
 }
@@ -94,4 +90,9 @@ bool TextureManagerClass::TextureLoaded(int id)
 std::vector<int> TextureManagerClass::GetTextureList()
 {
 	return storedTextures;
+}
+
+TextureManagerClass * TextureManagerClass::GetInstance()
+{
+	return instance;
 }

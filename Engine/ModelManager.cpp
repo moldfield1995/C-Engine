@@ -1,5 +1,6 @@
 #include "ModelManager.h"
 
+ModelManager* ModelManager::instance = 0;
 
 ModelManager::ModelManager()
 {
@@ -24,6 +25,7 @@ void ModelManager::Initalize()
 {
 	models = std::map<int, ModelClass*>();
 	storedModdels = std::vector<int>();
+	instance = this;
 }
 
 void ModelManager::Render(ID3D11DeviceContext* deviceContex, int id)
@@ -37,6 +39,13 @@ void ModelManager::AddModle(ID3D11Device* device, char* filePath, int id,HitBoxT
 	NewModel->Initialize(device, filePath,hitboxType,hitboxSize);
 	models[id] = NewModel;
 	storedModdels.push_back(id);
+}
+
+ModelClass * ModelManager::GetModel(int id)
+{
+	if (models.find(id) != models.end())
+		return models[id];
+	return nullptr;
 }
 
 bool ModelManager::ModelLoaded(int id)
@@ -75,4 +84,9 @@ float3 ModelManager::GetHitbox(int id)
 HitBoxType ModelManager::GetHitBoxType(int id)
 {
 	return models[id]->GetHitBoxType();
+}
+
+ModelManager * ModelManager::GetInstance()
+{
+	return instance;
 }

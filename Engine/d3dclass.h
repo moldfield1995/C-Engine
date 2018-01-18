@@ -42,6 +42,8 @@ public:
 	bool Initialize(int, int, bool, HWND, bool, float, float);
 	void Shutdown();
 	
+	
+
 	void BeginScene(float, float, float, float);
 	void EndScene();
 
@@ -68,6 +70,8 @@ public:
 	void DisableWireframe();
 
 private:
+	static D3DClass* instance;
+
 	bool m_vsync_enabled;
 	int m_videoCardMemory;
 	char m_videoCardDescription[128];
@@ -88,6 +92,8 @@ private:
 	ID3D11BlendState* m_alphaEnableBlendingState;
 	ID3D11BlendState* m_alphaDisableBlendingState;
 	ID3D11BlendState* m_alphaEnableBlendingState2;
+public:
+	static D3DClass* GetInstance();
 };
 
 #endif

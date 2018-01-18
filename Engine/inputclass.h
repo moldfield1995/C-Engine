@@ -34,6 +34,7 @@ public:
 	InputClass(const InputClass&);
 	~InputClass();
 
+
 	bool Initialize(HINSTANCE, HWND, int, int);
 	void Shutdown();
 	bool Frame();
@@ -72,6 +73,8 @@ private:
 	void ProcessInput();
 
 private:
+	static InputClass* instance;
+
 	IDirectInput8* m_directInput;
 	IDirectInputDevice8* m_keyboard;
 	IDirectInputDevice8* m_mouse;
@@ -93,6 +96,8 @@ private:
 	bool m_MinusToggle;
 	bool m_AToggle;
 	bool m_ZToggle;
+public:
+	static InputClass* GetInstance();
 };
 
 #endif

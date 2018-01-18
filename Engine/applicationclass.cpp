@@ -300,11 +300,11 @@ void ApplicationClass::loadMainLevel()
 	m_loadingScreen->Initialize(m_Direct3D, m_ScreenWidth, m_ScreenHeight, SCREEN_DEPTH, m_TextureManager, m_ModelManager, m_AudioManager);
 	m_BackBuffer = m_FrountBuffer; // Put the menu on the backBuffer
 	m_FrountBuffer = new ZoneClass();
-	thread lodingScreenFrame (RunLoadingScreen,m_Direct3D,m_Input,m_ShaderManager,m_TextureManager,m_ModelManager, m_Timer->GetTime(), m_Fps->GetFps(), m_loadingScreen, m_FrountBuffer, m_AudioManager); // this starts when you construct it
+	//thread lodingScreenFrame (RunLoadingScreen,m_Direct3D,m_Input,m_ShaderManager,m_TextureManager,m_ModelManager, m_Timer->GetTime(), m_Fps->GetFps(), m_loadingScreen, m_FrountBuffer, m_AudioManager); // this starts when you construct it
 	thread InitilizeLevel(InitaliseLevel,m_Direct3D, m_ScreenWidth, m_ScreenHeight, SCREEN_DEPTH, m_TextureManager, m_ModelManager, m_FrountBuffer, m_AudioManager);
 	InitilizeLevel.join();
 	m_loadingScreen->SetRunning(false);//notify lodingscreen to stop
-	lodingScreenFrame.join();
+	//lodingScreenFrame.join();
 	m_loadingScreen->Shutdown();
 }
 

@@ -44,11 +44,16 @@ public:
 	void RenderBaseViewMatrix();
 	void GetBaseViewMatrix(XMMATRIX&);
 
+	static CameraClass* GetActiveCamera();
+	void SetActiveCamera();
 private:
+	XMFLOAT3 m_position;
 	float m_positionX, m_positionY, m_positionZ;
 	float m_rotationX, m_rotationY, m_rotationZ;
 
 	XMMATRIX m_viewMatrix, m_baseViewMatrix;
+
+	static CameraClass* activeCamera;
 };
 
 #endif

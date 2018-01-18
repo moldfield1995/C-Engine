@@ -2,8 +2,8 @@
 // Filename: zoneclass.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "zoneclass.h"
-
-
+#include "lightshader.h"
+#include "bumpmapshaderclass.h"
 ZoneClass::ZoneClass()
 {
 	m_UserInterface = 0;
@@ -30,30 +30,31 @@ bool ZoneClass::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight
 {
 	bool result;
 	int loadAmount = 0;
-	result = textureManager->LoadTexture(Direct3D->GetDevice(), Direct3D->GetDeviceContext(), "../Engine/data/textures/rock01d.tga", 0);
+	ID3D11Device* device = Direct3D->GetDevice();
+	result = textureManager->LoadTexture(device, Direct3D->GetDeviceContext(), "../Engine/data/textures/rock01d.tga", 0);
 	if (!result)
 	{
 		return false;
 	}
 
-	result = textureManager->LoadTexture(Direct3D->GetDevice(), Direct3D->GetDeviceContext(), "../Engine/data/textures/rock01n.tga", 1);
+	result = textureManager->LoadTexture(device, Direct3D->GetDeviceContext(), "../Engine/data/textures/rock01n.tga", 1);
 	if (!result)
 	{
 		return false;
 	}
 
-	result = textureManager->LoadTexture(Direct3D->GetDevice(), Direct3D->GetDeviceContext(), "../Engine/data/textures/snow01n.tga", 2);
+	result = textureManager->LoadTexture(device, Direct3D->GetDeviceContext(), "../Engine/data/textures/snow01n.tga", 2);
 	if (!result)
 	{
 		return false;
 	}
 
-	result = textureManager->LoadTexture(Direct3D->GetDevice(), Direct3D->GetDeviceContext(), "../Engine/data/textures/distance01n.tga", 3);
+	result = textureManager->LoadTexture(device, Direct3D->GetDeviceContext(), "../Engine/data/textures/distance01n.tga", 3);
 	if (!result)
 	{
 		return false;
 	}
-	result = textureManager->LoadTexture(Direct3D->GetDevice(), Direct3D->GetDeviceContext(), "../Engine/data/textures/debug.tga", 404);
+	result = textureManager->LoadTexture(device, Direct3D->GetDeviceContext(), "../Engine/data/textures/debug.tga", 404);
 	if (!result)
 	{
 		return false;
@@ -129,7 +130,7 @@ bool ZoneClass::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight
 	}
 
 	// Initialize the sky dome object.
-	result = m_SkyDome->Initialize(Direct3D->GetDevice());
+	result = m_SkyDome->Initialize(device);
 	if (!result)
 	{
 		return false;
@@ -144,7 +145,7 @@ bool ZoneClass::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight
 	}
 
 	// Initialize the terrain object.
-	result = m_Terrain->Initialize(Direct3D->GetDevice(), "../Engine/data/setup.txt");
+	result = m_Terrain->Initialize(device, "../Engine/data/setup.txt");
 	if (!result)
 	{
 		return false;
@@ -163,37 +164,37 @@ bool ZoneClass::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight
 
 	// Set the user locked to the terrain height for movement.
 	m_heightLocked = true;
-	result = textureManager->LoadTexture(Direct3D->GetDevice(), Direct3D->GetDeviceContext(), "../Engine/data/T1Assets/Su-35_SuperFlanker_P01.tga", ModelManager::parsString("../Engine/data/T1Assets/Su-35_SuperFlanker_P01.tga"));
+	result = textureManager->LoadTexture(device, Direct3D->GetDeviceContext(), "../Engine/data/T1Assets/Su-35_SuperFlanker_P01.tga", ModelManager::parsString("../Engine/data/T1Assets/Su-35_SuperFlanker_P01.tga"));
 	if (!result)
 	{
 		return false;
 	}
-	result = textureManager->LoadTexture(Direct3D->GetDevice(), Direct3D->GetDeviceContext(), "../Engine/data/New Models/OldHouce.tga", ModelManager::parsString("../Engine/data/New Models/OldHouce.tga"));
+	result = textureManager->LoadTexture(device, Direct3D->GetDeviceContext(), "../Engine/data/New Models/OldHouce.tga", ModelManager::parsString("../Engine/data/New Models/OldHouce.tga"));
 	if (!result)
 	{
 		return false;
 	}
-	result = textureManager->LoadTexture(Direct3D->GetDevice(), Direct3D->GetDeviceContext(), "../Engine/data/New Models/hutTex.tga", ModelManager::parsString("../Engine/data/New Models/hutTex.tga"));
+	result = textureManager->LoadTexture(device, Direct3D->GetDeviceContext(), "../Engine/data/New Models/hutTex.tga", ModelManager::parsString("../Engine/data/New Models/hutTex.tga"));
 	if (!result)
 	{
 		return false;
 	}
-	result = textureManager->LoadTexture(Direct3D->GetDevice(), Direct3D->GetDeviceContext(), "../Engine/data/New Models/FancyHouceTex.tga", ModelManager::parsString("../Engine/data/New Models/FancyHouceTex.tga"));
+	result = textureManager->LoadTexture(device, Direct3D->GetDeviceContext(), "../Engine/data/New Models/FancyHouceTex.tga", ModelManager::parsString("../Engine/data/New Models/FancyHouceTex.tga"));
 	if (!result)
 	{
 		return false;
 	}
-	result = textureManager->LoadTexture(Direct3D->GetDevice(), Direct3D->GetDeviceContext(), "../Engine/data/New Models/SimpleHouce.tga", ModelManager::parsString("../Engine/data/New Models/SimpleHouce.tga"));
+	result = textureManager->LoadTexture(device, Direct3D->GetDeviceContext(), "../Engine/data/New Models/SimpleHouce.tga", ModelManager::parsString("../Engine/data/New Models/SimpleHouce.tga"));
 	if (!result)
 	{
 		return false;
 	}
-	result = textureManager->LoadTexture(Direct3D->GetDevice(), Direct3D->GetDeviceContext(), "../Engine/data/New Models/FancyHouceBump.tga", ModelManager::parsString("../Engine/data/New Models/FancyHouceBump.tga"));
+	result = textureManager->LoadTexture(device, Direct3D->GetDeviceContext(), "../Engine/data/New Models/FancyHouceBump.tga", ModelManager::parsString("../Engine/data/New Models/FancyHouceBump.tga"));
 	if (!result)
 	{
 		return false;
 	}
-	result = textureManager->LoadTexture(Direct3D->GetDevice(), Direct3D->GetDeviceContext(), "../Engine/data/New Models/hutBump.tga", ModelManager::parsString("../Engine/data/New Models/hutBump.tga"));
+	result = textureManager->LoadTexture(device, Direct3D->GetDeviceContext(), "../Engine/data/New Models/hutBump.tga", ModelManager::parsString("../Engine/data/New Models/hutBump.tga"));
 	if (!result)
 	{
 		return false;
@@ -202,66 +203,61 @@ bool ZoneClass::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight
 	setLoadingLevel(loadAmount);
 	m_DebugHitbox = true;
 	m_ObjectSpawn = false;
-	//modelManager->AddModle(Direct3D->GetDevice(), "../Engine/data/T1Assets/Uh60.txt", ModelManager::parsString("../Engine/data/T1Assets/Uh60.txt"));
-	//loadAmount += 20;
-	modelManager->AddModle(Direct3D->GetDevice(), "../Engine/data/T2Assets/Cat.txt", ModelManager::parsString("../Engine/data/T2Assets/Cat.txt"), HitBoxType::Rectangle, float3(1.0f, 0.0f, 0.0f));
+	modelManager->AddModle(device, "../Engine/data/T2Assets/Cat.txt", ModelManager::parsString("../Engine/data/T2Assets/Cat.txt"), HitBoxType::Rectangle, float3(1.0f, 0.0f, 0.0f));
 	loadAmount += 10;
 	setLoadingLevel(loadAmount);
-	modelManager->AddModle(Direct3D->GetDevice(), "../Engine/data/T1Assets/Su-35_SuperFlanker.txt", ModelManager::parsString("../Engine/data/T1Assets/Su-35_SuperFlanker.txt"), HitBoxType::Rectangle, float3(8.0f, 13.0f, 1.0f));
+	modelManager->AddModle(device, "../Engine/data/T1Assets/Su-35_SuperFlanker.txt", ModelManager::parsString("../Engine/data/T1Assets/Su-35_SuperFlanker.txt"), HitBoxType::Rectangle, float3(8.0f, 13.0f, 1.0f));
 	loadAmount += 10;
 	setLoadingLevel(loadAmount);
-	modelManager->AddModle(Direct3D->GetDevice(), "../Engine/data/New Models/OldHouce.txt", ModelManager::parsString("../Engine/data/New Models/OldHouce.txt"), HitBoxType::Rectangle, float3(3.0f, 2.0f, 4.0f));
+	modelManager->AddModle(device, "../Engine/data/New Models/OldHouce.txt", ModelManager::parsString("../Engine/data/New Models/OldHouce.txt"), HitBoxType::Rectangle, float3(3.0f, 2.0f, 4.0f));
 	loadAmount += 20;
 	setLoadingLevel(loadAmount);
-	modelManager->AddModle(Direct3D->GetDevice(), "../Engine/data/New Models/SimpleHouce.txt", ModelManager::parsString("../Engine/data/New Models/SimpleHouce.txt"), HitBoxType::Rectangle, float3(7.0f, 0.0f, 0.0f));
+	modelManager->AddModle(device, "../Engine/data/New Models/SimpleHouce.txt", ModelManager::parsString("../Engine/data/New Models/SimpleHouce.txt"), HitBoxType::Rectangle, float3(7.0f, 0.0f, 0.0f));
 	loadAmount += 10;
 	setLoadingLevel(loadAmount);
-	modelManager->AddModle(Direct3D->GetDevice(), "../Engine/data/New Models/hut.txt", ModelManager::parsString("../Engine/data/New Models/hut.txt"), HitBoxType::Rectangle, float3());
+	modelManager->AddModle(device, "../Engine/data/New Models/hut.txt", ModelManager::parsString("../Engine/data/New Models/hut.txt"), HitBoxType::Rectangle, float3());
 	loadAmount += 5;
 	setLoadingLevel(loadAmount);
-	modelManager->AddModle(Direct3D->GetDevice(), "../Engine/data/New Models/FancyHouce.txt", ModelManager::parsString("../Engine/data/New Models/FancyHouce.txt"), HitBoxType::Rectangle, float3());
+	modelManager->AddModle(device, "../Engine/data/New Models/FancyHouce.txt", ModelManager::parsString("../Engine/data/New Models/FancyHouce.txt"), HitBoxType::Rectangle, float3());
 	loadAmount += 5;
 	setLoadingLevel(loadAmount);
-	modelManager->AddModle(Direct3D->GetDevice(), "../Engine/data/T1Assets/cubeS.txt", ModelManager::parsString("../Engine/data/T1Assets/cubeS.txt"), HitBoxType::Point, float3());
-
+	modelManager->AddModle(device, "../Engine/data/T1Assets/cubeS.txt", ModelManager::parsString("../Engine/data/T1Assets/cubeS.txt"), HitBoxType::Point, float3());
+	ShaderManagerClass* shaderManager = ShaderManagerClass::GetInstance();
 	m_GameObjects = std::vector<GameObject*>();
 	GameObject* gameObject = new GameObject();
-	gameObject = new GameObject();
-	gameObject->Initalize(ModelManager::parsString("../Engine/data/T1Assets/cubeS.txt"), 404, float3(0.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f));
+	gameObject->Initalize(float3(0.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(ModelManager::parsString("../Engine/data/T1Assets/cubeS.txt")), textureManager->GetTexture(404), shaderManager->GetShader<LightShader>());
 	m_GameObjects.push_back(gameObject);
-	/*gameObject->Initalize(ModelManager::parsString("../Engine/data/T1Assets/Su-35_SuperFlanker.txt"), ModelManager::parsString("../Engine/data/T1Assets/Su-35_SuperFlanker_P01.dds"), float3(500.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f), HitBoxType::Point);
-	gameObject->SetHitbox(8.0f, 13.0f, 1.0f);
-	m_GameObjects.push_back(gameObject);//*/
+
 	gameObject = new GameObject();
-	gameObject->Initalize(ModelManager::parsString("../Engine/data/T1Assets/Su-35_SuperFlanker.txt"), ModelManager::parsString("../Engine/data/T1Assets/Su-35_SuperFlanker_P01.tga"), float3(560.0f, 30.0f, 260.0f), float3(0.0f, 0.0f, 0.0f));
-	m_GameObjects.push_back(gameObject); 
-	gameObject = new GameObject();
-	gameObject->Initalize(ModelManager::parsString("../Engine/data/T2Assets/Cat.txt"), 404, float3(565.0f, 7.8f, 260.0f), float3(0.0f, 0.0f, 0.0f));
+	gameObject->Initalize(float3(560.0f, 30.0f, 260.0f), float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(ModelManager::parsString("../Engine/data/T1Assets/Su-35_SuperFlanker.txt")), textureManager->GetTexture(ModelManager::parsString("../Engine/data/T1Assets/Su-35_SuperFlanker_P01.tga")), shaderManager->GetShader<LightShader>());
 	m_GameObjects.push_back(gameObject);
+
 	gameObject = new GameObject();
-	gameObject->Initalize(ModelManager::parsString("../Engine/data/New Models/OldHouce.txt"), ModelManager::parsString("../Engine/data/New Models/OldHouce.tga"), float3(560.0f, 8.0f, 270.0f), float3(0.0f, 0.0f, 0.0f));
+	gameObject->Initalize(float3(565.0f, 7.8f, 260.0f), float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(ModelManager::parsString("../Engine/data/T2Assets/Cat.txt")), textureManager->GetTexture(404), shaderManager->GetShader<LightShader>());
 	m_GameObjects.push_back(gameObject);
+
 	gameObject = new GameObject();
-	gameObject->Initalize(ModelManager::parsString("../Engine/data/New Models/hut.txt"), ModelManager::parsString("../Engine/data/New Models/hutTex.tga"), float3(540.0f, 8.0f, 260.0f), float3(0.0f, 0.0f, 0.0f));
-	gameObject->SetScale(float3(0.08f, 0.08f, 0.08f));
-	gameObject->SetShader(2);
-	gameObject->SetBump(ModelManager::parsString("../Engine/data/New Models/hutBump.tga"));
+	gameObject->Initalize(float3(560.0f, 8.0f, 270.0f), float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(ModelManager::parsString("../Engine/data/New Models/OldHouce.txt")), textureManager->GetTexture(ModelManager::parsString("../Engine/data/New Models/OldHouce.tga")), shaderManager->GetShader<LightShader>());
 	m_GameObjects.push_back(gameObject);
+	{
+		gameObject = new GameObject();
+		ID3D11ShaderResourceView* textures[2] = { textureManager->GetTexture(ModelManager::parsString("../Engine/data/New Models/hutTex.tga")),textureManager->GetTexture(ModelManager::parsString("../Engine/data/New Models/hutBump.tga")) };
+		gameObject->Initalize(float3(540.0f, 8.0f, 260.0f), float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(ModelManager::parsString("../Engine/data/New Models/hut.txt")), *textures, shaderManager->GetShader<BumpMapShaderClass>());
+		gameObject->SetScale(float3(0.08f, 0.08f, 0.08f));
+		m_GameObjects.push_back(gameObject);
+	}
+	{
+		gameObject = new GameObject();
+
+		ID3D11ShaderResourceView* textures[2] = { textureManager->GetTexture(ModelManager::parsString("../Engine/data/New Models/FancyHouceTex.tga")),textureManager->GetTexture(ModelManager::parsString("../Engine/data/New Models/FancyHouceBump.tga")) };
+		gameObject->Initalize(float3(580.0f, 8.0f, 260.0f), float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(ModelManager::parsString("../Engine/data/New Models/FancyHouce.txt")), *textures, shaderManager->GetShader<BumpMapShaderClass>());
+		gameObject->SetScale(float3(0.05f, 0.05f, 0.05f));
+		m_GameObjects.push_back(gameObject);
+	}
 	gameObject = new GameObject();
-	gameObject->Initalize(ModelManager::parsString("../Engine/data/New Models/FancyHouce.txt"), ModelManager::parsString("../Engine/data/New Models/FancyHouceTex.tga"), float3(580.0f, 8.0f, 260.0f), float3(0.0f, 0.0f, 0.0f));
-	gameObject->SetScale(float3(0.05f, 0.05f, 0.05f));
-	gameObject->SetShader(2);
-	gameObject->SetBump(ModelManager::parsString("../Engine/data/New Models/FancyHouceBump.tga"));
+	gameObject->Initalize(float3(560.0f, 8.0f, 240.0f), float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(ModelManager::parsString("../Engine/data/New Models/SimpleHouce.txt")), textureManager->GetTexture(ModelManager::parsString("../Engine/data/New Models/SimpleHouce.tga")), shaderManager->GetShader<LightShader>());
 	m_GameObjects.push_back(gameObject);
-	gameObject = new GameObject();
-	gameObject->Initalize(ModelManager::parsString("../Engine/data/New Models/SimpleHouce.txt"), ModelManager::parsString("../Engine/data/New Models/SimpleHouce.tga"), float3(560.0f, 8.0f, 240.0f), float3(0.0f, 0.0f, 0.0f));
-	m_GameObjects.push_back(gameObject);
-	/*gameObject = new GameObject();
-	gameObject->Initalize(ModelManager::parsString("../Engine/data/model.txt"), 0, float3(600.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f), HitBoxType::Point);
-	m_GameObjects.push_back(gameObject);
-	gameObject = new GameObject();
-	gameObject->Initalize(ModelManager::parsString("../Engine/data/model2.txt"), 0, float3(600.0f, 50.0f, 0.0f), float3(0.0f, 0.0f, 0.0f), HitBoxType::Point);
-	m_GameObjects.push_back(gameObject);//*/
+	m_Camera->SetActiveCamera();
 	return true;
 }
 
@@ -323,7 +319,7 @@ void ZoneClass::Shutdown()
 	return;
 }
 
-
+//Make most of these Instance Classes
 bool ZoneClass::Frame(D3DClass* Direct3D, InputClass* Input, ShaderManagerClass* ShaderManager, TextureManagerClass* TextureManager,
 	ModelManager* modelManager, float frameTime, int fps, AudioManager* audioManager)
 {
@@ -339,7 +335,7 @@ bool ZoneClass::Frame(D3DClass* Direct3D, InputClass* Input, ShaderManagerClass*
 	m_Position->GetRotation(rotX, rotY, rotZ);
 	m_Camera->SetRotation(rotX, rotY, rotZ);
 	// Do the frame processing for the user interface.
-	result = m_UserInterface->Frame(Direct3D->GetDeviceContext(), fps, posX, posZ,m_ObjectSpawn,m_spawnState);
+	result = m_UserInterface->Frame(Direct3D->GetDeviceContext(), fps, posX, posZ, m_ObjectSpawn, m_spawnState);
 	if (!result)
 	{
 		return false;
@@ -406,11 +402,11 @@ void ZoneClass::HandleInput(InputClass *Input, float frameTime, TextureManagerCl
 		m_Position->GetPosition(posX, posY, posZ);
 		m_Position->GetRotation(rotX, rotY, rotZ);
 		GameObject* go = m_GameObjects.back();
-		go->SetOrigin(posX, posY+m_ymod, posZ, rotX, rotY, 10.0f+m_zmod);
+		go->SetOrigin(posX, posY + m_ymod, posZ, rotX, rotY, 10.0f + m_zmod);
 		position = go->GetPosition();
 		rotation = go->GetRotation();
 		scale = go->GetScale();
-		int shader = go->GetShader();
+		//int shader = go->GetShader();
 		if (Input->MouseButton(1))
 			m_ObjectSpawn = false;
 		else
@@ -425,17 +421,17 @@ void ZoneClass::HandleInput(InputClass *Input, float frameTime, TextureManagerCl
 				else
 				{
 					if (Input->IsAPressed())
-						m_xmod += 1*frameTime;
-					else if(Input->IsZPressed())
-						m_xmod -= 1*frameTime;
+						m_xmod += 1 * frameTime;
+					else if (Input->IsZPressed())
+						m_xmod -= 1 * frameTime;
 					if (Input->IsSPressed())
-						m_ymod += 1*frameTime;
+						m_ymod += 1 * frameTime;
 					else if (Input->IsXPressed())
-						m_ymod -= 1*frameTime;
+						m_ymod -= 1 * frameTime;
 					if (Input->IsDPressed())
-						m_zmod += 1*frameTime;
+						m_zmod += 1 * frameTime;
 					else if (Input->IsCPressed())
-						m_zmod -= 1*frameTime;
+						m_zmod -= 1 * frameTime;
 				}
 				break;
 			case SpawnState::rotation:
@@ -476,7 +472,7 @@ void ZoneClass::HandleInput(InputClass *Input, float frameTime, TextureManagerCl
 					scale.Z(scale.Z() - frameTime);
 				go->SetScale(scale);
 				break;
-			case SpawnState::model:
+/*			case SpawnState::model:
 				if (Input->IsPlusPressed())
 					m_spawnState = SpawnState::texture;
 				else if (Input->IsMinusPressed())
@@ -492,7 +488,7 @@ void ZoneClass::HandleInput(InputClass *Input, float frameTime, TextureManagerCl
 				{
 					m_modelID--;
 					if (m_modelID < 0)
-						m_modelID= Models->GetModdelList().size() - 1;
+						m_modelID = Models->GetModdelList().size() - 1;
 					go->SetModel(Models->GetModdelList()[m_modelID]);
 				}
 				break;
@@ -555,7 +551,7 @@ void ZoneClass::HandleInput(InputClass *Input, float frameTime, TextureManagerCl
 						m_bumpID = TextureManager->GetTextureList().size() - 1;
 					go->SetBump(TextureManager->GetTextureList()[m_bumpID]);
 				}
-				break;
+				break;//*/
 			default:
 				break;
 			}
@@ -568,7 +564,7 @@ void ZoneClass::HandleInput(InputClass *Input, float frameTime, TextureManagerCl
 			m_Position->GetPosition(posX, posY, posZ);
 			m_Position->GetRotation(rotX, rotY, rotZ);
 			m_ObjectSpawn = true;
-			m_textID = m_modelID= m_bumpID = 0;
+			m_textID = m_modelID = m_bumpID = 0;
 			GameObject* go = new GameObject();
 			go->Initalize(Models->GetModdelList()[0], TextureManager->GetTextureList()[0], float3(), float3());
 			go->SetOrigin(posX, posY, posZ, rotX, rotY, 10.0f);
@@ -588,16 +584,16 @@ bool ZoneClass::CheckHitboxs(ModelManager* modelManager)
 	pHitbox = m_Position->Gethitbox();
 
 	int vectorLegth = m_GameObjects.size();
-	if(m_ObjectSpawn)
-	vectorLegth -= 1;
+	if (m_ObjectSpawn)
+		vectorLegth -= 1;
 	for (int i = 1; i < vectorLegth; i++)
 	{
 		if (i == vectorLegth&&m_ObjectSpawn)
 			return false;
 		if (m_GameObjects[i] != NULL)
 		{
-			gHitbox = modelManager->GetHitbox(m_GameObjects[i]->GetModel());
-			hitboxType = modelManager->GetHitBoxType(m_GameObjects[i]->GetModel());
+			gHitbox = m_GameObjects[i]->GetHitbox();
+			hitboxType = m_GameObjects[i]->GetHitboxType();
 			gPossition = m_GameObjects[i]->GetPosition();
 			gScale = m_GameObjects[i]->GetScale();
 			gHitbox.X(gHitbox.X() * gScale.X());
@@ -645,6 +641,7 @@ bool ZoneClass::Render(D3DClass* Direct3D, ShaderManagerClass* ShaderManager, Te
 	Direct3D->GetWorldMatrix(worldMatrix);
 	m_Camera->GetViewMatrix(viewMatrix);
 	Direct3D->GetProjectionMatrix(projectionMatrix);
+	//UI
 	m_Camera->GetBaseViewMatrix(baseViewMatrix);
 	Direct3D->GetOrthoMatrix(orthoMatrix);
 
@@ -704,11 +701,14 @@ bool ZoneClass::Render(D3DClass* Direct3D, ShaderManagerClass* ShaderManager, Te
 			}
 		}
 	}
+	ID3D11DeviceContext* context = Direct3D->GetDeviceContext();
 	int vectorLegth = m_GameObjects.size();
 	for (int i = 1; i < vectorLegth; i++)
 	{
 		if (m_GameObjects[i] != NULL)
 		{
+			m_GameObjects[i]->Render(context, worldMatrix, viewMatrix, projectionMatrix, m_Frustum, m_Light, *m_Camera);
+			/*
 			hitbox = modelManager->GetHitbox(m_GameObjects[i]->GetModel());
 			hitboxType = modelManager->GetHitBoxType(m_GameObjects[i]->GetModel());
 			possition = m_GameObjects[i]->GetPosition();
@@ -795,8 +795,10 @@ bool ZoneClass::Render(D3DClass* Direct3D, ShaderManagerClass* ShaderManager, Te
 					}
 				}
 			}
+			//*/
 		}
 	}
+	/*
 	if (m_DebugHitbox)
 	{
 		Direct3D->GetWorldMatrix(worldMatrix);
@@ -819,6 +821,7 @@ bool ZoneClass::Render(D3DClass* Direct3D, ShaderManagerClass* ShaderManager, Te
 		}
 
 	}
+	//*/
 	Direct3D->GetWorldMatrix(worldMatrix);
 	// Turn off wire frame rendering of the terrain if it was on.
 	if (m_wireFrame)

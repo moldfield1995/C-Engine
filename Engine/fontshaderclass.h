@@ -12,6 +12,7 @@
 #include <d3dcompiler.h>
 #include <directxmath.h>
 #include <fstream>
+#include "Shader.h"
 using namespace DirectX;
 using namespace std;
 
@@ -19,7 +20,7 @@ using namespace std;
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: FontShaderClass
 ////////////////////////////////////////////////////////////////////////////////
-class FontShaderClass
+class FontShaderClass:public Shader
 {
 private:
 	struct MatrixBufferType
@@ -41,6 +42,9 @@ public:
 
 	bool Initialize(ID3D11Device*, HWND);
 	void Shutdown();
+	//New
+	bool Render(ID3D11DeviceContext * context, int indexCount, const XMMATRIX &worldMatrix, const XMMATRIX &viewMatrix, const XMMATRIX &projectionMatrix, ID3D11ShaderResourceView * textures, LightClass * light = 0, XMFLOAT4* colour = 0);
+	//Old
 	bool Render(ID3D11DeviceContext*, int, const XMMATRIX&, const XMMATRIX&, const XMMATRIX&, ID3D11ShaderResourceView*, XMFLOAT4);
 
 private:

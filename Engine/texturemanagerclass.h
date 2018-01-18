@@ -21,7 +21,6 @@ public:
 	TextureManagerClass();
 	TextureManagerClass(const TextureManagerClass&);
 	~TextureManagerClass();
-
 	bool Initialize();
 	void Shutdown();
 
@@ -32,10 +31,11 @@ public:
 	bool TextureLoaded(int id);
 	std::vector<int> GetTextureList();
 private:
-	//TextureClass* m_TextureArray;
-	//int m_textureCount;
+	static TextureManagerClass* instance;
 	std::map<int, TextureClass*> textures;
 	std::vector<int> storedTextures;
+public:
+	static TextureManagerClass* GetInstance();
 };
 
 #endif

@@ -2,7 +2,7 @@
 // Filename: lightshader.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "lightshader.h"
-
+#include "cameraclass.h"
 
 LightShader::LightShader()
 {
@@ -48,6 +48,25 @@ void LightShader::Shutdown()
 	ShutdownShader();
 
 	return;
+}
+
+bool LightShader::Render(ID3D11DeviceContext * context, int indexCount, const XMMATRIX & worldMatrix, const XMMATRIX & viewMatrix, const XMMATRIX & projectionMatrix, ID3D11ShaderResourceView * textures, LightClass * light, XMFLOAT4* colour)
+{
+	bool result;
+
+	//TODO Fix specular;
+	// Set the shader parameters that it will use for rendering.
+	result = SetShaderParameters(context, worldMatrix, viewMatrix, projectionMatrix, textures, light->GetDirection(), light->GetAmbientColor(), light->GetDiffuseColor(),
+		CameraClass::GetActiveCamera()->GetPosition(),XMFLOAT4(1.0f,1.0f,1.0f,1.0f),300.0f);
+	if (!result)
+	{
+		return false;
+	}
+
+	// Now render the prepared buffers with the shader.
+	RenderShader(context, indexCount);
+
+	return true;
 }
 
 
