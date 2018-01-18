@@ -47,7 +47,7 @@ void ColorShaderClass::Shutdown()
 	return;
 }
 
-bool ColorShaderClass::Render(ID3D11DeviceContext * context, int indexCount, const XMMATRIX & worldMatrix, const XMMATRIX & viewMatrix, const XMMATRIX & projectionMatrix, ID3D11ShaderResourceView * textures, LightClass * light, XMFLOAT4* colour)
+bool ColorShaderClass::Render(ID3D11DeviceContext * context, int indexCount, const XMMATRIX & worldMatrix, const XMMATRIX & viewMatrix, const XMMATRIX & projectionMatrix, std::vector< ID3D11ShaderResourceView*>* textures, LightClass * light, XMFLOAT4* colour)
 {
 	bool result;
 

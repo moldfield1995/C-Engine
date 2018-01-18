@@ -51,7 +51,8 @@ private:
 	float3 m_position, m_rotation, m_scale;
 
 	ModelClass* m_model;
-	ID3D11ShaderResourceView* m_textures;
+	//ID3D11ShaderResourceView* m_textures;
+	std::vector<ID3D11ShaderResourceView*>* m_textures;
 	Shader* m_shader;
 	HitBoxType m_hitboxType;
 	float3 m_hitBox;

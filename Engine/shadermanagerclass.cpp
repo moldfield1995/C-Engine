@@ -212,7 +212,7 @@ bool ShaderManagerClass::RenderColorShader(ID3D11DeviceContext* deviceContext, i
 bool ShaderManagerClass::RenderTextureShader(ID3D11DeviceContext* deviceContext, int indexCount, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, 
 											 const XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* texture)
 {
-	return m_TextureShader->Render(deviceContext, indexCount, worldMatrix, viewMatrix, projectionMatrix, texture,0);
+	return m_TextureShader->Render(deviceContext, indexCount, worldMatrix, viewMatrix, projectionMatrix, texture);
 }
 
 

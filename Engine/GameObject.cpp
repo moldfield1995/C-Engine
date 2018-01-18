@@ -4,6 +4,11 @@
 
 GameObject::GameObject()
 {
+	m_model = 0;
+	//ID3D11ShaderResourceView* m_textures;
+	m_textures = new std::vector<ID3D11ShaderResourceView*>();
+	m_shader=0;
+	m_hitboxType = HitBoxType::Point;
 }
 
 
@@ -26,7 +31,7 @@ void GameObject::Initalize(float3 position, float3 rotation, ModelClass * model,
 {
 	m_position = position;
 	m_rotation = rotation;
-	m_textures = textures;
+	m_textures->push_back( textures);
 	m_shader = shader;
 	m_model = model;
 	if (!model)

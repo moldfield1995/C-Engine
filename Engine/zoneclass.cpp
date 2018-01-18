@@ -241,7 +241,7 @@ bool ZoneClass::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight
 	m_GameObjects.push_back(gameObject);
 	{
 		gameObject = new GameObject();
-		ID3D11ShaderResourceView* textures[2] = { textureManager->GetTexture(ModelManager::parsString("../Engine/data/New Models/hutTex.tga")),textureManager->GetTexture(ModelManager::parsString("../Engine/data/New Models/hutBump.tga")) };
+		ID3D11ShaderResourceView** textures = new ID3D11ShaderResourceView*[2] { textureManager->GetTexture(ModelManager::parsString("../Engine/data/New Models/hutTex.tga")),textureManager->GetTexture(ModelManager::parsString("../Engine/data/New Models/hutBump.tga")) };
 		gameObject->Initalize(float3(540.0f, 8.0f, 260.0f), float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(ModelManager::parsString("../Engine/data/New Models/hut.txt")), *textures, shaderManager->GetShader<BumpMapShaderClass>());
 		gameObject->SetScale(float3(0.08f, 0.08f, 0.08f));
 		m_GameObjects.push_back(gameObject);
@@ -249,7 +249,7 @@ bool ZoneClass::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight
 	{
 		gameObject = new GameObject();
 
-		ID3D11ShaderResourceView* textures[2] = { textureManager->GetTexture(ModelManager::parsString("../Engine/data/New Models/FancyHouceTex.tga")),textureManager->GetTexture(ModelManager::parsString("../Engine/data/New Models/FancyHouceBump.tga")) };
+		ID3D11ShaderResourceView** textures = new ID3D11ShaderResourceView*[2]{ textureManager->GetTexture(ModelManager::parsString("../Engine/data/New Models/hutTex.tga")),textureManager->GetTexture(ModelManager::parsString("../Engine/data/New Models/hutBump.tga")) };
 		gameObject->Initalize(float3(580.0f, 8.0f, 260.0f), float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(ModelManager::parsString("../Engine/data/New Models/FancyHouce.txt")), *textures, shaderManager->GetShader<BumpMapShaderClass>());
 		gameObject->SetScale(float3(0.05f, 0.05f, 0.05f));
 		m_GameObjects.push_back(gameObject);

@@ -71,7 +71,7 @@ bool BumpMapShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCou
 	return true;
 }
 //Requires two textures
-bool BumpMapShaderClass::Render(ID3D11DeviceContext * context, int indexCount, const XMMATRIX &worldMatrix, const XMMATRIX &viewMatrix, const XMMATRIX &projectionMatrix, ID3D11ShaderResourceView * textures, LightClass * light, XMFLOAT4* colour)
+bool BumpMapShaderClass::Render(ID3D11DeviceContext * context, int indexCount, const XMMATRIX &worldMatrix, const XMMATRIX &viewMatrix, const XMMATRIX &projectionMatrix, std::vector< ID3D11ShaderResourceView*>* textures, LightClass * light, XMFLOAT4* colour)
 {
 	bool result;
 
@@ -435,7 +435,7 @@ bool BumpMapShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 
 bool BumpMapShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, const XMMATRIX &worldMatrix,
 	const XMMATRIX &viewMatrix, const XMMATRIX &projectionMatrix,
-	ID3D11ShaderResourceView* textures,
+	std::vector< ID3D11ShaderResourceView*>* textures,
 	XMFLOAT3 lightDirection, XMFLOAT4 diffuseColor, XMFLOAT4 ambientColor) 
 {
 	HRESULT result;
@@ -470,7 +470,7 @@ bool BumpMapShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 
 	// Now set the matrix constant buffer in the vertex shader with the updated values.
 	deviceContext->VSSetConstantBuffers(bufferNumber, 1, &m_matrixBuffer);
-	ID3D11ShaderResourceView* texture[2] = { &textures[0], &textures[1] };
+	ID3D11ShaderResourceView* texture[2] = {textures->at(0),textures->at(0)};
 	// Set shader texture resources in the pixel shader.
 	deviceContext->PSSetShaderResources(0, 2, texture);
 
