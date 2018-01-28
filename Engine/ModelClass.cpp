@@ -251,7 +251,7 @@ bool ModelClass::SetHitbox(float radius)
 {
 	if (m_hitboxType == HitBoxType::Point || m_hitboxType == HitBoxType::Rectangle)
 		return false;
-	m_HitBoxSize.X(radius);
+	m_HitBoxSize.X= radius;
 	return true;
 }
 

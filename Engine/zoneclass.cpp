@@ -440,17 +440,17 @@ void ZoneClass::HandleInput(InputClass *Input, float frameTime, TextureManagerCl
 				else if (Input->IsMinusPressed())
 					m_spawnState = SpawnState::position;
 				if (Input->IsAPressed())
-					rotation.X(rotation.X() + 10 * frameTime);
+					rotation.X=rotation.X + 10 * frameTime;
 				else if (Input->IsZPressed())
-					rotation.X(rotation.X() - 10 * frameTime);
+					rotation.X=rotation.X - 10 * frameTime;
 				if (Input->IsSPressed())
-					rotation.Y(rotation.Y() + 10 * frameTime);
+					rotation.Y=rotation.Y + 10 * frameTime;
 				else if (Input->IsXPressed())
-					rotation.Y(rotation.Y() - 10 * frameTime);
+					rotation.Y=rotation.Y - 10 * frameTime;
 				if (Input->IsDPressed())
-					rotation.Z(rotation.Z() + 10 * frameTime);
+					rotation.Z=rotation.Z + 10 * frameTime;
 				else if (Input->IsCPressed())
-					rotation.Z(rotation.Z() - 10 * frameTime);
+					rotation.Z=rotation.Z - 10 * frameTime;
 				go->SetRotation(rotation);
 				break;
 			case SpawnState::scale:
@@ -459,17 +459,17 @@ void ZoneClass::HandleInput(InputClass *Input, float frameTime, TextureManagerCl
 				else if (Input->IsMinusPressed())
 					m_spawnState = SpawnState::rotation;
 				if (Input->IsAPressed())
-					scale.X(scale.X() + frameTime);
-				else if (Input->IsZPressed() && scale.X() > 0.1f)
-					scale.X(scale.X() - frameTime);
+					scale.X=scale.X + frameTime;
+				else if (Input->IsZPressed() && scale.X > 0.1f)
+					scale.X=scale.X - frameTime;
 				if (Input->IsSPressed())
-					scale.Y(scale.Y() + frameTime);
-				else if (Input->IsXPressed() && scale.Y() > 0.1f)
-					scale.Y(scale.Y() - frameTime);
+					scale.Y=scale.Y + frameTime;
+				else if (Input->IsXPressed() && scale.Y > 0.1f)
+					scale.Y=scale.Y - frameTime;
 				if (Input->IsDPressed())
-					scale.Z(scale.Z() + frameTime);
-				else if (Input->IsCPressed() && scale.Z() > 0.1f)
-					scale.Z(scale.Z() - frameTime);
+					scale.Z=scale.Z + frameTime;
+				else if (Input->IsCPressed() && scale.Z > 0.1f)
+					scale.Z=scale.Z - frameTime;
 				go->SetScale(scale);
 				break;
 /*			case SpawnState::model:
@@ -596,9 +596,7 @@ bool ZoneClass::CheckHitboxs(ModelManager* modelManager)
 			hitboxType = m_GameObjects[i]->GetHitboxType();
 			gPossition = m_GameObjects[i]->GetPosition();
 			gScale = m_GameObjects[i]->GetScale();
-			gHitbox.X(gHitbox.X() * gScale.X());
-			gHitbox.Y(gHitbox.Y() * gScale.Y());
-			gHitbox.Z(gHitbox.Z() * gScale.Z());
+			gHitbox =(gHitbox * gScale);
 			switch (hitboxType)
 			{
 			case HitBoxType::Sphere:
@@ -608,9 +606,9 @@ bool ZoneClass::CheckHitboxs(ModelManager* modelManager)
 				result;
 				break;
 			case HitBoxType::Rectangle:
-				result = (pPosition.X() - pHitbox.X() <= gPossition.X() + gHitbox.X() && pPosition.X() + pHitbox.X() >= gPossition.X() - gHitbox.X())
-					&& (pPosition.Y() - pHitbox.Y() <= gPossition.Y() + gHitbox.Y() && pPosition.Y() + pHitbox.Y() >= gPossition.Y() - gHitbox.Y())
-					&& (pPosition.Z() - pHitbox.Z() <= gPossition.Z() + gHitbox.Z() && pPosition.Z() + pHitbox.Z() >= gPossition.Z() - gHitbox.Z());
+				result = (pPosition.X - pHitbox.X <= gPossition.X + gHitbox.X && pPosition.X + pHitbox.X >= gPossition.X - gHitbox.X)
+					&& (pPosition.Y - pHitbox.Y <= gPossition.Y + gHitbox.Y && pPosition.Y + pHitbox.Y >= gPossition.Y - gHitbox.Y)
+					&& (pPosition.Z - pHitbox.Z <= gPossition.Z + gHitbox.Z && pPosition.Z + pHitbox.Z >= gPossition.Z - gHitbox.Z);
 				break;
 			case HitBoxType::Point:
 				result = false;

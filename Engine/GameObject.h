@@ -8,6 +8,7 @@
 #include "Shader.h"
 #include "textureclass.h"
 #include <vector>
+#include "Component.h"
 enum class SpawnState {
 	position,
 	rotation,
@@ -19,6 +20,7 @@ enum class SpawnState {
 };
 class GameObject
 {
+	friend void Component::Update();
 public:
 	GameObject();
 	~GameObject();
@@ -34,17 +36,21 @@ public:
 	
 	void Render(ID3D11DeviceContext* deviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, const XMMATRIX& projectionMatrix,FrustumClass* frustume,LightClass* light,CameraClass& camera);
 
-	void CheckColltion(GameObject* other);
+	bool CheckColltion(GameObject* other);
 	//Seting up a Cube or Sphere Hitbox
 	bool SetHitbox(float radius);
 	//Seting up a Rectangle HitBox
 	bool SetHitbox(float sizeX, float sizeY, float sizeZ);
 	void SetHitboxType(HitBoxType hitbox);
 	float3 GetHitbox();
+	float3 GetHitboxScaled();
 	HitBoxType GetHitboxType();
-
+	bool isAlive();
 	//Old Below Needs replacing
 	void SetOrigin(float posX, float posY, float posZ, float rotX, float rotY, float radius);
+
+protected:
+	bool m_KillGameObject;
 
 private:
 	
@@ -55,7 +61,8 @@ private:
 	std::vector<ID3D11ShaderResourceView*>* m_textures;
 	Shader* m_shader;
 	HitBoxType m_hitboxType;
-	float3 m_hitBox;
+	float3 m_hitbox;
+	std::vector<Component*> m_Componets;
 	//Old Below Needs Replacing
 	int m_modelIndex;
 	int m_textureIndex, m_bumpIndex;
