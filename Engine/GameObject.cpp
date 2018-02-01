@@ -47,7 +47,7 @@ float3 GameObject::GetScale() { return m_scale; }
 
 void GameObject::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, const XMMATRIX& projectionMatrix, FrustumClass * frustume, LightClass * light, CameraClass& camera)
 {
-	if (m_model == nullptr)
+	if (m_model == nullptr || !m_Renders)
 		return;
 	XMMATRIX renderMatrix,transformMatrix,rotationMatrix,scaleMatrix;
 	transformMatrix = XMMatrixTranslation(m_position.X, m_position.Y, m_position.Z);

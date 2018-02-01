@@ -25,7 +25,6 @@ public:
 	GameObject();
 	~GameObject();
 
-	//void Initalize(int model, int texute, float3 position, float3 rotation);
 	void Initalize(float3 position, float3 rotation, ModelClass* model, ID3D11ShaderResourceView* textures, Shader* shader);
 	void SetPosition(float3 pos);
 	void SetRotation(float3 rot);
@@ -67,7 +66,6 @@ protected:
 	float3 m_hitbox;
 	std::vector<Component*> m_Componets;
 private:
-	
 	float3 m_position, m_rotation, m_scale;
 	
 };
