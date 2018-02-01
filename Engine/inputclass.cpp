@@ -2,6 +2,7 @@
 // Filename: inputclass.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "inputclass.h"
+#include <algorithm>
 
 InputClass* InputClass::instance = 0;
 
@@ -100,15 +101,8 @@ bool InputClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidth, int
 		return false;
 	}
 
-	m_F1_released = true;
-	m_F2_released = true;
-	m_F3_released = true;
-	m_F4_released = true;
-	m_F5_released = true;
-	m_MinusToggle = false;
-	m_PlusToggle = false;
-	m_AToggle = false;
-	m_ZToggle = false;
+	m_LeapControler = Controller();
+
 	instance = this;
 	return true;
 }
@@ -162,6 +156,8 @@ bool InputClass::Frame()
 		return false;
 	}
 
+	ReadLeap();
+
 	// Process the changes in the mouse and keyboard.
 	ProcessInput();
 
@@ -173,7 +169,7 @@ bool InputClass::ReadKeyboard()
 {
 	HRESULT result;
 
-
+	std::copy(std::begin(m_keyboardState), std::end(m_keyboardState), m_OldKeyboardState);
 	// Read the keyboard device.
 	result = m_keyboard->GetDeviceState(sizeof(m_keyboardState), (LPVOID)&m_keyboardState);
 	if (FAILED(result))
@@ -217,6 +213,14 @@ bool InputClass::ReadMouse()
 	return true;
 }
 
+void InputClass::ReadLeap()
+{
+	if (m_LeapControler.isConnected())
+	{
+		m_LeapFrame = m_LeapControler.frame();
+	}
+}
+
 
 void InputClass::ProcessInput()
 {
@@ -256,321 +260,27 @@ void InputClass::GetMouseRaw(int &mouseX, int &mouseY)
 	mouseX = currentX;
 	mouseY = currentY;
 }
-
-
-bool InputClass::IsEscapePressed()
-{
-	// Do a bitwise and on the keyboard state to check if the escape key is currently being pressed.
-	if (m_keyboardState[DIK_ESCAPE] & 0x80)
-	{
-		return true;
-	}
-
-	return false;
-}
-
-
-bool InputClass::IsLeftPressed()
-{
-	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
-	if (m_keyboardState[DIK_LEFT] & 0x80)
-	{
-		return true;
-	}
-
-	return false;
-}
-
-
-bool InputClass::IsRightPressed()
-{
-	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
-	if (m_keyboardState[DIK_RIGHT] & 0x80)
-	{
-		return true;
-	}
-
-	return false;
-}
-
-
-bool InputClass::IsUpPressed()
-{
-	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
-	if (m_keyboardState[DIK_UP] & 0x80)
-	{
-		return true;
-	}
-
-	return false;
-}
-
-
-bool InputClass::IsDownPressed()
-{
-	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
-	if (m_keyboardState[DIK_DOWN] & 0x80)
-	{
-		return true;
-	}
-
-	return false;
-}
-
-
-bool InputClass::IsAPressed()
-{
-	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
-	if (m_keyboardState[DIK_A] & 0x80)
-	{
-		return true;
-	}
-
-	return false;
-}
-
-
-bool InputClass::IsZPressed()
-{
-	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
-	if (m_keyboardState[DIK_Z] & 0x80)
-	{
-		return true;
-	}
-
-	return false;
-}
-
-bool InputClass::IsAToggled()
-{
-	if (m_keyboardState[DIK_A] & 0x80 )
-	{
-		if (m_AToggle)
-			return false;
-		m_AToggle = true;
-		return true;
-	}
-	m_AToggle = false;
-	return false;
-}
-
-bool InputClass::IsZToggled()
-{
-	if (m_keyboardState[DIK_Z] & 0x80)
-	{
-		if (m_ZToggle)
-			return false;
-		m_ZToggle = true;
-		return true;
-	}
-	m_ZToggle = false;
-	return false;
-}
-
-bool InputClass::IsSPressed()
-{
-	if (m_keyboardState[DIK_S] & 0x80)
-	{
-		return true;
-	}
-
-	return false;
-}
-
-bool InputClass::IsXPressed()
-{
-	if (m_keyboardState[DIK_X] & 0x80)
-	{
-		return true;
-	}
-
-	return false;
-}
-
-bool InputClass::IsDPressed()
-{
-	if (m_keyboardState[DIK_D] & 0x80)
-	{
-		return true;
-	}
-
-	return false;
-}
-
-bool InputClass::IsCPressed()
-{
-	if (m_keyboardState[DIK_C] & 0x80)
-	{
-		return true;
-	}
-
-	return false;
-}
-
-
-bool InputClass::IsPgUpPressed()
-{
-	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
-	if (m_keyboardState[DIK_PGUP] & 0x80)
-	{
-		return true;
-	}
-
-	return false;
-}
-
-
-bool InputClass::IsPgDownPressed()
-{
-	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
-	if (m_keyboardState[DIK_PGDN] & 0x80)
-	{
-		return true;
-	}
-
-	return false;
-}
-
-bool InputClass::IsPlusPressed()
-{
-	if (m_keyboardState[DIK_ADD] & 0x80 || m_keyboardState[DIK_NUMPADPLUS] & 0x80)
-	{
-		if (m_PlusToggle)
-			return false;
-		m_PlusToggle = true;
-		return true;
-	}
-	m_PlusToggle = false;
-	return false;
-}
-
-bool InputClass::IsMinusPressed()
-{
-	if (m_keyboardState[DIK_MINUS] & 0x80 || m_keyboardState[DIK_NUMPADMINUS] & 0x80)
-	{
-		if (m_MinusToggle)
-			return false;
-		m_MinusToggle = true;
-		return true;
-	}
-	m_MinusToggle = false;
-	return false;
-}
-
-
-bool InputClass::IsF1Toggled()
-{
-	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
-	if(m_keyboardState[DIK_F1] & 0x80)
-	{
-		if(m_F1_released)
-		{
-			m_F1_released = false;
-			return true;
-		}
-	}
-	else
-	{
-		m_F1_released = true;
-	}
-
-	return false;
-}
-
-
-bool InputClass::IsF2Toggled()
-{
-	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
-	if(m_keyboardState[DIK_F2] & 0x80)
-	{
-		if(m_F2_released)
-		{
-			m_F2_released = false;
-			return true;
-		}
-	}
-	else
-	{
-		m_F2_released = true;
-	}
-
-	return false;
-}
-
-
-bool InputClass::IsF3Toggled()
-{
-	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
-	if(m_keyboardState[DIK_F3] & 0x80)
-	{
-		if (m_F3_released)
-		{
-			m_F3_released = false;
-			return true;
-		}
-	}
-	else
-	{
-		m_F3_released = true;
-	}
-
-	return false;
-}
-
-
-bool InputClass::IsF4Toggled()
-{
-	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
-	if(m_keyboardState[DIK_F4] & 0x80)
-	{
-		if (m_F4_released)
-		{
-			m_F4_released = false;
-			return true;
-		}
-	}
-	else
-	{
-		m_F4_released = true;
-	}
-
-	return false;
-}
-
-
-bool InputClass::IsF5Toggled()
-{
-	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
-	if (m_keyboardState[DIK_F5] & 0x80)
-	{
-		if (m_F5_released)
-		{
-			m_F5_released = false;
-			return true;
-		}
-	}
-	else
-	{
-		m_F5_released = true;
-	}
-
-	return false;
-}
-
+//Returns if the key was pressed down this frame
 bool InputClass::KeyDown(unsigned short int key)
 {
-	if (m_keyboardState[key] & 0x80)
-	{
-		return true;
-	}
-	return false;
+	return m_keyboardState[key] & 0x80 && !m_OldKeyboardState[key] & 0x80;
+}
+//Returns if the key was releced this frame
+bool InputClass::KeyUp(unsigned short int key)
+{
+	return !m_keyboardState[key] & 0x80 && m_OldKeyboardState[key] & 0x80;
+}
+//Returns if the key is down
+bool InputClass::Key(unsigned short int key)
+{
+	return m_keyboardState[key] & 0x80;
 }
 
 char InputClass::TypeCheck()
 {
 	for (unsigned short int i = 0; i < 256; i++)
 	{
-		if (m_keyboardState[i] & 0x80)
+		if (m_keyboardState[i] & 0x80 && !m_OldKeyboardState[i] & 0x80)
 		{
 			return i;
 		}
@@ -583,5 +293,15 @@ bool InputClass::MouseButton(int button)
 	if (m_mouseState.rgbButtons[button] & 0x80)
 		return true;
 	return false;
+}
+
+bool InputClass::LeapConnected()
+{
+	return m_LeapControler.isConnected();
+}
+
+const Leap::Frame InputClass::GetLeapFrame()
+{
+	return m_LeapFrame;
 }
 

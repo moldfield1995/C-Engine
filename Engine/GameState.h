@@ -14,8 +14,8 @@ class GameState
 {
 public:
 	GameState();
-	GameState(const GameState& other);
-	~GameState();
+	GameState(const GameState& other) {};
+	~GameState() {};
 
 	virtual bool Initialize(D3DClass*, int, int, float, TextureManagerClass*, ModelManager*, AudioManager*) = 0;
 	virtual void Shutdown() = 0;
@@ -26,7 +26,7 @@ protected:
 	virtual void HandleMovementInput(InputClass*, float) = 0;
 	virtual bool Render(D3DClass*, ShaderManagerClass*, TextureManagerClass*, ModelManager*) = 0;
 	StateSwich m_currentState;
-	void setLoadingLevel(int level);
+	void SetLoadingLevel(int level);
 private:
 	bool m_concurentAccsess;
 	int m_loadingLevel;

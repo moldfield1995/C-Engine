@@ -23,7 +23,9 @@
 //////////////
 #include <dinput.h>
 #include <Xinput.h>
+#include "Leap.h"
 
+using namespace Leap;
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: InputClass
 ////////////////////////////////////////////////////////////////////////////////
@@ -39,39 +41,22 @@ public:
 	void Shutdown();
 	bool Frame();
 
-	bool IsEscapePressed();
 	void GetMouseLocation(int&, int&);
 	void GetMouseRaw(int&, int&);
-	bool IsLeftPressed();
-	bool IsRightPressed();
-	bool IsUpPressed();
-	bool IsDownPressed();
-	bool IsAPressed();
-	bool IsZPressed();
-	bool IsAToggled();
-	bool IsZToggled();
-	bool IsSPressed();
-	bool IsXPressed();
-	bool IsDPressed();
-	bool IsCPressed();
-	bool IsPgUpPressed();
-	bool IsPgDownPressed();
-	bool IsPlusPressed();
-	bool IsMinusPressed();
-	bool IsF1Toggled();
-	bool IsF2Toggled();
-	bool IsF3Toggled();
-	bool IsF4Toggled();
-	bool IsF5Toggled();
 
 	bool KeyDown(unsigned short int key);
+	bool KeyUp(unsigned short int key);
+	bool Key(unsigned short int key);
 	char TypeCheck();
 	bool MouseButton(int button);
+
+	bool LeapConnected();
+	const Leap::Frame GetLeapFrame();
 private:
 	bool ReadKeyboard();
 	bool ReadMouse();
+	void ReadLeap();
 	void ProcessInput();
-
 private:
 	static InputClass* instance;
 
@@ -80,22 +65,16 @@ private:
 	IDirectInputDevice8* m_mouse;
 	
 	unsigned char m_keyboardState[256];
+	unsigned char m_OldKeyboardState[256];
 	DIMOUSESTATE m_mouseState;
 	DIMOUSESTATE m_OldMouseState;
-	
 
 	int m_screenWidth, m_screenHeight;
 	int m_mouseX, m_mouseY;
 	int currentX, currentY;
-	bool m_F1_released;
-	bool m_F2_released;
-	bool m_F3_released;
-	bool m_F4_released;
-	bool m_F5_released;
-	bool m_PlusToggle;
-	bool m_MinusToggle;
-	bool m_AToggle;
-	bool m_ZToggle;
+
+	Controller m_LeapControler;
+	Leap::Frame m_LeapFrame;
 public:
 	static InputClass* GetInstance();
 };

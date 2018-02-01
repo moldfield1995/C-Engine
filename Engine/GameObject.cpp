@@ -10,6 +10,7 @@ GameObject::GameObject()
 	m_shader=0;
 	m_hitboxType = HitBoxType::Point;
 	m_KillGameObject = false;
+	m_Componets = std::vector<Component*>();
 }
 
 
@@ -17,22 +18,13 @@ GameObject::~GameObject()
 {
 }
 
-void GameObject::Initalize(int model, int texute, float3 position, float3 rotation)
-{
-	m_modelIndex = model;
-	m_textureIndex = texute;
-	m_position = position;
-	m_rotation = rotation;
-	m_scale = float3(1.0f, 1.0f, 1.0f);
-	m_shader = 0;
-	m_bumpIndex = 0;
-}
 
 void GameObject::Initalize(float3 position, float3 rotation, ModelClass * model, ID3D11ShaderResourceView* textures, Shader * shader)
 {
 	m_position = position;
 	m_rotation = rotation;
-	m_textures->push_back( textures);
+	m_scale = float3(1.0f, 1.0f, 1.0f);
+	m_textures->push_back(textures);
 	m_shader = shader;
 	m_model = model;
 	if (!model)
@@ -66,6 +58,12 @@ void GameObject::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX& wor
 	renderMatrix = XMMatrixMultiply(scaleMatrix, renderMatrix);
 	m_model->Render(deviceContext);
 	m_shader->Render(deviceContext, m_model->GetIndexCount(), renderMatrix, viewMatrix, projectionMatrix, m_textures, light);
+}
+
+void GameObject::AddComponet(Component * component)
+{
+	component->owner = this;
+	m_Componets.push_back(component);
 }
 
 bool GameObject::CheckColltion(GameObject * other)
@@ -148,5 +146,16 @@ void GameObject::SetOrigin(float posX, float posY, float posZ, float rotX, float
 	m_position.Z =(posZ + radius*cosf(rotY*0.0174532925f));
 }
 
-bool GameObject::isAlive() { return !m_KillGameObject; }
+void GameObject::Destroy()
+{
+	for (int i = m_Componets.size(); 0 < i; i--)
+	{
+		if (m_Componets[i] != nullptr)
+			m_Componets[i]->Destroy();
+		delete(m_Componets[i]);
+		m_Componets.pop_back();
+	}
+}
+
+bool GameObject::IsAlive() { return !m_KillGameObject; }
 

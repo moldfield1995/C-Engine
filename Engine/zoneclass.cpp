@@ -60,7 +60,7 @@ bool ZoneClass::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight
 		return false;
 	}
 	loadAmount += 5;
-	setLoadingLevel(loadAmount);
+	SetLoadingLevel(loadAmount);
 	m_textID = m_modelID = 0;
 	// Create the user interface object.
 	m_UserInterface = new UserInterfaceClass;
@@ -136,7 +136,7 @@ bool ZoneClass::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight
 		return false;
 	}
 	loadAmount += 5;
-	setLoadingLevel(loadAmount);
+	SetLoadingLevel(loadAmount);
 	// Create the terrain object.
 	m_Terrain = new TerrainClass;
 	if (!m_Terrain)
@@ -152,7 +152,7 @@ bool ZoneClass::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight
 	}
 
 	loadAmount += 10;
-	setLoadingLevel(loadAmount);
+	SetLoadingLevel(loadAmount);
 	// Set the UI to display by default.
 	m_displayUI = true;
 
@@ -200,27 +200,27 @@ bool ZoneClass::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight
 		return false;
 	}
 	loadAmount += 5;
-	setLoadingLevel(loadAmount);
+	SetLoadingLevel(loadAmount);
 	m_DebugHitbox = true;
 	m_ObjectSpawn = false;
 	modelManager->AddModle(device, "../Engine/data/T2Assets/Cat.txt", ModelManager::parsString("../Engine/data/T2Assets/Cat.txt"), HitBoxType::Rectangle, float3(1.0f, 0.0f, 0.0f));
 	loadAmount += 10;
-	setLoadingLevel(loadAmount);
+	SetLoadingLevel(loadAmount);
 	modelManager->AddModle(device, "../Engine/data/T1Assets/Su-35_SuperFlanker.txt", ModelManager::parsString("../Engine/data/T1Assets/Su-35_SuperFlanker.txt"), HitBoxType::Rectangle, float3(8.0f, 13.0f, 1.0f));
 	loadAmount += 10;
-	setLoadingLevel(loadAmount);
+	SetLoadingLevel(loadAmount);
 	modelManager->AddModle(device, "../Engine/data/New Models/OldHouce.txt", ModelManager::parsString("../Engine/data/New Models/OldHouce.txt"), HitBoxType::Rectangle, float3(3.0f, 2.0f, 4.0f));
 	loadAmount += 20;
-	setLoadingLevel(loadAmount);
+	SetLoadingLevel(loadAmount);
 	modelManager->AddModle(device, "../Engine/data/New Models/SimpleHouce.txt", ModelManager::parsString("../Engine/data/New Models/SimpleHouce.txt"), HitBoxType::Rectangle, float3(7.0f, 0.0f, 0.0f));
 	loadAmount += 10;
-	setLoadingLevel(loadAmount);
+	SetLoadingLevel(loadAmount);
 	modelManager->AddModle(device, "../Engine/data/New Models/hut.txt", ModelManager::parsString("../Engine/data/New Models/hut.txt"), HitBoxType::Rectangle, float3());
 	loadAmount += 5;
-	setLoadingLevel(loadAmount);
+	SetLoadingLevel(loadAmount);
 	modelManager->AddModle(device, "../Engine/data/New Models/FancyHouce.txt", ModelManager::parsString("../Engine/data/New Models/FancyHouce.txt"), HitBoxType::Rectangle, float3());
 	loadAmount += 5;
-	setLoadingLevel(loadAmount);
+	SetLoadingLevel(loadAmount);
 	modelManager->AddModle(device, "../Engine/data/T1Assets/cubeS.txt", ModelManager::parsString("../Engine/data/T1Assets/cubeS.txt"), HitBoxType::Point, float3());
 	ShaderManagerClass* shaderManager = ShaderManagerClass::GetInstance();
 	m_GameObjects = std::vector<GameObject*>();
@@ -369,7 +369,8 @@ void ZoneClass::HandleMovementInput(InputClass* Input, float frameTime)
 	Input->GetMouseLocation(mouseX, mouseY);
 	m_Position->RotateX(mouseY);
 	m_Position->RotateY(mouseX);
-	result = m_Position->ApplyInput(Input->IsUpPressed(), Input->IsDownPressed(), Input->IsLeftPressed(), Input->IsRightPressed());
+	
+	result = m_Position->ApplyInput(Input->Key(DIK_UP), Input->Key(DIK_DOWN), Input->Key(DIK_LEFT), Input->Key(DIK_RIGHT));
 	m_Position->GetPosition(posX, posY, posZ);
 	m_Camera->SetPosition(posX, posY + 2.0f, posZ);
 	if (result)
@@ -387,7 +388,7 @@ void ZoneClass::HandleMovementInput(InputClass* Input, float frameTime)
 			}
 		}
 	}
-	if (Input->IsF2Toggled())
+	if (Input->KeyDown(DIK_F2))
 		m_DebugHitbox = !m_DebugHitbox;
 
 	return;
@@ -395,184 +396,7 @@ void ZoneClass::HandleMovementInput(InputClass* Input, float frameTime)
 
 void ZoneClass::HandleInput(InputClass *Input, float frameTime, TextureManagerClass * TextureManager, ModelManager * Models)
 {
-	float posX, posY, posZ, rotX, rotY, rotZ;
-	float3 position, rotation, scale;
-	if (m_ObjectSpawn)
-	{
-		m_Position->GetPosition(posX, posY, posZ);
-		m_Position->GetRotation(rotX, rotY, rotZ);
-		GameObject* go = m_GameObjects.back();
-		go->SetOrigin(posX, posY + m_ymod, posZ, rotX, rotY, 10.0f + m_zmod);
-		position = go->GetPosition();
-		rotation = go->GetRotation();
-		scale = go->GetScale();
-		//int shader = go->GetShader();
-		if (Input->MouseButton(1))
-			m_ObjectSpawn = false;
-		else
-		{
-			switch (m_spawnState)
-			{
-			case SpawnState::position:
-				if (Input->IsPlusPressed())
-					m_spawnState = SpawnState::rotation;
-				else if (Input->IsMinusPressed())
-					m_spawnState = SpawnState::bumpMap;
-				else
-				{
-					if (Input->IsAPressed())
-						m_xmod += 1 * frameTime;
-					else if (Input->IsZPressed())
-						m_xmod -= 1 * frameTime;
-					if (Input->IsSPressed())
-						m_ymod += 1 * frameTime;
-					else if (Input->IsXPressed())
-						m_ymod -= 1 * frameTime;
-					if (Input->IsDPressed())
-						m_zmod += 1 * frameTime;
-					else if (Input->IsCPressed())
-						m_zmod -= 1 * frameTime;
-				}
-				break;
-			case SpawnState::rotation:
-				if (Input->IsPlusPressed())
-					m_spawnState = SpawnState::scale;
-				else if (Input->IsMinusPressed())
-					m_spawnState = SpawnState::position;
-				if (Input->IsAPressed())
-					rotation.X=rotation.X + 10 * frameTime;
-				else if (Input->IsZPressed())
-					rotation.X=rotation.X - 10 * frameTime;
-				if (Input->IsSPressed())
-					rotation.Y=rotation.Y + 10 * frameTime;
-				else if (Input->IsXPressed())
-					rotation.Y=rotation.Y - 10 * frameTime;
-				if (Input->IsDPressed())
-					rotation.Z=rotation.Z + 10 * frameTime;
-				else if (Input->IsCPressed())
-					rotation.Z=rotation.Z - 10 * frameTime;
-				go->SetRotation(rotation);
-				break;
-			case SpawnState::scale:
-				if (Input->IsPlusPressed())
-					m_spawnState = SpawnState::model;
-				else if (Input->IsMinusPressed())
-					m_spawnState = SpawnState::rotation;
-				if (Input->IsAPressed())
-					scale.X=scale.X + frameTime;
-				else if (Input->IsZPressed() && scale.X > 0.1f)
-					scale.X=scale.X - frameTime;
-				if (Input->IsSPressed())
-					scale.Y=scale.Y + frameTime;
-				else if (Input->IsXPressed() && scale.Y > 0.1f)
-					scale.Y=scale.Y - frameTime;
-				if (Input->IsDPressed())
-					scale.Z=scale.Z + frameTime;
-				else if (Input->IsCPressed() && scale.Z > 0.1f)
-					scale.Z=scale.Z - frameTime;
-				go->SetScale(scale);
-				break;
-/*			case SpawnState::model:
-				if (Input->IsPlusPressed())
-					m_spawnState = SpawnState::texture;
-				else if (Input->IsMinusPressed())
-					m_spawnState = SpawnState::scale;
-				if (Input->IsAToggled())
-				{
-					m_modelID++;
-					if (Models->GetModdelList().size() == m_modelID)
-						m_modelID = 0;
-					go->SetModel(Models->GetModdelList()[m_modelID]);
-				}
-				else if (Input->IsZToggled())
-				{
-					m_modelID--;
-					if (m_modelID < 0)
-						m_modelID = Models->GetModdelList().size() - 1;
-					go->SetModel(Models->GetModdelList()[m_modelID]);
-				}
-				break;
-			case SpawnState::texture:
-				if (Input->IsPlusPressed())
-					m_spawnState = SpawnState::shader;
-				else if (Input->IsMinusPressed())
-					m_spawnState = SpawnState::model;
-				if (Input->IsAToggled())
-				{
-					m_textID++;
-					if (TextureManager->GetTextureList().size() == m_textID)
-						m_textID = 0;
-					go->SetTexture(TextureManager->GetTextureList()[m_textID]);
-				}
-				else if (Input->IsZToggled())
-				{
-					m_textID--;
-					if (m_textID < 0)
-						m_textID = TextureManager->GetTextureList().size() - 1;
-					go->SetTexture(TextureManager->GetTextureList()[m_textID]);
-				}
-				break;
-			case SpawnState::shader:
-				if (Input->IsPlusPressed())
-					m_spawnState = SpawnState::bumpMap;
-				else if (Input->IsMinusPressed())
-					m_spawnState = SpawnState::texture;
-				if (Input->IsAToggled())
-				{
-					shader++;
-					if (shader > 2)
-						shader = 0;
-					go->SetShader(shader);
-				}
-				else if (Input->IsZToggled())
-				{
-					shader--;
-					if (shader < 0)
-						shader = 2;
-					go->SetShader(shader);
-				}
-				break;
-			case SpawnState::bumpMap:
-				if (Input->IsPlusPressed())
-					m_spawnState = SpawnState::position;
-				else if (Input->IsMinusPressed())
-					m_spawnState = SpawnState::shader;
-				if (Input->IsAToggled())
-				{
-					m_bumpID++;
-					if (TextureManager->GetTextureList().size() == m_bumpID)
-						m_bumpID = 0;
-					go->SetBump(TextureManager->GetTextureList()[m_bumpID]);
-				}
-				else if (Input->IsZToggled())
-				{
-					m_bumpID--;
-					if (m_bumpID < 0)
-						m_bumpID = TextureManager->GetTextureList().size() - 1;
-					go->SetBump(TextureManager->GetTextureList()[m_bumpID]);
-				}
-				break;//*/
-			default:
-				break;
-			}
-		}
-	}
-	else
-	{
-		if (Input->MouseButton(0))
-		{
-			m_Position->GetPosition(posX, posY, posZ);
-			m_Position->GetRotation(rotX, rotY, rotZ);
-			m_ObjectSpawn = true;
-			m_textID = m_modelID = m_bumpID = 0;
-			GameObject* go = new GameObject();
-			go->Initalize(Models->GetModdelList()[0], TextureManager->GetTextureList()[0], float3(), float3());
-			go->SetOrigin(posX, posY, posZ, rotX, rotY, 10.0f);
-			m_GameObjects.push_back(go);
-			m_xmod = m_ymod = m_zmod = 0.0f;
-			m_spawnState = SpawnState::position;
-		}
-	}
+ //Removed because of Legacy
 }
 
 bool ZoneClass::CheckHitboxs(ModelManager* modelManager)

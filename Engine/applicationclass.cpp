@@ -249,7 +249,7 @@ bool ApplicationClass::Frame()
 	}
 
 	// Check if the user pressed escape and wants to exit the application.
-	if(m_Input->IsEscapePressed() == true)
+	if(m_Input->KeyDown(DIK_ESCAPE))
 	{
 		return false;
 	}

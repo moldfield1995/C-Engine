@@ -47,8 +47,10 @@
     <ClInclude Include="frustumclass.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="HandDesplay.h" />
     <ClInclude Include="ImageElement.h" />
     <ClInclude Include="inputclass.h" />
+    <ClInclude Include="LeapTestScene.h" />
     <ClInclude Include="lightclass.h" />
     <ClInclude Include="lightshader.h" />
     <ClInclude Include="lightshaderclass.h" />
@@ -94,8 +96,10 @@
     <ClCompile Include="frustumclass.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="HandDesplay.cpp" />
     <ClCompile Include="ImageElement.cpp" />
     <ClCompile Include="inputclass.cpp" />
+    <ClCompile Include="LeapTestScene.cpp" />
     <ClCompile Include="lightclass.cpp" />
     <ClCompile Include="lightshader.cpp" />
     <ClCompile Include="lightshaderclass.cpp" />
@@ -176,16 +180,21 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <BrowseInformation>true</BrowseInformation>
+      <AdditionalIncludeDirectories>..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>leap.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
+    <PostBuildEvent>
+      <Command>xcopy /yr "..\lib\x86\Leap.dll" "$(TargetDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
