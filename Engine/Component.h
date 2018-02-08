@@ -15,6 +15,7 @@ class Component
 public:
 	Component() {};
 	~Component() {};
+	void virtual Initalize() = 0;
 	void virtual Update() = 0;
 	void virtual Render(ID3D11DeviceContext* deviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, const XMMATRIX& projectionMatrix, FrustumClass* frustume, LightClass* light, CameraClass& camera) = 0;
 	void virtual Destroy() =0;

@@ -23,6 +23,8 @@ class GameObject
 	friend Component;
 public:
 	GameObject();
+	//Duplicates a gameObject, dose NOT copy componets
+	GameObject(GameObject* go);
 	~GameObject();
 
 	void Initalize(float3 position, float3 rotation, ModelClass* model, ID3D11ShaderResourceView* textures, Shader* shader);
@@ -33,6 +35,8 @@ public:
 	float3 GetRotation();
 	float3 GetScale();
 	
+	void Update();
+
 	//Render
 	void Render(ID3D11DeviceContext* deviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, const XMMATRIX& projectionMatrix,FrustumClass* frustume,LightClass* light,CameraClass& camera);
 

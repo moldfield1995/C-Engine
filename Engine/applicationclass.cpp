@@ -6,7 +6,7 @@
 #include "MainMenu.h"
 #include "zoneclass.h"
 #include "SplashScreen.h"
-
+#include "LeapTestScene.h"
 ApplicationClass::ApplicationClass()
 {
 	m_Input = 0;
@@ -129,6 +129,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	m_AudioManager = new AudioManager();
 	m_AudioManager->Initialise(hinstance);
 	int au = m_AudioManager->AddAudio("../Engine/data/Music/1.wav");
+#if _BuildState_  ==0
 	m_AudioManager->Play(au, true);
 	// Create the zone object.
 	m_FrountBuffer = new SplashScreen();
@@ -144,6 +145,22 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		MessageBox(hwnd, L"Could not initialize the zone object.", L"Error", MB_OK);
 		return false;
 	}
+#endif
+#if _BuildState_ == 1
+	m_FrountBuffer = new LeapTestScene();
+	if (!m_FrountBuffer)
+	{
+		return false;
+	}
+	m_currentState = CurrentState::Level;
+	// Initialize the zone object.
+	result = m_FrountBuffer->Initialize(m_Direct3D, screenWidth, screenHeight, SCREEN_DEPTH, m_TextureManager, m_ModelManager, m_AudioManager);
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the zone object.", L"Error", MB_OK);
+		return false;
+	}
+#endif
 
 	m_ScreenWidth = screenWidth;
 	m_ScreenHeight = screenHeight;

@@ -10,7 +10,24 @@ GameObject::GameObject()
 	m_shader=0;
 	m_hitboxType = HitBoxType::Point;
 	m_KillGameObject = false;
+
 	m_Componets = std::vector<Component*>();
+}
+
+GameObject::GameObject(GameObject * go)
+{
+	m_position = go->m_position;
+	m_rotation = go->m_rotation;
+	m_scale = go->m_scale;
+	m_model = go->m_model;
+	m_shader = go->m_shader;
+	m_Renders = m_model != nullptr;
+	m_Componets = std::vector<Component*>();
+	m_textures = new std::vector<ID3D11ShaderResourceView*>();
+	for each (ID3D11ShaderResourceView* texture in *go->m_textures)
+	{
+		m_textures->push_back(texture);
+	}
 }
 
 
@@ -29,6 +46,7 @@ void GameObject::Initalize(float3 position, float3 rotation, ModelClass * model,
 	m_model = model;
 	if (!model)
 		return;
+	m_Renders = true;
 	m_hitbox = model->GetHitbox();
 	m_hitboxType = model->GetHitBoxType();
 }
@@ -45,10 +63,23 @@ float3 GameObject::GetRotation() { return m_rotation; }
 
 float3 GameObject::GetScale() { return m_scale; }
 
+void GameObject::Update()
+{
+	for each (Component* componet in m_Componets)
+	{
+		componet->Update();
+	}
+}
+
 void GameObject::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, const XMMATRIX& projectionMatrix, FrustumClass * frustume, LightClass * light, CameraClass& camera)
 {
+	for each (Component* componet in m_Componets)
+	{
+		componet->Render(deviceContext,worldMatrix,viewMatrix,projectionMatrix,frustume,light,camera);
+	}
 	if (m_model == nullptr || !m_Renders)
 		return;
+	//ToDo check frostume
 	XMMATRIX renderMatrix,transformMatrix,rotationMatrix,scaleMatrix;
 	transformMatrix = XMMatrixTranslation(m_position.X, m_position.Y, m_position.Z);
 	scaleMatrix = XMMatrixScaling(m_scale.X, m_scale.Y, m_scale.Z);
@@ -63,6 +94,7 @@ void GameObject::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX& wor
 void GameObject::AddComponet(Component * component)
 {
 	component->owner = this;
+	component->Initalize();
 	m_Componets.push_back(component);
 }
 

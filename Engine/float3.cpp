@@ -11,6 +11,13 @@ float3::~float3()
 {
 }
 
+float3::float3(float xyz)
+{
+	X = xyz;
+	Y = xyz;
+	Z = xyz;
+}
+
 float3::float3(float x, float y, float z)
 {
 	X = x;

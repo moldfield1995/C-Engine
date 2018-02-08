@@ -58,8 +58,10 @@ bool MainMenu::Frame(D3DClass* Direct3D, InputClass* Input, ShaderManagerClass* 
 
 void MainMenu::HandleMovementInput(InputClass* Input, float frameTime)
 {
+
 	int mouseX , mouseY;
 	int posX , posY;
+
 	Input->GetMouseLocation(mouseX, mouseY);
 	m_Curser->GetPosition(posX, posY);
 	posX += mouseX;
