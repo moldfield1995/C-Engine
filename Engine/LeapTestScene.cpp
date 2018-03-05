@@ -30,7 +30,7 @@ bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 	m_Camera->SetPosition(0.0f, 0.0f, -10.0f);
 	m_Camera->Render();
 	m_Camera->RenderBaseViewMatrix();
-
+	m_Camera->SetActiveCamera();
 	// Create the light object.
 	m_Light = new LightClass;
 	if (!m_Light)
@@ -42,7 +42,7 @@ bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 	m_Light->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
 	m_Light->SetAmbientColor(0.1f, 0.1f, 0.1f, 0.1f);
 	m_Light->SetSpecularColor(0.1f, 0.1f, 0.1f, 0.1f);
-	m_Light->SetDirection(-0.5f, -1.0f, -0.5f);
+	m_Light->SetDirection(0.5f, -1.0f, -0.5f);
 
 	// Create the frustum object.
 	m_Frustum = new FrustumClass;
@@ -61,7 +61,7 @@ bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 		return false;
 	if (!modelManager->ModelLoaded(ModelManager::parsString("../Engine/data/T1Assets/cubeS.txt")))
 		modelManager->AddModle(device, "../Engine/data/T1Assets/cubeS.txt", ModelManager::parsString("../Engine/data/T1Assets/cubeS.txt"), HitBoxType::Point, float3());
-	Shader* shader = ShaderManagerClass::GetInstance()->GetShader<LightShaderClass>();
+	Shader* shader = ShaderManagerClass::GetInstance()->GetShader<LightShader>();
 
 	GameObject* gameObject = new GameObject();
 	gameObject->Initalize(float3(), float3(), modelManager->GetModel(ModelManager::parsString("../Engine/data/T1Assets/cubeS.txt")), textureManager->GetTexture(404), shader);

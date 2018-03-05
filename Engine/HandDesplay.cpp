@@ -59,7 +59,7 @@ void HandDesplay::Update()
 				if (bone.isValid()) {
 					workGo = m_HandGameObjects[currentActive];
 					workGo->SetPosition(float3(bone.prevJoint())*leapToWorldScale + handOffset);
-					workGo->SetRotation(bone.direction()); //Default float 3 = 0,0,0
+					workGo->SetRotation(bone.direction()); 
 					//itterate the gameobject index to update
 					currentActive++;
 				}
