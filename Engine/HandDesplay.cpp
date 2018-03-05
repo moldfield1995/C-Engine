@@ -8,7 +8,7 @@ HandDesplay::HandDesplay()
 {
 	lastUpdate = 0;
 	m_HandGameObjects = std::vector<GameObject*>();
-	currentActive = 0;
+	currentActive = -1;
 	leapToWorldScale = float3(.02f,.02f,-.02f);
 	handOffset = float3(0.0f, -5.0f, 0.0f);
 }
@@ -35,7 +35,7 @@ void HandDesplay::Update()
 	HandList hands = frame.hands();
 	int handCount = hands.count();
 	//reset to 0 incase render was not called
-	currentActive = 0;
+	currentActive = -1;
 	GameObject* workGo = 0;
 	for each (Leap::Hand hand in hands)
 	{
@@ -85,11 +85,6 @@ void HandDesplay::Destroy()
 
 }
 
-void HandDesplay::createGameObjects(Leap::Hand hand)
-{
-	//createObject for palm
-	//createObject for each finger
-}
 
 void HandDesplay::createGameObjects(int amount)
 {
