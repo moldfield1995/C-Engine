@@ -75,7 +75,8 @@ void GameObject::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX& wor
 {
 	for each (Component* componet in m_Componets)
 	{
-		componet->Render(deviceContext,worldMatrix,viewMatrix,projectionMatrix,frustume,light,camera);
+		if(componet->renders)
+			componet->Render(deviceContext,worldMatrix,viewMatrix,projectionMatrix,frustume,light,camera);
 	}
 	if (m_model == nullptr || !m_Renders)
 		return;
@@ -171,12 +172,12 @@ HitBoxType GameObject::GetHitboxType()
 	return m_hitboxType;
 }
 
-void GameObject::SetOrigin(float posX, float posY, float posZ, float rotX, float rotY, float radius)
-{
-	m_position.X =(posX + radius*cosf(rotX*0.0174532925f)*sinf(rotY*0.0174532925f));
-	m_position.Y =(posY);
-	m_position.Z =(posZ + radius*cosf(rotY*0.0174532925f));
-}
+//void GameObject::SetOrigin(float posX, float posY, float posZ, float rotX, float rotY, float radius)
+//{
+//	m_position.X =(posX + radius*cosf(rotX*0.0174532925f)*sinf(rotY*0.0174532925f));
+//	m_position.Y =(posY);
+//	m_position.Z =(posZ + radius*cosf(rotY*0.0174532925f));
+//}
 
 void GameObject::Destroy()
 {
@@ -185,8 +186,8 @@ void GameObject::Destroy()
 		if (m_Componets[i] != nullptr)
 			m_Componets[i]->Destroy();
 		delete(m_Componets[i]);
-		m_Componets.pop_back();
 	}
+	m_Componets.clear();
 }
 
 bool GameObject::IsAlive() { return !m_KillGameObject; }

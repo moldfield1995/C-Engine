@@ -75,6 +75,9 @@
     <ClInclude Include="texturemanagerclass.h" />
     <ClInclude Include="textureshaderclass.h" />
     <ClInclude Include="timerclass.h" />
+    <ClInclude Include="UIComponent.h" />
+    <ClInclude Include="UIMannager.h" />
+    <ClInclude Include="UIText.h" />
     <ClInclude Include="userinterfaceclass.h" />
     <ClInclude Include="zoneclass.h" />
   </ItemGroup>
@@ -124,6 +127,9 @@
     <ClCompile Include="texturemanagerclass.cpp" />
     <ClCompile Include="textureshaderclass.cpp" />
     <ClCompile Include="timerclass.cpp" />
+    <ClCompile Include="UIComponent.cpp" />
+    <ClCompile Include="UIMannager.cpp" />
+    <ClCompile Include="UIText.cpp" />
     <ClCompile Include="userinterfaceclass.cpp" />
     <ClCompile Include="zoneclass.cpp" />
   </ItemGroup>

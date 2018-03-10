@@ -64,6 +64,12 @@
     <Filter Include="Source Files\Elements">
       <UniqueIdentifier>{9cd73f52-9718-422c-ae99-6d6a23742e76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\UI">
+      <UniqueIdentifier>{5949768a-95dd-4154-ba7e-f90b957d3d91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{51931d09-4ba5-4afa-9934-5bb2e152d677}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -258,6 +264,15 @@
     <ClInclude Include="HandDesplay.h">
       <Filter>Header Files\Componets</Filter>
     </ClInclude>
+    <ClInclude Include="UIComponent.h">
+      <Filter>Header Files\SingleTon</Filter>
+    </ClInclude>
+    <ClInclude Include="UIMannager.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fontshaderclass.cpp">
@@ -400,6 +415,15 @@
     </ClCompile>
     <ClCompile Include="HandDesplay.cpp">
       <Filter>Source Files\Componets</Filter>
+    </ClCompile>
+    <ClCompile Include="UIComponent.cpp">
+      <Filter>Source Files\SingleTon</Filter>
+    </ClCompile>
+    <ClCompile Include="UIMannager.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIText.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

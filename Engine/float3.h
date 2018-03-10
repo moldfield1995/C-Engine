@@ -6,8 +6,10 @@ public:
 	float3();
 	~float3();
 	float3(float xyz);
+	float3(float x, float y);
 	float3(float x, float y, float z);
 	float3(Leap::Vector vector);
+
 	void Set(float x, float y, float z);
 	float3 Normalize();
 	float Lenght();

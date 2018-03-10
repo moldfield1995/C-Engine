@@ -18,6 +18,13 @@ float3::float3(float xyz)
 	Z = xyz;
 }
 
+float3::float3(float x, float y)
+{
+	X = x;
+	Y = y;
+	Z = 0.0f;
+}
+
 float3::float3(float x, float y, float z)
 {
 	X = x;

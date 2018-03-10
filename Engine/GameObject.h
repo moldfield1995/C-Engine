@@ -57,9 +57,6 @@ public:
 	void Destroy();
 	bool IsAlive();
 
-	//Old Below Needs replacing
-	void SetOrigin(float posX, float posY, float posZ, float rotX, float rotY, float radius);
-
 protected:
 
 	bool m_KillGameObject,m_Renders;
