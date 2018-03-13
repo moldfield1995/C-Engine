@@ -7,7 +7,6 @@
 #include "inputclass.h"
 #include "bitmapclass.h"
 #include "cameraclass.h"
-#include "ImageElement.h"
 class LoadingScreen : public GameState
 {
 public:
@@ -25,7 +24,6 @@ protected:
 private:
 	CameraClass* m_Camera;
 	bool m_running;
-	ImageElement* m_loadingBar;
 	GameState* m_level;
 	float m_scaleX;
 };

@@ -25,7 +25,6 @@ TextureClass::~TextureClass()
 bool TextureClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* filename)
 {
 	bool result;
-	int height, width;
 	D3D11_TEXTURE2D_DESC textureDesc;
 	HRESULT hResult;
 	unsigned int rowPitch;
@@ -33,15 +32,14 @@ bool TextureClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceC
 
 
 	// Load the targa image data into memory.
-	result = LoadTarga(filename, height, width);
+	result = LoadTarga(filename, textureHeight, textureWidth);
 	if(!result)
 	{
 		return false;
 	}
-
 	// Setup the description of the texture.
-	textureDesc.Height = height;
-	textureDesc.Width = width;
+	textureDesc.Height = textureHeight;
+	textureDesc.Width = textureWidth;
 	textureDesc.MipLevels = 0;
 	textureDesc.ArraySize = 1;
 	textureDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -60,7 +58,7 @@ bool TextureClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceC
 	}
 
 	// Set the row pitch of the targa image data.
-	rowPitch = (width * 4) * sizeof(unsigned char);
+	rowPitch = (textureWidth * 4) * sizeof(unsigned char);
 
 	// Copy the targa image data into the texture.
 	deviceContext->UpdateSubresource(m_texture, 0, NULL, m_targaData, rowPitch, 0);
@@ -119,6 +117,12 @@ void TextureClass::Shutdown()
 ID3D11ShaderResourceView* TextureClass::GetTexture()
 {
 	return m_textureView;
+}
+
+void TextureClass::GetTextureSize(int & height, int & width)
+{
+	height = textureHeight;
+	width = textureWidth;
 }
 
 

@@ -27,6 +27,7 @@ const float SCREEN_NEAR = 0.1f;
 #include "GameState.h"
 #include "LoadingScreen.h"
 #include "AudioManager.h"
+#include "fontmanagerclass.h"
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ApplicationClass
 ////////////////////////////////////////////////////////////////////////////////
@@ -67,7 +68,7 @@ private:
 	GameState* m_FrountBuffer;
 	GameState* m_BackBuffer;
 	ModelManager* m_ModelManager;
-	// add perfomance monitor
+	FontManagerClass* m_FontManager;
 	int m_ScreenHeight, m_ScreenWidth;
 	CurrentState m_currentState;
 	bool m_activeThread;

@@ -177,9 +177,6 @@
     <ClInclude Include="skydomeclass.h">
       <Filter>Header Files\SingleTon</Filter>
     </ClInclude>
-    <ClInclude Include="minimapclass.h">
-      <Filter>Header Files\System</Filter>
-    </ClInclude>
     <ClInclude Include="fpsclass.h">
       <Filter>Header Files\Mangers</Filter>
     </ClInclude>
@@ -252,9 +249,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\Elements</Filter>
     </ClInclude>
-    <ClInclude Include="ImageElement.h">
-      <Filter>Header Files\Elements</Filter>
-    </ClInclude>
     <ClInclude Include="lightclass.h">
       <Filter>Header Files\Elements</Filter>
     </ClInclude>
@@ -270,7 +264,19 @@
     <ClInclude Include="UIMannager.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
+    <ClInclude Include="fontmanagerclass.h">
+      <Filter>Header Files\Mangers</Filter>
+    </ClInclude>
     <ClInclude Include="UIText.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIImage.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugDesplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -306,9 +312,6 @@
       <Filter>Source Files\System</Filter>
     </ClCompile>
     <ClCompile Include="d3dclass.cpp">
-      <Filter>Source Files\System</Filter>
-    </ClCompile>
-    <ClCompile Include="minimapclass.cpp">
       <Filter>Source Files\System</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -398,9 +401,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\Elements</Filter>
     </ClCompile>
-    <ClCompile Include="ImageElement.cpp">
-      <Filter>Source Files\Elements</Filter>
-    </ClCompile>
     <ClCompile Include="lightclass.cpp">
       <Filter>Source Files\Elements</Filter>
     </ClCompile>
@@ -416,13 +416,25 @@
     <ClCompile Include="HandDesplay.cpp">
       <Filter>Source Files\Componets</Filter>
     </ClCompile>
-    <ClCompile Include="UIComponent.cpp">
-      <Filter>Source Files\SingleTon</Filter>
-    </ClCompile>
     <ClCompile Include="UIMannager.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
+    <ClCompile Include="fontmanagerclass.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
     <ClCompile Include="UIText.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIImage.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIComponent.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugDesplay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -19,6 +19,7 @@ ApplicationClass::ApplicationClass()
 	m_BackBuffer = 0;
 	m_ModelManager = 0;
 	m_AudioManager = 0;
+	m_FontManager = 0;
 }
 
 
@@ -96,7 +97,25 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		MessageBox(hwnd, L"Could not initialize the texture manager object.", L"Error", MB_OK);
 		return false;
 	}
-
+	//Load Default Texture
+	result = m_TextureManager->LoadTexture(m_Direct3D->GetDevice(), m_Direct3D->GetDeviceContext(), "../Engine/data/textures/debug.tga", 404);
+	if (!result)
+	{
+		return false;
+	}
+	//create Font Class
+	m_FontManager = new FontManagerClass;
+	if (!m_FontManager)
+		return false;
+	result = m_FontManager->Initialize();
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the font manager object.", L"Error", MB_OK);
+		return false;
+	}
+	//Load Default Font
+	result = m_FontManager->LoadFont(m_Direct3D->GetDevice(), m_Direct3D->GetDeviceContext(), "../Engine/data/font/font01.txt",
+		"../Engine/data/font/font01.tga", 32.0f, 3,0);
 
 	// Create the timer object.
 	m_Timer = new TimerClass;

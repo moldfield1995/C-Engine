@@ -1,15 +1,23 @@
 #include "UIText.h"
-
-
-
-
+#include "fontshaderclass.h"
+#include "shadermanagerclass.h"
+#include "fontmanagerclass.h"
 
 UIText::UIText(XMFLOAT4 colour, string initalText)
 {
+	active = false;
+	killComponet = false;
+	renders = true;
+	scale = float3(1.0f);
 	pixleColour = colour;
 	currentText = initalText;
 	shadowColour = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);
 	indexBuffer = vertexBuffer = 0;
+	stride = sizeof(VertexType);
+	shadowOffset = XMMatrixTranslation(2.0f,-2.0f,0.0f);
+	shader = 0;
+	font = 0;
+	vertices = 0;
 }
 
 
@@ -63,7 +71,7 @@ void UIText::Initalize()
 	result = device->CreateBuffer(&vertexBufferDesc, &vertexData, &vertexBuffer);
 	if (FAILED(result))
 	{
-		
+		OutputDebugString(L"Failed to create vertex buffer | Inialize | UIText");
 	}
 
 	// Set up the description of the static index buffer.
@@ -83,13 +91,17 @@ void UIText::Initalize()
 	result = device->CreateBuffer(&indexBufferDesc, &indexData, &indexBuffer);
 	if (FAILED(result))
 	{
-		
+		OutputDebugString(L"Failed to Create index buffer | Initalize | UIText");
 	}
 
 	// Release the index array as it is no longer needed.
 	delete[] indices;
 	indices = 0;
+	//End of D3DBuffet creation
 
+	shader = ShaderManagerClass::GetInstance()->GetShader<FontShaderClass>();
+	
+	font = FontManagerClass::GetInstance()->GetFont(0);
 
 }
 
@@ -99,10 +111,46 @@ void UIText::Update()
 
 void UIText::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX & worldMatrix, const XMMATRIX & baseViewMatrix, const XMMATRIX & orthoMatrix)
 {
+	XMMATRIX renderMatrix, rotationMatrix, scaleMatrix;
+	rotationMatrix = XMMatrixRotationRollPitchYaw(rotation.X, rotation.Y, rotation.Z);
+	scaleMatrix = XMMatrixScaling(scale.X, scale.Y, scale.Z);
+	//check if the shadow alpha is grater than 0
+	if (shadowColour.z > 0.0f)
+	{
+		renderMatrix = XMMatrixMultiply(worldMatrix, shadowOffset);
+		renderMatrix = XMMatrixMultiply(scaleMatrix, renderMatrix);
+		renderMatrix = XMMatrixMultiply(rotationMatrix, renderMatrix);
+		deviceContext->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, 0);
+		deviceContext->IASetIndexBuffer(indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+		deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		shader->Render(deviceContext, activeIndexs, renderMatrix, baseViewMatrix, orthoMatrix, font->GetTextures());
+	}
+	renderMatrix = XMMatrixMultiply(rotationMatrix, worldMatrix);
+	renderMatrix = XMMatrixMultiply(scaleMatrix, renderMatrix);
+	deviceContext->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, 0);
+	deviceContext->IASetIndexBuffer(indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	shader->Render(deviceContext, activeIndexs, renderMatrix, baseViewMatrix, orthoMatrix, font->GetTextures());
 }
 
 void UIText::Destroy()
 {
+	if (indexBuffer != 0)
+	{
+		indexBuffer->Release();
+		delete indexBuffer;
+		indexBuffer = 0;
+	}
+	if (vertexBuffer != 0)
+	{
+		vertexBuffer->Release();
+		delete vertexBuffer;
+		vertexBuffer = 0;
+	}
+	shader = 0;
+	font = 0;
+	delete[] vertices;
+	vertices = 0;
 }
 
 void UIText::UpdateString(string text)
@@ -112,24 +160,24 @@ void UIText::UpdateString(string text)
 	void* verticesPtr;
 	HRESULT result;
 	ID3D11DeviceContext* deviceContext;
-	const char* charText = text.data();
 	// Get the number of letters in the sentence.
 	numLetters = text.length();
 
 	// Check for possible buffer overflow.
 	if (numLetters > vertexCount/6)
 	{
-		
+		OutputDebugString(L"Buffer Overfloaw | UpdateString | UIText");
 	}
+
 	activeIndexs = numLetters * 6;
 	// Use the font class to build the vertex array from the sentence text and sentence draw location.
-	font->BuildVertexArray((void*)vertices, charText, position.X, position.Y);
+	font->BuildVertexArray((void*)vertices, text.data(), position.X, position.Y);
 	deviceContext = D3DClass::GetInstance()->GetDeviceContext();
 	// Lock the vertex buffer.
 	result = deviceContext->Map(vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	if (FAILED(result))
 	{
-		
+		OutputDebugString(L"Failed to Map Data | UpdateString | UIText");
 	}
 
 	// Get a pointer to the mapped resource data pointer.
@@ -145,4 +193,5 @@ void UIText::UpdateString(string text)
 
 void UIText::SetShadowColour(XMFLOAT4 colour)
 {
+	shadowColour = colour;
 }

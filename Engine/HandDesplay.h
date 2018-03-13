@@ -13,7 +13,6 @@ public:
 	void virtual Destroy();
 
 private:
-	void createGameObjects(Leap::Hand hand);
 	void createGameObjects(int amount);
 	int currentActive;
 	int64_t lastUpdate;

@@ -21,8 +21,8 @@ bool LoadingScreen::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 {
 	float scaleY = (float)screenHeight / 720.0f;
 	float scaleX = (float)screenWidth / 1280.0f;
-	m_loadingBar= new ImageElement;
-	m_loadingBar->Initialize(Direct3D->GetDevice(), Direct3D->GetDeviceContext(), screenWidth, screenHeight, 0, 100 * scaleY, "../Engine/data/minimap/LoadingBar.tga", 0, screenHeight - (300 * scaleY));
+	//m_loadingBar= new ImageElement;
+	//m_loadingBar->Initialize(Direct3D->GetDevice(), Direct3D->GetDeviceContext(), screenWidth, screenHeight, 0, 100 * scaleY, "../Engine/data/minimap/LoadingBar.tga", 0, screenHeight - (300 * scaleY));
 	m_Camera = new CameraClass;
 	m_Camera->SetPosition(0.0f, 0.0f, -10.0f);
 	m_Camera->Render();
@@ -33,12 +33,12 @@ bool LoadingScreen::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 
 void LoadingScreen::Shutdown()
 {
-	if (m_loadingBar)
-	{
-		m_loadingBar->Shutdown();
-		delete m_loadingBar;
-		m_loadingBar = 0;
-	}
+	//if (m_loadingBar)
+	//{
+	//	m_loadingBar->Shutdown();
+	//	delete m_loadingBar;
+	//	m_loadingBar = 0;
+	//}
 	if (m_Camera)
 	{
 		delete m_Camera;
@@ -57,16 +57,16 @@ bool LoadingScreen::Frame(D3DClass* Direct3D, InputClass* Input, ShaderManagerCl
 {
 	while (m_running)
 	{
-		int sizeX, sizeY,loading;
-		m_loadingBar->GetSize(sizeX, sizeY);
-		loading = m_level->GetLoadingLevel();
-		if (loading > 0)
-		{
-			float levelload = (float)loading / 100;
-			sizeX = 1980 * m_scaleX * levelload;
-			m_loadingBar->SetSize(sizeX, sizeY);
-		}
-		Render(Direct3D, ShaderManager, TextureManager, modelManager);
+		//int sizeX, sizeY,loading;
+		//m_loadingBar->GetSize(sizeX, sizeY);
+		//loading = m_level->GetLoadingLevel();
+		//if (loading > 0)
+		//{
+		//	float levelload = (float)loading / 100;
+		//	sizeX = 1980 * m_scaleX * levelload;
+		//	m_loadingBar->SetSize(sizeX, sizeY);
+		//}
+		//Render(Direct3D, ShaderManager, TextureManager, modelManager);
 	}
 	return true;
 }
@@ -97,11 +97,11 @@ bool LoadingScreen::Render(D3DClass* Direct3D, ShaderManagerClass* ShaderManager
 	Direct3D->TurnZBufferOff();
 	Direct3D->EnableAlphaBlending();
 	Direct3D->EnableAlphaToCoverageBlending();
-	if (!m_loadingBar->Render(Direct3D->GetDeviceContext()))
-		return false;
-	if (!ShaderManager->RenderTextureShader(Direct3D->GetDeviceContext(), m_loadingBar->GetIndexCount(), worldMatrix, viewMatrix,
-		orthoMatrix, m_loadingBar->GetTexture()))
-		return false;
+	//if (!m_loadingBar->Render(Direct3D->GetDeviceContext()))
+	//	return false;
+	//if (!ShaderManager->RenderTextureShader(Direct3D->GetDeviceContext(), m_loadingBar->GetIndexCount(), worldMatrix, viewMatrix,
+	//	orthoMatrix, m_loadingBar->GetTexture()))
+	//	return false;
 	Direct3D->EndScene();
 	return true;
 }

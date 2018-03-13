@@ -2,12 +2,13 @@
 // Filename: fontclass.cpp
 ///////////////////////////////////////////////////////////////////////////////
 #include "fontclass.h"
-
+#include "texturemanagerclass.h"
 
 FontClass::FontClass()
 {
 	m_Font = 0;
 	m_Texture = 0;
+	textures = 0;
 }
 
 
@@ -25,7 +26,6 @@ bool FontClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceCont
 						   float fontHeight, int spaceSize)
 {
 	bool result;
-
 
 	// Store the height of the font.
 	m_fontHeight = fontHeight;
@@ -126,8 +126,15 @@ void FontClass::ReleaseFontData()
 bool FontClass::LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* filename)
 {
 	bool result;
-
-
+	TextureManagerClass* textureManager = TextureManagerClass::GetInstance();
+	if (textureManager->LoadTexture(device, deviceContext, filename, 111))
+	{
+		textures = new std::vector<ID3D11ShaderResourceView*>();
+		textures->push_back(textureManager->GetTexture(111));
+	}
+	else
+		return false;
+	//TODO: Remove
 	// Create the texture object.
 	m_Texture = new TextureClass;
 	if(!m_Texture)
@@ -163,6 +170,11 @@ void FontClass::ReleaseTexture()
 ID3D11ShaderResourceView* FontClass::GetTexture()
 {
 	return m_Texture->GetTexture();
+}
+
+std::vector<ID3D11ShaderResourceView*>* FontClass::GetTextures()
+{
+	return textures;
 }
 
 

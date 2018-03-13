@@ -22,23 +22,10 @@ BitmapClass::~BitmapClass()
 }
 
 
-bool BitmapClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, int screenWidth, int screenHeight, int bitmapWidth, int bitmapHeight, char* textureFilename)
+bool BitmapClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* textureFilename)
 {
 	bool result;
-
-
-	// Store the screen size.
-	m_screenWidth = screenWidth;
-	m_screenHeight = screenHeight;
-
-	// Store the size in pixels that this bitmap should be rendered at.
-	m_bitmapWidth = bitmapWidth;
-	m_bitmapHeight = bitmapHeight;
-
-	// Initialize the previous rendering position to negative one.
-	m_previousPosX = -1;
-	m_previousPosY = -1;
-
+	int bitmapHeight, bitmapWidth;
 	// Initialize the vertex and index buffer that hold the geometry for the bitmap quad.
 	result = InitializeBuffers(device);
 	if(!result)
@@ -52,7 +39,12 @@ bool BitmapClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceCo
 	{
 		return false;
 	}
-
+	m_Texture->GetTextureSize(bitmapHeight, bitmapWidth);
+	result = UpdateBuffers(deviceContext, bitmapHeight, bitmapWidth);
+	if (!result)
+	{
+		return false;
+	}
 	return true;
 }
 
@@ -69,17 +61,8 @@ void BitmapClass::Shutdown()
 }
 
 
-bool BitmapClass::Render(ID3D11DeviceContext* deviceContext, int positionX, int positionY, int bitmapHeight, int bitmapWidth)
+bool BitmapClass::Render(ID3D11DeviceContext* deviceContext)
 {
-	bool result;
-
-
-	// Re-build the dynamic vertex buffer for rendering to possibly a different location on the screen.
-	result = UpdateBuffers(deviceContext, positionX, positionY,bitmapHeight, bitmapWidth);
-	if (!result)
-	{
-		return false;
-	}
 
 	// Put the vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	RenderBuffers(deviceContext);
@@ -99,11 +82,16 @@ ID3D11ShaderResourceView* BitmapClass::GetTexture()
 	return m_Texture->GetTexture();
 }
 
+void BitmapClass::GetTextureSize(int & height, int & width)
+{
+	m_Texture->GetTextureSize(height, width);
+}
+
 
 bool BitmapClass::InitializeBuffers(ID3D11Device* device)
 {
-	VertexType* vertices;
 	unsigned long* indices;
+	VertexType *vertices;
 	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
 	HRESULT result;
@@ -179,10 +167,6 @@ bool BitmapClass::InitializeBuffers(ID3D11Device* device)
 		return false;
 	}
 
-	// Release the arrays now that the vertex and index buffers have been created and loaded.
-	delete [] vertices;
-	vertices = 0;
-
 	delete [] indices;
 	indices = 0;
 
@@ -210,65 +194,32 @@ void BitmapClass::ShutdownBuffers()
 }
 
 
-bool BitmapClass::UpdateBuffers(ID3D11DeviceContext* deviceContent, int positionX, int positionY,int bitmapHeight, int bitmapWidth)
+bool BitmapClass::UpdateBuffers(ID3D11DeviceContext* deviceContent,int bitmapHeight, int bitmapWidth)
 {
-	float left, right, top, bottom;
-	VertexType* vertices;
+	VertexType *vertices;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	VertexType* dataPtr;
 	HRESULT result;
 
-
-	// If the position we are rendering this bitmap to has not changed then don't update the vertex buffer since it
-	// currently has the correct parameters.
-	if((positionX == m_previousPosX) && (positionY == m_previousPosY) && (m_bitmapHeight == bitmapHeight) &&(m_bitmapWidth == bitmapWidth))
-	{
-		return true;
-	}
-
-	// If it has changed then update the position it is being rendered to.
-	m_previousPosX = positionX;
-	m_previousPosY = positionY;
-	m_bitmapHeight = bitmapHeight;
-	m_bitmapWidth = bitmapWidth;
-	// Calculate the screen coordinates of the left side of the bitmap.
-	left = (float)((m_screenWidth / 2) * -1) + (float)positionX;
-
-	// Calculate the screen coordinates of the right side of the bitmap.
-	right = left + (float)m_bitmapWidth;
-
-	// Calculate the screen coordinates of the top of the bitmap.
-	top = (float)(m_screenHeight / 2) - (float)positionY;
-
-	// Calculate the screen coordinates of the bottom of the bitmap.
-	bottom = top - (float)m_bitmapHeight;
-
-	// Create the vertex array.
-	vertices = new VertexType[m_vertexCount];
-	if(!vertices)
-	{
-		return false;
-	}
-
 	// Load the vertex array with data.
 	// First triangle.
-	vertices[0].position = XMFLOAT3(left, top, 0.0f);  // Top left.
+	vertices[0].position = XMFLOAT3(0.0f, 0.0f, 0.0f);  // Top left.
 	vertices[0].texture = XMFLOAT2(0.0f, 0.0f);
 
-	vertices[1].position = XMFLOAT3(right, bottom, 0.0f);  // Bottom right.
+	vertices[1].position = XMFLOAT3(bitmapWidth, bitmapHeight, 0.0f);  // Bottom right.
 	vertices[1].texture = XMFLOAT2(1.0f, 1.0f);
 
-	vertices[2].position = XMFLOAT3(left, bottom, 0.0f);  // Bottom left.
+	vertices[2].position = XMFLOAT3(0.0f, bitmapHeight, 0.0f);  // Bottom left.
 	vertices[2].texture = XMFLOAT2(0.0f, 1.0f);
 
 	// Second triangle.
-	vertices[3].position = XMFLOAT3(left, top, 0.0f);  // Top left.
+	vertices[3].position = XMFLOAT3(0.0f, 0.0f, 0.0f);  // Top left.
 	vertices[3].texture = XMFLOAT2(0.0f, 0.0f);
 
-	vertices[4].position = XMFLOAT3(right, top, 0.0f);  // Top right.
+	vertices[4].position = XMFLOAT3(bitmapWidth, 0.0f, 0.0f);  // Top right.
 	vertices[4].texture = XMFLOAT2(1.0f, 0.0f);
 
-	vertices[5].position = XMFLOAT3(right, bottom, 0.0f);  // Bottom right.
+	vertices[5].position = XMFLOAT3(bitmapWidth, bitmapHeight, 0.0f);  // Bottom right.
 	vertices[5].texture = XMFLOAT2(1.0f, 1.0f);
 
 	// Lock the vertex buffer.
@@ -289,10 +240,6 @@ bool BitmapClass::UpdateBuffers(ID3D11DeviceContext* deviceContent, int position
 
 	// Release the pointer reference.
 	dataPtr = 0;
-
-	// Release the vertex array as it is no longer needed.
-	delete [] vertices;
-	vertices = 0;
 
 	return true;
 }
@@ -325,7 +272,6 @@ bool BitmapClass::LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceC
 {
 	bool result;
 
-
 	// Create the texture object.
 	m_Texture = new TextureClass;
 	if(!m_Texture)
@@ -339,7 +285,7 @@ bool BitmapClass::LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceC
 	{
 		return false;
 	}
-
+	
 	return true;
 }
 

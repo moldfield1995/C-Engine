@@ -7,7 +7,6 @@
 #include "inputclass.h"
 #include "bitmapclass.h"
 #include "cameraclass.h"
-#include "ImageElement.h"
 class MainMenu : public GameState 
 {
 public:
@@ -25,7 +24,6 @@ protected:
 private:
 	void UIHitboxTest();
 	CameraClass* m_Camera;
-	ImageElement* m_Logo, *m_StartButton, *m_QuitButton,*m_Curser,*m_Background;
 	int screenHight, screenWidth;
 };
 

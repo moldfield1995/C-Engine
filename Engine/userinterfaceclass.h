@@ -9,7 +9,6 @@
 // MY CLASS INCLUDES //
 ///////////////////////
 #include "textclass.h"
-#include "minimapclass.h"
 #include "GameObject.h"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +36,6 @@ private:
 	TextClass *m_FpsString, *m_SpawnType;
 	int m_previousFps;
 	int m_previousPosition[6];
-	MiniMapClass* m_MiniMap;
 };
 
 #endif

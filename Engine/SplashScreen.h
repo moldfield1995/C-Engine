@@ -7,7 +7,6 @@
 #include "inputclass.h"
 #include "bitmapclass.h"
 #include "cameraclass.h"
-#include "ImageElement.h"
 class SplashScreen : public  GameState
 {
 public:
@@ -24,6 +23,5 @@ protected:
 private:
 	int m_ScreenHight, m_ScreenWidth;
 	CameraClass* m_Camera;
-	ImageElement* m_Logo, *m_Text;
 };
 

@@ -10,6 +10,7 @@
 //////////////
 #include <directxmath.h>
 #include <fstream>
+#include <vector>
 using namespace DirectX;
 using namespace std;
 
@@ -45,8 +46,11 @@ public:
 
 	bool Initialize(ID3D11Device*, ID3D11DeviceContext*, char*, char*, float, int);
 	void Shutdown();
-
+	//old
 	ID3D11ShaderResourceView* GetTexture();
+	//new
+	std::vector< ID3D11ShaderResourceView*>* GetTextures();
+
 	void BuildVertexArray(void*,const char*, float, float);
 	int GetSentencePixelLength(char*);
 	int GetFontHeight();
@@ -59,9 +63,11 @@ private:
 
 private:
 	FontType* m_Font;
-	TextureClass* m_Texture;
 	float m_fontHeight;
 	int m_spaceSize;
+	std::vector< ID3D11ShaderResourceView*> *textures;
+	//TODO: Remove
+	TextureClass* m_Texture;
 };
 
 #endif

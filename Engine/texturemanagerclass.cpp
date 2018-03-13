@@ -7,7 +7,6 @@ TextureManagerClass* TextureManagerClass::instance = 0;
 
 TextureManagerClass::TextureManagerClass()
 {
-	//m_TextureArray = 0;
 }
 
 
@@ -21,9 +20,8 @@ TextureManagerClass::~TextureManagerClass()
 }
 
 
-bool TextureManagerClass::Initialize()//int count)
+bool TextureManagerClass::Initialize()
 {
-	//m_textureCount = count;
 	textures = std::map<int, TextureClass*>();
 	storedTextures = std::vector<int>();
 	instance = this;
@@ -34,17 +32,6 @@ bool TextureManagerClass::Initialize()//int count)
 
 void TextureManagerClass::Shutdown()
 {
-	//int i;
-	// Release the texture objects.
-	//if(m_TextureArray)
-	//{
-	//	for(i=0; i<m_textureCount; i++)
-	//	{
-	//		m_TextureArray[i].Shutdown();
-	//	}
-	//	delete [] m_TextureArray;
-	//	m_TextureArray = 0;
-	//}
 
 	for (std::map<int, TextureClass*>::iterator it = textures.begin(); it != textures.end(); ++it)
 	{
@@ -59,26 +46,22 @@ void TextureManagerClass::Shutdown()
 bool TextureManagerClass::LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* filename, int id)
 {
 	bool result;
+	if (TextureLoaded(id))
+	{
+		OutputDebugString(L"Texture was allready loaded");
+		return true; //return true as the texture allready exsits
+	}
 	TextureClass* NewTexture = new TextureClass();
 	result = NewTexture->Initialize(device, deviceContext, filename);
 	textures[id] = NewTexture;
 	storedTextures.push_back(id);
 	return result;
-	// Initialize the color texture object.
-	//result = m_TextureArray[id].Initialize(device, deviceContext, filename);
-	//if(!result)
-	//{
-	//	return false;
-	//}
-
-	//return true;
 }
 
 
 ID3D11ShaderResourceView* TextureManagerClass::GetTexture(int id)
 {
 	return textures[id]->GetTexture();
-	//return m_TextureArray[id].GetTexture();
 }
 
 bool TextureManagerClass::TextureLoaded(int id)

@@ -36,6 +36,7 @@ public:
 	void Shutdown();
 
 	ID3D11ShaderResourceView* GetTexture();
+	void GetTextureSize(int& height, int& width);
 
 private:
 	bool LoadTarga(char*, int&, int&);
@@ -44,7 +45,7 @@ private:
 	unsigned char* m_targaData;
 	ID3D11Texture2D* m_texture;
 	ID3D11ShaderResourceView* m_textureView;
-
+	int textureHeight, textureWidth;
 };
 
 #endif

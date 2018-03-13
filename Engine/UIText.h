@@ -22,10 +22,9 @@ public:
 	void virtual Destroy();
 	void UpdateString(string text);
 	void SetShadowColour(XMFLOAT4 colour);
-private:
-
 protected:
 	XMFLOAT4 pixleColour, shadowColour;
+	XMMATRIX shadowOffset;
 	string currentText;
 private:
 	ID3D11Buffer* vertexBuffer, *indexBuffer;
@@ -33,5 +32,6 @@ private:
 	Shader* shader;
 	FontClass* font;
 	VertexType* vertices;
+	unsigned int stride;
 };
 

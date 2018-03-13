@@ -8,7 +8,7 @@ UserInterfaceClass::UserInterfaceClass()
 {
 	m_Font1 = 0;
 	m_FpsString = 0;
-	m_MiniMap = 0;
+	//m_MiniMap = 0;
 	m_SpawnType = 0;
 }
 
@@ -73,18 +73,18 @@ bool UserInterfaceClass::Initialize(D3DClass* Direct3D, int screenHeight, int sc
 	m_previousFps = -1;
 
 	// Create the mini-map object.
-	m_MiniMap = new MiniMapClass;
-	if(!m_MiniMap)
-	{
-		return false;
-	}
+	//m_MiniMap = new MiniMapClass;
+	//if(!m_MiniMap)
+	//{
+	//	return false;
+	//}
 
-	// Initialize the mini-map object.
-	result = m_MiniMap->Initialize(Direct3D->GetDevice(), Direct3D->GetDeviceContext(), screenWidth, screenHeight, 1025, 1025);
-	if(!m_MiniMap)
-	{
-		return false;
-	}
+	//// Initialize the mini-map object.
+	//result = m_MiniMap->Initialize(Direct3D->GetDevice(), Direct3D->GetDeviceContext(), screenWidth, screenHeight, 1025, 1025);
+	//if(!m_MiniMap)
+	//{
+	//	return false;
+	//}
 
 	return true;
 }
@@ -92,13 +92,13 @@ bool UserInterfaceClass::Initialize(D3DClass* Direct3D, int screenHeight, int sc
 
 void UserInterfaceClass::Shutdown()
 {
-	// Release the mini-map object.
-	if(m_MiniMap)
-	{
-		m_MiniMap->Shutdown();
-		delete m_MiniMap;
-		m_MiniMap = 0;
-	}
+	//// Release the mini-map object.
+	//if(m_MiniMap)
+	//{
+	//	m_MiniMap->Shutdown();
+	//	delete m_MiniMap;
+	//	m_MiniMap = 0;
+	//}
 
 
 
@@ -176,7 +176,7 @@ bool UserInterfaceClass::Frame(ID3D11DeviceContext* deviceContext, int fps,float
 	}
 
 	// Update the mini-map position indicator.
-	m_MiniMap->PositionUpdate(posX, posZ);
+	//m_MiniMap->PositionUpdate(posX, posZ);
 
 	return true;
 }
@@ -203,11 +203,11 @@ bool UserInterfaceClass::Render(D3DClass* Direct3D, ShaderManagerClass* ShaderMa
 	Direct3D->DisableAlphaBlending();
 
 	// Render the mini-map.
-	result = m_MiniMap->Render(Direct3D->GetDeviceContext(), ShaderManager, worldMatrix, viewMatrix, orthoMatrix);
-	if(!result)
-	{
-		return false;
-	}
+	//result = m_MiniMap->Render(Direct3D->GetDeviceContext(), ShaderManager, worldMatrix, viewMatrix, orthoMatrix);
+	//if(!result)
+	//{
+	//	return false;
+	//}
 
 	// Turn the Z buffer back on now that the 2D rendering has completed.
 	Direct3D->TurnZBufferOn();
