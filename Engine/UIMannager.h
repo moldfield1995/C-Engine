@@ -1,7 +1,9 @@
 #pragma once
 #include "UIComponent.h"
 #include <vector>
-//TODO: state or multiple managers?
+
+//Updated In Final Year
+//Created By Matthew Oldfield
 
 class UIMannager
 {

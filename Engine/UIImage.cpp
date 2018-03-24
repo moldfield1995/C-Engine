@@ -24,8 +24,8 @@ void UIImage::Initalize()
 	{
 		OutputDebugString(L"Failed to Initalize bitmapClass | Initalize | UIImage");
 	}
-	delete[] textureFileName;
-	textureFileName = 0;
+	//delete textureFileName;
+	//textureFileName = 0;
 	shader = ShaderManagerClass::GetInstance()->GetShader<TextureShaderClass>();
 	textures = new std::vector<ID3D11ShaderResourceView*>();
 	textures->push_back(bitmapClass->GetTexture());
@@ -42,9 +42,11 @@ void UIImage::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX & world
 	rotationMatrix = XMMatrixRotationRollPitchYaw(rotation.X, rotation.Y, rotation.Z);
 	scaleMatrix = XMMatrixScaling(scale.X, scale.Y, scale.Z);
 	renderMatrix = XMMatrixMultiply(worldMatrix,renderMatrix);
+	renderMatrix = XMMatrixMultiply(rotationMatrix, renderMatrix);
+	renderMatrix = XMMatrixMultiply(scaleMatrix, renderMatrix);
 
 	bitmapClass->Render(deviceContext);
-	shader->Render(deviceContext, bitmapClass->GetIndexCount(), worldMatrix, baseViewMatrix, orthoMatrix, textures, 0, &colour);
+	shader->Render(deviceContext, bitmapClass->GetIndexCount(), renderMatrix, baseViewMatrix, orthoMatrix, textures, 0, &colour);
 
 }
 
@@ -62,6 +64,7 @@ void UIImage::Destroy()
 		textures = 0;
 	}
 	shader = 0;
+	killComponet = true;
 }
 
 XMFLOAT4 UIImage::GetColour()

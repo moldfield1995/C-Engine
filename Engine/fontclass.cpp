@@ -178,7 +178,7 @@ std::vector<ID3D11ShaderResourceView*>* FontClass::GetTextures()
 }
 
 
-void FontClass::BuildVertexArray(void* vertices, const char* sentence, float drawX, float drawY)
+int FontClass::BuildVertexArray(void* vertices, const char* sentence, float drawX, float drawY)
 {
 	VertexType* vertexPtr;
 	int numLetters, index, i, letter;
@@ -236,7 +236,7 @@ void FontClass::BuildVertexArray(void* vertices, const char* sentence, float dra
 		}
 	}
 
-	return;
+	return index;
 }
 
 

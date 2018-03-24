@@ -56,6 +56,11 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
 	D3D11_DEPTH_STENCIL_DESC depthDisabledStencilDesc;
 	D3D11_BLEND_DESC blendStateDescription;
 
+	m_screenWidth = screenWidth;
+	m_screenHeight = screenHeight;
+
+	m_screenNear = screenNear;
+	m_screenDepth = screenDepth;
 
 	// Store the vsync setting.
 	m_vsync_enabled = vsync;
@@ -743,6 +748,18 @@ void D3DClass::DisableWireframe()
 	m_deviceContext->RSSetState(m_rasterState);
 
 	return;
+}
+
+void D3DClass::GetScreenReserlution(int & width, int & height)
+{
+	width = m_screenWidth;
+	height = m_screenHeight;
+}
+
+void D3DClass::GetScreenDepth(float & screenNear, float & screenDepth)
+{
+	screenNear = m_screenNear;
+	screenDepth = m_screenDepth;
 }
 
 D3DClass * D3DClass::GetInstance()

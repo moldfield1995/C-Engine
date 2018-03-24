@@ -51,7 +51,7 @@ public:
 	//new
 	std::vector< ID3D11ShaderResourceView*>* GetTextures();
 
-	void BuildVertexArray(void*,const char*, float, float);
+	int BuildVertexArray(void*,const char*, float, float);
 	int GetSentencePixelLength(char*);
 	int GetFontHeight();
 

@@ -1,5 +1,9 @@
 #pragma once
 #include "Leap.h"
+
+//Updated In Final Year
+//Created By Matthew Oldfield
+
 class float3
 {
 public:
@@ -17,6 +21,7 @@ public:
 	float3 operator+ (float3 other);
 	float3 operator- (float3 other);
 	float3 operator/ (float3 other);
+	std::string ToString();
 	//float3 operator= (Leap::Vector vector);
 	float X, Y, Z;
 

@@ -91,7 +91,6 @@ void BitmapClass::GetTextureSize(int & height, int & width)
 bool BitmapClass::InitializeBuffers(ID3D11Device* device)
 {
 	unsigned long* indices;
-	VertexType *vertices;
 	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
 	HRESULT result;
@@ -189,6 +188,11 @@ void BitmapClass::ShutdownBuffers()
 		m_vertexBuffer->Release();
 		m_vertexBuffer = 0;
 	}
+	if (vertices)
+	{
+		delete[] vertices;
+		vertices = 0;
+	}
 
 	return;
 }
@@ -196,7 +200,6 @@ void BitmapClass::ShutdownBuffers()
 
 bool BitmapClass::UpdateBuffers(ID3D11DeviceContext* deviceContent,int bitmapHeight, int bitmapWidth)
 {
-	VertexType *vertices;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	VertexType* dataPtr;
 	HRESULT result;

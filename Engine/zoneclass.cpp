@@ -335,7 +335,7 @@ bool ZoneClass::Frame(D3DClass* Direct3D, InputClass* Input, ShaderManagerClass*
 	m_Position->GetRotation(rotX, rotY, rotZ);
 	m_Camera->SetRotation(rotX, rotY, rotZ);
 	// Do the frame processing for the user interface.
-	result = m_UserInterface->Frame(Direct3D->GetDeviceContext(), fps, posX, posZ, m_ObjectSpawn, m_spawnState);
+	result = m_UserInterface->Frame(Direct3D->GetDeviceContext(), fps, posX, posZ, m_ObjectSpawn);
 	if (!result)
 	{
 		return false;

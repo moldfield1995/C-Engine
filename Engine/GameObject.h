@@ -9,15 +9,10 @@
 #include "textureclass.h"
 #include <vector>
 #include "Component.h"
-enum class SpawnState {
-	position,
-	rotation,
-	scale,
-	model,
-	texture,
-	shader,
-	bumpMap,
-};
+
+//Updated In Final Year
+//Created By Matthew Oldfield
+
 class GameObject
 {
 	friend Component;

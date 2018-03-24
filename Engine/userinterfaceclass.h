@@ -24,7 +24,7 @@ public:
 	bool Initialize(D3DClass*, int, int);
 	void Shutdown();
 
-	bool Frame(ID3D11DeviceContext*, int,float ,float, bool, SpawnState );
+	bool Frame(ID3D11DeviceContext*, int,float ,float, bool);
 	bool Render(D3DClass*, ShaderManagerClass*, const XMMATRIX&, const XMMATRIX&, const XMMATRIX&);
 
 

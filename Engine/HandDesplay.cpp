@@ -9,8 +9,6 @@ HandDesplay::HandDesplay()
 	lastUpdate = 0;
 	m_HandGameObjects = std::vector<GameObject*>();
 	currentActive = -1;
-	leapToWorldScale = float3(.02f,.02f,-.02f);
-	handOffset = float3(0.0f, -5.0f, 0.0f);
 }
 
 
@@ -20,7 +18,9 @@ HandDesplay::~HandDesplay()
 
 void HandDesplay::Initalize()
 {
-	//createGameObjects(10);
+	InputClass* instance = InputClass::GetInstance();
+	leapToWorldScale = instance->GetLeapToWorldScale();
+	leapOffset = instance->GetLeapOffset();
 	this->SetOwnersRender(false);
 }
 
@@ -35,14 +35,14 @@ void HandDesplay::Update()
 	HandList hands = frame.hands();
 	int handCount = hands.count();
 	//reset to 0 incase render was not called
-	currentActive = -1;
+	currentActive = 0;
 	GameObject* workGo = 0;
 	for each (Leap::Hand hand in hands)
 	{
 		if (currentActive >= m_HandGameObjects.size())
 			createGameObjects(1);
 		workGo = m_HandGameObjects[currentActive];
-		workGo->SetPosition(float3(hand.palmPosition())*leapToWorldScale + handOffset);
+		workGo->SetPosition(float3(hand.palmPosition())*leapToWorldScale + leapOffset);
 		workGo->SetRotation(hand.direction());
 		//Itterate the gameobject index to update
 		currentActive++;
@@ -58,7 +58,7 @@ void HandDesplay::Update()
 				Bone bone = finger.bone(static_cast<Bone::Type>(i));
 				if (bone.isValid()) {
 					workGo = m_HandGameObjects[currentActive];
-					workGo->SetPosition(float3(bone.prevJoint())*leapToWorldScale + handOffset);
+					workGo->SetPosition(float3(bone.prevJoint())*leapToWorldScale + leapOffset);
 					workGo->SetRotation(bone.direction()); 
 					//itterate the gameobject index to update
 					currentActive++;

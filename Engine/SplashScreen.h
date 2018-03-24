@@ -7,6 +7,9 @@
 #include "inputclass.h"
 #include "bitmapclass.h"
 #include "cameraclass.h"
+
+//Created By Matthew Oldfield
+
 class SplashScreen : public  GameState
 {
 public:

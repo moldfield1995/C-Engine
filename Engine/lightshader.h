@@ -16,6 +16,8 @@ using namespace DirectX;
 #include <fstream>
 using namespace std;
 
+//Created By RasterTeck
+//Updated By Matthew Oldfield
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: LightShaderClass

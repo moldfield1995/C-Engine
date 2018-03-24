@@ -2,6 +2,10 @@
 #include <Windows.h>
 #include <vector>
 #include "AudioElement.h"
+
+//Updated In Final Year
+//Created By Matthew Oldfield
+
 class AudioManager
 {
 public:

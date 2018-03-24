@@ -77,6 +77,11 @@ float3 float3::operator/(float3 other)
 	return float3(X/other.X, Y/other.Y, Z/other.Z);
 }
 
+std::string float3::ToString()
+{
+	return "X: "+std::to_string(X) + " Y: " + std::to_string(Y) + " Z: " + std::to_string(Z) ;
+}
+
 
 
 

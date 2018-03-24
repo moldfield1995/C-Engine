@@ -31,10 +31,16 @@ public:
 	int GetTiming();
 
 private:
+	static TimerClass *instance;
+
 	float m_frequency;
 	INT64 m_startTime;
 	float m_frameTime;
 	INT64 m_beginTime, m_endTime;
+
+public:
+	static TimerClass* GetInstance();
+
 };
 
 #endif

@@ -3,7 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "inputclass.h"
 #include <algorithm>
-
+#include "d3dclass.h"
+#include "cameraclass.h"
 InputClass* InputClass::instance = 0;
 
 InputClass::InputClass()
@@ -11,6 +12,8 @@ InputClass::InputClass()
 	m_directInput = 0;
 	m_keyboard = 0;
 	m_mouse = 0;
+	leapToWorldScale = float3(.04f, .04f, -.04f);
+	leapOffset = float3(0.0f, -7.0f, 0.0f);
 }
 
 
@@ -218,6 +221,29 @@ void InputClass::ReadLeap()
 	if (m_LeapControler.isConnected())
 	{
 		m_LeapFrame = m_LeapControler.frame();
+
+		if (CameraClass::GetActiveCamera() && D3DClass::GetInstance() && m_LeapFrame.isValid() && m_LeapFrame.hands()[0].isValid())
+		{
+			D3DClass* directInstance;
+			CameraClass* activeCamera;
+			XMMATRIX projectionMatirx, viewMatrix, worldMatrix;
+			int screenHight, screenWidth;
+			float screenDepth, screenNear;
+			directInstance = D3DClass::GetInstance();
+			activeCamera = CameraClass::GetActiveCamera();
+
+			directInstance->GetScreenReserlution(screenWidth, screenHight);
+			directInstance->GetScreenDepth(screenNear, screenDepth);
+			directInstance->GetProjectionMatrix(projectionMatirx);
+			directInstance->GetWorldMatrix(worldMatrix);
+			activeCamera->GetViewMatrix(viewMatrix);
+
+			float3 handpos = (float3(m_LeapFrame.hands()[0].palmPosition())* leapToWorldScale) + leapOffset;
+			XMVECTOR posvector = XMVectorSet(handpos.X, handpos.Y, handpos.Z, 1.0f);
+			XMVECTOR screenspace = XMVector3Project(posvector, 0.0f, 0.0f, screenWidth, screenHight, screenNear, screenDepth, projectionMatirx, viewMatrix, worldMatrix);
+			leapScreenPosition.X = screenspace.m128_f32[0];
+			leapScreenPosition.Y = screenspace.m128_f32[1];
+		}
 	}
 }
 
@@ -303,5 +329,20 @@ bool InputClass::LeapConnected()
 const Leap::Frame InputClass::GetLeapFrame()
 {
 	return m_LeapFrame;
+}
+
+const float3 InputClass::GetLeapToWorldScale()
+{
+	return leapToWorldScale;
+}
+
+const float3 InputClass::GetLeapOffset()
+{
+	return leapOffset;
+}
+
+float3 InputClass::GetLeapScreenPos()
+{
+	return leapScreenPosition;
 }
 

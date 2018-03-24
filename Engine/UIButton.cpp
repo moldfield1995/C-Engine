@@ -1,5 +1,5 @@
 #include "UIButton.h"
-
+#include "inputclass.h"
 
 
 UIButton::UIButton(char* textureFileName)
@@ -8,6 +8,7 @@ UIButton::UIButton(char* textureFileName)
 	defaultColour = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	hoverColour = XMFLOAT4(1.0f, 1.0f, 1.0f, 0.75f);
 	clickColour = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	buttonState = ButtonState::Default;
 }
 
 UIButton::~UIButton()
@@ -16,11 +17,41 @@ UIButton::~UIButton()
 
 void UIButton::Initalize()
 {
+	UIImage::Initalize();
 }
 
 void UIButton::Update()
 {
+	InputClass* instance = InputClass::GetInstance();
 	//Todo: check cursur/hand pos
+	if (CheckCollition(instance->GetLeapScreenPos()))
+	{
+		//check if a click has been made
+		Leap::Frame frame = instance->GetLeapFrame();
+		if (!frame.isValid())
+			return;
+		Leap::Hand hand = frame.hands()[0];
+		if (!hand.isValid())
+			return;
+		Leap::FingerList fingers = frame.fingers();
+		for each (Leap::Finger finger in fingers)
+		{
+			if (finger.type() == Leap::Finger::TYPE_THUMB && !finger.isExtended())
+			{
+				__raise this->onClickTrigger();
+			}
+		}
+
+		if (buttonState == ButtonState::Default) {
+			this->colour = hoverColour;
+			buttonState = ButtonState::Hover;
+		}
+	}
+	else if (buttonState != ButtonState::Default)
+	{
+		this->colour = defaultColour;
+		buttonState = ButtonState::Default;
+	}
 }
 
 void UIButton::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX & worldMatrix, const XMMATRIX & baseViewMatrix, const XMMATRIX & orthoMatrix)
@@ -83,3 +114,8 @@ void UIButton::SetClickColour(XMFLOAT4 value)
 {
 	clickColour = value;
 }
+
+//void UIButton::AddOnClick(OnClick value, void* source)
+//{
+//	__hook(&onClickTrigger, source, value);
+//}

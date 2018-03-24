@@ -1,6 +1,9 @@
 #pragma once
 #include "Component.h"
 #include "Leap.h"
+
+//Created In Final Year
+//Created By Matthew Oldfield
 class HandDesplay :
 	public Component
 {
@@ -17,6 +20,6 @@ private:
 	int currentActive;
 	int64_t lastUpdate;
 	std::vector<GameObject*> m_HandGameObjects;
-	float3 leapToWorldScale, handOffset;
+	float3 leapToWorldScale, leapOffset;
 };
 

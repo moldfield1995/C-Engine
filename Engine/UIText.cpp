@@ -102,7 +102,7 @@ void UIText::Initalize()
 	shader = ShaderManagerClass::GetInstance()->GetShader<FontShaderClass>();
 	
 	font = FontManagerClass::GetInstance()->GetFont(0);
-
+	UpdateString(currentText);
 }
 
 void UIText::Update()
@@ -111,26 +111,30 @@ void UIText::Update()
 
 void UIText::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX & worldMatrix, const XMMATRIX & baseViewMatrix, const XMMATRIX & orthoMatrix)
 {
-	XMMATRIX renderMatrix, rotationMatrix, scaleMatrix;
+	XMMATRIX renderMatrix, rotationMatrix, scaleMatrix, positionMatrix;
 	rotationMatrix = XMMatrixRotationRollPitchYaw(rotation.X, rotation.Y, rotation.Z);
 	scaleMatrix = XMMatrixScaling(scale.X, scale.Y, scale.Z);
+	positionMatrix = XMMatrixTranslation(position.X, position.Y, position.Z);
+	unsigned int offset = 0;
 	//check if the shadow alpha is grater than 0
 	if (shadowColour.z > 0.0f)
 	{
-		renderMatrix = XMMatrixMultiply(worldMatrix, shadowOffset);
+		renderMatrix = XMMatrixMultiply(positionMatrix, shadowOffset);
+		renderMatrix = XMMatrixMultiply(worldMatrix, renderMatrix);
 		renderMatrix = XMMatrixMultiply(scaleMatrix, renderMatrix);
 		renderMatrix = XMMatrixMultiply(rotationMatrix, renderMatrix);
-		deviceContext->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, 0);
+		deviceContext->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
 		deviceContext->IASetIndexBuffer(indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 		deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		shader->Render(deviceContext, activeIndexs, renderMatrix, baseViewMatrix, orthoMatrix, font->GetTextures());
+		shader->Render(deviceContext, activeIndexs, renderMatrix, baseViewMatrix, orthoMatrix, font->GetTextures(),0,&pixleColour);
 	}
-	renderMatrix = XMMatrixMultiply(rotationMatrix, worldMatrix);
+	renderMatrix = XMMatrixMultiply(worldMatrix, positionMatrix);
+	renderMatrix = XMMatrixMultiply(rotationMatrix, renderMatrix);
 	renderMatrix = XMMatrixMultiply(scaleMatrix, renderMatrix);
-	deviceContext->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, 0);
+	deviceContext->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
 	deviceContext->IASetIndexBuffer(indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	shader->Render(deviceContext, activeIndexs, renderMatrix, baseViewMatrix, orthoMatrix, font->GetTextures());
+	shader->Render(deviceContext, activeIndexs, renderMatrix, baseViewMatrix, orthoMatrix, font->GetTextures(), 0, &pixleColour);
 }
 
 void UIText::Destroy()
@@ -151,6 +155,7 @@ void UIText::Destroy()
 	font = 0;
 	delete[] vertices;
 	vertices = 0;
+	killComponet = true;
 }
 
 void UIText::UpdateString(string text)
@@ -166,12 +171,13 @@ void UIText::UpdateString(string text)
 	// Check for possible buffer overflow.
 	if (numLetters > vertexCount/6)
 	{
-		OutputDebugString(L"Buffer Overfloaw | UpdateString | UIText");
+		OutputDebugString(L"Buffer Overflow Redusing chars | UpdateString | UIText");
+		text.erase(text.begin() + vertexCount / 6, text.end());
+		numLetters = text.length();
 	}
 
-	activeIndexs = numLetters * 6;
 	// Use the font class to build the vertex array from the sentence text and sentence draw location.
-	font->BuildVertexArray((void*)vertices, text.data(), position.X, position.Y);
+	activeIndexs = font->BuildVertexArray((void*)vertices, text.data(), 0.0f, 0.0f);
 	deviceContext = D3DClass::GetInstance()->GetDeviceContext();
 	// Lock the vertex buffer.
 	result = deviceContext->Map(vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
@@ -183,8 +189,8 @@ void UIText::UpdateString(string text)
 	// Get a pointer to the mapped resource data pointer.
 	verticesPtr = (void*)mappedResource.pData;
 
-	// Copy the vertex array into the vertex buffer.
-	memcpy(verticesPtr, (void*)vertices, (sizeof(VertexType) * vertexCount));
+	// Copy ACTIVE vertexs into the vertex buffer.
+	memcpy(verticesPtr, (void*)vertices, (sizeof(VertexType) * activeIndexs ));
 
 	// Unlock the vertex buffer.
 	deviceContext->Unmap(vertexBuffer, 0);

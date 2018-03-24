@@ -4,6 +4,9 @@
 #include "Shader.h"
 #include <vector>
 
+//Updated In Final Year
+//Created By Matthew Oldfield
+
 class UIImage:
 	public UIComponent
 {

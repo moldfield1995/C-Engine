@@ -1,7 +1,12 @@
 #pragma once
 #include "UIComponent.h"
 #include "fontclass.h"
+
 using namespace std;
+
+//Updated In Final Year
+//Created By Matthew Oldfield
+
 class UIText :
 	public UIComponent
 {

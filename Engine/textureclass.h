@@ -39,7 +39,7 @@ public:
 	void GetTextureSize(int& height, int& width);
 
 private:
-	bool LoadTarga(char*, int&, int&);
+	bool LoadTarga(char*);
 
 private:
 	unsigned char* m_targaData;

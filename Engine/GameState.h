@@ -5,6 +5,10 @@
 #include "texturemanagerclass.h"
 #include "ModelManager.h"
 #include "AudioManager.h"
+
+//Updated In Final Year
+//Created By Matthew Oldfield
+
 enum class StateSwich{
 	Next,
 	Quit,

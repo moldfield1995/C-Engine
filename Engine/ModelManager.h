@@ -2,6 +2,9 @@
 #include <map>
 #include <vector>
 #include "ModelClass.h"
+
+//Created By Matthew Oldfield
+
 class ModelManager
 {
 public:

@@ -22,19 +22,32 @@ void UIMannager::Initalize(int screenX, int screenY)
 
 void UIMannager::Update()
 {
-	for each (UIComponent* var in componets)
+	for (int i = componets.size()-1; i >= 0; i--)
 	{
-		var->Update();
+		if (componets[i]->killComponet)
+		{
+			componets[i]->Destroy();
+			delete componets[i];
+			componets.erase(componets.begin() + i);
+			i++;
+		}
+		else
+			componets[i]->Update();
 	}
 }
 
 void UIMannager::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX & worldMatrix, const XMMATRIX & baseViewMatrix, const XMMATRIX & orthoMatrix)
 {
+	D3DClass* Direct3D = D3DClass::GetInstance();
+	Direct3D->TurnZBufferOff();
+	Direct3D->EnableAlphaBlending();
 	for each (UIComponent* var in componets)
 	{
 		if (var->renders)
 			var->Render(deviceContext, worldMatrix, baseViewMatrix, orthoMatrix);
 	}
+	Direct3D->TurnZBufferOn();
+	Direct3D->DisableAlphaBlending();
 }
 
 

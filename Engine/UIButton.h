@@ -1,6 +1,8 @@
 #pragma once
 #include "UIImage.h"
 
+//Updated In Final Year
+//Created By Matthew Oldfield
 
 class UIButton :
 	public UIImage
@@ -12,6 +14,9 @@ public:
 		Hover,
 		Click
 	};
+
+	typedef void OnClick();
+	__event OnClick onClickTrigger;
 public:
 	UIButton(char* textureFileName);
 	~UIButton();
@@ -31,6 +36,7 @@ public:
 	XMFLOAT4 GetClickColour();
 	void SetClickColour(XMFLOAT4 value);
 
+	//void AddOnClick(OnClick deleget, void* source);
 protected:
 	XMFLOAT4 defaultColour,hoverColour, clickColour;
 	ButtonState buttonState;

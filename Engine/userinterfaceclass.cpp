@@ -122,7 +122,7 @@ void UserInterfaceClass::Shutdown()
 }
 
 
-bool UserInterfaceClass::Frame(ID3D11DeviceContext* deviceContext, int fps,float posX,float posZ, bool objectSpawned, SpawnState state)
+bool UserInterfaceClass::Frame(ID3D11DeviceContext* deviceContext, int fps,float posX,float posZ, bool objectSpawned)
 {
 	bool result;
 
@@ -139,32 +139,32 @@ bool UserInterfaceClass::Frame(ID3D11DeviceContext* deviceContext, int fps,float
 		char finalString[30];
 		char tempString[16];
 		strcpy_s(finalString, "Object Edit: ");
-		switch (state)
-		{
-		case SpawnState::position:
-			strcpy_s(tempString, "Position");
-			break;
-		case SpawnState::rotation:
-			strcpy_s(tempString, "Rotation");
-			break;
-		case SpawnState::scale:
-			strcpy_s(tempString, "Scale");
-			break;
-		case SpawnState::model:
-			strcpy_s(tempString, "Model");
-			break;
-		case SpawnState::texture:
-			strcpy_s(tempString, "Texture");
-			break;
-		case SpawnState::shader:
-			strcpy_s(tempString, "Shader");
-			break;
-		case SpawnState::bumpMap:
-			strcpy_s(tempString, "BumpMap");
-			break;
-		default:
-			break;
-		}
+		//switch (state)
+		//{
+		//case SpawnState::position:
+		//	strcpy_s(tempString, "Position");
+		//	break;
+		//case SpawnState::rotation:
+		//	strcpy_s(tempString, "Rotation");
+		//	break;
+		//case SpawnState::scale:
+		//	strcpy_s(tempString, "Scale");
+		//	break;
+		//case SpawnState::model:
+		//	strcpy_s(tempString, "Model");
+		//	break;
+		//case SpawnState::texture:
+		//	strcpy_s(tempString, "Texture");
+		//	break;
+		//case SpawnState::shader:
+		//	strcpy_s(tempString, "Shader");
+		//	break;
+		//case SpawnState::bumpMap:
+		//	strcpy_s(tempString, "BumpMap");
+		//	break;
+		//default:
+		//	break;
+		//}
 		strcat_s(finalString, tempString);
 		m_SpawnType->UpdateSentence(deviceContext, m_Font1, finalString, 10, 55, 0.0f, 1.0f, 0.0f);
 	}

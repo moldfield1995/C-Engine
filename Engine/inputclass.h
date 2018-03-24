@@ -24,6 +24,11 @@
 #include <dinput.h>
 #include <Xinput.h>
 #include "Leap.h"
+#include "float3.h"
+
+//Updated In Final Year
+//Created By RasterTeck
+//Updated By Matthew Oldfield
 
 using namespace Leap;
 ////////////////////////////////////////////////////////////////////////////////
@@ -52,6 +57,10 @@ public:
 
 	bool LeapConnected();
 	const Leap::Frame GetLeapFrame();
+
+	const float3 GetLeapToWorldScale();
+	const float3 GetLeapOffset();
+	float3 GetLeapScreenPos();
 private:
 	bool ReadKeyboard();
 	bool ReadMouse();
@@ -75,6 +84,9 @@ private:
 
 	Controller m_LeapControler;
 	Leap::Frame m_LeapFrame;
+	float3 leapToWorldScale, leapOffset;
+
+	float3 leapScreenPosition;
 public:
 	static InputClass* GetInstance();
 };

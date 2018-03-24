@@ -9,6 +9,9 @@ class LightClass;
 class CameraClass;
 class GameObject;
 
+//Updated In Final Year
+//Created By Matthew Oldfield
+
 class Component
 {
 	friend GameObject;

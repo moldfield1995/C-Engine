@@ -3,6 +3,8 @@
 #include "cpuclass.h"
 #include "timerclass.h"
 
+//Created By Matthew Oldfield
+
 class PeformanceMonerting
 {
 public:

@@ -53,6 +53,7 @@ private:
 	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
 	int m_vertexCount, m_indexCount;
 	TextureClass* m_Texture;
+	VertexType *vertices;
 };
 
 #endif

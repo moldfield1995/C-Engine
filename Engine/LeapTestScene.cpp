@@ -1,5 +1,6 @@
 #include "LeapTestScene.h"
 #include "HandDesplay.h"
+#include "DebugDesplay.h"
 
 LeapTestScene::LeapTestScene()
 {
@@ -7,6 +8,7 @@ LeapTestScene::LeapTestScene()
 	m_Frustum = 0;
 	m_GameObjects = std::vector<GameObject*>();
 	m_Light = 0;
+	m_UIMannager = 0;
 }
 
 
@@ -17,7 +19,7 @@ LeapTestScene::~LeapTestScene()
 bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight, float screenDepth, TextureManagerClass* textureManager, ModelManager* modelManager, AudioManager* audioManager)
 {
 	ID3D11Device* device = Direct3D->GetDevice();
-	bool result;
+	bool result = true;
 
 	// Create the camera object.
 	m_Camera = new CameraClass;
@@ -53,7 +55,9 @@ bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 
 	// Initialize the frustum object.
 	m_Frustum->Initialize(screenDepth);
-
+	
+	m_UIMannager = new UIMannager();
+	m_UIMannager->Initalize(screenWidth, screenHeight);
 
 	if(!textureManager->TextureLoaded(404))
 		result = textureManager->LoadTexture(device, Direct3D->GetDeviceContext(), "../Engine/data/textures/debug.tga", 404);
@@ -67,6 +71,7 @@ bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 	gameObject->Initalize(float3(), float3(), modelManager->GetModel(ModelManager::parsString("../Engine/data/T1Assets/cubeS.txt")), textureManager->GetTexture(404), shader);
 	
 	gameObject->AddComponet(new HandDesplay());
+	gameObject->AddComponet(new DebugDesplay());
 	m_GameObjects.push_back(gameObject);
 
 
@@ -84,6 +89,7 @@ bool LeapTestScene::Frame(D3DClass* Direct3D, InputClass* Input, ShaderManagerCl
 	{
 		gameobject->Update();
 	}
+	m_UIMannager->Update();
 	Render(Direct3D, ShaderManager, TextureManager, modelManager);
 	return true;
 }
@@ -94,7 +100,7 @@ void LeapTestScene::HandleMovementInput(InputClass* Input, float frameTime)
 
 bool LeapTestScene::Render(D3DClass* Direct3D, ShaderManagerClass* ShaderManager, TextureManagerClass* TextureManager, ModelManager* modelManager)
 {
-	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
+	XMMATRIX worldMatrix, viewMatrix, projectionMatrix, baceViewMatrix, orthoMatrix;
 	// Generate the view matrix based on the camera's position.
 	m_Camera->Render();
 
@@ -102,6 +108,8 @@ bool LeapTestScene::Render(D3DClass* Direct3D, ShaderManagerClass* ShaderManager
 	Direct3D->GetWorldMatrix(worldMatrix);
 	m_Camera->GetViewMatrix(viewMatrix);
 	Direct3D->GetProjectionMatrix(projectionMatrix);
+	m_Camera->GetBaseViewMatrix(baceViewMatrix);
+	Direct3D->GetOrthoMatrix(orthoMatrix);
 
 	// Construct the frustum.
 	m_Frustum->ConstructFrustum(projectionMatrix, viewMatrix);
@@ -114,6 +122,7 @@ bool LeapTestScene::Render(D3DClass* Direct3D, ShaderManagerClass* ShaderManager
 		gameobject->Render(context, worldMatrix, viewMatrix, projectionMatrix, m_Frustum, m_Light, *m_Camera);
 	}
 
+	m_UIMannager->Render(context, worldMatrix, baceViewMatrix, orthoMatrix);
 
 	//End Render
 	Direct3D->EndScene();

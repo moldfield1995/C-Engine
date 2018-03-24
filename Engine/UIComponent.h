@@ -4,6 +4,9 @@
 #include "float3.h"
 class UIMannager;
 
+//Updated In Final Year
+//Created By Matthew Oldfield
+
 ///This class will be used for any object that would want to be on the UI.
 ///It works like a Gameobejct and componet together 
 class UIComponent

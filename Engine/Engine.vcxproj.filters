@@ -277,7 +277,7 @@
       <Filter>Header Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="DebugDesplay.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Componets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -435,7 +435,7 @@
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="DebugDesplay.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Componets</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

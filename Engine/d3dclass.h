@@ -69,9 +69,15 @@ public:
 	void EnableWireframe();
 	void DisableWireframe();
 
+	void GetScreenReserlution(int& width, int& height);
+
+	void GetScreenDepth(float& screenNear, float& screenDepth);
+
 private:
 	static D3DClass* instance;
 
+	int m_screenWidth, m_screenHeight;
+	float m_screenNear, m_screenDepth;
 	bool m_vsync_enabled;
 	int m_videoCardMemory;
 	char m_videoCardDescription[128];

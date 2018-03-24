@@ -25,10 +25,13 @@
 #include "GameObject.h"
 #include <vector>
 
+//Updated In Final Year
+//Created By RasterTeck
+//Updated By Matthew Oldfield
+
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ZoneClass
 ////////////////////////////////////////////////////////////////////////////////
-
 class ZoneClass : public GameState
 {
 public:
@@ -57,7 +60,6 @@ private:
 	bool m_displayUI, m_wireFrame, m_cellLines, m_heightLocked, m_DebugHitbox,m_ObjectSpawn;
 	float m_xmod, m_ymod, m_zmod;
 	int m_textID, m_modelID, m_bumpID;
-	SpawnState m_spawnState;
 	std::vector<GameObject*> m_GameObjects;
 };
 

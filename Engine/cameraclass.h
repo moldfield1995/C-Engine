@@ -11,6 +11,7 @@
 #include <directxmath.h>
 using namespace DirectX;
 
+//Updated by Matthew Oldfield
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: CameraClass
@@ -43,16 +44,17 @@ public:
 
 	void RenderBaseViewMatrix();
 	void GetBaseViewMatrix(XMMATRIX&);
-
+	//Added by Matthew Oldfield
 	static CameraClass* GetActiveCamera();
 	void SetActiveCamera();
+	//End
 private:
 	XMFLOAT3 m_position;
 	float m_positionX, m_positionY, m_positionZ;
 	float m_rotationX, m_rotationY, m_rotationZ;
 
 	XMMATRIX m_viewMatrix, m_baseViewMatrix;
-
+	//Added By Matthew Oldfield
 	static CameraClass* activeCamera;
 };
 

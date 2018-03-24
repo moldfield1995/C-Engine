@@ -3,6 +3,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 #include "timerclass.h"
 
+TimerClass* TimerClass::instance = 0;
+
 
 TimerClass::TimerClass()
 {
@@ -36,6 +38,8 @@ bool TimerClass::Initialize()
 
 	// Get the initial start time.
 	QueryPerformanceCounter((LARGE_INTEGER*)&m_startTime);
+
+	instance = this;
 
 	return true;
 }
@@ -100,4 +104,9 @@ int TimerClass::GetTiming()
 	milliseconds = (elapsedTicks / (float)frequency) * 1000.0f;
 
 	return (int)milliseconds;
+}
+
+TimerClass * TimerClass::GetInstance()
+{
+	return instance;
 }

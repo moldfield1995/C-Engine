@@ -16,6 +16,8 @@
 using namespace DirectX;
 using namespace std;
 
+//Created By RasterTeck
+//Updated By Matthew Oldfield
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: TextureShaderClass
