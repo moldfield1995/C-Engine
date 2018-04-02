@@ -28,14 +28,13 @@ void DebugDesplay::Initalize()
 	handText[4] = new UIText(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), "");
 	for (int i = textNum-1; i >= 0; i--)
 	{
-		//screen position starts at center
-		handText[i]->SetPosition(float3(-screenWidth / 2, screenHeight / 2 - (i * 35.0f)));
+		handText[i]->SetPosition(float3(0.0f, - (i * 35.0f)));
 		instance->AddComponet(handText[i]);
 	}
 	
 
 	testButton = new UIButton("../Engine/data/textures/Button.tga");
-	testButton->SetPosition(float3(0.0f, 0.0f));
+	testButton->SetPosition(float3(screenWidth/2, 0.0f));
 	__hook(&UIButton::onClickTrigger, testButton, &DebugDesplay::ButtonClicked);
 	instance->AddComponet(testButton);
 }

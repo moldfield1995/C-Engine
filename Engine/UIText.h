@@ -38,5 +38,7 @@ private:
 	FontClass* font;
 	VertexType* vertices;
 	unsigned int stride;
+
+	static int screenHeight, screenWidth;
 };
 

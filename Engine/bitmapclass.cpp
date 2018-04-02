@@ -2,7 +2,7 @@
 // Filename: bitmapclass.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "bitmapclass.h"
-
+#include "d3dclass.h"
 
 BitmapClass::BitmapClass()
 {
@@ -203,26 +203,34 @@ bool BitmapClass::UpdateBuffers(ID3D11DeviceContext* deviceContent,int bitmapHei
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	VertexType* dataPtr;
 	HRESULT result;
+	int screenHeight, screenWidth;
+	float left, top, right, bottom;
 
+	D3DClass::GetInstance()->GetScreenReserlution(screenWidth, screenHeight);
+
+	left = (float)(screenWidth / 2)*-1.0f;
+	right = left + (float)bitmapWidth;
+	top = (float)(screenHeight / 2);
+	bottom = top - (float)bitmapHeight;
 	// Load the vertex array with data.
 	// First triangle.
-	vertices[0].position = XMFLOAT3(0.0f, 0.0f, 0.0f);  // Top left.
+	vertices[0].position = XMFLOAT3(left, top, 0.0f);  // Top left.
 	vertices[0].texture = XMFLOAT2(0.0f, 0.0f);
 
-	vertices[1].position = XMFLOAT3(bitmapWidth, bitmapHeight, 0.0f);  // Bottom right.
+	vertices[1].position = XMFLOAT3(right, bottom, 0.0f);  // Bottom right.
 	vertices[1].texture = XMFLOAT2(1.0f, 1.0f);
 
-	vertices[2].position = XMFLOAT3(0.0f, bitmapHeight, 0.0f);  // Bottom left.
+	vertices[2].position = XMFLOAT3(left, bottom, 0.0f);  // Bottom left.
 	vertices[2].texture = XMFLOAT2(0.0f, 1.0f);
 
 	// Second triangle.
-	vertices[3].position = XMFLOAT3(0.0f, 0.0f, 0.0f);  // Top left.
+	vertices[3].position = XMFLOAT3(left, top, 0.0f);  // Top left.
 	vertices[3].texture = XMFLOAT2(0.0f, 0.0f);
 
-	vertices[4].position = XMFLOAT3(bitmapWidth, 0.0f, 0.0f);  // Top right.
+	vertices[4].position = XMFLOAT3(right, top, 0.0f);  // Top right.
 	vertices[4].texture = XMFLOAT2(1.0f, 0.0f);
 
-	vertices[5].position = XMFLOAT3(bitmapWidth, bitmapHeight, 0.0f);  // Bottom right.
+	vertices[5].position = XMFLOAT3(right, bottom, 0.0f);  // Bottom right.
 	vertices[5].texture = XMFLOAT2(1.0f, 1.0f);
 
 	// Lock the vertex buffer.

@@ -32,6 +32,11 @@ private:
 		XMMATRIX projection;
 	};
 
+	struct ColourBuffer
+	{
+		XMFLOAT4 colour;
+	};
+
 public:
 	TextureShaderClass();
 	TextureShaderClass(const TextureShaderClass&);
@@ -49,7 +54,7 @@ private:
 	void ShutdownShader();
 	void OutputShaderErrorMessage(ID3D10Blob*, HWND, WCHAR*);
 
-	bool SetShaderParameters(ID3D11DeviceContext*, const XMMATRIX&, const XMMATRIX&, const XMMATRIX&, ID3D11ShaderResourceView*);
+	bool SetShaderParameters(ID3D11DeviceContext*, const XMMATRIX&, const XMMATRIX&, const XMMATRIX&, ID3D11ShaderResourceView*, XMFLOAT4);
 	void RenderShader(ID3D11DeviceContext*, int);
 
 private:
@@ -58,6 +63,8 @@ private:
 	ID3D11InputLayout* m_layout;
 	ID3D11Buffer* m_matrixBuffer;
 	ID3D11SamplerState* m_sampleState;
+
+	ID3D11Buffer* m_colourBuffer;
 };
 
 #endif

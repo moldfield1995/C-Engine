@@ -76,3 +76,15 @@ void UIImage::SetColour(XMFLOAT4 value)
 {
 	colour = value;
 }
+
+void UIImage::SetPosition(float3 value, bool centerX, bool centerY)
+{
+	int height, width;
+	bitmapClass->GetTextureSize(height, width);
+	position = value;
+
+	if (centerX)
+		position.X -= width;
+	if (centerY)
+		position.Y += width;
+}

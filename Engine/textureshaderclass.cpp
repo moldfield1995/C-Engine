@@ -11,6 +11,7 @@ TextureShaderClass::TextureShaderClass()
 	m_layout = 0;
 	m_matrixBuffer = 0;
 	m_sampleState = 0;
+	m_colourBuffer = 0;
 }
 
 
@@ -54,7 +55,7 @@ bool TextureShaderClass::Render(ID3D11DeviceContext * context, int indexCount, c
 
 
 	// Set the shader parameters that it will use for rendering.
-	result = SetShaderParameters(context, worldMatrix, viewMatrix, projectionMatrix, textures->at(0));
+	result = SetShaderParameters(context, worldMatrix, viewMatrix, projectionMatrix, textures->at(0),*colour);
 	if (!result)
 	{
 		return false;
@@ -74,7 +75,7 @@ bool TextureShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCou
 
 
 	// Set the shader parameters that it will use for rendering.
-	result = SetShaderParameters(deviceContext, worldMatrix, viewMatrix, projectionMatrix, texture);
+	result = SetShaderParameters(deviceContext, worldMatrix, viewMatrix, projectionMatrix, texture, XMFLOAT4(1.0f,1.0f,1.0f,1.0f));
 	if(!result)
 	{
 		return false;
@@ -98,6 +99,7 @@ bool TextureShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR
 	D3D11_BUFFER_DESC matrixBufferDesc;
 	D3D11_SAMPLER_DESC samplerDesc;
 
+	D3D11_BUFFER_DESC colourBufferDesc;
 
 	// Initialize the pointers this function will use to null.
 	errorMessage = 0;
@@ -228,6 +230,20 @@ bool TextureShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR
 		return false;
 	}
 
+	colourBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+	colourBufferDesc.ByteWidth = sizeof(ColourBuffer);
+	colourBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	colourBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	colourBufferDesc.MiscFlags = 0;
+	colourBufferDesc.StructureByteStride = 0;
+
+	result = device->CreateBuffer(&colourBufferDesc, NULL, &m_colourBuffer);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+
 	return true;
 }
 
@@ -268,7 +284,11 @@ void TextureShaderClass::ShutdownShader()
 		m_vertexShader->Release();
 		m_vertexShader = 0;
 	}
-
+	if (m_colourBuffer)
+	{
+		m_colourBuffer->Release();
+		m_colourBuffer = 0;
+	}
 	return;
 }
 
@@ -310,12 +330,13 @@ void TextureShaderClass::OutputShaderErrorMessage(ID3D10Blob* errorMessage, HWND
 
 
 bool TextureShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix,
-											 const XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* texture)
+											 const XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* texture, XMFLOAT4 colour)
 {
 	HRESULT result;
     D3D11_MAPPED_SUBRESOURCE mappedResource;
 	MatrixBufferType* dataPtr;
 	unsigned int bufferNumber;
+	ColourBuffer* dataPtr2;
 
 	// Xu's test line. Lock the constant buffer so it can be written to.
 	result = deviceContext->Map(m_matrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
@@ -335,6 +356,15 @@ bool TextureShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 
 	// Unlock the constant buffer.
     deviceContext->Unmap(m_matrixBuffer, 0);
+	//Get a ptr to the colour data
+	deviceContext->Map(m_colourBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+	//cast to buffer
+	dataPtr2 = (ColourBuffer*)mappedResource.pData;
+	//set data Local
+	dataPtr2->colour = colour;
+	//Free data
+	deviceContext->Unmap(m_colourBuffer, 0);
+
 
 	// Set the position of the constant buffer in the vertex shader.
 	bufferNumber = 0;
@@ -344,6 +374,8 @@ bool TextureShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 
 	// Set shader texture resource in the pixel shader.
 	deviceContext->PSSetShaderResources(0, 1, &texture);
+
+	deviceContext->PSSetConstantBuffers(0, 1, &m_colourBuffer);
 
 	return true;
 }

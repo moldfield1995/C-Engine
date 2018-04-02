@@ -48,6 +48,7 @@ void UIMannager::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX & wo
 	}
 	Direct3D->TurnZBufferOn();
 	Direct3D->DisableAlphaBlending();
+	
 }
 
 

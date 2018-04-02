@@ -2,7 +2,8 @@
 #include "fontshaderclass.h"
 #include "shadermanagerclass.h"
 #include "fontmanagerclass.h"
-
+int UIText::screenHeight = 0;
+int UIText::screenWidth = 0;
 UIText::UIText(XMFLOAT4 colour, string initalText)
 {
 	active = false;
@@ -33,6 +34,9 @@ void UIText::Initalize()
 	HRESULT result;
 	int i;
 	ID3D11Device* device = D3DClass::GetInstance()->GetDevice();
+	//checks if staic varibles have been set
+	if (screenWidth == 0 || screenHeight == 0)
+		D3DClass::GetInstance()->GetScreenReserlution(screenWidth, screenHeight);
 
 	// Max carictor length is 128
 	vertexCount = 6 * 128;
@@ -177,7 +181,7 @@ void UIText::UpdateString(string text)
 	}
 
 	// Use the font class to build the vertex array from the sentence text and sentence draw location.
-	activeIndexs = font->BuildVertexArray((void*)vertices, text.data(), 0.0f, 0.0f);
+	activeIndexs = font->BuildVertexArray((void*)vertices, text.data(), -screenWidth / 2, screenHeight / 2);
 	deviceContext = D3DClass::GetInstance()->GetDeviceContext();
 	// Lock the vertex buffer.
 	result = deviceContext->Map(vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);

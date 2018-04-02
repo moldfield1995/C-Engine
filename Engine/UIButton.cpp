@@ -6,7 +6,7 @@ UIButton::UIButton(char* textureFileName)
 	: UIImage(textureFileName)
 {
 	defaultColour = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	hoverColour = XMFLOAT4(1.0f, 1.0f, 1.0f, 0.75f);
+	hoverColour = XMFLOAT4(1.0f, 1.0f, 1.0f, 0.5f);
 	clickColour = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
 	buttonState = ButtonState::Default;
 }
@@ -39,6 +39,7 @@ void UIButton::Update()
 			if (finger.type() == Leap::Finger::TYPE_THUMB && !finger.isExtended())
 			{
 				__raise this->onClickTrigger();
+				this->colour = clickColour;
 			}
 		}
 
