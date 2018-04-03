@@ -203,25 +203,25 @@ bool ZoneClass::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight
 	SetLoadingLevel(loadAmount);
 	m_DebugHitbox = true;
 	m_ObjectSpawn = false;
-	modelManager->AddModle(device, "../Engine/data/T2Assets/Cat.txt", ModelManager::parsString("../Engine/data/T2Assets/Cat.txt"), HitBoxType::Rectangle, float3(1.0f, 0.0f, 0.0f));
+	modelManager->AddModle(device, "../Engine/data/T2Assets/Cat.txt", ModelManager::parsString("../Engine/data/T2Assets/Cat.txt"));
 	loadAmount += 10;
 	SetLoadingLevel(loadAmount);
-	modelManager->AddModle(device, "../Engine/data/T1Assets/Su-35_SuperFlanker.txt", ModelManager::parsString("../Engine/data/T1Assets/Su-35_SuperFlanker.txt"), HitBoxType::Rectangle, float3(8.0f, 13.0f, 1.0f));
+	modelManager->AddModle(device, "../Engine/data/T1Assets/Su-35_SuperFlanker.txt", ModelManager::parsString("../Engine/data/T1Assets/Su-35_SuperFlanker.txt"));
 	loadAmount += 10;
 	SetLoadingLevel(loadAmount);
-	modelManager->AddModle(device, "../Engine/data/New Models/OldHouce.txt", ModelManager::parsString("../Engine/data/New Models/OldHouce.txt"), HitBoxType::Rectangle, float3(3.0f, 2.0f, 4.0f));
+	modelManager->AddModle(device, "../Engine/data/New Models/OldHouce.txt", ModelManager::parsString("../Engine/data/New Models/OldHouce.txt"));
 	loadAmount += 20;
 	SetLoadingLevel(loadAmount);
-	modelManager->AddModle(device, "../Engine/data/New Models/SimpleHouce.txt", ModelManager::parsString("../Engine/data/New Models/SimpleHouce.txt"), HitBoxType::Rectangle, float3(7.0f, 0.0f, 0.0f));
+	modelManager->AddModle(device, "../Engine/data/New Models/SimpleHouce.txt", ModelManager::parsString("../Engine/data/New Models/SimpleHouce.txt"));
 	loadAmount += 10;
 	SetLoadingLevel(loadAmount);
-	modelManager->AddModle(device, "../Engine/data/New Models/hut.txt", ModelManager::parsString("../Engine/data/New Models/hut.txt"), HitBoxType::Rectangle, float3());
+	modelManager->AddModle(device, "../Engine/data/New Models/hut.txt", ModelManager::parsString("../Engine/data/New Models/hut.txt"));
 	loadAmount += 5;
 	SetLoadingLevel(loadAmount);
-	modelManager->AddModle(device, "../Engine/data/New Models/FancyHouce.txt", ModelManager::parsString("../Engine/data/New Models/FancyHouce.txt"), HitBoxType::Rectangle, float3());
+	modelManager->AddModle(device, "../Engine/data/New Models/FancyHouce.txt", ModelManager::parsString("../Engine/data/New Models/FancyHouce.txt"));
 	loadAmount += 5;
 	SetLoadingLevel(loadAmount);
-	modelManager->AddModle(device, "../Engine/data/T1Assets/cubeS.txt", ModelManager::parsString("../Engine/data/T1Assets/cubeS.txt"), HitBoxType::Point, float3());
+	modelManager->AddModle(device, "../Engine/data/T1Assets/cubeS.txt", ModelManager::parsString("../Engine/data/T1Assets/cubeS.txt"));
 	ShaderManagerClass* shaderManager = ShaderManagerClass::GetInstance();
 	m_GameObjects = std::vector<GameObject*>();
 	GameObject* gameObject = new GameObject();
@@ -423,18 +423,18 @@ bool ZoneClass::CheckHitboxs(ModelManager* modelManager)
 			gHitbox =(gHitbox * gScale);
 			switch (hitboxType)
 			{
-			case HitBoxType::Sphere:
+			case HitBoxType::sphere:
 				result;
 				break;
-			case HitBoxType::Cube:
+			case HitBoxType::cube:
 				result;
 				break;
-			case HitBoxType::Rectangle:
+			case HitBoxType::rectangle:
 				result = (pPosition.X - pHitbox.X <= gPossition.X + gHitbox.X && pPosition.X + pHitbox.X >= gPossition.X - gHitbox.X)
 					&& (pPosition.Y - pHitbox.Y <= gPossition.Y + gHitbox.Y && pPosition.Y + pHitbox.Y >= gPossition.Y - gHitbox.Y)
 					&& (pPosition.Z - pHitbox.Z <= gPossition.Z + gHitbox.Z && pPosition.Z + pHitbox.Z >= gPossition.Z - gHitbox.Z);
 				break;
-			case HitBoxType::Point:
+			case HitBoxType::point:
 				result = false;
 				break;
 			default:

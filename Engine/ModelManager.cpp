@@ -33,10 +33,10 @@ void ModelManager::Render(ID3D11DeviceContext* deviceContex, int id)
 	models[id]->Render(deviceContex);
 }
 
-void ModelManager::AddModle(ID3D11Device* device, char* filePath, int id,HitBoxType hitboxType,float3 hitboxSize)
+void ModelManager::AddModle(ID3D11Device* device, char* filePath, int id)
 {
 	ModelClass* NewModel = new ModelClass();
-	NewModel->Initialize(device, filePath,hitboxType,hitboxSize);
+	NewModel->Initialize(device, filePath);
 	models[id] = NewModel;
 	storedModdels.push_back(id);
 }
@@ -75,15 +75,6 @@ int ModelManager::IndexCount(int id)
 std::vector<int> ModelManager::GetModdelList()
 {
 	return storedModdels;
-}
-float3 ModelManager::GetHitbox(int id)
-{
-	return models[id]->GetHitbox();
-}
-
-HitBoxType ModelManager::GetHitBoxType(int id)
-{
-	return models[id]->GetHitBoxType();
 }
 
 ModelManager * ModelManager::GetInstance()

@@ -64,7 +64,10 @@ bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 	if(!result)
 		return false;
 	if (!modelManager->ModelLoaded(ModelManager::parsString("../Engine/data/T1Assets/cubeS.txt")))
-		modelManager->AddModle(device, "../Engine/data/T1Assets/cubeS.txt", ModelManager::parsString("../Engine/data/T1Assets/cubeS.txt"), HitBoxType::Point, float3());
+		modelManager->AddModle(device, "../Engine/data/T1Assets/cubeS.txt", ModelManager::parsString("../Engine/data/T1Assets/cubeS.txt"));
+
+	modelManager->AddModle(device, "../Engine/data/Capsule.obj", ModelManager::parsString("../Engine/data/Capsule.obj"));
+
 	Shader* shader = ShaderManagerClass::GetInstance()->GetShader<LightShader>();
 
 	GameObject* gameObject = new GameObject();
@@ -74,6 +77,9 @@ bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 	gameObject->AddComponet(new DebugDesplay());
 	m_GameObjects.push_back(gameObject);
 
+	gameObject = new GameObject();
+	gameObject->Initalize(float3(0.0f,-10.0f,5.0f), float3(), modelManager->GetModel(ModelManager::parsString("../Engine/data/Capsule.obj")), textureManager->GetTexture(404), shader);
+	m_GameObjects.push_back(gameObject);
 
 	return true;
 }

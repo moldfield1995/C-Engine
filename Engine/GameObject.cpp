@@ -8,7 +8,7 @@ GameObject::GameObject()
 	//ID3D11ShaderResourceView* m_textures;
 	m_textures = new std::vector<ID3D11ShaderResourceView*>();
 	m_shader=0;
-	m_hitboxType = HitBoxType::Point;
+	m_hitboxType = HitBoxType::point;
 	m_KillGameObject = false;
 
 	m_Componets = std::vector<Component*>();
@@ -47,8 +47,8 @@ void GameObject::Initalize(float3 position, float3 rotation, ModelClass * model,
 	if (!model)
 		return;
 	m_Renders = true;
-	m_hitbox = model->GetHitbox();
-	m_hitboxType = model->GetHitBoxType();
+	m_hitbox = float3();
+	m_hitboxType = HitBoxType::point;
 }
 
 void GameObject::SetPosition(float3 pos) { m_position = pos; }
@@ -138,7 +138,7 @@ bool GameObject::CheckColltion(GameObject * other)
 
 bool GameObject::SetHitbox(float radius)
 {
-	if (m_hitboxType == HitBoxType::Point || m_hitboxType == HitBoxType::Rectangle)
+	if (m_hitboxType == HitBoxType::point || m_hitboxType == HitBoxType::rectangle)
 		return false;
 	m_hitbox.X =(radius);
 	return true;
@@ -146,7 +146,7 @@ bool GameObject::SetHitbox(float radius)
 
 bool GameObject::SetHitbox(float sizeX, float sizeY, float sizeZ)
 {
-	if (m_hitboxType != HitBoxType::Rectangle)
+	if (m_hitboxType != HitBoxType::rectangle)
 		return false;
 	m_hitbox = float3(sizeX, sizeY, sizeZ);
 	return true;

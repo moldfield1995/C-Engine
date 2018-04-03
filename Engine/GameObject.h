@@ -13,6 +13,14 @@
 //Updated In Final Year
 //Created By Matthew Oldfield
 
+//Using lowercase enums because of a conflict with Widonws Rectangle function
+enum HitBoxType
+{
+	point,
+	sphere,
+	cube,
+	rectangle,
+};
 class GameObject
 {
 	friend Component;
