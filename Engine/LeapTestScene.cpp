@@ -1,6 +1,9 @@
 #include "LeapTestScene.h"
 #include "HandDesplay.h"
 #include "DebugDesplay.h"
+#include "Utills.h"
+#include "RotateObject.h"
+
 
 LeapTestScene::LeapTestScene()
 {
@@ -19,6 +22,7 @@ LeapTestScene::~LeapTestScene()
 bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight, float screenDepth, TextureManagerClass* textureManager, ModelManager* modelManager, AudioManager* audioManager)
 {
 	ID3D11Device* device = Direct3D->GetDevice();
+	ID3D11DeviceContext* deviceContex = Direct3D->GetDeviceContext();
 	bool result = true;
 
 	// Create the camera object.
@@ -55,30 +59,39 @@ bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 
 	// Initialize the frustum object.
 	m_Frustum->Initialize(screenDepth);
-	
+
 	m_UIMannager = new UIMannager();
 	m_UIMannager->Initalize(screenWidth, screenHeight);
 
-	if(!textureManager->TextureLoaded(404))
-		result = textureManager->LoadTexture(device, Direct3D->GetDeviceContext(), "../Engine/data/textures/debug.tga", 404);
-	if(!result)
-		return false;
-	if (!modelManager->ModelLoaded(ModelManager::parsString("../Engine/data/T1Assets/cubeS.txt")))
-		modelManager->AddModle(device, "../Engine/data/T1Assets/cubeS.txt", ModelManager::parsString("../Engine/data/T1Assets/cubeS.txt"));
+	int shipTex = textureManager->LoadTexture(device, deviceContex, "../Engine/data/textures/StupidShipUV.tga");
 
-	modelManager->AddModle(device, "../Engine/data/Capsule.obj", ModelManager::parsString("../Engine/data/Capsule.obj"));
+	result = textureManager->LoadTexture(device, deviceContex, "../Engine/data/textures/debug.tga", 404);
+	if (!result)
+		return false;
+	modelManager->AddModle(device, "../Engine/data/T1Assets/cubeS.txt", Utills::ParsString("../Engine/data/T1Assets/cubeS.txt"));
+	modelManager->AddModle(device, "../Engine/data/Models/Capsule.obj", Utills::ParsString("../Engine/data/Models/Capsule.obj"));
+	int shipModel = modelManager->AddModle(device, "../Engine/data/Models/StupidShip.obj");
 
 	Shader* shader = ShaderManagerClass::GetInstance()->GetShader<LightShader>();
 
 	GameObject* gameObject = new GameObject();
-	gameObject->Initalize(float3(), float3(), modelManager->GetModel(ModelManager::parsString("../Engine/data/T1Assets/cubeS.txt")), textureManager->GetTexture(404), shader);
-	
+	gameObject->Initalize(float3(), float3(), modelManager->GetModel(Utills::ParsString("../Engine/data/T1Assets/cubeS.txt")), textureManager->GetTexture(404), shader);
+
 	gameObject->AddComponet(new HandDesplay());
 	gameObject->AddComponet(new DebugDesplay());
 	m_GameObjects.push_back(gameObject);
 
+	//gameObject = new GameObject();
+	//gameObject->Initalize(float3(0.0f, -10.0f, 5.0f), float3(), modelManager->GetModel(Utills::ParsString("../Engine/data/Capsule.obj")), textureManager->GetTexture(404), shader);
+	//m_GameObjects.push_back(gameObject);
+
+	Shader* bumpShader = ShaderManagerClass::GetInstance()->GetShader<BumpMapShaderClass>();
+	int defaultNormal = textureManager->LoadTexture(device, deviceContex, "../Engine/data/textures/DefaultNornal.tga");
+
 	gameObject = new GameObject();
-	gameObject->Initalize(float3(0.0f,-10.0f,5.0f), float3(), modelManager->GetModel(ModelManager::parsString("../Engine/data/Capsule.obj")), textureManager->GetTexture(404), shader);
+	gameObject->Initalize(float3(0.0f, 0.0f, 5.0f), float3(), modelManager->GetModel(shipModel), textureManager->GetTexture(shipTex), bumpShader);
+	gameObject->AddTexture(textureManager->GetTexture(defaultNormal));
+	gameObject->AddComponet(new RotateObject(float3(1.0f, 1.0f, 1.0f)));
 	m_GameObjects.push_back(gameObject);
 
 	return true;

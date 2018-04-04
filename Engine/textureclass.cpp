@@ -2,7 +2,7 @@
 // Filename: textureclass.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "textureclass.h"
-
+#include "Utills.h"
 
 TextureClass::TextureClass()
 {
@@ -54,6 +54,7 @@ bool TextureClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceC
 	hResult = device->CreateTexture2D(&textureDesc, NULL, &m_texture);
 	if(FAILED(hResult))
 	{
+		Utills::DebugString("Undable to create 2D texture, textureClass, Initlize");
 		return false;
 	}
 
@@ -73,6 +74,7 @@ bool TextureClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceC
 	hResult = device->CreateShaderResourceView(m_texture, &srvDesc, &m_textureView);
 	if(FAILED(hResult))
 	{
+		Utills::DebugString("Undable to create shader resource view, textureClass, Initlize");
 		return false;
 	}
 
@@ -139,6 +141,7 @@ bool TextureClass::LoadTarga(char* filename)
 	error = fopen_s(&filePtr, filename, "rb");
 	if(error != 0)
 	{
+		Utills::DebugString("File Not Found, textureClass, LoadTGA");
 		return false;
 	}
 
@@ -146,6 +149,7 @@ bool TextureClass::LoadTarga(char* filename)
 	count = (unsigned int)fread(&targaFileHeader, sizeof(TargaHeader), 1, filePtr);
 	if(count != 1)
 	{
+		Utills::DebugString("Undable to load header, textureClass, LoadTGA");
 		return false;
 	}
 
@@ -157,6 +161,7 @@ bool TextureClass::LoadTarga(char* filename)
 	// Check that it is 32 bit and not 24 bit.
 	if(bpp != 32)
 	{
+		Utills::DebugString("Incorect File Format, textureClass, LoadTGA");
 		return false;
 	}
 
@@ -174,6 +179,7 @@ bool TextureClass::LoadTarga(char* filename)
 	count = (unsigned int)fread(targaImage, 1, imageSize, filePtr);
 	if(count != imageSize)
 	{
+		Utills::DebugString("File Size invalid, textureClass, LoadTGA");
 		return false;
 	}
 

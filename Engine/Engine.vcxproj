@@ -61,6 +61,7 @@
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="PeformanceMonerting.h" />
     <ClInclude Include="positionclass.h" />
+    <ClInclude Include="RotateObject.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="shadermanagerclass.h" />
     <ClInclude Include="skydomeclass.h" />
@@ -81,6 +82,7 @@
     <ClInclude Include="UIMannager.h" />
     <ClInclude Include="UIText.h" />
     <ClInclude Include="userinterfaceclass.h" />
+    <ClInclude Include="Utills.h" />
     <ClInclude Include="zoneclass.h" />
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +118,7 @@
     <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="PeformanceMonerting.cpp" />
     <ClCompile Include="positionclass.cpp" />
+    <ClCompile Include="RotateObject.cpp" />
     <ClCompile Include="shadermanagerclass.cpp" />
     <ClCompile Include="skydomeclass.cpp" />
     <ClCompile Include="skydomeshaderclass.cpp" />
@@ -135,6 +138,7 @@
     <ClCompile Include="UIMannager.cpp" />
     <ClCompile Include="UIText.cpp" />
     <ClCompile Include="userinterfaceclass.cpp" />
+    <ClCompile Include="Utills.cpp" />
     <ClCompile Include="zoneclass.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

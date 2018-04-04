@@ -2,6 +2,7 @@
 // Filename: texturemanagerclass.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "texturemanagerclass.h"
+#include "Utills.h"
 
 TextureManagerClass* TextureManagerClass::instance = 0;
 
@@ -48,7 +49,7 @@ bool TextureManagerClass::LoadTexture(ID3D11Device* device, ID3D11DeviceContext*
 	bool result;
 	if (TextureLoaded(id))
 	{
-		OutputDebugString(L"Texture was allready loaded");
+		OutputDebugString(L"Texture was allready loaded\n");
 		return true; //return true as the texture allready exsits
 	}
 	TextureClass* NewTexture = new TextureClass();
@@ -56,6 +57,26 @@ bool TextureManagerClass::LoadTexture(ID3D11Device* device, ID3D11DeviceContext*
 	textures[id] = NewTexture;
 	storedTextures.push_back(id);
 	return result;
+}
+
+int TextureManagerClass::LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* filename)
+{
+	int id = Utills::ParsString(filename);
+	if (TextureLoaded(id))
+	{
+		OutputDebugString(L"Texture was allready loaded\n");
+		return id;
+	}
+	TextureClass* NewTexture = new TextureClass();
+	if (!NewTexture->Initialize(device, deviceContext, filename))
+	{
+		std::string file =  "Texture Failed to load ";
+		file.append(filename);
+		Utills::DebugString(file.data());
+	}
+	textures[id] = NewTexture;
+	storedTextures.push_back(id);
+	return id;
 }
 
 

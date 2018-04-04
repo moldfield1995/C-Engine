@@ -1,4 +1,5 @@
 #include "ModelManager.h"
+#include "Utills.h"
 
 ModelManager* ModelManager::instance = 0;
 
@@ -35,10 +36,35 @@ void ModelManager::Render(ID3D11DeviceContext* deviceContex, int id)
 
 void ModelManager::AddModle(ID3D11Device* device, char* filePath, int id)
 {
+	if (ModelLoaded(id))
+		return;
 	ModelClass* NewModel = new ModelClass();
-	NewModel->Initialize(device, filePath);
+	if (!NewModel->Initialize(device, filePath))
+	{
+		std::string file = "Modle Failed to load ";
+		file.append(filePath);
+		Utills::DebugString(file.data());
+		
+	}
 	models[id] = NewModel;
 	storedModdels.push_back(id);
+}
+
+int ModelManager::AddModle(ID3D11Device * device , char * filePath)
+{
+	int id = Utills::ParsString(filePath);
+	if (ModelLoaded(id))
+		return id;
+	ModelClass* NewModel = new ModelClass();
+	if (!NewModel->Initialize(device, filePath))
+	{
+		std::string file = "Modle Failed to load ";
+		file.append(filePath);
+		Utills::DebugString(file.data());
+	}
+	models[id] = NewModel;
+	storedModdels.push_back(id);
+	return id;
 }
 
 ModelClass * ModelManager::GetModel(int id)
@@ -56,16 +82,6 @@ bool ModelManager::ModelLoaded(int id)
 		return false;
 }
 
-int ModelManager::parsString(char* fileLocation)
-{
-	std::string local = fileLocation;
-	int id = 0;
-	for (int itt = 0, length = local.length(); itt < length; itt++)
-	{
-		id += local[itt];
-	}
-	return id * local.length();
-}
 
 int ModelManager::IndexCount(int id)
 {

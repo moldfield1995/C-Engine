@@ -46,6 +46,9 @@ public:
 	//Componet
 	void AddComponet(Component* component);
 
+	//If index is not previded its just added to the top of the list
+	void AddTexture(ID3D11ShaderResourceView* texture, int index = -1);
+
 	//Collition
 	bool CheckColltion(GameObject* other);
 	//Seting up a Cube or Sphere Hitbox

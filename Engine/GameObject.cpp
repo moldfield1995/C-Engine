@@ -99,6 +99,16 @@ void GameObject::AddComponet(Component * component)
 	m_Componets.push_back(component);
 }
 
+void GameObject::AddTexture(ID3D11ShaderResourceView * texture, int index)
+{
+	if (index == -1)
+	{
+		m_textures->push_back(texture);
+		return;
+	}
+	(*m_textures)[index] = texture;
+}
+
 bool GameObject::CheckColltion(GameObject * other)
 {
 

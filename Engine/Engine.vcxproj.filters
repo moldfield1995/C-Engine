@@ -279,6 +279,12 @@
     <ClInclude Include="DebugDesplay.h">
       <Filter>Header Files\Componets</Filter>
     </ClInclude>
+    <ClInclude Include="Utills.h">
+      <Filter>Header Files\SingleTon</Filter>
+    </ClInclude>
+    <ClInclude Include="RotateObject.h">
+      <Filter>Header Files\Componets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fontshaderclass.cpp">
@@ -435,6 +441,12 @@
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="DebugDesplay.cpp">
+      <Filter>Source Files\Componets</Filter>
+    </ClCompile>
+    <ClCompile Include="Utills.cpp">
+      <Filter>Source Files\SingleTon</Filter>
+    </ClCompile>
+    <ClCompile Include="RotateObject.cpp">
       <Filter>Source Files\Componets</Filter>
     </ClCompile>
   </ItemGroup>

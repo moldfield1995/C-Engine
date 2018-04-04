@@ -30,6 +30,7 @@ public:
 	void Shutdown();
 
 	bool LoadTexture(ID3D11Device*, ID3D11DeviceContext*, char*, int);
+	int LoadTexture(ID3D11Device*, ID3D11DeviceContext*, char*);
 
 	ID3D11ShaderResourceView* GetTexture(int);
 
