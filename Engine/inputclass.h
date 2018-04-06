@@ -84,9 +84,9 @@ private:
 
 	Controller m_LeapControler;
 	Leap::Frame m_LeapFrame;
-	float3 leapToWorldScale, leapOffset;
+	float3 m_leapToWorldScale, m_leapOffset;
 
-	float3 leapScreenPosition;
+	float3 m_leapScreenPosition;
 public:
 	static InputClass* GetInstance();
 };

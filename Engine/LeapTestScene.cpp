@@ -24,7 +24,7 @@ bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 	ID3D11Device* device = Direct3D->GetDevice();
 	ID3D11DeviceContext* deviceContex = Direct3D->GetDeviceContext();
 	bool result = true;
-
+	int defaultNormal, modelId, textureID;
 	// Create the camera object.
 	m_Camera = new CameraClass;
 	if (!m_Camera)
@@ -63,16 +63,16 @@ bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 	m_UIMannager = new UIMannager();
 	m_UIMannager->Initalize(screenWidth, screenHeight);
 
-	int shipTex = textureManager->LoadTexture(device, deviceContex, "../Engine/data/textures/StupidShipUV.tga");
+	textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/textures/StupidShipUV.tga");
 
 	result = textureManager->LoadTexture(device, deviceContex, "../Engine/data/textures/debug.tga", 404);
 	if (!result)
 		return false;
 	modelManager->AddModle(device, "../Engine/data/T1Assets/cubeS.txt", Utills::ParsString("../Engine/data/T1Assets/cubeS.txt"));
 	modelManager->AddModle(device, "../Engine/data/Models/Capsule.obj", Utills::ParsString("../Engine/data/Models/Capsule.obj"));
-	int shipModel = modelManager->AddModle(device, "../Engine/data/Models/StupidShip.obj");
+	modelId = modelManager->AddModle(device, "../Engine/data/Models/StupidShip.obj");
 
-	Shader* shader = ShaderManagerClass::GetInstance()->GetShader<LightShader>();
+	Shader* shader = ShaderManagerClass::GetInstance()->GetShader<TextureShaderClass>();
 
 	GameObject* gameObject = new GameObject();
 	gameObject->Initalize(float3(), float3(), modelManager->GetModel(Utills::ParsString("../Engine/data/T1Assets/cubeS.txt")), textureManager->GetTexture(404), shader);
@@ -86,12 +86,35 @@ bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 	//m_GameObjects.push_back(gameObject);
 
 	Shader* bumpShader = ShaderManagerClass::GetInstance()->GetShader<BumpMapShaderClass>();
-	int defaultNormal = textureManager->LoadTexture(device, deviceContex, "../Engine/data/textures/DefaultNornal.tga");
+	defaultNormal = textureManager->LoadTexture(device, deviceContex, "../Engine/data/textures/DefaultNornal.tga");
 
 	gameObject = new GameObject();
-	gameObject->Initalize(float3(0.0f, 0.0f, 5.0f), float3(), modelManager->GetModel(shipModel), textureManager->GetTexture(shipTex), bumpShader);
+	gameObject->Initalize(float3(0.0f, 0.0f, 5.0f), float3(), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), bumpShader);
 	gameObject->AddTexture(textureManager->GetTexture(defaultNormal));
-	gameObject->AddComponet(new RotateObject(float3(1.0f, 1.0f, 1.0f)));
+	gameObject->AddComponet(new RotateObject(float3(50.0f, 50.0f, 50.0f)));
+	m_GameObjects.push_back(gameObject);
+
+	modelId = modelManager->AddModle(device, "../Engine/data/GooglePoly/Asteroids.obj");
+	textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/GooglePoly/Asteroids_BaseColor.tga");
+
+	gameObject = new GameObject();
+	gameObject->Initalize(float3(0.0f, -5.0f, 15.0f), float3(), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
+	m_GameObjects.push_back(gameObject);
+
+	modelId = modelManager->AddModle(device, "../Engine/data/LizReddington/Planet1.obj");
+	textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/LizReddington/Planet1.tga");
+
+	gameObject = new GameObject();
+	gameObject->Initalize(float3(5.0f, -5.0f, 15.0f), float3(), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
+	gameObject->SetScale(float3(0.01f,0.01f,0.01f));
+	m_GameObjects.push_back(gameObject);
+
+	modelId = modelManager->AddModle(device, "../Engine/data/LizReddington/Ship1.obj");
+	textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/LizReddington/Ship1Uved.tga");
+
+	gameObject = new GameObject();
+	gameObject->Initalize(float3(-5.0f, -5.0f, 15.0f), float3(), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
+	gameObject->SetScale(float3(0.01f, 0.01f, 0.01f));
 	m_GameObjects.push_back(gameObject);
 
 	return true;
@@ -99,6 +122,25 @@ bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 
 void LeapTestScene::Shutdown()
 {
+	if (m_Camera)
+	{
+		delete(m_Camera);
+		m_Camera = 0;
+	}
+	if (m_Frustum)
+	{
+		delete m_Frustum;
+		m_Frustum = 0;
+	}
+	for each (GameObject* var in m_GameObjects)
+	{
+		var->Destroy();
+		delete var;
+		var = 0;
+	}
+
+	m_Light = 0;
+	m_UIMannager = 0;
 }
 
 bool LeapTestScene::Frame(D3DClass* Direct3D, InputClass* Input, ShaderManagerClass* ShaderManager, TextureManagerClass* TextureManager,

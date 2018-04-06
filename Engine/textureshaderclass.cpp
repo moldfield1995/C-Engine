@@ -55,7 +55,10 @@ bool TextureShaderClass::Render(ID3D11DeviceContext * context, int indexCount, c
 
 
 	// Set the shader parameters that it will use for rendering.
-	result = SetShaderParameters(context, worldMatrix, viewMatrix, projectionMatrix, textures->at(0),*colour);
+	if(colour != nullptr)
+		result = SetShaderParameters(context, worldMatrix, viewMatrix, projectionMatrix, textures->at(0),*colour);
+	else
+		result = SetShaderParameters(context, worldMatrix, viewMatrix, projectionMatrix, textures->at(0), XMFLOAT4(1.0f,1.0f,1.0f,1.0f));
 	if (!result)
 	{
 		return false;

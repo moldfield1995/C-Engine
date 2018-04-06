@@ -43,7 +43,8 @@ void HandDesplay::Update()
 			createGameObjects(1);
 		workGo = m_HandGameObjects[currentActive];
 		workGo->SetPosition(float3(hand.palmPosition())*leapToWorldScale + leapOffset);
-		workGo->SetRotation(hand.direction());
+		workGo->SetRotation((float3(hand.palmNormal())+float3(1.0f)) * (90.0f / PI));//* (180.0f/PI));
+		
 		//Itterate the gameobject index to update
 		currentActive++;
 		//Itterate throgh fingers
@@ -59,7 +60,7 @@ void HandDesplay::Update()
 				if (bone.isValid()) {
 					workGo = m_HandGameObjects[currentActive];
 					workGo->SetPosition(float3(bone.prevJoint())*leapToWorldScale + leapOffset);
-					workGo->SetRotation(bone.direction()); 
+					workGo->SetRotation((float3(hand.palmNormal()) + float3(1.0f)) * (90.0f/PI));
 					//itterate the gameobject index to update
 					currentActive++;
 				}

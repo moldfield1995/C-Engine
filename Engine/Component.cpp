@@ -24,3 +24,13 @@ Shader * Component::GetShader()
 {
 	return owner->m_shader;
 }
+
+void Component::SetOwnersDynamicObject(TA::DynamicObject * value)
+{
+	owner->m_collishonObject = value;
+}
+
+TA::DynamicObject* Component::GetOwnersDynamicObject()
+{
+	return owner->m_collishonObject;
+}

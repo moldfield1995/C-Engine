@@ -199,6 +199,19 @@ void GameObject::Destroy()
 		delete(m_Componets[i]);
 	}
 	m_Componets.clear();
+	m_model = 0;
+	if (m_textures)
+	{
+		m_textures->clear();
+		delete m_textures;
+		m_textures = 0;
+	}
+	m_shader = 0;
+	if (m_collishonObject)
+	{
+		m_collishonObject->Release();
+		m_collishonObject = 0;
+	}
 }
 
 bool GameObject::IsAlive() { return !m_KillGameObject; }

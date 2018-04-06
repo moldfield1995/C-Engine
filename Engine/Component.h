@@ -3,6 +3,7 @@
 #include "ModelClass.h"
 #include <vector>
 #include "Shader.h"
+#include "..\TrueAxis\Physics\DynamicObject.h"
 
 class FrustumClass;
 class LightClass;
@@ -29,6 +30,9 @@ protected:
 	ModelClass* GetModel();
 	std::vector<ID3D11ShaderResourceView*>* GetTextures();
 	Shader* GetShader();
+
+	void SetOwnersDynamicObject(TA::DynamicObject* value);
+	TA::DynamicObject* GetOwnersDynamicObject();
 
 	GameObject* owner;
 	bool renders, killComponet,active;

@@ -9,7 +9,8 @@
 #include "textureclass.h"
 #include <vector>
 #include "Component.h"
-
+#include "..\TrueAxis\Physics\DynamicObject.h"
+#include "..\TrueAxis\Physics\CollisionObjectComplex.h"
 //Updated In Final Year
 //Created By Matthew Oldfield
 
@@ -72,8 +73,8 @@ protected:
 	HitBoxType m_hitboxType;
 	float3 m_hitbox;
 	std::vector<Component*> m_Componets;
+	TA::DynamicObject* m_collishonObject;
 private:
 	float3 m_position, m_rotation, m_scale;
-	
 };
 
