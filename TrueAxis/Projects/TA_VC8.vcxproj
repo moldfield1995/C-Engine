@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B6452181-1590-4BE3-A968-6A84E7BBCE32}</ProjectGuid>
+    <RootNamespace>TA_VC8</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.27413.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling />
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat />
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Common\AABB.h" />
+    <ClInclude Include="..\Common\Common.h" />
+    <ClInclude Include="..\Common\Config.h" />
+    <ClInclude Include="..\Common\ConvexHull.h" />
+    <ClInclude Include="..\Common\Debug.h" />
+    <ClInclude Include="..\Common\Error.h" />
+    <ClInclude Include="..\Common\EulerAngles.h" />
+    <ClInclude Include="..\Common\Geometry.h" />
+    <ClInclude Include="..\Common\Maths.h" />
+    <ClInclude Include="..\Common\Matrix.h" />
+    <ClInclude Include="..\Common\MemoryMgr.h" />
+    <ClInclude Include="..\Common\MFrame.h" />
+    <ClInclude Include="..\Common\RandFunc.h" />
+    <ClInclude Include="..\Common\RefCount.h" />
+    <ClInclude Include="..\Common\StackAlloc.h" />
+    <ClInclude Include="..\Common\Types.h" />
+    <ClInclude Include="..\Common\Vec2.h" />
+    <ClInclude Include="..\Common\Vec3.h" />
+    <ClInclude Include="..\Common\Vec4.h" />
+    <ClInclude Include="..\Common\Vector.h" />
+    <ClInclude Include="..\Common\zcta000.h" />
+    <ClInclude Include="..\Common\zcta001.h" />
+    <ClInclude Include="..\Common\zcta002.h" />
+    <ClInclude Include="..\Common\zcta003.h" />
+    <ClInclude Include="..\Common\zcta004.h" />
+    <ClInclude Include="..\Common\zcta005.h" />
+    <ClInclude Include="..\Common\zcta006.h" />
+    <ClInclude Include="..\Common\zcta007.h" />
+    <ClInclude Include="..\Common\zcta008.h" />
+    <ClInclude Include="..\Common\zcta009.h" />
+    <ClInclude Include="..\Common\zcta010.h" />
+    <ClInclude Include="..\Common\zcta011.h" />
+    <ClInclude Include="..\Common\zcta012.h" />
+    <ClInclude Include="..\Common\zcta013.h" />
+    <ClInclude Include="..\Common\zcta014.h" />
+    <ClInclude Include="..\Common\zcta015.h" />
+    <ClInclude Include="..\Common\zcta016.h" />
+    <ClInclude Include="..\Common\zcta017.h" />
+    <ClInclude Include="..\Common\zcta018.h" />
+    <ClInclude Include="..\Common\zcta019.h" />
+    <ClInclude Include="..\Common\zcta020.h" />
+    <ClInclude Include="..\Common\zcta021.h" />
+    <ClInclude Include="..\Physics\CarTemplate.h" />
+    <ClInclude Include="..\Physics\Collision.h" />
+    <ClInclude Include="..\Physics\CollisionObject.h" />
+    <ClInclude Include="..\Physics\CollisionObjectAABBMesh.h" />
+    <ClInclude Include="..\Physics\CollisionObjectCachedPolyData.h" />
+    <ClInclude Include="..\Physics\CollisionObjectCapsule.h" />
+    <ClInclude Include="..\Physics\CollisionObjectCombo.h" />
+    <ClInclude Include="..\Physics\CollisionObjectComplex.h" />
+    <ClInclude Include="..\Physics\CollisionObjectConvex.h" />
+    <ClInclude Include="..\Physics\CollisionObjectCylinder.h" />
+    <ClInclude Include="..\Physics\CollisionObjectLineList.h" />
+    <ClInclude Include="..\Physics\CollisionObjectSimple.h" />
+    <ClInclude Include="..\Physics\CollisionObjectSphere.h" />
+    <ClInclude Include="..\Physics\DynamicObject.h" />
+    <ClInclude Include="..\Physics\DynamicObjectCar.h" />
+    <ClInclude Include="..\Physics\DynamicObjectCollisionIterator.h" />
+    <ClInclude Include="..\Physics\Physics.h" />
+    <ClInclude Include="..\Physics\PhysicsJoint.h" />
+    <ClInclude Include="..\Physics\PhysicsObject.h" />
+    <ClInclude Include="..\Physics\PhysicsRender.h" />
+    <ClInclude Include="..\Physics\StaticObject.h" />
+    <ClInclude Include="..\Physics\SurfaceAttribute.h" />
+    <ClInclude Include="..\Physics\zpta000.h" />
+    <ClInclude Include="..\Physics\zpta001.h" />
+    <ClInclude Include="..\Physics\zpta002.h" />
+    <ClInclude Include="..\Physics\zpta003.h" />
+    <ClInclude Include="..\Physics\zpta004.h" />
+    <ClInclude Include="..\Physics\zpta005.h" />
+    <ClInclude Include="..\Physics\zpta006.h" />
+    <ClInclude Include="..\Physics\zpta007.h" />
+    <ClInclude Include="..\Physics\zpta008.h" />
+    <ClInclude Include="..\Physics\zpta009.h" />
+    <ClInclude Include="..\Physics\zpta010.h" />
+    <ClInclude Include="..\Physics\zpta011.h" />
+    <ClInclude Include="..\Physics\zpta012.h" />
+    <ClInclude Include="..\Physics\zpta013.h" />
+    <ClInclude Include="..\Physics\zpta014.h" />
+    <ClInclude Include="..\Physics\zpta015.h" />
+    <ClInclude Include="..\Physics\zpta016.h" />
+    <ClInclude Include="..\Physics\zpta017.h" />
+    <ClInclude Include="..\Physics\zpta018.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Common\zcta000.cpp" />
+    <ClCompile Include="..\Common\zcta001.cpp" />
+    <ClCompile Include="..\Common\zcta002.cpp" />
+    <ClCompile Include="..\Common\zcta003.cpp" />
+    <ClCompile Include="..\Common\zcta004.cpp" />
+    <ClCompile Include="..\Common\zcta005.cpp" />
+    <ClCompile Include="..\Common\zcta006.cpp" />
+    <ClCompile Include="..\Common\zcta007.cpp" />
+    <ClCompile Include="..\Common\zcta008.cpp" />
+    <ClCompile Include="..\Common\zcta009.cpp" />
+    <ClCompile Include="..\Common\zcta010.cpp" />
+    <ClCompile Include="..\Common\zcta011.cpp" />
+    <ClCompile Include="..\Common\zcta012.cpp" />
+    <ClCompile Include="..\Common\zcta013.cpp" />
+    <ClCompile Include="..\Common\zcta014.cpp" />
+    <ClCompile Include="..\Common\zcta015.cpp" />
+    <ClCompile Include="..\Common\zcta016.cpp" />
+    <ClCompile Include="..\Common\zcta017.cpp" />
+    <ClCompile Include="..\Common\zcta018.cpp" />
+    <ClCompile Include="..\Common\zcta019.cpp" />
+    <ClCompile Include="..\Common\zcta020.cpp" />
+    <ClCompile Include="..\Common\zcta021.cpp" />
+    <ClCompile Include="..\Common\zcta022.cpp" />
+    <ClCompile Include="..\Common\zcta023.cpp" />
+    <ClCompile Include="..\Common\zcta024.cpp" />
+    <ClCompile Include="..\Common\zcta025.cpp" />
+    <ClCompile Include="..\Common\zcta026.cpp" />
+    <ClCompile Include="..\Common\zcta027.cpp" />
+    <ClCompile Include="..\Common\zcta028.cpp" />
+    <ClCompile Include="..\Physics\zpta000.cpp" />
+    <ClCompile Include="..\Physics\zpta001.cpp" />
+    <ClCompile Include="..\Physics\zpta002.cpp" />
+    <ClCompile Include="..\Physics\zpta003.cpp" />
+    <ClCompile Include="..\Physics\zpta004.cpp" />
+    <ClCompile Include="..\Physics\zpta005.cpp" />
+    <ClCompile Include="..\Physics\zpta006.cpp" />
+    <ClCompile Include="..\Physics\zpta007.cpp" />
+    <ClCompile Include="..\Physics\zpta008.cpp" />
+    <ClCompile Include="..\Physics\zpta009.cpp" />
+    <ClCompile Include="..\Physics\zpta010.cpp" />
+    <ClCompile Include="..\Physics\zpta011.cpp" />
+    <ClCompile Include="..\Physics\zpta012.cpp" />
+    <ClCompile Include="..\Physics\zpta013.cpp" />
+    <ClCompile Include="..\Physics\zpta014.cpp" />
+    <ClCompile Include="..\Physics\zpta015.cpp" />
+    <ClCompile Include="..\Physics\zpta016.cpp" />
+    <ClCompile Include="..\Physics\zpta017.cpp" />
+    <ClCompile Include="..\Physics\zpta018.cpp" />
+    <ClCompile Include="..\Physics\zpta019.cpp" />
+    <ClCompile Include="..\Physics\zpta020.cpp" />
+    <ClCompile Include="..\Physics\zpta021.cpp" />
+    <ClCompile Include="..\Physics\zpta022.cpp" />
+    <ClCompile Include="..\Physics\zpta023.cpp" />
+    <ClCompile Include="..\Physics\zpta024.cpp" />
+    <ClCompile Include="..\Physics\zpta025.cpp" />
+    <ClCompile Include="..\Physics\zpta026.cpp" />
+    <ClCompile Include="..\Physics\zpta027.cpp" />
+    <ClCompile Include="..\Physics\zpta028.cpp" />
+    <ClCompile Include="..\Physics\zpta029.cpp" />
+    <ClCompile Include="..\Physics\zpta030.cpp" />
+    <ClCompile Include="..\Physics\zpta031.cpp" />
+    <ClCompile Include="..\Physics\zpta032.cpp" />
+    <ClCompile Include="..\Physics\zpta033.cpp" />
+    <ClCompile Include="..\Physics\zpta034.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Common\zcta000.inl" />
+    <None Include="..\Common\zcta001.inl" />
+    <None Include="..\Common\zcta002.inl" />
+    <None Include="..\Common\zcta003.inl" />
+    <None Include="..\Common\zcta004.inl" />
+    <None Include="..\Common\zcta005.inl" />
+    <None Include="..\Common\zcta006.inl" />
+    <None Include="..\Common\zcta007.inl" />
+    <None Include="..\Common\zcta008.inl" />
+    <None Include="..\Common\zcta009.inl" />
+    <None Include="..\Common\zcta010.inl" />
+    <None Include="..\Common\zcta011.inl" />
+    <None Include="..\Common\zcta012.inl" />
+    <None Include="..\Common\zcta013.inl" />
+    <None Include="..\Common\zcta014.inl" />
+    <None Include="..\Common\zcta015.inl" />
+    <None Include="..\Physics\zpta000.inl" />
+    <None Include="..\Physics\zpta001.inl" />
+    <None Include="..\Physics\zpta002.inl" />
+    <None Include="..\Physics\zpta003.inl" />
+    <None Include="..\Physics\zpta004.inl" />
+    <None Include="..\Physics\zpta005.inl" />
+    <None Include="..\Physics\zpta006.inl" />
+    <None Include="..\Physics\zpta007.inl" />
+    <None Include="..\Physics\zpta008.inl" />
+    <None Include="..\Physics\zpta009.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

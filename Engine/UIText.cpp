@@ -116,7 +116,8 @@ void UIText::Update()
 void UIText::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX & worldMatrix, const XMMATRIX & baseViewMatrix, const XMMATRIX & orthoMatrix)
 {
 	XMMATRIX renderMatrix, rotationMatrix, scaleMatrix, positionMatrix;
-	rotationMatrix = XMMatrixRotationRollPitchYaw(rotation.X, rotation.Y, rotation.Z);
+	float3 rotationInRadens = rotation * 0.0174532925f;
+	rotationMatrix = XMMatrixRotationRollPitchYaw(rotationInRadens.X, rotationInRadens.Y, rotationInRadens.Z);
 	scaleMatrix = XMMatrixScaling(scale.X, scale.Y, scale.Z);
 	positionMatrix = XMMatrixTranslation(position.X, position.Y, position.Z);
 	unsigned int offset = 0;

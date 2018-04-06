@@ -1,0 +1,539 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{48926711-2a6a-46bc-83ef-a94b18afb6d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{412517cb-d80a-404c-806f-486992ac1bc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{ab760b15-4e40-41e9-9d25-bf17854e76fd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Common\AABB.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Common.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Config.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\ConvexHull.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Debug.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Error.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\EulerAngles.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Geometry.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Maths.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Matrix.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\MemoryMgr.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\MFrame.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\RandFunc.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\RefCount.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\StackAlloc.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Types.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Vec2.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Vec3.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Vec4.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Vector.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\CarTemplate.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\Collision.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\CollisionObject.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\CollisionObjectAABBMesh.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\CollisionObjectCachedPolyData.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\CollisionObjectCapsule.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\CollisionObjectCombo.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\CollisionObjectComplex.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\CollisionObjectConvex.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\CollisionObjectCylinder.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\CollisionObjectLineList.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\CollisionObjectSimple.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\CollisionObjectSphere.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\DynamicObject.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\DynamicObjectCar.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\DynamicObjectCollisionIterator.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\Physics.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\PhysicsJoint.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\PhysicsObject.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\PhysicsRender.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\StaticObject.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\SurfaceAttribute.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta000.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta001.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta002.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta003.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta004.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta005.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta006.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta007.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta008.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta009.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta010.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta011.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta012.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta013.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta014.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta015.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta016.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta017.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta018.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta019.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta020.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\zcta021.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta000.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta001.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta002.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta003.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta004.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta005.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta006.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta007.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta008.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta009.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta010.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta011.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta012.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta013.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta014.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta015.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta016.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta017.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\zpta018.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Common\zcta000.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta001.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta002.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta003.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta004.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta005.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta006.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta007.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta008.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta009.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta010.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta011.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta012.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta013.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta014.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta015.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta016.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta017.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta018.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta019.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta020.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta021.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta022.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta023.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta024.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta025.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta026.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta027.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\zcta028.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta000.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta001.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta002.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta003.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta004.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta005.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta006.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta007.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta008.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta009.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta010.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta011.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta012.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta013.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta014.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta015.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta016.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta017.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta018.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta019.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta020.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta021.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta022.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta023.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta024.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta025.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta026.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta027.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta028.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta029.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta030.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta031.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta032.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta033.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\zpta034.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Common\zcta000.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Common\zcta001.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Common\zcta002.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Common\zcta003.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Common\zcta004.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Common\zcta005.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Common\zcta006.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Common\zcta007.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Common\zcta008.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Common\zcta009.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Common\zcta010.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Common\zcta011.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Common\zcta012.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Common\zcta013.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Common\zcta014.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Common\zcta015.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Physics\zpta000.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Physics\zpta001.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Physics\zpta002.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Physics\zpta003.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Physics\zpta004.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Physics\zpta005.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Physics\zpta006.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Physics\zpta007.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Physics\zpta008.inl">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\Physics\zpta009.inl">
+      <Filter>Source</Filter>
+    </None>
+  </ItemGroup>
+</Project>

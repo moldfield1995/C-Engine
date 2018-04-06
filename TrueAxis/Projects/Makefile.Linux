@@ -1,0 +1,97 @@
+############################################################################
+# Makefile.Linux 
+#
+# Copyright (C) 2004 - 2006 True Axis Pty Ltd, Australia.
+# All Rights Reserved.
+#
+# INSTRUCTIONS:
+#
+# Make file for building TrueAxis libraries for Linux under win32. This
+# makefile is provided for users convenience. Users are equaly welcome
+# to use the TrueAxis obfuscated source files in their own make file.
+#
+# To build Win32 Linux debug and release libraries use: 
+#	make -f Makefile.Linux
+#
+# To clean all use:
+#	make -f Makefile.Linux clean
+#
+# The following sub-targets can also be used:
+#	debug 
+#	release 
+#	cleanDebug 
+#	cleanRelease
+#
+############################################################################
+
+CPP  = g++-3.4
+CC   = gcc-3.4
+SED  = sed
+OUTPUT_FOLDER = ReleaseLinux/
+
+include MakeSourceFiles.txt
+		
+OBJ_COMMON = $(patsubst %.cpp,$(OUTPUT_FOLDER)%.o,$(SRC_COMMON))
+OBJ_PHYSICS = $(patsubst %.cpp,$(OUTPUT_FOLDER)%.o,$(SRC_PHYSICS))
+
+D_COMMON = $(patsubst %.o,%.d,$(OBJ_COMMON))
+D_PHYSICS = $(patsubst %.o,%.d,$(OBJ_PHYSICS))
+
+OBJ = $(OBJ_COMMON) $(OBJ_PHYSICS)
+
+BIN  = taphysics.a
+DFLAGS =  $(EXTRA_FLAGS)
+CPPFLAGS = -fexpensive-optimizations -O3 $(DFLAGS)
+
+.PHONY: default debug release manual clean cleanManual cleanDebug cleanRelease 
+
+default: debug release
+
+debug:
+	make -f Makefile.Linux manual EXTRA_FLAGS=-D_DEBUG OUTPUT_FOLDER=DebugLinux/ BIN=ta_physics_linux_debug.a
+
+release:
+	make -f Makefile.Linux manual OUTPUT_FOLDER=ReleaseLinux/ BIN=ta_physics_linux.a
+
+manual:	$(BIN)
+	
+clean: cleanDebug cleanRelease
+	
+cleanDebug:
+	make -f Makefile.Linux cleanManual OUTPUT_FOLDER=DebugLinux/ BIN=ta_physics_linux_debug.a
+	
+cleanRelease:
+	make -f Makefile.Linux cleanManual OUTPUT_FOLDER=ReleaseLinux/ BIN=ta_physics_linux.a
+
+cleanManual:
+	rm -f $(OBJ) $(BIN) $(D_COMMON) $(D##_PHYSICS)
+
+$(BIN): $(OBJ)
+	ar r $(BIN) $(OBJ)
+	ranlib $(BIN)
+	
+$(OUTPUT_FOLDER): 
+	md $(OUTPUT_FOLDER)
+	
+$(OBJ_COMMON): $(OUTPUT_FOLDER)%.o: ../Common/%.cpp $(OUTPUT_FOLDER)%.d 
+	$(CPP) -c $< -o $@ $(CPPFLAGS) $(EXTRA_FLAGS)
+		
+$(OBJ_PHYSICS): $(OUTPUT_FOLDER)%.o: ../Physics/%.cpp $(OUTPUT_FOLDER)%.d
+	$(CPP) -c $< -o $@ $(CPPFLAGS) $(EXTRA_FLAGS)
+		
+$(D_COMMON): $(OUTPUT_FOLDER)%.d: ../Common/%.cpp
+	@echo Generateing dependancies for $<
+	@rm -f $@
+	@$(CPP) -M $(DFLAGS) $< > $@._0
+	@$(SED) 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@._0 > $@
+	@rm -f $@._0
+	
+$(D_PHYSICS): $(OUTPUT_FOLDER)%.d: ../Physics/%.cpp
+	@echo Generateing dependancies for $<
+	@rm -f $@
+	@$(CPP) -M $(DFLAGS) $< > $@._0
+	@$(SED) 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@._0 > $@
+	@rm -f $@._0
+
+
+include $(OBJ:.o=.d)

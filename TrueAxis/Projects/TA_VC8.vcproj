@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="TA_VC8"
+	ProjectGUID="{B6452181-1590-4BE3-A968-6A84E7BBCE32}"
+	RootNamespace="TA_VC8"
+	Keyword="Win32Proj"
+	>
+	<Platforms>
+		<Platform
+			Name="Win32"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="4"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="4"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="4"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				InlineFunctionExpansion="2"
+				EnableIntrinsicFunctions="true"
+				FavorSizeOrSpeed="1"
+				OmitFramePointers="true"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				StringPooling="true"
+				ExceptionHandling="0"
+				RuntimeLibrary="2"
+				BufferSecurityCheck="false"
+				FloatingPointModel="2"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="0"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Common"
+			Filter="">
+			<File
+				RelativePath="..\Common\AABB.h">
+			</File>
+			<File
+				RelativePath="..\Common\Common.h">
+			</File>
+			<File
+				RelativePath="..\Common\Config.h">
+			</File>
+			<File
+				RelativePath="..\Common\ConvexHull.h">
+			</File>
+			<File
+				RelativePath="..\Common\Debug.h">
+			</File>
+			<File
+				RelativePath="..\Common\Error.h">
+			</File>
+			<File
+				RelativePath="..\Common\EulerAngles.h">
+			</File>
+			<File
+				RelativePath="..\Common\Geometry.h">
+			</File>
+			<File
+				RelativePath="..\Common\Maths.h">
+			</File>
+			<File
+				RelativePath="..\Common\Matrix.h">
+			</File>
+			<File
+				RelativePath="..\Common\MemoryMgr.h">
+			</File>
+			<File
+				RelativePath="..\Common\MFrame.h">
+			</File>
+			<File
+				RelativePath="..\Common\RandFunc.h">
+			</File>
+			<File
+				RelativePath="..\Common\RefCount.h">
+			</File>
+			<File
+				RelativePath="..\Common\StackAlloc.h">
+			</File>
+			<File
+				RelativePath="..\Common\Types.h">
+			</File>
+			<File
+				RelativePath="..\Common\Vec2.h">
+			</File>
+			<File
+				RelativePath="..\Common\Vec3.h">
+			</File>
+			<File
+				RelativePath="..\Common\Vec4.h">
+			</File>
+			<File
+				RelativePath="..\Common\Vector.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Physics"
+			Filter="">
+			<File
+				RelativePath="..\Physics\CarTemplate.h">
+			</File>
+			<File
+				RelativePath="..\Physics\Collision.h">
+			</File>
+			<File
+				RelativePath="..\Physics\CollisionObject.h">
+			</File>
+			<File
+				RelativePath="..\Physics\CollisionObjectAABBMesh.h">
+			</File>
+			<File
+				RelativePath="..\Physics\CollisionObjectCachedPolyData.h">
+			</File>
+			<File
+				RelativePath="..\Physics\CollisionObjectCapsule.h">
+			</File>
+			<File
+				RelativePath="..\Physics\CollisionObjectCombo.h">
+			</File>
+			<File
+				RelativePath="..\Physics\CollisionObjectComplex.h">
+			</File>
+			<File
+				RelativePath="..\Physics\CollisionObjectConvex.h">
+			</File>
+			<File
+				RelativePath="..\Physics\CollisionObjectCylinder.h">
+			</File>
+			<File
+				RelativePath="..\Physics\CollisionObjectLineList.h">
+			</File>
+			<File
+				RelativePath="..\Physics\CollisionObjectSimple.h">
+			</File>
+			<File
+				RelativePath="..\Physics\CollisionObjectSphere.h">
+			</File>
+			<File
+				RelativePath="..\Physics\DynamicObject.h">
+			</File>
+			<File
+				RelativePath="..\Physics\DynamicObjectCar.h">
+			</File>
+			<File
+				RelativePath="..\Physics\DynamicObjectCollisionIterator.h">
+			</File>
+			<File
+				RelativePath="..\Physics\Physics.h">
+			</File>
+			<File
+				RelativePath="..\Physics\PhysicsJoint.h">
+			</File>
+			<File
+				RelativePath="..\Physics\PhysicsObject.h">
+			</File>
+			<File
+				RelativePath="..\Physics\PhysicsRender.h">
+			</File>
+			<File
+				RelativePath="..\Physics\StaticObject.h">
+			</File>
+			<File
+				RelativePath="..\Physics\SurfaceAttribute.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Source"
+			Filter="">
+			<File
+				RelativePath="..\Common\zcta000.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta000.inl">
+			</File>
+			<File
+				RelativePath="..\Common\zcta001.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta000.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta001.inl">
+			</File>
+			<File
+				RelativePath="..\Common\zcta001.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta002.inl">
+			</File>
+			<File
+				RelativePath="..\Common\zcta002.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta002.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta003.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta003.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta004.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta005.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta006.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta007.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta008.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta004.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta005.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta009.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta006.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta010.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta007.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta008.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta003.inl">
+			</File>
+			<File
+				RelativePath="..\Common\zcta011.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta012.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta004.inl">
+			</File>
+			<File
+				RelativePath="..\Common\zcta013.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta014.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta005.inl">
+			</File>
+			<File
+				RelativePath="..\Common\zcta009.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta006.inl">
+			</File>
+			<File
+				RelativePath="..\Common\zcta015.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta010.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta007.inl">
+			</File>
+			<File
+				RelativePath="..\Common\zcta011.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta008.inl">
+			</File>
+			<File
+				RelativePath="..\Common\zcta016.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta017.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta018.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta012.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta013.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta009.inl">
+			</File>
+			<File
+				RelativePath="..\Common\zcta019.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta014.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta020.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta015.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta016.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta021.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta017.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta018.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta022.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta023.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta010.inl">
+			</File>
+			<File
+				RelativePath="..\Common\zcta024.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta011.inl">
+			</File>
+			<File
+				RelativePath="..\Common\zcta025.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta019.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta012.inl">
+			</File>
+			<File
+				RelativePath="..\Common\zcta026.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta020.h">
+			</File>
+			<File
+				RelativePath="..\Common\zcta013.inl">
+			</File>
+			<File
+				RelativePath="..\Common\zcta027.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta014.inl">
+			</File>
+			<File
+				RelativePath="..\Common\zcta028.cpp">
+			</File>
+			<File
+				RelativePath="..\Common\zcta015.inl">
+			</File>
+			<File
+				RelativePath="..\Common\zcta021.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta000.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta000.inl">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta001.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta001.inl">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta002.inl">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta002.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta000.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta001.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta003.inl">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta003.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta002.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta004.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta005.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta003.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta006.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta004.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta007.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta008.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta009.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta010.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta011.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta012.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta013.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta014.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta015.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta016.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta005.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta006.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta017.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta007.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta004.inl">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta005.inl">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta018.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta006.inl">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta019.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta007.inl">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta020.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta008.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta009.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta010.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta021.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta008.inl">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta022.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta023.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta024.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta011.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta012.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta025.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta009.inl">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta026.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta027.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta013.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta028.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta014.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta029.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta015.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta030.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta016.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta031.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta032.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta033.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta017.h">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta034.cpp">
+			</File>
+			<File
+				RelativePath="..\Physics\zpta018.h">
+			</File>
+		</Filter>
+	</Files>
+
+	<Globals>
+	</Globals>
+</VisualStudioProject>

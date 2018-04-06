@@ -39,7 +39,8 @@ void UIImage::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX & world
 {
 	XMMATRIX renderMatrix, rotationMatrix, scaleMatrix;
 	renderMatrix = XMMatrixTranslation(position.X, position.Y, position.Z);
-	rotationMatrix = XMMatrixRotationRollPitchYaw(rotation.X, rotation.Y, rotation.Z);
+	float3 rotationInRadens = rotation * 0.0174532925f;
+	rotationMatrix = XMMatrixRotationRollPitchYaw(rotationInRadens.X, rotationInRadens.Y, rotationInRadens.Z);
 	scaleMatrix = XMMatrixScaling(scale.X, scale.Y, scale.Z);
 	renderMatrix = XMMatrixMultiply(worldMatrix,renderMatrix);
 	renderMatrix = XMMatrixMultiply(rotationMatrix, renderMatrix);

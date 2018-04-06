@@ -84,7 +84,8 @@ void GameObject::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX& wor
 	XMMATRIX renderMatrix,transformMatrix,rotationMatrix,scaleMatrix;
 	transformMatrix = XMMatrixTranslation(m_position.X, m_position.Y, m_position.Z);
 	scaleMatrix = XMMatrixScaling(m_scale.X, m_scale.Y, m_scale.Z);
-	rotationMatrix = XMMatrixRotationRollPitchYaw(m_rotation.X, m_rotation.Y, m_rotation.Z);
+	float3 rotationInRadens = m_rotation * 0.0174532925f;
+	rotationMatrix = XMMatrixRotationRollPitchYaw(rotationInRadens.X, rotationInRadens.Y, rotationInRadens.Z);
 	renderMatrix = XMMatrixMultiply(worldMatrix, transformMatrix);
 	renderMatrix = XMMatrixMultiply(rotationMatrix, renderMatrix);
 	renderMatrix = XMMatrixMultiply(scaleMatrix, renderMatrix);

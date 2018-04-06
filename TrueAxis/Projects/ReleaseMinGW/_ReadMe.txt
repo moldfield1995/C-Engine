@@ -1,0 +1,1 @@
+Release MinGW intermediate files

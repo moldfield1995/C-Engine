@@ -20,6 +20,7 @@ ApplicationClass::ApplicationClass()
 	m_ModelManager = 0;
 	m_AudioManager = 0;
 	m_FontManager = 0;
+	m_taPhysics = 0;
 }
 
 
@@ -148,6 +149,18 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	m_AudioManager = new AudioManager();
 	m_AudioManager->Initialise(hinstance);
 	int au = m_AudioManager->AddAudio("../Engine/data/Music/1.wav");
+
+	
+
+	TA::Physics::CreateInstance();
+	m_taPhysics = &TA::Physics::GetInstance();
+	TA::AABB worldExstence;
+	worldExstence.Initialise(TA::Vec3(0.0f, 0.0f, 0.0f), TA::Vec3(100.0f, 100.0f, 100.0f));
+	m_taPhysics->SetWorldDimensions(worldExstence);
+	//We are in space, no graverty
+	m_taPhysics->SetGravity(TA::Vec3(0.0f, 0.0f, 0.0f));
+	m_taPhysics->SetupSimulation();
+
 #if _BuildState_  ==0
 	m_AudioManager->Play(au, true);
 	// Create the zone object.
@@ -283,6 +296,8 @@ bool ApplicationClass::Frame()
 	{
 		return false;
 	}
+
+	m_taPhysics->Update(m_Timer->GetTime());
 
 	// Check if the user pressed escape and wants to exit the application.
 	if(m_Input->KeyDown(DIK_ESCAPE))

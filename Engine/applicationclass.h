@@ -28,6 +28,8 @@ const float SCREEN_NEAR = 0.1f;
 #include "LoadingScreen.h"
 #include "AudioManager.h"
 #include "fontmanagerclass.h"
+#include "..\TrueAxis\Physics\Physics.h"
+
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ApplicationClass
 ////////////////////////////////////////////////////////////////////////////////
@@ -73,6 +75,7 @@ private:
 	CurrentState m_currentState;
 	bool m_activeThread;
 	AudioManager* m_AudioManager;
+	TA::Physics* m_taPhysics;
 };
 
 #endif
