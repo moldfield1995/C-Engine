@@ -1,6 +1,6 @@
 #include "GameObject.h"
 #include <math.h>
-
+#include "../TrueAxis/Physics/Physics.h"
 
 GameObject::GameObject()
 {
@@ -8,7 +8,7 @@ GameObject::GameObject()
 	//ID3D11ShaderResourceView* m_textures;
 	m_textures = new std::vector<ID3D11ShaderResourceView*>();
 	m_shader=0;
-	m_hitboxType = HitBoxType::point;
+	//m_hitboxType = HitBoxType::point;
 	m_KillGameObject = false;
 
 	m_Componets = std::vector<Component*>();
@@ -21,7 +21,7 @@ GameObject::GameObject(GameObject * go)
 	m_scale = go->m_scale;
 	m_model = go->m_model;
 	m_shader = go->m_shader;
-	m_Renders = m_model != nullptr;
+	m_Renders = go->m_Renders;
 	m_Componets = std::vector<Component*>();
 	m_textures = new std::vector<ID3D11ShaderResourceView*>();
 	for each (ID3D11ShaderResourceView* texture in *go->m_textures)
@@ -47,8 +47,8 @@ void GameObject::Initalize(float3 position, float3 rotation, ModelClass * model,
 	if (!model)
 		return;
 	m_Renders = true;
-	m_hitbox = float3();
-	m_hitboxType = HitBoxType::point;
+	//m_hitbox = float3();
+	//m_hitboxType = HitBoxType::point;
 }
 
 void GameObject::SetPosition(float3 pos) { m_position = pos; }
@@ -110,85 +110,78 @@ void GameObject::AddTexture(ID3D11ShaderResourceView * texture, int index)
 	(*m_textures)[index] = texture;
 }
 
-bool GameObject::CheckColltion(GameObject * other)
-{
-
-
-	return false;
-	/*
-	gHitbox = m_GameObjects[i]->GetHitbox();
-	hitboxType = m_GameObjects[i]->GetHitboxType();
-	gPossition = m_GameObjects[i]->GetPosition();
-	gScale = m_GameObjects[i]->GetScale();
-	gHitbox.X(gHitbox.X() * gScale.X());
-	gHitbox.Y(gHitbox.Y() * gScale.Y());
-	gHitbox.Z(gHitbox.Z() * gScale.Z());
-	switch (hitboxType)
-	{
-	case HitBoxType::Sphere:
-		result;
-		break;
-	case HitBoxType::Cube:
-		result;
-		break;
-	case HitBoxType::Rectangle:
-		result = (pPosition.X() - pHitbox.X() <= gPossition.X() + gHitbox.X() && pPosition.X() + pHitbox.X() >= gPossition.X() - gHitbox.X())
-			&& (pPosition.Y() - pHitbox.Y() <= gPossition.Y() + gHitbox.Y() && pPosition.Y() + pHitbox.Y() >= gPossition.Y() - gHitbox.Y())
-			&& (pPosition.Z() - pHitbox.Z() <= gPossition.Z() + gHitbox.Z() && pPosition.Z() + pHitbox.Z() >= gPossition.Z() - gHitbox.Z());
-		break;
-	case HitBoxType::Point:
-		result = false;
-		break;
-	default:
-		result = false;
-		break;
-		*/
-}
-
-
-
-bool GameObject::SetHitbox(float radius)
-{
-	if (m_hitboxType == HitBoxType::point || m_hitboxType == HitBoxType::rectangle)
-		return false;
-	m_hitbox.X =(radius);
-	return true;
-}
-
-bool GameObject::SetHitbox(float sizeX, float sizeY, float sizeZ)
-{
-	if (m_hitboxType != HitBoxType::rectangle)
-		return false;
-	m_hitbox = float3(sizeX, sizeY, sizeZ);
-	return true;
-}
-
-void GameObject::SetHitboxType(HitBoxType hitbox)
-{
-	m_hitboxType = hitbox;
-}
-
-float3 GameObject::GetHitbox()
-{
-	return m_hitbox;
-}
-
-float3 GameObject::GetHitboxScaled()
-{
-	return float3();
-}
-
-HitBoxType GameObject::GetHitboxType()
-{
-	return m_hitboxType;
-}
-
-//void GameObject::SetOrigin(float posX, float posY, float posZ, float rotX, float rotY, float radius)
+//bool GameObject::CheckColltion(GameObject * other)
 //{
-//	m_position.X =(posX + radius*cosf(rotX*0.0174532925f)*sinf(rotY*0.0174532925f));
-//	m_position.Y =(posY);
-//	m_position.Z =(posZ + radius*cosf(rotY*0.0174532925f));
+//
+//	return false;
+//	/*
+//	gHitbox = m_GameObjects[i]->GetHitbox();
+//	hitboxType = m_GameObjects[i]->GetHitboxType();
+//	gPossition = m_GameObjects[i]->GetPosition();
+//	gScale = m_GameObjects[i]->GetScale();
+//	gHitbox.X(gHitbox.X() * gScale.X());
+//	gHitbox.Y(gHitbox.Y() * gScale.Y());
+//	gHitbox.Z(gHitbox.Z() * gScale.Z());
+//	switch (hitboxType)
+//	{
+//	case HitBoxType::Sphere:
+//		result;
+//		break;
+//	case HitBoxType::Cube:
+//		result;
+//		break;
+//	case HitBoxType::Rectangle:
+//		result = (pPosition.X() - pHitbox.X() <= gPossition.X() + gHitbox.X() && pPosition.X() + pHitbox.X() >= gPossition.X() - gHitbox.X())
+//			&& (pPosition.Y() - pHitbox.Y() <= gPossition.Y() + gHitbox.Y() && pPosition.Y() + pHitbox.Y() >= gPossition.Y() - gHitbox.Y())
+//			&& (pPosition.Z() - pHitbox.Z() <= gPossition.Z() + gHitbox.Z() && pPosition.Z() + pHitbox.Z() >= gPossition.Z() - gHitbox.Z());
+//		break;
+//	case HitBoxType::Point:
+//		result = false;
+//		break;
+//	default:
+//		result = false;
+//		break;
+//		*/
 //}
+//
+//
+//
+//bool GameObject::SetHitbox(float radius)
+//{
+//	if (m_hitboxType == HitBoxType::point || m_hitboxType == HitBoxType::rectangle)
+//		return false;
+//	m_hitbox.X =(radius);
+//	return true;
+//}
+//
+//bool GameObject::SetHitbox(float sizeX, float sizeY, float sizeZ)
+//{
+//	if (m_hitboxType != HitBoxType::rectangle)
+//		return false;
+//	m_hitbox = float3(sizeX, sizeY, sizeZ);
+//	return true;
+//}
+//
+//void GameObject::SetHitboxType(HitBoxType hitbox)
+//{
+//	m_hitboxType = hitbox;
+//}
+//
+//float3 GameObject::GetHitbox()
+//{
+//	return m_hitbox;
+//}
+//
+//float3 GameObject::GetHitboxScaled()
+//{
+//	return float3();
+//}
+//
+//HitBoxType GameObject::GetHitboxType()
+//{
+//	return m_hitboxType;
+//}
+
 
 void GameObject::Destroy()
 {
@@ -199,20 +192,36 @@ void GameObject::Destroy()
 		delete(m_Componets[i]);
 	}
 	m_Componets.clear();
+	//stored elss where
 	m_model = 0;
+
 	if (m_textures)
 	{
 		m_textures->clear();
 		delete m_textures;
 		m_textures = 0;
 	}
+	//stored else where
 	m_shader = 0;
+
 	if (m_collishonObject)
 	{
+		TA::Physics::GetInstance().RemoveDynamicObject(m_collishonObject);
 		m_collishonObject->Release();
 		m_collishonObject = 0;
 	}
 }
 
 bool GameObject::IsAlive() { return !m_KillGameObject; }
+
+void GameObject::OnCollishon(const GameObject * other)
+{
+	for each (Component* componet in m_Componets)
+	{
+		//if it retuns True the colliton has been resolved and 
+		//Dose not want it to be sent to other componets
+		if (componet->OnCollishon(other))
+			return;
+	}
+}
 

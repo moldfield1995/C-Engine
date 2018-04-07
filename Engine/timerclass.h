@@ -24,11 +24,13 @@ public:
 	bool Initialize();
 	void Frame();
 
+	float GetFrameTime();
 	float GetTime();
 
+	//For Performance monitoring
 	void StartTimer();
 	void StopTimer();
-	int GetTiming();
+	int GetTimerTime();
 
 private:
 	static TimerClass *instance;
@@ -38,6 +40,7 @@ private:
 	float m_frameTime;
 	INT64 m_beginTime, m_endTime;
 
+	float m_appAliveTime;
 public:
 	static TimerClass* GetInstance();
 

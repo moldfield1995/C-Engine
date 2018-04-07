@@ -7,6 +7,7 @@
 #include "zoneclass.h"
 #include "SplashScreen.h"
 #include "LeapTestScene.h"
+#include "Utills.h"
 ApplicationClass::ApplicationClass()
 {
 	m_Input = 0;
@@ -160,7 +161,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	//We are in space, no graverty
 	m_taPhysics->SetGravity(TA::Vec3(0.0f, 0.0f, 0.0f));
 	m_taPhysics->SetupSimulation();
-
+	m_taPhysics->SetPreProcessCollisionCallBack(ApplicationClass::ProcessColltion);
 #if _BuildState_  ==0
 	m_AudioManager->Play(au, true);
 	// Create the zone object.
@@ -297,7 +298,7 @@ bool ApplicationClass::Frame()
 		return false;
 	}
 
-	m_taPhysics->Update(m_Timer->GetTime());
+	m_taPhysics->Update(m_Timer->GetFrameTime());
 
 	// Check if the user pressed escape and wants to exit the application.
 	if(m_Input->KeyDown(DIK_ESCAPE))
@@ -308,9 +309,9 @@ bool ApplicationClass::Frame()
 
 	// Do the zone frame processing.
 	if(m_activeThread)
-	result = m_FrountBuffer->Frame(m_Direct3D, m_Input, m_ShaderManager, m_TextureManager,m_ModelManager, m_Timer->GetTime(), m_Fps->GetFps(),m_AudioManager);
+		result = m_FrountBuffer->Frame(m_Direct3D, m_Input, m_ShaderManager, m_TextureManager,m_ModelManager, m_Timer->GetFrameTime(), m_Fps->GetFps(),m_AudioManager);
 	else
-		result = m_BackBuffer->Frame(m_Direct3D, m_Input, m_ShaderManager, m_TextureManager, m_ModelManager, m_Timer->GetTime(), m_Fps->GetFps(), m_AudioManager);
+		result = m_BackBuffer->Frame(m_Direct3D, m_Input, m_ShaderManager, m_TextureManager, m_ModelManager, m_Timer->GetFrameTime(), m_Fps->GetFps(), m_AudioManager);
 	if(!result)
 	{
 		return false;
@@ -344,20 +345,38 @@ bool ApplicationClass::Frame()
 		return false;
 	return result;
 }
+//Called before the collion is processed, Returns if the collison should be ignored
+bool TA_CALL_BACK ApplicationClass::ProcessColltion(TA::PreCollision& collision) {
 
+	GameObject *go1, *go2;
+	go1 = (GameObject*)collision.GetObjectA()->GetUserData();
+	go2 = (GameObject*)collision.GetObjectB()->GetUserData();
+	if (!go1 || !go2)
+	{
+		Utills::DebugString("Collition Happened where one of the Userdata did not contain a gameobject: ProcessColltion : ApplicationClass ");
+		return false;
+	}
+	go1->OnCollishon(go2);
+	go2->OnCollishon(go1);
+	return true;
+}
+
+
+//Needs to be fixed as there is a thread collison when loading assets (setting buffers on GPU) and rendering
 void ApplicationClass::loadMainLevel()
 {
 	LoadingScreen* m_loadingScreen = new LoadingScreen();
 	m_loadingScreen->Initialize(m_Direct3D, m_ScreenWidth, m_ScreenHeight, SCREEN_DEPTH, m_TextureManager, m_ModelManager, m_AudioManager);
 	m_BackBuffer = m_FrountBuffer; // Put the menu on the backBuffer
 	m_FrountBuffer = new ZoneClass();
-	//thread lodingScreenFrame (RunLoadingScreen,m_Direct3D,m_Input,m_ShaderManager,m_TextureManager,m_ModelManager, m_Timer->GetTime(), m_Fps->GetFps(), m_loadingScreen, m_FrountBuffer, m_AudioManager); // this starts when you construct it
+	//thread lodingScreenFrame (RunLoadingScreen,m_Direct3D,m_Input,m_ShaderManager,m_TextureManager,m_ModelManager, m_Timer->GetFrameTime(), m_Fps->GetFps(), m_loadingScreen, m_FrountBuffer, m_AudioManager); // this starts when you construct it
 	thread InitilizeLevel(InitaliseLevel,m_Direct3D, m_ScreenWidth, m_ScreenHeight, SCREEN_DEPTH, m_TextureManager, m_ModelManager, m_FrountBuffer, m_AudioManager);
 	InitilizeLevel.join();
 	m_loadingScreen->SetRunning(false);//notify lodingscreen to stop
 	//lodingScreenFrame.join();
 	m_loadingScreen->Shutdown();
 }
+
 
 void ApplicationClass::loadMainMenu()
 {

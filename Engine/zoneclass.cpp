@@ -403,50 +403,50 @@ void ZoneClass::HandleInput(InputClass *Input, float frameTime, TextureManagerCl
 
 bool ZoneClass::CheckHitboxs(ModelManager* modelManager)
 {
-	bool result = false;
-	float3 gPossition, gScale, gHitbox, pHitbox, pPosition;
-	HitBoxType hitboxType;
-	pPosition = m_Position->GetPosition();
-	pHitbox = m_Position->Gethitbox();
+	//bool result = false;
+	//float3 gPossition, gScale, gHitbox, pHitbox, pPosition;
+	//HitBoxType hitboxType;
+	//pPosition = m_Position->GetPosition();
+	//pHitbox = m_Position->Gethitbox();
 
-	int vectorLegth = m_GameObjects.size();
-	if (m_ObjectSpawn)
-		vectorLegth -= 1;
-	for (int i = 1; i < vectorLegth; i++)
-	{
-		if (i == vectorLegth&&m_ObjectSpawn)
-			return false;
-		if (m_GameObjects[i] != NULL)
-		{
-			gHitbox = m_GameObjects[i]->GetHitbox();
-			hitboxType = m_GameObjects[i]->GetHitboxType();
-			gPossition = m_GameObjects[i]->GetPosition();
-			gScale = m_GameObjects[i]->GetScale();
-			gHitbox =(gHitbox * gScale);
-			switch (hitboxType)
-			{
-			case HitBoxType::sphere:
-				result;
-				break;
-			case HitBoxType::cube:
-				result;
-				break;
-			case HitBoxType::rectangle:
-				result = (pPosition.X - pHitbox.X <= gPossition.X + gHitbox.X && pPosition.X + pHitbox.X >= gPossition.X - gHitbox.X)
-					&& (pPosition.Y - pHitbox.Y <= gPossition.Y + gHitbox.Y && pPosition.Y + pHitbox.Y >= gPossition.Y - gHitbox.Y)
-					&& (pPosition.Z - pHitbox.Z <= gPossition.Z + gHitbox.Z && pPosition.Z + pHitbox.Z >= gPossition.Z - gHitbox.Z);
-				break;
-			case HitBoxType::point:
-				result = false;
-				break;
-			default:
-				result = false;
-				break;
-			}
-			if (result)
-				return result;
-		}
-	}
+	//int vectorLegth = m_GameObjects.size();
+	//if (m_ObjectSpawn)
+	//	vectorLegth -= 1;
+	//for (int i = 1; i < vectorLegth; i++)
+	//{
+	//	if (i == vectorLegth&&m_ObjectSpawn)
+	//		return false;
+	//	if (m_GameObjects[i] != NULL)
+	//	{
+	//		gHitbox = m_GameObjects[i]->GetHitbox();
+	//		hitboxType = m_GameObjects[i]->GetHitboxType();
+	//		gPossition = m_GameObjects[i]->GetPosition();
+	//		gScale = m_GameObjects[i]->GetScale();
+	//		gHitbox =(gHitbox * gScale);
+	//		switch (hitboxType)
+	//		{
+	//		case HitBoxType::sphere:
+	//			result;
+	//			break;
+	//		case HitBoxType::cube:
+	//			result;
+	//			break;
+	//		case HitBoxType::rectangle:
+	//			result = (pPosition.X - pHitbox.X <= gPossition.X + gHitbox.X && pPosition.X + pHitbox.X >= gPossition.X - gHitbox.X)
+	//				&& (pPosition.Y - pHitbox.Y <= gPossition.Y + gHitbox.Y && pPosition.Y + pHitbox.Y >= gPossition.Y - gHitbox.Y)
+	//				&& (pPosition.Z - pHitbox.Z <= gPossition.Z + gHitbox.Z && pPosition.Z + pHitbox.Z >= gPossition.Z - gHitbox.Z);
+	//			break;
+	//		case HitBoxType::point:
+	//			result = false;
+	//			break;
+	//		default:
+	//			result = false;
+	//			break;
+	//		}
+	//		if (result)
+	//			return result;
+	//	}
+	//}
 	return false;
 }
 
@@ -457,7 +457,7 @@ bool ZoneClass::Render(D3DClass* Direct3D, ShaderManagerClass* ShaderManager, Te
 	XMFLOAT3 cameraPosition;
 	int i;
 	float3 possition, rotaion, scale, hitbox;
-	HitBoxType hitboxType;
+	//HitBoxType hitboxType;
 	// Generate the view matrix based on the camera's position.
 	m_Camera->Render();
 

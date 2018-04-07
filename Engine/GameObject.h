@@ -14,14 +14,7 @@
 //Updated In Final Year
 //Created By Matthew Oldfield
 
-//Using lowercase enums because of a conflict with Widonws Rectangle function
-enum HitBoxType
-{
-	point,
-	sphere,
-	cube,
-	rectangle,
-};
+
 class GameObject
 {
 	friend Component;
@@ -50,19 +43,22 @@ public:
 	//If index is not previded its just added to the top of the list
 	void AddTexture(ID3D11ShaderResourceView* texture, int index = -1);
 
-	//Collition
-	bool CheckColltion(GameObject* other);
-	//Seting up a Cube or Sphere Hitbox
-	bool SetHitbox(float radius);
-	//Seting up a Rectangle HitBox
-	bool SetHitbox(float sizeX, float sizeY, float sizeZ);
-	void SetHitboxType(HitBoxType hitbox);
-	float3 GetHitbox();
-	float3 GetHitboxScaled();
-	HitBoxType GetHitboxType();
-
 	void Destroy();
 	bool IsAlive();
+
+	void OnCollishon(const GameObject* other);
+
+
+	////Collition Old
+	//bool CheckColltion(GameObject* other);
+	////Seting up a Cube or Sphere Hitbox
+	//bool SetHitbox(float radius);
+	////Seting up a Rectangle HitBox
+	//bool SetHitbox(float sizeX, float sizeY, float sizeZ);
+	//void SetHitboxType(HitBoxType hitbox);
+	//float3 GetHitbox();
+	//float3 GetHitboxScaled();
+	//HitBoxType GetHitboxType();
 
 protected:
 
@@ -70,8 +66,8 @@ protected:
 	ModelClass* m_model;
 	std::vector<ID3D11ShaderResourceView*>* m_textures;
 	Shader* m_shader;
-	HitBoxType m_hitboxType;
-	float3 m_hitbox;
+	//HitBoxType m_hitboxType;
+	//float3 m_hitbox;
 	std::vector<Component*> m_Componets;
 	TA::DynamicObject* m_collishonObject;
 private:

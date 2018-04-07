@@ -1,5 +1,10 @@
 #include "GameObject.h"
 
+bool Component::OnCollishon(const GameObject * other)
+{
+	return false;
+}
+
 void Component::SetOwnersKill(bool state)
 {
 	owner->m_KillGameObject = state;

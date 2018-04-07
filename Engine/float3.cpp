@@ -52,6 +52,15 @@ float3 float3::Normalize()
 	return float3(X / lenght,Y/lenght,Z/lenght);
 }
 
+float3 float3::Lerp(float3 a, float3 b, float t)
+{
+	float3 value = float3();
+	value.X = a.X + t * (b.X - a.X);
+	value.Y = a.Y + t * (b.Y - a.Y);
+	value.Z = a.Z + t * (b.Z - a.Z);
+	return value;
+}
+
 float float3::Lenght()
 {
 	return X + Y + Z;
@@ -80,6 +89,16 @@ float3 float3::operator/(float3 other)
 std::string float3::ToString()
 {
 	return "X: "+std::to_string(X) + " Y: " + std::to_string(Y) + " Z: " + std::to_string(Z) ;
+}
+
+TA::Vec3 float3::ToVec3()
+{
+	return TA::Vec3(X,Y,Z);
+}
+
+TA::EulerAngles float3::ToEuler()
+{
+	return TA::EulerAngles(X,Y,Z);
 }
 
 

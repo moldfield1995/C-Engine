@@ -42,7 +42,7 @@ void DebugDesplay::Initalize()
 void DebugDesplay::Update()
 {
 	InputClass *instance = InputClass::GetInstance();
-	float frameTime = TimerClass::GetInstance()->GetTime();
+	float frameTime = TimerClass::GetInstance()->GetFrameTime();
 	Frame frame = instance->GetLeapFrame();
 	if (frame.isValid())
 	{

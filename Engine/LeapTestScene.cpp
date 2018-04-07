@@ -3,7 +3,7 @@
 #include "DebugDesplay.h"
 #include "Utills.h"
 #include "RotateObject.h"
-
+#include "HitBoxTest.h"
 
 LeapTestScene::LeapTestScene()
 {
@@ -116,6 +116,23 @@ bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 	gameObject->Initalize(float3(-5.0f, -5.0f, 15.0f), float3(), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
 	gameObject->SetScale(float3(0.01f, 0.01f, 0.01f));
 	m_GameObjects.push_back(gameObject);
+
+	modelId = modelManager->AddModle(device, "../Engine/data/T1Assets/cube.txt");
+
+	gameObject = new GameObject();
+	gameObject->Initalize(float3(0.0f, 0.0f, 0.0f), float3(), modelManager->GetModel(modelId), textureManager->GetTexture(404), shader);
+	HitBoxTest* hitbox1 = new HitBoxTest(float3(), float3(-3.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f));
+	gameObject->AddComponet(hitbox1);
+	m_GameObjects.push_back(gameObject);
+
+	gameObject = new GameObject();
+	gameObject->Initalize(float3(0.0f, 0.0f, 0.0f), float3(40.0f,29.0f,68.0f), modelManager->GetModel(modelId), textureManager->GetTexture(404), shader);
+	HitBoxTest* hitbox2 = new HitBoxTest(float3(), float3(3.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f));
+	gameObject->AddComponet(hitbox2);
+	m_GameObjects.push_back(gameObject);
+
+	hitbox1->SetOtherCollision(hitbox2);
+	hitbox2->SetOtherCollision(hitbox1);
 
 	return true;
 }

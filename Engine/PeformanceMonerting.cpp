@@ -58,6 +58,6 @@ void PeformanceMonerting::Frame()
 
 int PeformanceMonerting::GetCpuPercentage(){ return m_Cpu->GetCpuPercentage(); }
 int PeformanceMonerting::GetFps(){ return m_Fps->GetFps(); }
-float PeformanceMonerting::GetTrueTime(){ return m_Timer->GetTime(); }
-float PeformanceMonerting::GetTime(){ return m_Timer->GetTime() * m_timeScale; }
-void PeformanceMonerting::IncreseTimeScale(){ m_timeScale += 0.01f * m_Timer->GetTime(); }
+float PeformanceMonerting::GetTrueTime(){ return m_Timer->GetFrameTime(); }
+float PeformanceMonerting::GetTime(){ return m_Timer->GetFrameTime() * m_timeScale; }
+void PeformanceMonerting::IncreseTimeScale(){ m_timeScale += 0.01f * m_Timer->GetFrameTime(); }

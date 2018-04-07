@@ -23,6 +23,8 @@ public:
 	void virtual Update() = 0;
 	void virtual Render(ID3D11DeviceContext* deviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, const XMMATRIX& projectionMatrix, FrustumClass* frustume, LightClass* light, CameraClass& camera) = 0;
 	void virtual Destroy() =0;
+	//Return True to stop other componets being called
+	bool virtual OnCollishon(const GameObject* other);
 protected:
 	//Acsessors and Setters for GameObject
 	void SetOwnersKill(bool state);
@@ -30,7 +32,6 @@ protected:
 	ModelClass* GetModel();
 	std::vector<ID3D11ShaderResourceView*>* GetTextures();
 	Shader* GetShader();
-
 	void SetOwnersDynamicObject(TA::DynamicObject* value);
 	TA::DynamicObject* GetOwnersDynamicObject();
 

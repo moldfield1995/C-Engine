@@ -52,6 +52,10 @@ public:
 	bool Frame();
 
 private:
+	//bool ProcessColltion(TA::PreCollision & collision);
+	//Collition Triggers
+	bool static TA_CALL_BACK ProcessColltion(TA::PreCollision& collition);
+	//Loading and Scene settup
 	void loadMainMenu();
 	void loadMainLevel();
 	void shutDownFrountBuffer();

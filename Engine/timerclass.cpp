@@ -8,6 +8,7 @@ TimerClass* TimerClass::instance = 0;
 
 TimerClass::TimerClass()
 {
+	m_appAliveTime = 0.0f;
 }
 
 
@@ -59,6 +60,7 @@ void TimerClass::Frame()
 
 	// Calculate the frame time.
 	m_frameTime = (float)elapsedTicks / m_frequency;
+	m_appAliveTime += m_frameTime;
 
 	// Restart the timer.
 	m_startTime = currentTime;
@@ -67,9 +69,14 @@ void TimerClass::Frame()
 }
 
 
-float TimerClass::GetTime()
+float TimerClass::GetFrameTime()
 {
 	return m_frameTime;
+}
+
+float TimerClass::GetTime()
+{
+	return m_appAliveTime;
 }
 
 
@@ -87,7 +94,7 @@ void TimerClass::StopTimer()
 }
 
 
-int TimerClass::GetTiming()
+int TimerClass::GetTimerTime()
 {
 	float elapsedTicks;
 	INT64 frequency;

@@ -1,6 +1,7 @@
 #pragma once
 #include "Leap.h"
-
+#include "..\TrueAxis\Common\Vec3.h"
+#include "..\TrueAxis\Common\EulerAngles.h"
 //Updated In Final Year
 //Created By Matthew Oldfield
 
@@ -14,6 +15,10 @@ public:
 	float3(float x, float y, float z);
 	float3(Leap::Vector vector);
 
+	//Static Maths
+	static float3 Lerp(float3 a, float3 b, float t);
+
+	//Usefull operators
 	void Set(float x, float y, float z);
 	float3 Normalize();
 	float Lenght();
@@ -21,11 +26,13 @@ public:
 	float3 operator+ (float3 other);
 	float3 operator- (float3 other);
 	float3 operator/ (float3 other);
+
+	//Convertions from float3 to other libary equivlents
 	std::string ToString();
-	//float3 operator= (Leap::Vector vector);
+	TA::Vec3 ToVec3();
+	TA::EulerAngles ToEuler();
+
 	float X, Y, Z;
 
-private:
-	//float m_x, m_y, m_z;
 };
 

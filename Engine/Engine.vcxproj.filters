@@ -286,7 +286,10 @@
       <Filter>Header Files\Componets</Filter>
     </ClInclude>
     <ClInclude Include="GamePlayScene.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="HitBoxTest.h">
+      <Filter>Header Files\Componets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -453,7 +456,10 @@
       <Filter>Source Files\Componets</Filter>
     </ClCompile>
     <ClCompile Include="GamePlayScene.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="HitBoxTest.cpp">
+      <Filter>Source Files\Componets</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
