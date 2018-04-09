@@ -39,6 +39,7 @@ float3::float3(Leap::Vector vector)
 	Z = vector.z;
 }
 
+
 void float3::Set(float x, float y, float z)
 {
 	X = x;
@@ -63,7 +64,11 @@ float3 float3::Lerp(float3 a, float3 b, float t)
 
 float float3::Lenght()
 {
-	return X + Y + Z;
+	float lenght = 0.0f;
+	lenght += X >= 0.0f ? X : -X;
+	lenght += Y >= 0.0f ? Y : -Y;
+	lenght += Z >= 0.0f ? Z : -Z;
+	return lenght;
 }
 
 float3 float3::operator*(float3 other)
@@ -84,6 +89,11 @@ float3 float3::operator-(float3 other)
 float3 float3::operator/(float3 other)
 {
 	return float3(X/other.X, Y/other.Y, Z/other.Z);
+}
+
+float3 float3::operator-()
+{
+	return float3(-X,-Y,-Z);
 }
 
 std::string float3::ToString()
