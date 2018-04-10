@@ -10,14 +10,12 @@ using namespace DirectX;
 class ModelClass
 {
 public:
-	ModelClass();
-	~ModelClass();
-	bool Initialize(ID3D11Device*, char*);
-	void ShutDown();
-	void Render(ID3D11DeviceContext*);
-
-	int GetIndexCount();
-
+	struct ModelType
+	{
+		float x, y, z;
+		float tu, tv;
+		float nx, ny, nz;
+	};
 private:
 	struct VertexType
 	{
@@ -26,19 +24,23 @@ private:
 		XMFLOAT3  normal;
 	};
 
-	struct ModelType
-	{
-		float x, y, z;
-		float tu, tv;
-		float nx, ny, nz;
-	};
-
-	struct FaceType 
+	struct FaceType
 	{
 		int vIndex1, vIndex2, vIndex3;
 		int tIndex1, tIndex2, tIndex3;
 		int nIndex1, nIndex2, nIndex3;
 	};
+public:
+	ModelClass();
+	~ModelClass();
+	bool Initialize(ID3D11Device*, char*);
+	void ShutDown();
+	void Render(ID3D11DeviceContext*);
+
+	int GetIndexCount();
+	const ModelType* GetModelData();
+	const char* GetFileName();
+private:
 
 	bool LoadModel(char*);
 	void ReleaseModel();
@@ -53,5 +55,6 @@ private:
 	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
 	int m_vertexCount, m_indexCount;
 	ModelType* m_model;
+	char* m_fileLoaction;
 };
 

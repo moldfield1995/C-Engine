@@ -23,3 +23,13 @@ void Utills::DebugString(const char * debugOutput)
 	OutputDebugString(L"\r\n");
 	delete[] wtext;
 }
+
+bool Utills::FileExsits(const char * filelocation)
+{
+	int stringlen = strlen(filelocation) + 1;
+	wchar_t *wtext = new wchar_t[stringlen];
+	mbstowcs(wtext, filelocation, stringlen);
+
+	return _waccess(wtext, 6) != -1;
+	delete[] wtext;
+}

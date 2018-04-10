@@ -2,11 +2,10 @@
 #include "..\TrueAxis\Physics\Physics.h"
 #include "..\TrueAxis\Common\AABB.h"
 #include "..\TrueAxis\Physics\DynamicObject.h"
-#include "GameObject.h"
 #include "timerclass.h"
 #include <vector>
 #include "texturemanagerclass.h"
-
+#include "GameObject.h"
 
 HitBoxTest::HitBoxTest(float3 size, float3 minPos, float3 maxPos)
 {

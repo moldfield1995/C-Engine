@@ -70,6 +70,18 @@
     <Filter Include="Source Files\UI">
       <UniqueIdentifier>{51931d09-4ba5-4afa-9934-5bb2e152d677}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Componets\Colliders">
+      <UniqueIdentifier>{366dcd5d-c5dc-4b90-9b81-e1d45d06814d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Componets\Coliders">
+      <UniqueIdentifier>{2248c54d-bf74-4a7e-8b38-0660f1fabed3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Componets\Debug">
+      <UniqueIdentifier>{32c0f0d7-4ebd-421b-be30-333f78dbddda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Componets\Debug">
+      <UniqueIdentifier>{b9b90f4d-48d3-4bff-8811-9e65babcc1e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -255,9 +267,6 @@
     <ClInclude Include="positionclass.h">
       <Filter>Header Files\Elements</Filter>
     </ClInclude>
-    <ClInclude Include="HandDesplay.h">
-      <Filter>Header Files\Componets</Filter>
-    </ClInclude>
     <ClInclude Include="UIComponent.h">
       <Filter>Header Files\SingleTon</Filter>
     </ClInclude>
@@ -276,9 +285,6 @@
     <ClInclude Include="UIButton.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
-    <ClInclude Include="DebugDesplay.h">
-      <Filter>Header Files\Componets</Filter>
-    </ClInclude>
     <ClInclude Include="Utills.h">
       <Filter>Header Files\SingleTon</Filter>
     </ClInclude>
@@ -288,8 +294,26 @@
     <ClInclude Include="GamePlayScene.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="BasicMeshHitbox.h">
+      <Filter>Header Files\Componets\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollider.h">
+      <Filter>Header Files\Componets\Colliders</Filter>
+    </ClInclude>
     <ClInclude Include="HitBoxTest.h">
-      <Filter>Header Files\Componets</Filter>
+      <Filter>Header Files\Componets\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugDesplay.h">
+      <Filter>Header Files\Componets\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="HandDesplay.h">
+      <Filter>Header Files\Componets\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="CapsuleCollider.h">
+      <Filter>Header Files\Componets\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerControler.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -425,9 +449,6 @@
     <ClCompile Include="textclass.cpp">
       <Filter>Source Files\Elements</Filter>
     </ClCompile>
-    <ClCompile Include="HandDesplay.cpp">
-      <Filter>Source Files\Componets</Filter>
-    </ClCompile>
     <ClCompile Include="UIMannager.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
@@ -446,9 +467,6 @@
     <ClCompile Include="UIButton.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
-    <ClCompile Include="DebugDesplay.cpp">
-      <Filter>Source Files\Componets</Filter>
-    </ClCompile>
     <ClCompile Include="Utills.cpp">
       <Filter>Source Files\SingleTon</Filter>
     </ClCompile>
@@ -458,8 +476,26 @@
     <ClCompile Include="GamePlayScene.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="SphereCollider.cpp">
+      <Filter>Source Files\Componets\Coliders</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicMeshHitbox.cpp">
+      <Filter>Source Files\Componets\Coliders</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugDesplay.cpp">
+      <Filter>Source Files\Componets\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="HandDesplay.cpp">
+      <Filter>Source Files\Componets\Debug</Filter>
+    </ClCompile>
     <ClCompile Include="HitBoxTest.cpp">
-      <Filter>Source Files\Componets</Filter>
+      <Filter>Source Files\Componets\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="CapsuleCollider.cpp">
+      <Filter>Source Files\Componets\Coliders</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerControler.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

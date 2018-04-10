@@ -4,6 +4,7 @@
 #include "Utills.h"
 #include "RotateObject.h"
 #include "HitBoxTest.h"
+#include "BasicMeshHitbox.h"
 
 LeapTestScene::LeapTestScene()
 {
@@ -113,8 +114,10 @@ bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 	textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/LizReddington/Ship1Uved.tga");
 
 	gameObject = new GameObject();
-	gameObject->Initalize(float3(-5.0f, -5.0f, 15.0f), float3(), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
+	gameObject->Initalize(float3(0.0f, 0.0f, 0.0f), float3(), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
 	gameObject->SetScale(float3(0.01f, 0.01f, 0.01f));
+	BasicMeshHitbox *basicMeshHitbox = new BasicMeshHitbox();
+	gameObject->AddComponet(basicMeshHitbox);
 	m_GameObjects.push_back(gameObject);
 
 	modelId = modelManager->AddModle(device, "../Engine/data/T1Assets/cube.txt");
@@ -127,7 +130,7 @@ bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 
 	gameObject = new GameObject();
 	gameObject->Initalize(float3(0.0f, 0.0f, 0.0f), float3(40.0f,29.0f,68.0f), modelManager->GetModel(modelId), textureManager->GetTexture(404), shader);
-	Component* hitbox = new HitBoxTest(float3(), float3(6.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f));
+	hitbox = new HitBoxTest(float3(), float3(6.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f));
 	gameObject->AddComponet(hitbox);
 	m_GameObjects.push_back(gameObject);
 

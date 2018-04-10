@@ -13,6 +13,7 @@ ModelClass::~ModelClass()
 bool ModelClass::Initialize(ID3D11Device* device, char* modelFilename)
 {
 	bool result;
+	m_fileLoaction = modelFilename;
 	std::string fileName = modelFilename;
 	if (fileName.substr(fileName.find_last_of('.') + 1) == "obj")
 		result = LoadObjModel(modelFilename);
@@ -43,6 +44,18 @@ int ModelClass::GetIndexCount()
 {
 	return m_indexCount;
 }
+
+const ModelClass::ModelType* ModelClass::GetModelData()
+{
+	return m_model;
+}
+
+const char * ModelClass::GetFileName()
+{
+	return m_fileLoaction;
+}
+
+
 
 bool ModelClass::LoadModel(char* modelFilename)
 {
