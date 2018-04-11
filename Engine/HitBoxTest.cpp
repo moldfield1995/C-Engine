@@ -7,7 +7,7 @@
 #include "texturemanagerclass.h"
 #include "GameObject.h"
 
-HitBoxTest::HitBoxTest(float3 size, float3 minPos, float3 maxPos)
+HitBoxTest::HitBoxTest(Float3 size, Float3 minPos, Float3 maxPos)
 {
 	collideTexture = 0;
 	defaultTexture = 0;
@@ -25,7 +25,7 @@ void HitBoxTest::Initalize()
 {
 	//Varible and object setup
 	float time = TimerClass::GetInstance()->GetTime();
-	float3 possition = float3::Lerp(minPosition, maxPosition, (sinf(time) + 1.0f) / 2.0f);
+	Float3 possition = Float3::Lerp(minPosition, maxPosition, (sinf(time) + 1.0f) / 2.0f);
 	TA::Physics& physicsInstance = TA::Physics::GetInstance();
 	TextureManagerClass *textureManager = TextureManagerClass::GetInstance();
 	D3DClass *d3dClass = D3DClass::GetInstance();
@@ -50,9 +50,9 @@ void HitBoxTest::Initalize()
 
 void HitBoxTest::Update()
 {
-	float3 possition, rotation;
+	Float3 possition, rotation;
 	float time = TimerClass::GetInstance()->GetTime();
-	possition = float3::Lerp(minPosition,maxPosition,(sinf(time)+1.0f)/2.0f);
+	possition = Float3::Lerp(minPosition,maxPosition,(sinf(time)+1.0f)/2.0f);
 	owner->SetPosition(possition);
 	rotation = owner->GetRotation();
 	GetOwnersDynamicObject()->SetFrame(TA::MFrame(possition.ToVec3(), TA::Mat33(rotation.ToEuler())));

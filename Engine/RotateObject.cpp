@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "timerclass.h"
 
-RotateObject::RotateObject(float3 rotation)
+RotateObject::RotateObject(Float3 rotation)
 {
 	rotateSpeed = rotation;
 }

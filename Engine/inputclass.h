@@ -58,9 +58,9 @@ public:
 	bool LeapConnected();
 	const Leap::Frame GetLeapFrame();
 
-	const float3 GetLeapToWorldScale();
-	const float3 GetLeapOffset();
-	float3 GetLeapScreenPos();
+	const Float3 GetLeapToWorldScale();
+	const Float3 GetLeapOffset();
+	Float3 GetLeapScreenPos();
 private:
 	bool ReadKeyboard();
 	bool ReadMouse();
@@ -84,9 +84,9 @@ private:
 
 	Controller m_LeapControler;
 	Leap::Frame m_LeapFrame;
-	float3 m_leapToWorldScale, m_leapOffset;
+	Float3 m_leapToWorldScale, m_leapOffset;
 
-	float3 m_leapScreenPosition;
+	Float3 m_leapScreenPosition;
 public:
 	static InputClass* GetInstance();
 };

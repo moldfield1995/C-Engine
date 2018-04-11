@@ -17,7 +17,7 @@ public:
 	void SetActive(bool value);
 	void Destroy();
 protected:
-	float3 screenSize;
+	Float3 screenSize;
 	bool active;
 private:
 	std::vector<UIComponent*> componets;

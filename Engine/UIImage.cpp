@@ -39,7 +39,7 @@ void UIImage::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX & world
 {
 	XMMATRIX renderMatrix, rotationMatrix, scaleMatrix;
 	renderMatrix = XMMatrixTranslation(position.X, position.Y, position.Z);
-	float3 rotationInRadens = rotation * 0.0174532925f;
+	Float3 rotationInRadens = rotation * 0.0174532925f;
 	rotationMatrix = XMMatrixRotationRollPitchYaw(rotationInRadens.X, rotationInRadens.Y, rotationInRadens.Z);
 	scaleMatrix = XMMatrixScaling(scale.X, scale.Y, scale.Z);
 	renderMatrix = XMMatrixMultiply(worldMatrix,renderMatrix);
@@ -78,7 +78,7 @@ void UIImage::SetColour(XMFLOAT4 value)
 	colour = value;
 }
 
-void UIImage::SetPosition(float3 value, bool centerX, bool centerY)
+void UIImage::SetPosition(Float3 value, bool centerX, bool centerY)
 {
 	int height, width;
 	bitmapClass->GetTextureSize(height, width);

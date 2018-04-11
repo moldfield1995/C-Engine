@@ -4,7 +4,7 @@ class SphereCollider :
 	public Component
 {
 public:
-	SphereCollider(float radius );
+	SphereCollider(float radius, bool ControledByVelocity = false);
 	~SphereCollider();
 	void virtual Initalize();
 	void virtual Update();
@@ -12,5 +12,6 @@ public:
 	void virtual Destroy();
 private:
 	float radius;
+	bool controledByVelocity;
 };
 

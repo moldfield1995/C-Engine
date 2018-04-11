@@ -9,7 +9,7 @@ UIText::UIText(XMFLOAT4 colour, string initalText)
 	active = false;
 	killComponet = false;
 	renders = true;
-	scale = float3(1.0f);
+	scale = Float3(1.0f);
 	pixleColour = colour;
 	currentText = initalText;
 	shadowColour = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);
@@ -116,7 +116,7 @@ void UIText::Update()
 void UIText::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX & worldMatrix, const XMMATRIX & baseViewMatrix, const XMMATRIX & orthoMatrix)
 {
 	XMMATRIX renderMatrix, rotationMatrix, scaleMatrix, positionMatrix;
-	float3 rotationInRadens = rotation * 0.0174532925f;
+	Float3 rotationInRadens = rotation * 0.0174532925f;
 	rotationMatrix = XMMatrixRotationRollPitchYaw(rotationInRadens.X, rotationInRadens.Y, rotationInRadens.Z);
 	scaleMatrix = XMMatrixScaling(scale.X, scale.Y, scale.Z);
 	positionMatrix = XMMatrixTranslation(position.X, position.Y, position.Z);

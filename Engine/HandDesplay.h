@@ -20,6 +20,6 @@ private:
 	int currentActive;
 	int64_t lastUpdate;
 	std::vector<GameObject*> m_HandGameObjects;
-	float3 leapToWorldScale, leapOffset;
+	Float3 leapToWorldScale, leapOffset;
 };
 

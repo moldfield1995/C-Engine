@@ -8,7 +8,7 @@ GameObject::GameObject()
 	//ID3D11ShaderResourceView* m_textures;
 	m_textures = new std::vector<ID3D11ShaderResourceView*>();
 	m_shader=0;
-	//m_hitboxType = HitBoxType::point;
+	m_colour = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);
 	m_KillGameObject = false;
 
 	m_Componets = std::vector<Component*>();
@@ -36,32 +36,36 @@ GameObject::~GameObject()
 }
 
 
-void GameObject::Initalize(float3 position, float3 rotation, ModelClass * model, ID3D11ShaderResourceView* textures, Shader * shader)
+void GameObject::Initalize(Float3 position, Float3 rotation, ModelClass * model, ID3D11ShaderResourceView* textures, Shader * shader)
 {
 	m_position = position;
 	m_rotation = rotation;
-	m_scale = float3(1.0f, 1.0f, 1.0f);
+	m_scale = Float3(1.0f, 1.0f, 1.0f);
 	m_textures->push_back(textures);
 	m_shader = shader;
 	m_model = model;
 	if (!model)
 		return;
 	m_Renders = true;
-	//m_hitbox = float3();
+	//m_hitbox = Float3();
 	//m_hitboxType = HitBoxType::point;
 }
 
-void GameObject::SetPosition(float3 pos) { m_position = pos; }
+void GameObject::SetPosition(Float3 pos) { m_position = pos; }
 
-void GameObject::SetRotation(float3 rot) { m_rotation = rot; }
+void GameObject::SetRotation(Float3 rot) { m_rotation = rot; }
 
-void GameObject::SetScale(float3 scale) { m_scale = scale; }
+void GameObject::SetScale(Float3 scale) { m_scale = scale; }
 
-float3 GameObject::GetPosition() { return m_position; }
+void GameObject::SetColour(XMFLOAT4 colour) { m_colour = colour; }
 
-float3 GameObject::GetRotation() { return m_rotation; }
+Float3 GameObject::GetPosition() { return m_position; }
 
-float3 GameObject::GetScale() { return m_scale; }
+Float3 GameObject::GetRotation() { return m_rotation; }
+
+Float3 GameObject::GetScale() { return m_scale; }
+
+XMFLOAT4 GameObject::GetColour(){ return m_colour; }
 
 void GameObject::Update()
 {
@@ -84,13 +88,13 @@ void GameObject::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX& wor
 	XMMATRIX renderMatrix,transformMatrix,rotationMatrix,scaleMatrix;
 	transformMatrix = XMMatrixTranslation(m_position.X, m_position.Y, m_position.Z);
 	scaleMatrix = XMMatrixScaling(m_scale.X, m_scale.Y, m_scale.Z);
-	float3 rotationInRadens = m_rotation * 0.0174532925f;
+	Float3 rotationInRadens = m_rotation * 0.0174532925f;
 	rotationMatrix = XMMatrixRotationRollPitchYaw(rotationInRadens.X, rotationInRadens.Y, rotationInRadens.Z);
 	renderMatrix = XMMatrixMultiply(worldMatrix, transformMatrix);
 	renderMatrix = XMMatrixMultiply(rotationMatrix, renderMatrix);
 	renderMatrix = XMMatrixMultiply(scaleMatrix, renderMatrix);
 	m_model->Render(deviceContext);
-	m_shader->Render(deviceContext, m_model->GetIndexCount(), renderMatrix, viewMatrix, projectionMatrix, m_textures, light);
+	m_shader->Render(deviceContext, m_model->GetIndexCount(), renderMatrix, viewMatrix, projectionMatrix, m_textures, light,&m_colour);
 }
 
 void GameObject::AddComponet(Component * component)
@@ -109,78 +113,6 @@ void GameObject::AddTexture(ID3D11ShaderResourceView * texture, int index)
 	}
 	(*m_textures)[index] = texture;
 }
-
-//bool GameObject::CheckColltion(GameObject * other)
-//{
-//
-//	return false;
-//	/*
-//	gHitbox = m_GameObjects[i]->GetHitbox();
-//	hitboxType = m_GameObjects[i]->GetHitboxType();
-//	gPossition = m_GameObjects[i]->GetPosition();
-//	gScale = m_GameObjects[i]->GetScale();
-//	gHitbox.X(gHitbox.X() * gScale.X());
-//	gHitbox.Y(gHitbox.Y() * gScale.Y());
-//	gHitbox.Z(gHitbox.Z() * gScale.Z());
-//	switch (hitboxType)
-//	{
-//	case HitBoxType::Sphere:
-//		result;
-//		break;
-//	case HitBoxType::Cube:
-//		result;
-//		break;
-//	case HitBoxType::Rectangle:
-//		result = (pPosition.X() - pHitbox.X() <= gPossition.X() + gHitbox.X() && pPosition.X() + pHitbox.X() >= gPossition.X() - gHitbox.X())
-//			&& (pPosition.Y() - pHitbox.Y() <= gPossition.Y() + gHitbox.Y() && pPosition.Y() + pHitbox.Y() >= gPossition.Y() - gHitbox.Y())
-//			&& (pPosition.Z() - pHitbox.Z() <= gPossition.Z() + gHitbox.Z() && pPosition.Z() + pHitbox.Z() >= gPossition.Z() - gHitbox.Z());
-//		break;
-//	case HitBoxType::Point:
-//		result = false;
-//		break;
-//	default:
-//		result = false;
-//		break;
-//		*/
-//}
-//
-//
-//
-//bool GameObject::SetHitbox(float radius)
-//{
-//	if (m_hitboxType == HitBoxType::point || m_hitboxType == HitBoxType::rectangle)
-//		return false;
-//	m_hitbox.X =(radius);
-//	return true;
-//}
-//
-//bool GameObject::SetHitbox(float sizeX, float sizeY, float sizeZ)
-//{
-//	if (m_hitboxType != HitBoxType::rectangle)
-//		return false;
-//	m_hitbox = float3(sizeX, sizeY, sizeZ);
-//	return true;
-//}
-//
-//void GameObject::SetHitboxType(HitBoxType hitbox)
-//{
-//	m_hitboxType = hitbox;
-//}
-//
-//float3 GameObject::GetHitbox()
-//{
-//	return m_hitbox;
-//}
-//
-//float3 GameObject::GetHitboxScaled()
-//{
-//	return float3();
-//}
-//
-//HitBoxType GameObject::GetHitboxType()
-//{
-//	return m_hitboxType;
-//}
 
 
 void GameObject::Destroy()

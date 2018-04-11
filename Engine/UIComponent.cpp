@@ -2,43 +2,43 @@
 
 UIComponent::UIComponent()
 {
-	position = rotation = float3();
-	scale = float3(1.0f);
+	position = rotation = Float3();
+	scale = Float3(1.0f);
 	renders = active = true;
 	killComponet = false;
 }
 
-void UIComponent::SetPosition(float3 value)
+void UIComponent::SetPosition(Float3 value)
 {
 	position = value;
 }
 
-void UIComponent::SetRotation(float3 value)
+void UIComponent::SetRotation(Float3 value)
 {
 	rotation = value;
 }
 
-void UIComponent::SetScale(float3 value)
+void UIComponent::SetScale(Float3 value)
 {
 	scale = value;
 }
 
-float3 UIComponent::GetPosition()
+Float3 UIComponent::GetPosition()
 {
 	return position;
 }
 
-float3 UIComponent::GetRotation()
+Float3 UIComponent::GetRotation()
 {
 	return rotation;
 }
 
-float3 UIComponent::GetScale()
+Float3 UIComponent::GetScale()
 {
 	return scale;
 }
 
-bool UIComponent::CheckCollition(float3 otherPos)
+bool UIComponent::CheckCollition(Float3 otherPos)
 {
 	return false;
 }

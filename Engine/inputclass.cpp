@@ -12,8 +12,8 @@ InputClass::InputClass()
 	m_directInput = 0;
 	m_keyboard = 0;
 	m_mouse = 0;
-	m_leapToWorldScale = float3(.04f, .04f, -.04f);
-	m_leapOffset = float3(0.0f, -7.0f, 0.0f);
+	m_leapToWorldScale = Float3(.04f, .04f, -.04f);
+	m_leapOffset = Float3(0.0f, -7.0f, 0.0f);
 }
 
 
@@ -238,7 +238,7 @@ void InputClass::ReadLeap()
 			directInstance->GetWorldMatrix(worldMatrix);
 			activeCamera->GetViewMatrix(viewMatrix);
 
-			float3 handpos = (float3(m_LeapFrame.hands()[0].palmPosition())* m_leapToWorldScale) + m_leapOffset;
+			Float3 handpos = (Float3(m_LeapFrame.hands()[0].palmPosition())* m_leapToWorldScale) + m_leapOffset;
 			XMVECTOR posvector = XMVectorSet(handpos.X, handpos.Y, handpos.Z, 1.0f);
 			XMVECTOR screenspace = XMVector3Project(posvector, 0.0f, 0.0f, screenWidth, screenHight, screenNear, screenDepth, projectionMatirx, viewMatrix, worldMatrix);
 			m_leapScreenPosition.X = screenspace.m128_f32[0];
@@ -331,17 +331,17 @@ const Leap::Frame InputClass::GetLeapFrame()
 	return m_LeapFrame;
 }
 
-const float3 InputClass::GetLeapToWorldScale()
+const Float3 InputClass::GetLeapToWorldScale()
 {
 	return m_leapToWorldScale;
 }
 
-const float3 InputClass::GetLeapOffset()
+const Float3 InputClass::GetLeapOffset()
 {
 	return m_leapOffset;
 }
 
-float3 InputClass::GetLeapScreenPos()
+Float3 InputClass::GetLeapScreenPos()
 {
 	return m_leapScreenPosition;
 }

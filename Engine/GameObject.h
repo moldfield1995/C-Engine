@@ -24,14 +24,16 @@ public:
 	GameObject(GameObject* go);
 	~GameObject();
 
-	void Initalize(float3 position, float3 rotation, ModelClass* model, ID3D11ShaderResourceView* textures, Shader* shader);
-	void SetPosition(float3 pos);
-	void SetRotation(float3 rot);
-	void SetScale(float3 scale);
-	float3 GetPosition();
-	float3 GetRotation();
-	float3 GetScale();
-	
+	void Initalize(Float3 position, Float3 rotation, ModelClass* model, ID3D11ShaderResourceView* textures, Shader* shader);
+	void SetPosition(Float3 pos);
+	void SetRotation(Float3 rot);
+	void SetScale(Float3 scale);
+	void SetColour(XMFLOAT4 colour);
+	Float3 GetPosition();
+	Float3 GetRotation();
+	Float3 GetScale();
+	XMFLOAT4 GetColour();
+
 	void Update();
 
 	//Render
@@ -49,28 +51,17 @@ public:
 	void OnCollishon(const GameObject* other);
 
 
-	////Collition Old
-	//bool CheckColltion(GameObject* other);
-	////Seting up a Cube or Sphere Hitbox
-	//bool SetHitbox(float radius);
-	////Seting up a Rectangle HitBox
-	//bool SetHitbox(float sizeX, float sizeY, float sizeZ);
-	//void SetHitboxType(HitBoxType hitbox);
-	//float3 GetHitbox();
-	//float3 GetHitboxScaled();
-	//HitBoxType GetHitboxType();
-
 protected:
 
 	bool m_KillGameObject,m_Renders;
 	ModelClass* m_model;
 	std::vector<ID3D11ShaderResourceView*>* m_textures;
 	Shader* m_shader;
-	//HitBoxType m_hitboxType;
-	//float3 m_hitbox;
+	XMFLOAT4 m_colour;
+
 	std::vector<Component*> m_Componets;
 	TA::DynamicObject* m_collishonObject;
 private:
-	float3 m_position, m_rotation, m_scale;
+	Float3 m_position, m_rotation, m_scale;
 };
 

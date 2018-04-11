@@ -20,9 +20,9 @@ public:
 
 	XMFLOAT4 GetColour();
 	void virtual SetColour(XMFLOAT4 value);
-	//Exsposes the inherited SetPosition otherwise the compiler only sees SetPostion(float3,bool,bool)
+	//Exsposes the inherited SetPosition otherwise the compiler only sees SetPostion(Float3,bool,bool)
 	using UIComponent::SetPosition;
-	void SetPosition(float3 value, bool centerX, bool centerY);
+	void SetPosition(Float3 value, bool centerX, bool centerY);
 protected:
 	XMFLOAT4 colour;
 	BitmapClass *bitmapClass;

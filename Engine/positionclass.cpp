@@ -17,7 +17,7 @@ PositionClass::PositionClass()
 	m_frameTime = 0.0f;
 	m_moveSpeed = 10.0f;
 	m_focused = false;
-	m_hitbox = float3();
+	m_hitbox = Float3();
 }
 
 
@@ -45,12 +45,12 @@ void PositionClass::Frame(bool hit)
 	}
 }
 
-void PositionClass::Sethitbox(float3 hitbox)
+void PositionClass::Sethitbox(Float3 hitbox)
 {
 	m_hitbox = hitbox;
 }
 
-float3 PositionClass::Gethitbox()
+Float3 PositionClass::Gethitbox()
 {
 	return m_hitbox;
 }
@@ -82,9 +82,9 @@ void PositionClass::GetPosition(float& x, float& y, float& z)
 	return;
 }
 
-float3 PositionClass::GetPosition()
+Float3 PositionClass::GetPosition()
 {
-	return float3(m_positionX,m_positionY,m_positionZ);
+	return Float3(m_positionX,m_positionY,m_positionZ);
 }
 
 

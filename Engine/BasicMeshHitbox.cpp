@@ -6,8 +6,9 @@
 #include "Utills.h"
 #include "GameObject.h"
 
-BasicMeshHitbox::BasicMeshHitbox()
+BasicMeshHitbox::BasicMeshHitbox(bool ControledByVelocity)
 {
+	controledByVelocity = ControledByVelocity;
 }
 
 
@@ -45,7 +46,33 @@ void BasicMeshHitbox::Initalize()
 
 void BasicMeshHitbox::Update()
 {
-	GetOwnersDynamicObject()->SetFrame(TA::MFrame(owner->GetPosition().ToVec3(), TA::Mat33(owner->GetRotation().ToEuler())));
+	if (controledByVelocity)
+	{
+		owner->SetPosition( GetOwnersDynamicObject()->GetPosition());
+		TA::Mat33 rotationMatrix = GetOwnersDynamicObject()->GetFrame().m33Rotation;
+		//Taken From learnopencv.com/rotation-matrix-to-euler-angles/
+		Float3 rotation = Float3();
+		//use ifs so we dont need to square root
+		float sy = (rotationMatrix.M11() > 0.0f ? rotationMatrix.M11() : -rotationMatrix.M11()) + (rotationMatrix.M21() > 0.0f ? rotationMatrix.M21() : -rotationMatrix.M21());
+
+		if (sy > 0.0f)
+		{
+			rotation.X = atan2f(rotationMatrix.M32(), rotationMatrix.M33());
+			rotation.Y = atan2f(-rotationMatrix.M31(), sy);
+			rotation.Z = atan2f(rotationMatrix.M21(), rotationMatrix.M11());
+		}
+		else
+		{
+			rotation.X = atan2f(rotationMatrix.M23(), rotationMatrix.M22());
+			rotation.Y = atan2f(-rotationMatrix.M31(), sy);
+			rotation.Z = 0.0f;
+		}
+
+		owner->SetRotation(rotation);
+
+	}
+	else
+		GetOwnersDynamicObject()->SetFrame(TA::MFrame(owner->GetPosition().ToVec3(), TA::Mat33(owner->GetRotation().ToEuler())));
 }
 
 void BasicMeshHitbox::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX & worldMatrix, const XMMATRIX & viewMatrix, const XMMATRIX & projectionMatrix, FrustumClass * frustume, LightClass * light, CameraClass & camera)
@@ -78,8 +105,8 @@ TA::CollisionObjectConvex * BasicMeshHitbox::generateConvexHull()
 	}
 
 	//initalize varibles
-	float3 negZmax = float3(0.0f), negZmin = float3(0.0f), posZmax = float3(0.0f), posZmin = float3(0.0f);
-	float3 scale = owner->GetScale();
+	Float3 negZmax = Float3(0.0f), negZmin = Float3(0.0f), posZmax = Float3(0.0f), posZmin = Float3(0.0f);
+	Float3 scale = owner->GetScale();
 	TA::Vec3 *pointList = new TA::Vec3[8];
 	const ModelClass::ModelType *verts = GetModel()->GetModelData();
 	const int vetexCount = GetModel()->GetIndexCount();

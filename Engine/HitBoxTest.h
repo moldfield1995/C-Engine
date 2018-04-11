@@ -4,7 +4,7 @@ class HitBoxTest :
 	public Component
 {
 public:
-	HitBoxTest(float3 size,float3 minPos, float3 maxPos);
+	HitBoxTest(Float3 size,Float3 minPos, Float3 maxPos);
 	~HitBoxTest();
 
 	void virtual Initalize();
@@ -15,6 +15,6 @@ public:
 	bool virtual OnCollishon(const GameObject* other);
 private:
 	ID3D11ShaderResourceView *collideTexture, *defaultTexture;
-	float3 hitboxSize, minPosition, maxPosition;
+	Float3 hitboxSize, minPosition, maxPosition;
 };
 

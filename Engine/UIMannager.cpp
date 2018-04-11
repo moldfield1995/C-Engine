@@ -14,7 +14,7 @@ UIMannager::~UIMannager()
 
 void UIMannager::Initalize(int screenX, int screenY)
 {
-	screenSize = float3(screenX, screenY);
+	screenSize = Float3(screenX, screenY);
 	instance = this;
 	active = true;
 	componets = std::vector<UIComponent*>();

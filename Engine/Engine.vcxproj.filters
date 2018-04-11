@@ -313,7 +313,7 @@
       <Filter>Header Files\Componets\Colliders</Filter>
     </ClInclude>
     <ClInclude Include="PlayerControler.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Componets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -495,7 +495,7 @@
       <Filter>Source Files\Componets\Coliders</Filter>
     </ClCompile>
     <ClCompile Include="PlayerControler.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Componets</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

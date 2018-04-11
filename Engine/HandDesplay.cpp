@@ -42,8 +42,8 @@ void HandDesplay::Update()
 		if (currentActive >= m_HandGameObjects.size())
 			createGameObjects(1);
 		workGo = m_HandGameObjects[currentActive];
-		workGo->SetPosition(float3(hand.palmPosition())*leapToWorldScale + leapOffset);
-		workGo->SetRotation((float3(hand.palmNormal())+float3(1.0f)) * (90.0f / PI));//* (180.0f/PI));
+		workGo->SetPosition(Float3(hand.palmPosition())*leapToWorldScale + leapOffset);
+		workGo->SetRotation((Float3(hand.palmNormal())+Float3(1.0f)) * (90.0f / PI));//* (180.0f/PI));
 		
 		//Itterate the gameobject index to update
 		currentActive++;
@@ -59,8 +59,8 @@ void HandDesplay::Update()
 				Bone bone = finger.bone(static_cast<Bone::Type>(i));
 				if (bone.isValid()) {
 					workGo = m_HandGameObjects[currentActive];
-					workGo->SetPosition(float3(bone.prevJoint())*leapToWorldScale + leapOffset);
-					workGo->SetRotation((float3(hand.palmNormal()) + float3(1.0f)) * (90.0f/PI));
+					workGo->SetPosition(Float3(bone.prevJoint())*leapToWorldScale + leapOffset);
+					workGo->SetRotation((Float3(hand.palmNormal()) + Float3(1.0f)) * (90.0f/PI));
 					//itterate the gameobject index to update
 					currentActive++;
 				}

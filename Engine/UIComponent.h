@@ -20,18 +20,18 @@ public:
 	void virtual Render(ID3D11DeviceContext* deviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& baseViewMatrix, const XMMATRIX& orthoMatrix) = 0;
 	void virtual Destroy() = 0;
 
-	void virtual SetPosition(float3 value);
-	void virtual SetRotation(float3 value);
-	void virtual SetScale(float3 value);
+	void virtual SetPosition(Float3 value);
+	void virtual SetRotation(Float3 value);
+	void virtual SetScale(Float3 value);
 
-	float3 virtual GetPosition();
-	float3 virtual GetRotation();
-	float3 virtual GetScale();
+	Float3 virtual GetPosition();
+	Float3 virtual GetRotation();
+	Float3 virtual GetScale();
 
-	bool virtual CheckCollition(float3 otherPos);
+	bool virtual CheckCollition(Float3 otherPos);
 
 protected:
-	float3 position, rotation, scale;
+	Float3 position, rotation, scale;
 	bool renders, killComponet, active;
 private:
 

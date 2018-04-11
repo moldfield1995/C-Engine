@@ -25,7 +25,7 @@ public:
 	void virtual Render(ID3D11DeviceContext* deviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& baseViewMatrix, const XMMATRIX& orthoMatrix);
 	void virtual Destroy();
 	
-	bool virtual CheckCollition(float3 otherPos);
+	bool virtual CheckCollition(Float3 otherPos);
 	void SetState(ButtonState value);
 	ButtonState GetState();
 

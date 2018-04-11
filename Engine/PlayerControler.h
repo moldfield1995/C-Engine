@@ -1,11 +1,15 @@
 #pragma once
 #include "Component.h"
 #include "GameObject.h"
+#include "inputclass.h"
+
+using namespace Leap;
+
 class PlayerControler :
 	public Component
 {
 public:
-	PlayerControler();
+	PlayerControler(float maxEnergey, float maxHP);
 	~PlayerControler();
 	void virtual Initalize();
 	void virtual Update();
@@ -14,10 +18,19 @@ public:
 	bool virtual OnCollishon(const GameObject* other);
 
 private:
+
+	void FindHand(InputClass* input, float timeDelta);
+
+	//Leap and possition
 	int currentHand;
-	float currentEnergey, currentHP;
-	//ShotSpawner
-	//UI componets
-	//score
+	Float3 leapToWorldScale, leapWorldOffset;
+
+	//GamePlay
+	float currentEnergey, currentHP, maxEnergey, maxHP;
+	const float hpLossPerHit, energeyLossPerSecond;
+
+	//ShotSpawner (Seprate script)
+	//UI componet
+	//score (do in seprate script)
 };
 

@@ -28,13 +28,13 @@ void DebugDesplay::Initalize()
 	handText[4] = new UIText(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), "");
 	for (int i = textNum-1; i >= 0; i--)
 	{
-		handText[i]->SetPosition(float3(0.0f, - (i * 35.0f)));
+		handText[i]->SetPosition(Float3(0.0f, - (i * 35.0f)));
 		instance->AddComponet(handText[i]);
 	}
 	
 
 	testButton = new UIButton("../Engine/data/textures/Button.tga");
-	testButton->SetPosition(float3(screenWidth/2, 0.0f));
+	testButton->SetPosition(Float3(screenWidth/2, 0.0f));
 	__hook(&UIButton::onClickTrigger, testButton, &DebugDesplay::ButtonClicked);
 	instance->AddComponet(testButton);
 }
@@ -47,7 +47,7 @@ void DebugDesplay::Update()
 	if (frame.isValid())
 	{
 		Hand hand = frame.hands()[0];
-		float3 handPos = hand.palmPosition();
+		Float3 handPos = hand.palmPosition();
 		handText[1]->UpdateString("Raw leap " + handPos.ToString());
 
 		handPos = handPos * instance->GetLeapToWorldScale() + instance->GetLeapOffset();
@@ -61,7 +61,7 @@ void DebugDesplay::Update()
 	{
 		handText[0]->UpdateString("Invalid Frame");
 	}
-	//float3 input = float3();
+	//Float3 input = Float3();
 	//if (instance->Key(DIK_UPARROW))
 	//	input.Y += 100.0f * frameTime;
 	//if (instance->Key(DIK_DOWNARROW))

@@ -7,7 +7,7 @@ class BasicMeshHitbox :
 	public Component
 {
 public:
-	BasicMeshHitbox();
+	BasicMeshHitbox(bool ControledByVelocity = false);
 	~BasicMeshHitbox();
 	void virtual Initalize();
 	void virtual Update();
@@ -16,5 +16,6 @@ public:
 
 private:
 	TA::CollisionObjectConvex* generateConvexHull();
+	bool controledByVelocity;
 };
 

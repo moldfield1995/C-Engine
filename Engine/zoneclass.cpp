@@ -113,7 +113,7 @@ bool ZoneClass::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight
 	// Set the initial position and rotation.
 	m_Position->SetPosition(560.0f, 8.0f, 260.0f);
 	m_Position->SetRotation(0.0f, 0.0f, 0.0f);
-	m_Position->Sethitbox(float3(1.0f, 3.0f, 1.0f));
+	m_Position->Sethitbox(Float3(1.0f, 3.0f, 1.0f));
 	// Create the frustum object.
 	m_Frustum = new FrustumClass;
 	if (!m_Frustum)
@@ -227,37 +227,37 @@ bool ZoneClass::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight
 	ShaderManagerClass* shaderManager = ShaderManagerClass::GetInstance();
 	m_GameObjects = std::vector<GameObject*>();
 	GameObject* gameObject = new GameObject();
-	gameObject->Initalize(float3(0.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(Utills::ParsString("../Engine/data/T1Assets/cubeS.txt")), textureManager->GetTexture(404), shaderManager->GetShader<LightShader>());
+	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(Utills::ParsString("../Engine/data/T1Assets/cubeS.txt")), textureManager->GetTexture(404), shaderManager->GetShader<LightShader>());
 	m_GameObjects.push_back(gameObject);
 
 	gameObject = new GameObject();
-	gameObject->Initalize(float3(560.0f, 30.0f, 260.0f), float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(Utills::ParsString("../Engine/data/T1Assets/Su-35_SuperFlanker.txt")), textureManager->GetTexture(Utills::ParsString("../Engine/data/T1Assets/Su-35_SuperFlanker_P01.tga")), shaderManager->GetShader<LightShader>());
+	gameObject->Initalize(Float3(560.0f, 30.0f, 260.0f), Float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(Utills::ParsString("../Engine/data/T1Assets/Su-35_SuperFlanker.txt")), textureManager->GetTexture(Utills::ParsString("../Engine/data/T1Assets/Su-35_SuperFlanker_P01.tga")), shaderManager->GetShader<LightShader>());
 	m_GameObjects.push_back(gameObject);
 
 	gameObject = new GameObject();
-	gameObject->Initalize(float3(565.0f, 7.8f, 260.0f), float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(Utills::ParsString("../Engine/data/T2Assets/Cat.txt")), textureManager->GetTexture(404), shaderManager->GetShader<LightShader>());
+	gameObject->Initalize(Float3(565.0f, 7.8f, 260.0f), Float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(Utills::ParsString("../Engine/data/T2Assets/Cat.txt")), textureManager->GetTexture(404), shaderManager->GetShader<LightShader>());
 	m_GameObjects.push_back(gameObject);
 
 	gameObject = new GameObject();
-	gameObject->Initalize(float3(560.0f, 8.0f, 270.0f), float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(Utills::ParsString("../Engine/data/New Models/OldHouce.txt")), textureManager->GetTexture(Utills::ParsString("../Engine/data/New Models/OldHouce.tga")), shaderManager->GetShader<LightShader>());
+	gameObject->Initalize(Float3(560.0f, 8.0f, 270.0f), Float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(Utills::ParsString("../Engine/data/New Models/OldHouce.txt")), textureManager->GetTexture(Utills::ParsString("../Engine/data/New Models/OldHouce.tga")), shaderManager->GetShader<LightShader>());
 	m_GameObjects.push_back(gameObject);
 	{
 		gameObject = new GameObject();
 		ID3D11ShaderResourceView** textures = new ID3D11ShaderResourceView*[2] { textureManager->GetTexture(Utills::ParsString("../Engine/data/New Models/hutTex.tga")),textureManager->GetTexture(Utills::ParsString("../Engine/data/New Models/hutBump.tga")) };
-		gameObject->Initalize(float3(540.0f, 8.0f, 260.0f), float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(Utills::ParsString("../Engine/data/New Models/hut.txt")), *textures, shaderManager->GetShader<BumpMapShaderClass>());
-		gameObject->SetScale(float3(0.08f, 0.08f, 0.08f));
+		gameObject->Initalize(Float3(540.0f, 8.0f, 260.0f), Float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(Utills::ParsString("../Engine/data/New Models/hut.txt")), *textures, shaderManager->GetShader<BumpMapShaderClass>());
+		gameObject->SetScale(Float3(0.08f, 0.08f, 0.08f));
 		m_GameObjects.push_back(gameObject);
 	}
 	{
 		gameObject = new GameObject();
 
 		ID3D11ShaderResourceView** textures = new ID3D11ShaderResourceView*[2]{ textureManager->GetTexture(Utills::ParsString("../Engine/data/New Models/hutTex.tga")),textureManager->GetTexture(Utills::ParsString("../Engine/data/New Models/hutBump.tga")) };
-		gameObject->Initalize(float3(580.0f, 8.0f, 260.0f), float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(Utills::ParsString("../Engine/data/New Models/FancyHouce.txt")), *textures, shaderManager->GetShader<BumpMapShaderClass>());
-		gameObject->SetScale(float3(0.05f, 0.05f, 0.05f));
+		gameObject->Initalize(Float3(580.0f, 8.0f, 260.0f), Float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(Utills::ParsString("../Engine/data/New Models/FancyHouce.txt")), *textures, shaderManager->GetShader<BumpMapShaderClass>());
+		gameObject->SetScale(Float3(0.05f, 0.05f, 0.05f));
 		m_GameObjects.push_back(gameObject);
 	}
 	gameObject = new GameObject();
-	gameObject->Initalize(float3(560.0f, 8.0f, 240.0f), float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(Utills::ParsString("../Engine/data/New Models/SimpleHouce.txt")), textureManager->GetTexture(Utills::ParsString("../Engine/data/New Models/SimpleHouce.tga")), shaderManager->GetShader<LightShader>());
+	gameObject->Initalize(Float3(560.0f, 8.0f, 240.0f), Float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(Utills::ParsString("../Engine/data/New Models/SimpleHouce.txt")), textureManager->GetTexture(Utills::ParsString("../Engine/data/New Models/SimpleHouce.tga")), shaderManager->GetShader<LightShader>());
 	m_GameObjects.push_back(gameObject);
 	m_Camera->SetActiveCamera();
 	return true;
@@ -404,7 +404,7 @@ void ZoneClass::HandleInput(InputClass *Input, float frameTime, TextureManagerCl
 bool ZoneClass::CheckHitboxs(ModelManager* modelManager)
 {
 	//bool result = false;
-	//float3 gPossition, gScale, gHitbox, pHitbox, pPosition;
+	//Float3 gPossition, gScale, gHitbox, pHitbox, pPosition;
 	//HitBoxType hitboxType;
 	//pPosition = m_Position->GetPosition();
 	//pHitbox = m_Position->Gethitbox();
@@ -456,7 +456,7 @@ bool ZoneClass::Render(D3DClass* Direct3D, ShaderManagerClass* ShaderManager, Te
 	bool result;
 	XMFLOAT3 cameraPosition;
 	int i;
-	float3 possition, rotaion, scale, hitbox;
+	Float3 possition, rotaion, scale, hitbox;
 	//HitBoxType hitboxType;
 	// Generate the view matrix based on the camera's position.
 	m_Camera->Render();

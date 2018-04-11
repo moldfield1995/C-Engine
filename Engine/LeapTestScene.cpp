@@ -76,46 +76,46 @@ bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 	Shader* shader = ShaderManagerClass::GetInstance()->GetShader<TextureShaderClass>();
 
 	GameObject* gameObject = new GameObject();
-	gameObject->Initalize(float3(), float3(), modelManager->GetModel(Utills::ParsString("../Engine/data/T1Assets/cubeS.txt")), textureManager->GetTexture(404), shader);
+	gameObject->Initalize(Float3(), Float3(), modelManager->GetModel(Utills::ParsString("../Engine/data/T1Assets/cubeS.txt")), textureManager->GetTexture(404), shader);
 
 	gameObject->AddComponet(new HandDesplay());
 	gameObject->AddComponet(new DebugDesplay());
 	m_GameObjects.push_back(gameObject);
 
 	//gameObject = new GameObject();
-	//gameObject->Initalize(float3(0.0f, -10.0f, 5.0f), float3(), modelManager->GetModel(Utills::ParsString("../Engine/data/Capsule.obj")), textureManager->GetTexture(404), shader);
+	//gameObject->Initalize(Float3(0.0f, -10.0f, 5.0f), Float3(), modelManager->GetModel(Utills::ParsString("../Engine/data/Capsule.obj")), textureManager->GetTexture(404), shader);
 	//m_GameObjects.push_back(gameObject);
 
 	Shader* bumpShader = ShaderManagerClass::GetInstance()->GetShader<BumpMapShaderClass>();
 	defaultNormal = textureManager->LoadTexture(device, deviceContex, "../Engine/data/textures/DefaultNornal.tga");
 
 	gameObject = new GameObject();
-	gameObject->Initalize(float3(0.0f, 0.0f, 5.0f), float3(), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), bumpShader);
+	gameObject->Initalize(Float3(0.0f, 0.0f, 5.0f), Float3(), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), bumpShader);
 	gameObject->AddTexture(textureManager->GetTexture(defaultNormal));
-	gameObject->AddComponet(new RotateObject(float3(50.0f, 50.0f, 50.0f)));
+	gameObject->AddComponet(new RotateObject(Float3(50.0f, 50.0f, 50.0f)));
 	m_GameObjects.push_back(gameObject);
 
 	modelId = modelManager->AddModle(device, "../Engine/data/GooglePoly/Asteroids.obj");
 	textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/GooglePoly/Asteroids_BaseColor.tga");
 
 	gameObject = new GameObject();
-	gameObject->Initalize(float3(0.0f, -5.0f, 15.0f), float3(), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
+	gameObject->Initalize(Float3(0.0f, -5.0f, 15.0f), Float3(), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
 	m_GameObjects.push_back(gameObject);
 
 	modelId = modelManager->AddModle(device, "../Engine/data/LizReddington/Planet1.obj");
 	textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/LizReddington/Planet1.tga");
 
 	gameObject = new GameObject();
-	gameObject->Initalize(float3(5.0f, -5.0f, 15.0f), float3(), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
-	gameObject->SetScale(float3(0.01f,0.01f,0.01f));
+	gameObject->Initalize(Float3(5.0f, -5.0f, 15.0f), Float3(), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
+	gameObject->SetScale(Float3(0.01f,0.01f,0.01f));
 	m_GameObjects.push_back(gameObject);
 
 	modelId = modelManager->AddModle(device, "../Engine/data/LizReddington/Ship1.obj");
 	textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/LizReddington/Ship1Uved.tga");
 
 	gameObject = new GameObject();
-	gameObject->Initalize(float3(0.0f, 0.0f, 0.0f), float3(), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
-	gameObject->SetScale(float3(0.01f, 0.01f, 0.01f));
+	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
+	gameObject->SetScale(Float3(0.01f, 0.01f, 0.01f));
 	BasicMeshHitbox *basicMeshHitbox = new BasicMeshHitbox();
 	gameObject->AddComponet(basicMeshHitbox);
 	m_GameObjects.push_back(gameObject);
@@ -123,14 +123,14 @@ bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 	modelId = modelManager->AddModle(device, "../Engine/data/T1Assets/cube.txt");
 
 	gameObject = new GameObject();
-	gameObject->Initalize(float3(0.0f, 0.0f, 0.0f), float3(), modelManager->GetModel(modelId), textureManager->GetTexture(404), shader);
-	Component* hitbox = new HitBoxTest(float3(), float3(-6.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f));
+	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(), modelManager->GetModel(modelId), textureManager->GetTexture(404), shader);
+	Component* hitbox = new HitBoxTest(Float3(), Float3(-6.0f, 0.0f, 0.0f), Float3(0.0f, 0.0f, 0.0f));
 	gameObject->AddComponet(hitbox);
 	m_GameObjects.push_back(gameObject);
 
 	gameObject = new GameObject();
-	gameObject->Initalize(float3(0.0f, 0.0f, 0.0f), float3(40.0f,29.0f,68.0f), modelManager->GetModel(modelId), textureManager->GetTexture(404), shader);
-	hitbox = new HitBoxTest(float3(), float3(6.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f));
+	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(40.0f,29.0f,68.0f), modelManager->GetModel(modelId), textureManager->GetTexture(404), shader);
+	hitbox = new HitBoxTest(Float3(), Float3(6.0f, 0.0f, 0.0f), Float3(0.0f, 0.0f, 0.0f));
 	gameObject->AddComponet(hitbox);
 	m_GameObjects.push_back(gameObject);
 

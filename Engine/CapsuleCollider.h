@@ -4,7 +4,7 @@ class CapsuleCollider :
 	public Component
 {
 public:
-	CapsuleCollider(float3 capsuleBegining, float3 capsuleEnd, float capsuleRadius);
+	CapsuleCollider(Float3 capsuleBegining, Float3 capsuleEnd, float capsuleRadius, bool ControledByVelocity = false);
 	~CapsuleCollider();
 	void virtual Initalize();
 	void virtual Update();
@@ -12,7 +12,8 @@ public:
 	void virtual Destroy();
 
 private:
-	float3 capsuleBeginPoint, capsuleEndPoint;
+	Float3 capsuleBeginPoint, capsuleEndPoint;
 	float radius;
+	bool controledByVelocity;
 };
 

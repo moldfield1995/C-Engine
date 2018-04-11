@@ -65,11 +65,11 @@ void UIButton::Destroy()
 	UIImage::Destroy();
 }
 
-bool UIButton::CheckCollition(float3 otherPos)
+bool UIButton::CheckCollition(Float3 otherPos)
 {
 	int height, width;
 	//Todo: Coppys or refrences?
-	float3 hitboxExstent = position;
+	Float3 hitboxExstent = position;
 	bitmapClass->GetTextureSize(height, width);
 	hitboxExstent.X += width;
 	hitboxExstent.Y += height;

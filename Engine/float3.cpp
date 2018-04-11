@@ -2,37 +2,44 @@
 
 
 
-float3::float3()
+Float3::Float3()
 {
 	X = Y = Z = 0.0f;
 }
 
-float3::~float3()
+Float3::~Float3()
 {
 }
 
-float3::float3(float xyz)
+Float3::Float3(float xyz)
 {
 	X = xyz;
 	Y = xyz;
 	Z = xyz;
 }
 
-float3::float3(float x, float y)
+Float3::Float3(float x, float y)
 {
 	X = x;
 	Y = y;
 	Z = 0.0f;
 }
 
-float3::float3(float x, float y, float z)
+Float3::Float3(float x, float y, float z)
 {
 	X = x;
 	Y = y;
 	Z = z;
 }
 
-float3::float3(Leap::Vector vector)
+Float3::Float3(Leap::Vector vector)
+{
+	X = vector.x;
+	Y = vector.y;
+	Z = vector.z;
+}
+
+Float3::Float3(const TA::Vec3 & vector)
 {
 	X = vector.x;
 	Y = vector.y;
@@ -40,29 +47,30 @@ float3::float3(Leap::Vector vector)
 }
 
 
-void float3::Set(float x, float y, float z)
+
+void Float3::Set(float x, float y, float z)
 {
 	X = x;
 	Y = y;
 	Z = z;
 }
 
-float3 float3::Normalize()
+Float3 Float3::Normalize()
 {
 	float lenght = Lenght();
-	return float3(X / lenght,Y/lenght,Z/lenght);
+	return Float3(X / lenght, Y / lenght, Z / lenght);
 }
 
-float3 float3::Lerp(float3 a, float3 b, float t)
+Float3 Float3::Lerp(Float3 a, Float3 b, float t)
 {
-	float3 value = float3();
+	Float3 value = Float3();
 	value.X = a.X + t * (b.X - a.X);
 	value.Y = a.Y + t * (b.Y - a.Y);
 	value.Z = a.Z + t * (b.Z - a.Z);
 	return value;
 }
 
-float float3::Lenght()
+float Float3::Lenght()
 {
 	float lenght = 0.0f;
 	lenght += X >= 0.0f ? X : -X;
@@ -71,44 +79,44 @@ float float3::Lenght()
 	return lenght;
 }
 
-float3 float3::operator*(float3 other)
+Float3 Float3::operator*(Float3 other)
 {
-	return float3(X*other.X,Y*other.Y,Z*other.Z);
+	return Float3(X*other.X, Y*other.Y, Z*other.Z);
 }
 
-float3 float3::operator+(float3 other)
+Float3 Float3::operator+(Float3 other)
 {
-	return float3(X+other.X, Y+other.Y, Z+other.Z);
+	return Float3(X + other.X, Y + other.Y, Z + other.Z);
 }
 
-float3 float3::operator-(float3 other)
+Float3 Float3::operator-(Float3 other)
 {
-	return float3(X-other.X, Y-other.Y, Z-other.Z);
+	return Float3(X - other.X, Y - other.Y, Z - other.Z);
 }
 
-float3 float3::operator/(float3 other)
+Float3 Float3::operator/(Float3 other)
 {
-	return float3(X/other.X, Y/other.Y, Z/other.Z);
+	return Float3(X / other.X, Y / other.Y, Z / other.Z);
 }
 
-float3 float3::operator-()
+Float3 Float3::operator-()
 {
-	return float3(-X,-Y,-Z);
+	return Float3(-X, -Y, -Z);
 }
 
-std::string float3::ToString()
+std::string Float3::ToString()
 {
-	return "X: "+std::to_string(X) + " Y: " + std::to_string(Y) + " Z: " + std::to_string(Z) ;
+	return "X: " + std::to_string(X) + " Y: " + std::to_string(Y) + " Z: " + std::to_string(Z);
 }
 
-TA::Vec3 float3::ToVec3()
+TA::Vec3 Float3::ToVec3()
 {
-	return TA::Vec3(X,Y,Z);
+	return TA::Vec3(X, Y, Z);
 }
 
-TA::EulerAngles float3::ToEuler()
+TA::EulerAngles Float3::ToEuler()
 {
-	return TA::EulerAngles(X,Y,Z);
+	return TA::EulerAngles(X, Y, Z);
 }
 
 
