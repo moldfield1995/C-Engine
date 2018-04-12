@@ -6,6 +6,7 @@
 #include <vector>
 #include "texturemanagerclass.h"
 #include "GameObject.h"
+#include "Collider.h"
 
 HitBoxTest::HitBoxTest(Float3 size, Float3 minPos, Float3 maxPos)
 {
@@ -36,10 +37,11 @@ void HitBoxTest::Initalize()
 	//SetUp Dynamic Object
 	TA::DynamicObject *dynamicObject = TA::DynamicObject::CreateNew();
 	dynamicObject->InitialiseAsABox(aabb);
-	dynamicObject->SetFrame(TA::MFrame(possition.ToVec3(), TA::Mat33(owner->GetRotation().ToEuler())));
+	dynamicObject->SetFrame(TA::MFrame(possition.ToVec3(), TA::Mat33((owner->GetRotation()* Leap::DEG_TO_RAD).ToEuler())));
 	dynamicObject->SetGhost(true);
 	dynamicObject->SetToMoving();
-	dynamicObject->SetUserData(owner);
+	CollisonData* collisonData = new CollisonData{ CollisionLayer::Default, owner };
+	dynamicObject->SetUserData(collisonData);
 	physicsInstance.AddDynamicObject(dynamicObject);
 	SetOwnersDynamicObject(dynamicObject);
 	//SetUo texture swiching
@@ -55,7 +57,7 @@ void HitBoxTest::Update()
 	possition = Float3::Lerp(minPosition,maxPosition,(sinf(time)+1.0f)/2.0f);
 	owner->SetPosition(possition);
 	rotation = owner->GetRotation();
-	GetOwnersDynamicObject()->SetFrame(TA::MFrame(possition.ToVec3(), TA::Mat33(rotation.ToEuler())));
+	GetOwnersDynamicObject()->SetFrame(TA::MFrame(possition.ToVec3(), TA::Mat33((rotation* Leap::DEG_TO_RAD).ToEuler())));
 }
 
 void HitBoxTest::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX & worldMatrix, const XMMATRIX & viewMatrix, const XMMATRIX & projectionMatrix, FrustumClass * frustume, LightClass * light, CameraClass & camera)
@@ -68,7 +70,7 @@ void HitBoxTest::Destroy()
 	defaultTexture = 0;
 }
 
-bool HitBoxTest::OnCollishon(const GameObject * other)
+bool HitBoxTest::OnCollishon(const CollisonData * other)
 {
 	std::vector<ID3D11ShaderResourceView*>* texutes = GetTextures();
 	if ((*texutes)[0] == defaultTexture)

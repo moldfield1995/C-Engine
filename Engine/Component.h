@@ -5,10 +5,12 @@
 #include "Shader.h"
 #include "..\TrueAxis\Physics\DynamicObject.h"
 
+
 class FrustumClass;
 class LightClass;
 class CameraClass;
 class GameObject;
+struct CollisonData;
 //Updated In Final Year
 //Created By Matthew Oldfield
 
@@ -23,7 +25,8 @@ public:
 	void virtual Render(ID3D11DeviceContext* deviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, const XMMATRIX& projectionMatrix, FrustumClass* frustume, LightClass* light, CameraClass& camera) = 0;
 	void virtual Destroy() =0;
 	//Return True to stop other componets being called
-	bool virtual OnCollishon(const GameObject* other);
+	bool virtual OnCollishon(const CollisonData* other);
+	GameObject* GetOwner();
 protected:
 	//Acsessors and Setters for GameObject
 	void SetOwnersKill(bool state);

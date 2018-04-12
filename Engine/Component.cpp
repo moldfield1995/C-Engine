@@ -1,8 +1,13 @@
 #include "GameObject.h"
 
-bool Component::OnCollishon(const GameObject * other)
+bool Component::OnCollishon(const CollisonData * other)
 {
 	return false;
+}
+
+GameObject * Component::GetOwner()
+{
+	return owner;
 }
 
 void Component::SetOwnersKill(bool state)

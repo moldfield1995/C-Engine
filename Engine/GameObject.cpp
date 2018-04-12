@@ -8,7 +8,7 @@ GameObject::GameObject()
 	//ID3D11ShaderResourceView* m_textures;
 	m_textures = new std::vector<ID3D11ShaderResourceView*>();
 	m_shader=0;
-	m_colour = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);
+	m_colour = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	m_KillGameObject = false;
 
 	m_Componets = std::vector<Component*>();
@@ -24,6 +24,7 @@ GameObject::GameObject(GameObject * go)
 	m_Renders = go->m_Renders;
 	m_Componets = std::vector<Component*>();
 	m_textures = new std::vector<ID3D11ShaderResourceView*>();
+	m_colour = go->m_colour;
 	for each (ID3D11ShaderResourceView* texture in *go->m_textures)
 	{
 		m_textures->push_back(texture);
@@ -146,7 +147,7 @@ void GameObject::Destroy()
 
 bool GameObject::IsAlive() { return !m_KillGameObject; }
 
-void GameObject::OnCollishon(const GameObject * other)
+void GameObject::OnCollishon(const CollisonData * other)
 {
 	for each (Component* componet in m_Componets)
 	{

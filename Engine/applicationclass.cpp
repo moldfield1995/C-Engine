@@ -8,6 +8,9 @@
 #include "SplashScreen.h"
 #include "LeapTestScene.h"
 #include "Utills.h"
+#include "Collider.h"
+#include "GamePlayScene.h"
+
 ApplicationClass::ApplicationClass()
 {
 	m_Input = 0;
@@ -156,7 +159,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	TA::Physics::CreateInstance();
 	m_taPhysics = &TA::Physics::GetInstance();
 	TA::AABB worldExstence;
-	worldExstence.Initialise(TA::Vec3(0.0f, 0.0f, 0.0f), TA::Vec3(100.0f, 100.0f, 100.0f));
+	worldExstence.Initialise(TA::Vec3(0.0f, 0.0f, 0.0f), TA::Vec3(100.0f, 100.0f, 1000.0f));
 	m_taPhysics->SetWorldDimensions(worldExstence);
 	//We are in space, no graverty
 	m_taPhysics->SetGravity(TA::Vec3(0.0f, 0.0f, 0.0f));
@@ -181,6 +184,21 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 #endif
 #if _BuildState_ == 1
 	m_FrountBuffer = new LeapTestScene();
+	if (!m_FrountBuffer)
+	{
+		return false;
+	}
+	m_currentState = CurrentState::Level;
+	// Initialize the zone object.
+	result = m_FrountBuffer->Initialize(m_Direct3D, screenWidth, screenHeight, SCREEN_DEPTH, m_TextureManager, m_ModelManager, m_AudioManager);
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the zone object.", L"Error", MB_OK);
+		return false;
+	}
+#endif
+#if _BuildState_ == 2
+	m_FrountBuffer = new GamePlayScene();
 	if (!m_FrountBuffer)
 	{
 		return false;
@@ -348,16 +366,16 @@ bool ApplicationClass::Frame()
 //Called before the collion is processed, Returns if the collison should be ignored
 bool TA_CALL_BACK ApplicationClass::ProcessColltion(TA::PreCollision& collision) {
 
-	GameObject *go1, *go2;
-	go1 = (GameObject*)collision.GetObjectA()->GetUserData();
-	go2 = (GameObject*)collision.GetObjectB()->GetUserData();
-	if (!go1 || !go2)
+	CollisonData *col1, *col2;
+	col1 = (CollisonData*)collision.GetObjectA()->GetUserData();
+	col2 = (CollisonData*)collision.GetObjectB()->GetUserData();
+	if (!col1 || !col2)
 	{
 		Utills::DebugString("Collition Happened where one of the Userdata did not contain a gameobject: ProcessColltion : ApplicationClass ");
 		return false;
 	}
-	go1->OnCollishon(go2);
-	go2->OnCollishon(go1);
+	col1->Object->OnCollishon(col2);
+	col2->Object->OnCollishon(col1);
 	return true;
 }
 

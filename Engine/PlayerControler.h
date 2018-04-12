@@ -15,11 +15,12 @@ public:
 	void virtual Update();
 	void virtual Render(ID3D11DeviceContext* deviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, const XMMATRIX& projectionMatrix, FrustumClass* frustume, LightClass* light, CameraClass& camera);
 	void virtual Destroy();
-	bool virtual OnCollishon(const GameObject* other);
+	bool virtual OnCollishon(const CollisonData* other);
 
+	void HitAstroid();
 private:
 
-	void FindHand(InputClass* input, float timeDelta);
+	void FindHand(InputClass* input, float timeDelta, Hand &hand);
 
 	//Leap and possition
 	int currentHand;
@@ -32,5 +33,10 @@ private:
 	//ShotSpawner (Seprate script)
 	//UI componet
 	//score (do in seprate script)
+
+
+	static PlayerControler* instance;
+public:
+	static PlayerControler* GetInstance();
 };
 

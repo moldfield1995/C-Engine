@@ -18,7 +18,7 @@ public:
 
 	//Static Maths
 	static Float3 Lerp(Float3 a, Float3 b, float t);
-
+	static Float3 Cross(Float3 a, Float3 b);
 	//Usefull operators
 	void Set(float x, float y, float z);
 	Float3 Normalize();

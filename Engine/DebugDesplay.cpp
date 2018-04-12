@@ -52,8 +52,8 @@ void DebugDesplay::Update()
 
 		handPos = handPos * instance->GetLeapToWorldScale() + instance->GetLeapOffset();
 		handText[0]->UpdateString("Hands: " + std::to_string(frame.hands().count()) + " Pos " + handPos.ToString());
-		
-		handText[2]->UpdateString("Rot " + (hand.palmNormal()* PI).toString());
+		Vector direction = hand.direction();
+		handText[2]->UpdateString("Rot " + (Float3(direction.roll(), direction.pitch(), direction.yaw())*RAD_TO_DEG).ToString());
 
 		handText[3]->UpdateString("ScreenPos " + instance->GetLeapScreenPos().ToString());
 	}

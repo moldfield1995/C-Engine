@@ -12,7 +12,7 @@ public:
 	void virtual Render(ID3D11DeviceContext* deviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, const XMMATRIX& projectionMatrix, FrustumClass* frustume, LightClass* light, CameraClass& camera);
 	void virtual Destroy();
 	//Return True to stop other componets being called
-	bool virtual OnCollishon(const GameObject* other);
+	bool virtual OnCollishon(const CollisonData* other);
 private:
 	ID3D11ShaderResourceView *collideTexture, *defaultTexture;
 	Float3 hitboxSize, minPosition, maxPosition;

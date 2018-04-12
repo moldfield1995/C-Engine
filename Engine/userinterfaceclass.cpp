@@ -185,7 +185,6 @@ bool UserInterfaceClass::Frame(ID3D11DeviceContext* deviceContext, int fps,float
 bool UserInterfaceClass::Render(D3DClass* Direct3D, ShaderManagerClass* ShaderManager, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, 
 								const XMMATRIX& orthoMatrix)
 {
-	bool result;
 
 
 	// Turn off the Z buffer and enable alpha blending to begin 2D rendering.

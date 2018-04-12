@@ -70,6 +70,11 @@ Float3 Float3::Lerp(Float3 a, Float3 b, float t)
 	return value;
 }
 
+Float3 Float3::Cross(Float3 a, Float3 b)
+{
+	return Float3(a.Y*b.Z - a.Z*b.Y, a.Z*b.X - a.X*b.Z,a.X*b.Y - a.Y*b.X);
+}
+
 float Float3::Lenght()
 {
 	float lenght = 0.0f;

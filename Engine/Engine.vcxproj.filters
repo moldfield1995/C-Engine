@@ -315,6 +315,15 @@
     <ClInclude Include="PlayerControler.h">
       <Filter>Header Files\Componets</Filter>
     </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files\Componets\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotComponet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fontshaderclass.cpp">
@@ -496,6 +505,15 @@
     </ClCompile>
     <ClCompile Include="PlayerControler.cpp">
       <Filter>Source Files\Componets</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Source Files\Componets\Coliders</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotComponet.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

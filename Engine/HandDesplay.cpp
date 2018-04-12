@@ -44,7 +44,6 @@ void HandDesplay::Update()
 		workGo = m_HandGameObjects[currentActive];
 		workGo->SetPosition(Float3(hand.palmPosition())*leapToWorldScale + leapOffset);
 		workGo->SetRotation((Float3(hand.palmNormal())+Float3(1.0f)) * (90.0f / PI));//* (180.0f/PI));
-		
 		//Itterate the gameobject index to update
 		currentActive++;
 		//Itterate throgh fingers

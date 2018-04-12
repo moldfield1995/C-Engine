@@ -38,6 +38,7 @@
     <ClInclude Include="bumpmapshaderclass.h" />
     <ClInclude Include="cameraclass.h" />
     <ClInclude Include="CapsuleCollider.h" />
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="colorshaderclass.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="cpuclass.h" />
@@ -69,6 +70,8 @@
     <ClInclude Include="RotateObject.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="shadermanagerclass.h" />
+    <ClInclude Include="ShotComponet.h" />
+    <ClInclude Include="ShotManager.h" />
     <ClInclude Include="skydomeclass.h" />
     <ClInclude Include="skydomeshaderclass.h" />
     <ClInclude Include="SphereCollider.h" />
@@ -100,6 +103,7 @@
     <ClCompile Include="bumpmapshaderclass.cpp" />
     <ClCompile Include="cameraclass.cpp" />
     <ClCompile Include="CapsuleCollider.cpp" />
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="colorshaderclass.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="cpuclass.cpp" />
@@ -131,6 +135,8 @@
     <ClCompile Include="positionclass.cpp" />
     <ClCompile Include="RotateObject.cpp" />
     <ClCompile Include="shadermanagerclass.cpp" />
+    <ClCompile Include="ShotComponet.cpp" />
+    <ClCompile Include="ShotManager.cpp" />
     <ClCompile Include="skydomeclass.cpp" />
     <ClCompile Include="skydomeshaderclass.cpp" />
     <ClCompile Include="SphereCollider.cpp" />

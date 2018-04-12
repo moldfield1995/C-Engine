@@ -14,6 +14,7 @@
 //Updated In Final Year
 //Created By Matthew Oldfield
 
+struct CollisonData;
 
 class GameObject
 {
@@ -37,10 +38,22 @@ public:
 	void Update();
 
 	//Render
-	void Render(ID3D11DeviceContext* deviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, const XMMATRIX& projectionMatrix,FrustumClass* frustume,LightClass* light,CameraClass& camera);
+	void Render(ID3D11DeviceContext* deviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, const XMMATRIX& projectionMatrix, FrustumClass* frustume, LightClass* light, CameraClass& camera);
 
 	//Componet
 	void AddComponet(Component* component);
+
+	template<class T>
+	T* GetComponent()
+	{
+		for each (Component* component in m_Componets)
+		{
+			T* castedcomponent = dynamic_cast<T*>(component);
+			if (castedcomponent != NULL)
+				return castedcomponent;
+		}
+		return nullptr;
+	}
 
 	//If index is not previded its just added to the top of the list
 	void AddTexture(ID3D11ShaderResourceView* texture, int index = -1);
@@ -48,12 +61,12 @@ public:
 	void Destroy();
 	bool IsAlive();
 
-	void OnCollishon(const GameObject* other);
+	void OnCollishon(const CollisonData* other);
 
 
 protected:
 
-	bool m_KillGameObject,m_Renders;
+	bool m_KillGameObject, m_Renders;
 	ModelClass* m_model;
 	std::vector<ID3D11ShaderResourceView*>* m_textures;
 	Shader* m_shader;
