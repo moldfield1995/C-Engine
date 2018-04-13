@@ -11,7 +11,7 @@ class UIImage:
 	public UIComponent
 {
 public:
-	UIImage(char* textureFileName);
+	UIImage(char* textureFileName, PivotPosition pivot = PivotPosition::TopLeft);
 	~UIImage();
 	void virtual Initalize();
 	void virtual Update();

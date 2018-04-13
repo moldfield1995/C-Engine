@@ -1,6 +1,8 @@
 #include "PlayerControler.h"
 #include "timerclass.h"
 #include "Collider.h"
+#include "UIText.h"
+#include "UIMannager.h"
 
 PlayerControler* PlayerControler::instance = 0;
 
@@ -9,9 +11,11 @@ PlayerControler::PlayerControler(float maxEnergey, float maxHP)
 	: hpLossPerHit(25.0f)
 	, energeyLossPerSecond(100.0f)
 	, restingPosition(0.0f,0.0f,5.0f)
+	, maxEnergey(maxEnergey)
+	, maxHP(maxHP)
 {
-	this->maxEnergey = maxEnergey;
-	this->maxHP = maxHP;
+	currentEnergey = 0.0f;
+	currentHP = maxHP;
 }
 
 PlayerControler::~PlayerControler()
@@ -34,7 +38,6 @@ void PlayerControler::Initalize()
 
 	//UI Setup
 
-	//Shot Setup
 
 	//SetInstance
 	instance = this;
@@ -59,9 +62,9 @@ void PlayerControler::Update()
 	}
 	//End Position Setting
 
-	if (!leapHand.isValid())
-		return;
-
+	currentEnergey += 2.0f * timeDelta;
+	if (currentEnergey > maxEnergey)
+		currentEnergey = maxEnergey;
 
 }
 

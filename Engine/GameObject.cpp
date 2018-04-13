@@ -5,7 +5,7 @@
 GameObject::GameObject()
 {
 	m_model = 0;
-	//ID3D11ShaderResourceView* m_textures;
+	//ID3D11ShaderResourceView* m_Textures;
 	m_textures = new std::vector<ID3D11ShaderResourceView*>();
 	m_shader=0;
 	m_colour = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);

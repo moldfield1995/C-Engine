@@ -25,7 +25,6 @@ const float SCREEN_NEAR = 0.1f;
 #include "fpsclass.h"
 #include "ModelManager.h"
 #include "GameState.h"
-#include "LoadingScreen.h"
 #include "AudioManager.h"
 #include "fontmanagerclass.h"
 #include "..\TrueAxis\Physics\Physics.h"
@@ -56,14 +55,11 @@ private:
 	//Collition Triggers
 	bool static TA_CALL_BACK ProcessColltion(TA::PreCollision& collition);
 	//Loading and Scene settup
-	void loadMainMenu();
-	void loadMainLevel();
 	void shutDownFrountBuffer();
 	void shutDownBackBuffer();
 
 	static void InitaliseLevel(D3DClass* Direct3D, int screenWidth, int screenHeight, float screenDepth, TextureManagerClass* textureManager, ModelManager* modelManager, GameState* frountBuffer,AudioManager* AudioManager);
-	static void RunLoadingScreen(D3DClass* Direct3D, InputClass* Input, ShaderManagerClass* ShaderManager, TextureManagerClass* TextureManager,
-		ModelManager* modelManager, float frameTime, int fps, LoadingScreen* loadingScreen, GameState* level, AudioManager* audioManager);
+
 
 	InputClass* m_Input;
 	D3DClass* m_Direct3D;

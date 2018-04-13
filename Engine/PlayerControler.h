@@ -29,13 +29,11 @@ private:
 	Float3 rotationOffset;
 	const Float3 restingPosition;
 	//GamePlay
-	float currentEnergey, currentHP, maxEnergey, maxHP;
-	const float hpLossPerHit, energeyLossPerSecond;
+	float currentEnergey, currentHP;
+	const float hpLossPerHit, energeyLossPerSecond, maxEnergey, maxHP;
 
-	//ShotSpawner (Seprate script)
 	//UI componet
-	//score (do in seprate script)
-
+	
 
 	static PlayerControler* instance;
 public:

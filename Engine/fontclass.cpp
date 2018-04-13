@@ -7,8 +7,7 @@
 FontClass::FontClass()
 {
 	m_Font = 0;
-	m_Texture = 0;
-	textures = 0;
+	m_Textures = 0;
 }
 
 
@@ -29,7 +28,7 @@ bool FontClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceCont
 
 	// Store the height of the font.
 	m_fontHeight = fontHeight;
-
+	m_fontWidth = 0.0f;
 	// Store the size of spaces in pixel size.
 	m_spaceSize = spaceSize;
 
@@ -129,25 +128,11 @@ bool FontClass::LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceCon
 	TextureManagerClass* textureManager = TextureManagerClass::GetInstance();
 	if (textureManager->LoadTexture(device, deviceContext, filename, 111))
 	{
-		textures = new std::vector<ID3D11ShaderResourceView*>();
-		textures->push_back(textureManager->GetTexture(111));
+		m_Textures = new std::vector<ID3D11ShaderResourceView*>();
+		m_Textures->push_back(textureManager->GetTexture(111));
 	}
 	else
 		return false;
-	//TODO: Remove
-	// Create the texture object.
-	m_Texture = new TextureClass;
-	if(!m_Texture)
-	{
-		return false;
-	}
-
-	// Initialize the texture object.
-	result = m_Texture->Initialize(device, deviceContext, filename);
-	if(!result)
-	{
-		return false;
-	}
 
 	return true;
 }
@@ -155,26 +140,14 @@ bool FontClass::LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceCon
 
 void FontClass::ReleaseTexture()
 {
-	// Release the texture object.
-	if(m_Texture)
-	{
-		m_Texture->Shutdown();
-		delete m_Texture;
-		m_Texture = 0;
-	}
-
+	m_Textures->clear();
 	return;
 }
 
 
-ID3D11ShaderResourceView* FontClass::GetTexture()
-{
-	return m_Texture->GetTexture();
-}
-
 std::vector<ID3D11ShaderResourceView*>* FontClass::GetTextures()
 {
-	return textures;
+	return m_Textures;
 }
 
 
@@ -236,6 +209,7 @@ int FontClass::BuildVertexArray(void* vertices, const char* sentence, float draw
 		}
 	}
 
+	m_fontWidth = drawX;
 	return index;
 }
 
@@ -267,7 +241,12 @@ int FontClass::GetSentencePixelLength(char* sentence)
 }
 
 
-int FontClass::GetFontHeight()
+float FontClass::GetFontHeight()
 {
-	return (int)m_fontHeight;
+	return m_fontHeight;
+}
+
+float FontClass::GetFontWidth()
+{
+	return m_fontWidth;
 }

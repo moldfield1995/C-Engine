@@ -60,14 +60,14 @@
     <ClInclude Include="lightclass.h" />
     <ClInclude Include="lightshader.h" />
     <ClInclude Include="lightshaderclass.h" />
-    <ClInclude Include="LoadingScreen.h" />
-    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="ModelClass.h" />
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="PeformanceMonerting.h" />
     <ClInclude Include="PlayerControler.h" />
+    <ClInclude Include="PlayerUI.h" />
     <ClInclude Include="positionclass.h" />
     <ClInclude Include="RotateObject.h" />
+    <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="shadermanagerclass.h" />
     <ClInclude Include="ShotComponet.h" />
@@ -75,10 +75,7 @@
     <ClInclude Include="skydomeclass.h" />
     <ClInclude Include="skydomeshaderclass.h" />
     <ClInclude Include="SphereCollider.h" />
-    <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="systemclass.h" />
-    <ClInclude Include="terraincellclass.h" />
-    <ClInclude Include="terrainclass.h" />
     <ClInclude Include="terrainshaderclass.h" />
     <ClInclude Include="textclass.h" />
     <ClInclude Include="textureclass.h" />
@@ -90,9 +87,7 @@
     <ClInclude Include="UIImage.h" />
     <ClInclude Include="UIMannager.h" />
     <ClInclude Include="UIText.h" />
-    <ClInclude Include="userinterfaceclass.h" />
     <ClInclude Include="Utills.h" />
-    <ClInclude Include="zoneclass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="applicationclass.cpp" />
@@ -125,25 +120,22 @@
     <ClCompile Include="lightclass.cpp" />
     <ClCompile Include="lightshader.cpp" />
     <ClCompile Include="lightshaderclass.cpp" />
-    <ClCompile Include="LoadingScreen.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="ModelClass.cpp" />
     <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="PeformanceMonerting.cpp" />
     <ClCompile Include="PlayerControler.cpp" />
+    <ClCompile Include="PlayerUI.cpp" />
     <ClCompile Include="positionclass.cpp" />
     <ClCompile Include="RotateObject.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="shadermanagerclass.cpp" />
     <ClCompile Include="ShotComponet.cpp" />
     <ClCompile Include="ShotManager.cpp" />
     <ClCompile Include="skydomeclass.cpp" />
     <ClCompile Include="skydomeshaderclass.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
-    <ClCompile Include="SplashScreen.cpp" />
     <ClCompile Include="systemclass.cpp" />
-    <ClCompile Include="terraincellclass.cpp" />
-    <ClCompile Include="terrainclass.cpp" />
     <ClCompile Include="terrainshaderclass.cpp" />
     <ClCompile Include="textclass.cpp" />
     <ClCompile Include="textureclass.cpp" />
@@ -155,9 +147,7 @@
     <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="UIMannager.cpp" />
     <ClCompile Include="UIText.cpp" />
-    <ClCompile Include="userinterfaceclass.cpp" />
     <ClCompile Include="Utills.cpp" />
-    <ClCompile Include="zoneclass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TrueAxis\Projects\TA_VC8.vcxproj">

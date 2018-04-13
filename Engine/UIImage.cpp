@@ -2,7 +2,8 @@
 #include "shadermanagerclass.h"
 #include "textureshaderclass.h"
 
-UIImage::UIImage(char* textureFileName)
+UIImage::UIImage(char* textureFileName, PivotPosition pivot)
+	: UIComponent(pivot)
 {
 	this->textureFileName = textureFileName;
 	bitmapClass = 0;
@@ -82,10 +83,10 @@ void UIImage::SetPosition(Float3 value, bool centerX, bool centerY)
 {
 	int height, width;
 	bitmapClass->GetTextureSize(height, width);
-	position = value;
+	position = value + pivotOffset;
 
 	if (centerX)
 		position.X -= width;
 	if (centerY)
-		position.Y += width;
+		position.Y += height;
 }

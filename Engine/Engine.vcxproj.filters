@@ -19,9 +19,6 @@
     <Filter Include="Header Files\Mangers">
       <UniqueIdentifier>{be62750f-449b-40a5-ade0-415ab47dca6c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Tarrain">
-      <UniqueIdentifier>{0de73089-7c18-4a4d-a870-6e982fc97ad0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\System">
       <UniqueIdentifier>{47e66539-b7b2-46e4-a2cc-cab90827161b}</UniqueIdentifier>
     </Filter>
@@ -159,12 +156,6 @@
     <ClInclude Include="texturemanagerclass.h">
       <Filter>Header Files\Mangers</Filter>
     </ClInclude>
-    <ClInclude Include="terrainclass.h">
-      <Filter>Header Files\Tarrain</Filter>
-    </ClInclude>
-    <ClInclude Include="terraincellclass.h">
-      <Filter>Header Files\Tarrain</Filter>
-    </ClInclude>
     <ClInclude Include="d3dclass.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
@@ -201,12 +192,6 @@
     <ClInclude Include="ModelManager.h">
       <Filter>Header Files\Mangers</Filter>
     </ClInclude>
-    <ClInclude Include="zoneclass.h">
-      <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="userinterfaceclass.h">
-      <Filter>Header Files\Mangers</Filter>
-    </ClInclude>
     <ClInclude Include="ModelClass.h">
       <Filter>Header Files\HandeldByManager</Filter>
     </ClInclude>
@@ -219,17 +204,8 @@
     <ClInclude Include="GameState.h">
       <Filter>Header Files\SingleTon</Filter>
     </ClInclude>
-    <ClInclude Include="MainMenu.h">
-      <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="SplashScreen.h">
-      <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="lightshader.h">
       <Filter>Header Files\Shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="LoadingScreen.h">
-      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="AudioManager.h">
       <Filter>Header Files\System</Filter>
@@ -318,10 +294,16 @@
     <ClInclude Include="Collider.h">
       <Filter>Header Files\Componets\Colliders</Filter>
     </ClInclude>
-    <ClInclude Include="ShotManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ShotComponet.h">
+      <Filter>Header Files\Componets</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotManager.h">
+      <Filter>Header Files\Componets</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreManager.h">
+      <Filter>Header Files\Componets</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -383,20 +365,11 @@
     <ClCompile Include="timerclass.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="zoneclass.cpp">
-      <Filter>Source Files\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="ModelManager.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
     <ClCompile Include="ModelClass.cpp">
       <Filter>Source Files\HandeledByManagers</Filter>
-    </ClCompile>
-    <ClCompile Include="terraincellclass.cpp">
-      <Filter>Source Files\HandeledByManagers</Filter>
-    </ClCompile>
-    <ClCompile Include="userinterfaceclass.cpp">
-      <Filter>Source Files\Manager</Filter>
     </ClCompile>
     <ClCompile Include="skydomeclass.cpp">
       <Filter>Source Files\SingleTon</Filter>
@@ -410,17 +383,8 @@
     <ClCompile Include="GameState.cpp">
       <Filter>Source Files\SingleTon</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenu.cpp">
-      <Filter>Source Files\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="SplashScreen.cpp">
-      <Filter>Source Files\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="lightshader.cpp">
       <Filter>Source Files\Shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="LoadingScreen.cpp">
-      <Filter>Source Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="AudioManager.cpp">
       <Filter>Source Files\System</Filter>
@@ -452,9 +416,6 @@
     <ClCompile Include="positionclass.cpp">
       <Filter>Source Files\Elements</Filter>
     </ClCompile>
-    <ClCompile Include="terrainclass.cpp">
-      <Filter>Source Files\Elements</Filter>
-    </ClCompile>
     <ClCompile Include="textclass.cpp">
       <Filter>Source Files\Elements</Filter>
     </ClCompile>
@@ -468,9 +429,6 @@
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="UIImage.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UIComponent.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="UIButton.cpp">
@@ -509,10 +467,19 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files\Componets\Coliders</Filter>
     </ClCompile>
-    <ClCompile Include="ShotManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ShotComponet.cpp">
+      <Filter>Source Files\Componets</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotManager.cpp">
+      <Filter>Source Files\Componets</Filter>
+    </ClCompile>
+    <ClCompile Include="UIComponent.cpp">
+      <Filter>Source Files\SingleTon</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreManager.cpp">
+      <Filter>Source Files\Componets</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

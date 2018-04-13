@@ -4,7 +4,8 @@
 #include "fontmanagerclass.h"
 int UIText::screenHeight = 0;
 int UIText::screenWidth = 0;
-UIText::UIText(XMFLOAT4 colour, string initalText)
+UIText::UIText(XMFLOAT4 colour, string initalText, PivotPosition pivot)
+	:UIComponent(pivot)
 {
 	active = false;
 	killComponet = false;
@@ -205,4 +206,13 @@ void UIText::UpdateString(string text)
 void UIText::SetShadowColour(XMFLOAT4 colour)
 {
 	shadowColour = colour;
+}
+
+void UIText::SetPosition(Float3 value, bool centerX, bool centerY)
+{
+	position = value + pivotOffset;
+	if (centerX)
+		position.X -= font->GetFontWidth();
+	if (centerY)
+		position.Y += font->GetFontHeight();
 }

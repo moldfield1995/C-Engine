@@ -1,8 +1,10 @@
 #include "UIComponent.h"
 
-UIComponent::UIComponent()
+UIComponent::UIComponent(PivotPosition pivot)
 {
-	position = rotation = Float3();
+	SetPivot(pivot);
+	position = pivotOffset;
+	rotation = Float3();
 	scale = Float3(1.0f);
 	renders = active = true;
 	killComponet = false;
@@ -10,7 +12,7 @@ UIComponent::UIComponent()
 
 void UIComponent::SetPosition(Float3 value)
 {
-	position = value;
+	position = value + pivotOffset;
 }
 
 void UIComponent::SetRotation(Float3 value)
@@ -41,4 +43,48 @@ Float3 UIComponent::GetScale()
 bool UIComponent::CheckCollition(Float3 otherPos)
 {
 	return false;
+}
+
+void UIComponent::SetPivot(PivotPosition pivot)
+{
+	int screenWidth, screenHight;
+	D3DClass::GetInstance()->GetScreenReserlution(screenWidth, screenHight);
+	switch (pivot)
+	{
+	case TopLeft:
+		pivotOffset = Float3();
+		break;
+	case TopMiddle:
+		pivotOffset = Float3(screenWidth / 2, 0.0f);
+		break;
+	case TopRight:
+		pivotOffset = Float3(screenWidth, 0.0f);
+		break;
+	case MiddleLeft:
+		pivotOffset = Float3(0.0f, screenHight / 2);
+		break;
+	case Center:
+		pivotOffset = Float3(screenWidth / 2, screenHight / 2);
+		break;
+	case MiddleRight:
+		pivotOffset = Float3(screenWidth, screenHight / 2);
+		break;
+	case BottemLeft:
+		pivotOffset = Float3(0.0f, screenHight);
+		break;
+	case BottemMiddle:
+		pivotOffset = Float3(screenWidth / 2, screenHight);
+		break;
+	case BottemRight:
+		pivotOffset = Float3(screenWidth, screenHight);
+		break;
+	default:
+		break;
+	}
+	this->pivot = pivot;
+}
+
+PivotPosition UIComponent::GetPivot()
+{
+	return pivot;
 }

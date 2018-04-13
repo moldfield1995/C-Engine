@@ -2,8 +2,8 @@
 #include "inputclass.h"
 
 
-UIButton::UIButton(char* textureFileName)
-	: UIImage(textureFileName)
+UIButton::UIButton(char* textureFileName, PivotPosition pivot)
+	: UIImage(textureFileName,pivot)
 {
 	defaultColour = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	hoverColour = XMFLOAT4(1.0f, 1.0f, 1.0f, 0.5f);

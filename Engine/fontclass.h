@@ -46,15 +46,12 @@ public:
 
 	bool Initialize(ID3D11Device*, ID3D11DeviceContext*, char*, char*, float, int);
 	void Shutdown();
-	//old
-	ID3D11ShaderResourceView* GetTexture();
-	//new
 	std::vector< ID3D11ShaderResourceView*>* GetTextures();
 
 	int BuildVertexArray(void*,const char*, float, float);
 	int GetSentencePixelLength(char*);
-	int GetFontHeight();
-
+	float GetFontHeight();
+	float GetFontWidth();
 private:
 	bool LoadFontData(char*);
 	void ReleaseFontData();
@@ -63,11 +60,9 @@ private:
 
 private:
 	FontType* m_Font;
-	float m_fontHeight;
+	float m_fontHeight, m_fontWidth;
 	int m_spaceSize;
-	std::vector< ID3D11ShaderResourceView*> *textures;
-	//TODO: Remove
-	TextureClass* m_Texture;
+	std::vector< ID3D11ShaderResourceView*> *m_Textures;
 };
 
 #endif

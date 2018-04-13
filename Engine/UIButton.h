@@ -18,7 +18,7 @@ public:
 	typedef void OnClick();
 	__event OnClick onClickTrigger;
 public:
-	UIButton(char* textureFileName);
+	UIButton(char* textureFileName, PivotPosition pivot = PivotPosition::TopLeft);
 	~UIButton();
 	void virtual Initalize();
 	void virtual Update();

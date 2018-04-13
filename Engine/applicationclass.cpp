@@ -3,9 +3,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "applicationclass.h"
 #include <thread>
-#include "MainMenu.h"
-#include "zoneclass.h"
-#include "SplashScreen.h"
 #include "LeapTestScene.h"
 #include "Utills.h"
 #include "Collider.h"
@@ -340,7 +337,7 @@ bool ApplicationClass::Frame()
 		switch (m_currentState)
 		{
 		case CurrentState::SplashScreen:
-			loadMainMenu();
+			//loadMainMenu();
 			m_currentState = CurrentState::MainMenu;
 			break;
 		case CurrentState::Level:
@@ -348,7 +345,7 @@ bool ApplicationClass::Frame()
 			m_currentState = CurrentState::PauseScreen;
 			break;
 		case CurrentState::MainMenu:
-			loadMainLevel();
+			//loadMainLevel();
 			m_currentState = CurrentState::Level;
 			break;
 		case CurrentState::PauseScreen:
@@ -381,37 +378,14 @@ bool TA_CALL_BACK ApplicationClass::ProcessColltion(TA::PreCollision& collision)
 
 
 //Needs to be fixed as there is a thread collison when loading assets (setting buffers on GPU) and rendering
-void ApplicationClass::loadMainLevel()
-{
-	LoadingScreen* m_loadingScreen = new LoadingScreen();
-	m_loadingScreen->Initialize(m_Direct3D, m_ScreenWidth, m_ScreenHeight, SCREEN_DEPTH, m_TextureManager, m_ModelManager, m_AudioManager);
-	m_BackBuffer = m_FrountBuffer; // Put the menu on the backBuffer
-	m_FrountBuffer = new ZoneClass();
-	//thread lodingScreenFrame (RunLoadingScreen,m_Direct3D,m_Input,m_ShaderManager,m_TextureManager,m_ModelManager, m_Timer->GetFrameTime(), m_Fps->GetFps(), m_loadingScreen, m_FrountBuffer, m_AudioManager); // this starts when you construct it
-	thread InitilizeLevel(InitaliseLevel,m_Direct3D, m_ScreenWidth, m_ScreenHeight, SCREEN_DEPTH, m_TextureManager, m_ModelManager, m_FrountBuffer, m_AudioManager);
-	InitilizeLevel.join();
-	m_loadingScreen->SetRunning(false);//notify lodingscreen to stop
-	//lodingScreenFrame.join();
-	m_loadingScreen->Shutdown();
-}
 
 
-void ApplicationClass::loadMainMenu()
-{
-	shutDownFrountBuffer();
-	shutDownBackBuffer();
-	m_FrountBuffer = new MainMenu();
-	m_FrountBuffer->Initialize(m_Direct3D, m_ScreenWidth, m_ScreenHeight, SCREEN_DEPTH, m_TextureManager, m_ModelManager, m_AudioManager);
-}
+
+
 
 void ApplicationClass::InitaliseLevel(D3DClass* Direct3D, int screenWidth, int screenHeight, float screenDepth, TextureManagerClass* textureManager, ModelManager* modelManager, GameState* frountBuffer, AudioManager* audioManager)
 {
 	frountBuffer->Initialize(Direct3D, screenWidth, screenHeight, screenDepth, textureManager, modelManager,audioManager);
 }
 
-void ApplicationClass::RunLoadingScreen(D3DClass* Direct3D, InputClass* Input, ShaderManagerClass* ShaderManager, TextureManagerClass* TextureManager,
-	ModelManager* modelManager, float frameTime, int fps, LoadingScreen* loadingScreen, GameState* level, AudioManager* audioManager)
-{
-	loadingScreen->SetLevel(level);
-	loadingScreen->Frame(Direct3D, Input, ShaderManager, TextureManager, modelManager, frameTime, fps,audioManager);
-}
+

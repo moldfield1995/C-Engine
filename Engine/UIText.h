@@ -19,7 +19,7 @@ private:
 	};
 
 public:
-	UIText(XMFLOAT4 colour, string initalText);
+	UIText(XMFLOAT4 colour, string initalText, PivotPosition pivot = PivotPosition::TopLeft);
 	~UIText();
 	void virtual Initalize();
 	void virtual Update();
@@ -27,6 +27,9 @@ public:
 	void virtual Destroy();
 	void UpdateString(string text);
 	void SetShadowColour(XMFLOAT4 colour);
+	
+	using UIComponent::SetPosition;
+	void SetPosition(Float3 value, bool centerX, bool centerY);
 protected:
 	XMFLOAT4 pixleColour, shadowColour;
 	XMMATRIX shadowOffset;
