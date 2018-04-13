@@ -3,7 +3,7 @@
 #include "Collider.h"
 #include "timerclass.h"
 
-const float ShotComponet::lifeTime = 100.0f;
+const float ShotComponet::lifeTime = 10.0f;
 
 ShotComponet::ShotComponet()
 {
@@ -47,14 +47,17 @@ bool ShotComponet::OnCollishon(const CollisonData * other)
 	return true;
 }
 
-void ShotComponet::Shoot(Float3 position)
+void ShotComponet::Shoot(Float3 position, Float3 direction)
 {
 	owner->SetPosition(position);
-	GetOwnersDynamicObject()->SetPosition(position.ToVec3());
-	SetOwnersRender(true);
-	GetOwnersDynamicObject()->SetCollisionDisabled(false);
-	GetOwnersDynamicObject()->SetLinearVelocity(TA::Vec3(0.0f, 0.0f, 100.0f));
 
+	TA::DynamicObject* dynamicObject = GetOwnersDynamicObject();
+	dynamicObject->SetPosition(position.ToVec3());
+	dynamicObject->SetCollisionDisabled(false);
+	dynamicObject->SetLinearVelocity(direction.ToVec3());
+	dynamicObject->SetUpdateDisabled(false);
+
+	SetOwnersRender(true);
 }
 
 void ShotComponet::Reset()

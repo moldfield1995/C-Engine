@@ -12,7 +12,7 @@ public:
 	void virtual Destroy();
 	bool virtual OnCollishon(const CollisonData* other);
 
-	void Shoot(Float3 position);
+	void Shoot(Float3 position, Float3 direction);
 	void Reset();
 private:
 	const static float lifeTime;

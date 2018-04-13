@@ -18,6 +18,7 @@ public:
 	bool virtual OnCollishon(const CollisonData* other);
 
 	void HitAstroid();
+	int GetCurrentHand();
 private:
 
 	void FindHand(InputClass* input, float timeDelta, Hand &hand);
@@ -25,7 +26,8 @@ private:
 	//Leap and possition
 	int currentHand;
 	Float3 leapToWorldScale, leapWorldOffset;
-
+	Float3 rotationOffset;
+	const Float3 restingPosition;
 	//GamePlay
 	float currentEnergey, currentHP, maxEnergey, maxHP;
 	const float hpLossPerHit, energeyLossPerSecond;

@@ -78,7 +78,7 @@ bool GamePlayScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 
 
 	{//Creates the shot manager 
-		modelId = modelManager->AddModle(device, "../Engine/data/Models/Capsule.obj");
+		modelId = modelManager->AddModle(device, "../Engine/data/Models/Sphere.obj");
 		textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/textures/Default.tga");
 
 		GameObject* shot = new GameObject();

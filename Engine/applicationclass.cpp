@@ -159,7 +159,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	TA::Physics::CreateInstance();
 	m_taPhysics = &TA::Physics::GetInstance();
 	TA::AABB worldExstence;
-	worldExstence.Initialise(TA::Vec3(0.0f, 0.0f, 0.0f), TA::Vec3(100.0f, 100.0f, 1000.0f));
+	worldExstence.Initialise(TA::Vec3(0.0f, 0.0f, 900.0f), TA::Vec3(1000.0f, 1000.0f, 1000.0f));
 	m_taPhysics->SetWorldDimensions(worldExstence);
 	//We are in space, no graverty
 	m_taPhysics->SetGravity(TA::Vec3(0.0f, 0.0f, 0.0f));

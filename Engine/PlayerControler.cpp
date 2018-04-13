@@ -8,6 +8,7 @@ PlayerControler* PlayerControler::instance = 0;
 PlayerControler::PlayerControler(float maxEnergey, float maxHP)
 	: hpLossPerHit(25.0f)
 	, energeyLossPerSecond(100.0f)
+	, restingPosition(0.0f,0.0f,5.0f)
 {
 	this->maxEnergey = maxEnergey;
 	this->maxHP = maxHP;
@@ -24,8 +25,12 @@ void PlayerControler::Initalize()
 	leapToWorldScale = inputClass->GetLeapToWorldScale();
 	leapWorldOffset = inputClass->GetLeapOffset();
 	Hand hand;
+
+	rotationOffset = owner->GetRotation();
+
 	//Hand Setup
 	FindHand(inputClass, 1.0f, hand);
+
 
 	//UI Setup
 
@@ -44,10 +49,9 @@ void PlayerControler::Update()
 	if (leapHand.isValid())
 	{
 		//Leap possition to world possiton
-		owner->SetPosition(Float3(leapHand.palmPosition())*leapToWorldScale + leapWorldOffset);
-		//Bugs out rotates werdly
-		//Vector direction = leapHand.direction();
-		//owner->SetRotation(Float3(direction.roll(),direction.pitch(),direction.yaw())*RAD_TO_DEG);
+		owner->SetPosition(Float3(leapHand.palmPosition())*leapToWorldScale + leapWorldOffset + restingPosition);
+		Vector direction = leapHand.direction();
+		owner->SetRotation((Float3(direction.pitch(),direction.yaw(), -leapHand.palmNormal().roll())*RAD_TO_DEG) + rotationOffset);
 	}
 	else
 	{//Attempt to find a new hand
@@ -88,6 +92,11 @@ void PlayerControler::HitAstroid()
 	currentEnergey += 10.0f;
 }
 
+int PlayerControler::GetCurrentHand()
+{
+	return currentHand;
+}
+
 void PlayerControler::FindHand(InputClass * input, float timeDelta, Hand &hand)
 {
 	bool handFound = false;
@@ -99,8 +108,8 @@ void PlayerControler::FindHand(InputClass * input, float timeDelta, Hand &hand)
 		{
 			//Leap possition to world possiton
 			owner->SetPosition(Float3(leapHand.palmPosition())*leapToWorldScale + leapWorldOffset);
-			//Takes normal facing directon and translates it to rotational value
-			//owner->SetRotation((Float3(leapHand.palmNormal()) + Float3(1.0f)) * (90.0f / PI));
+			Vector direction = leapHand.direction();
+			owner->SetRotation((Float3(direction.pitch(), direction.yaw(), -leapHand.palmNormal().roll())*RAD_TO_DEG) + rotationOffset);
 			currentHand = leapHand.id();
 			hand = leapHand;
 			handFound = true;
@@ -109,8 +118,8 @@ void PlayerControler::FindHand(InputClass * input, float timeDelta, Hand &hand)
 	}
 	if (!handFound)
 	{//Worce case go back to 0,0,0
-		owner->SetPosition(Float3::Lerp(owner->GetPosition(), Float3(0.0f), timeDelta));
-		//owner->SetRotation(Float3::Lerp(owner->GetRotation(), Float3(0.0f), timeDelta));
+		owner->SetPosition(Float3::Lerp(owner->GetPosition(), restingPosition, timeDelta));
+		owner->SetRotation(Float3::Lerp(owner->GetRotation(), rotationOffset, timeDelta));
 	}
 }
 

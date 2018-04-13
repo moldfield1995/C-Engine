@@ -16,11 +16,12 @@ public:
 	static ShotManager* GetInstance();
 private:
 
+	void Shoot();
 	void CreateShots(int amount);
 
 	float timeToNextShot;
 	const float shotInterval, superChargeTime;
-	const Float3 shotOffset;
+	const float shotOffset, shotSpeed;
 	GameObject* shotPrefab;
 
 	std::vector<GameObject*> activeShots;

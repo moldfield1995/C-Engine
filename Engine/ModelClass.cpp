@@ -120,17 +120,16 @@ bool ModelClass::LoadObjModel(char * modelFileName)
 	int vertexCount, textureCount, normalCount, faceCount, maxCount;
 	int vertexIndex, texcoordIndex, normalIndex, faceIndex, vIndex, tIndex, nIndex;
 	char input, temp;
-	ModelType* modelInput;
-	FaceType* faceInput;
 	std::ifstream fin;
 	//Setup all the arrays and Indexs
 	vertexIndex = texcoordIndex = normalIndex = faceIndex = 0;
 	if (!ReadCounts(modelFileName, vertexCount, textureCount, normalCount, faceCount))
 		return false;
 	//Get the max count to initalize an array of modelInput
-	maxCount = (vertexCount > textureCount ? vertexCount : textureCount) > normalCount ? vertexCount : normalCount;
-	modelInput = new ModelType[maxCount];
-	faceInput = new FaceType[faceCount];
+	maxCount = vertexCount > textureCount ? vertexCount : textureCount;
+	maxCount = maxCount > normalCount ? maxCount : normalCount;
+	ModelType *modelInput = new ModelType[maxCount];
+	FaceType *faceInput = new FaceType[faceCount];
 
 	fin.open(modelFileName);
 	if (fin.fail())
