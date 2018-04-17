@@ -24,6 +24,8 @@
     <None Include="Shaderlight.vs" />
     <None Include="skydome.ps" />
     <None Include="skydome.vs" />
+    <None Include="slider.ps" />
+    <None Include="slider.vs" />
     <None Include="terrain.ps" />
     <None Include="terrain.vs" />
     <None Include="texture.ps" />
@@ -74,6 +76,7 @@
     <ClInclude Include="ShotManager.h" />
     <ClInclude Include="skydomeclass.h" />
     <ClInclude Include="skydomeshaderclass.h" />
+    <ClInclude Include="slidershaderclass.h" />
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="systemclass.h" />
     <ClInclude Include="terrainshaderclass.h" />
@@ -134,6 +137,7 @@
     <ClCompile Include="ShotManager.cpp" />
     <ClCompile Include="skydomeclass.cpp" />
     <ClCompile Include="skydomeshaderclass.cpp" />
+    <ClCompile Include="slidershaderclass.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="systemclass.cpp" />
     <ClCompile Include="terrainshaderclass.cpp" />

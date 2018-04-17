@@ -130,6 +130,12 @@
     <None Include="bumpmap.vs">
       <Filter>Shader Files</Filter>
     </None>
+    <None Include="slider.ps">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="slider.vs">
+      <Filter>Shader Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="colorshaderclass.h">
@@ -304,7 +310,10 @@
       <Filter>Header Files\Componets</Filter>
     </ClInclude>
     <ClInclude Include="PlayerUI.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="slidershaderclass.h">
+      <Filter>Header Files\Shaders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -480,7 +489,10 @@
       <Filter>Source Files\Componets</Filter>
     </ClCompile>
     <ClCompile Include="PlayerUI.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="slidershaderclass.cpp">
+      <Filter>Source Files\Shaders</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
