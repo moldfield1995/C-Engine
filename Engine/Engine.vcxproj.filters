@@ -150,9 +150,6 @@
     <ClInclude Include="skydomeshaderclass.h">
       <Filter>Header Files\Shaders</Filter>
     </ClInclude>
-    <ClInclude Include="terrainshaderclass.h">
-      <Filter>Header Files\Shaders</Filter>
-    </ClInclude>
     <ClInclude Include="textureshaderclass.h">
       <Filter>Header Files\Shaders</Filter>
     </ClInclude>
@@ -231,9 +228,6 @@
     <ClInclude Include="LeapTestScene.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="textclass.h">
-      <Filter>Header Files\Elements</Filter>
-    </ClInclude>
     <ClInclude Include="cameraclass.h">
       <Filter>Header Files\Elements</Filter>
     </ClInclude>
@@ -309,11 +303,14 @@
     <ClInclude Include="ScoreManager.h">
       <Filter>Header Files\Componets</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerUI.h">
-      <Filter>Header Files\UI</Filter>
-    </ClInclude>
     <ClInclude Include="slidershaderclass.h">
       <Filter>Header Files\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerUI.h">
+      <Filter>Header Files\Componets</Filter>
+    </ClInclude>
+    <ClInclude Include="UISlider.h">
+      <Filter>Header Files\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -330,9 +327,6 @@
       <Filter>Source Files\Shaders</Filter>
     </ClCompile>
     <ClCompile Include="textureshaderclass.cpp">
-      <Filter>Source Files\Shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="terrainshaderclass.cpp">
       <Filter>Source Files\Shaders</Filter>
     </ClCompile>
     <ClCompile Include="shadermanagerclass.cpp">
@@ -425,9 +419,6 @@
     <ClCompile Include="positionclass.cpp">
       <Filter>Source Files\Elements</Filter>
     </ClCompile>
-    <ClCompile Include="textclass.cpp">
-      <Filter>Source Files\Elements</Filter>
-    </ClCompile>
     <ClCompile Include="UIMannager.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
@@ -488,11 +479,14 @@
     <ClCompile Include="ScoreManager.cpp">
       <Filter>Source Files\Componets</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerUI.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
     <ClCompile Include="slidershaderclass.cpp">
       <Filter>Source Files\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerUI.cpp">
+      <Filter>Source Files\Componets</Filter>
+    </ClCompile>
+    <ClCompile Include="UISlider.cpp">
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

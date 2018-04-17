@@ -61,22 +61,22 @@ void UIComponent::SetPivot(PivotPosition pivot)
 		pivotOffset = Float3(screenWidth, 0.0f);
 		break;
 	case MiddleLeft:
-		pivotOffset = Float3(0.0f, screenHight / 2);
+		pivotOffset = Float3(0.0f, -screenHight / 2);
 		break;
 	case Center:
-		pivotOffset = Float3(screenWidth / 2, screenHight / 2);
+		pivotOffset = Float3(screenWidth / 2, -screenHight / 2);
 		break;
 	case MiddleRight:
-		pivotOffset = Float3(screenWidth, screenHight / 2);
+		pivotOffset = Float3(screenWidth, -screenHight / 2);
 		break;
 	case BottemLeft:
-		pivotOffset = Float3(0.0f, screenHight);
+		pivotOffset = Float3(0.0f, -screenHight);
 		break;
 	case BottemMiddle:
-		pivotOffset = Float3(screenWidth / 2, screenHight);
+		pivotOffset = Float3(screenWidth / 2, -screenHight);
 		break;
 	case BottemRight:
-		pivotOffset = Float3(screenWidth, screenHight);
+		pivotOffset = Float3(screenWidth, -screenHight);
 		break;
 	default:
 		break;

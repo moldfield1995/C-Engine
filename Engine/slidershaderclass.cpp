@@ -31,7 +31,7 @@ bool SliderShaderClass::Initialize(ID3D11Device* device, HWND hwnd)
 
 
 	// Initialize the vertex and pixel shaders.
-	result = InitializeShader(device, hwnd, L"../Engine/Slider.vs", L"../Engine/Slider.ps");
+	result = InitializeShader(device, hwnd, L"../Engine/slider.vs", L"../Engine/slider.ps");
 	if(!result)
 	{
 		return false;
@@ -49,16 +49,14 @@ void SliderShaderClass::Shutdown()
 	return;
 }
 
-bool SliderShaderClass::Render(ID3D11DeviceContext * context, int indexCount, const XMMATRIX & worldMatrix, const XMMATRIX & viewMatrix, const XMMATRIX & projectionMatrix, std::vector< ID3D11ShaderResourceView*>* Sliders, LightClass * light, XMFLOAT4* colour)
+bool SliderShaderClass::Render(ID3D11DeviceContext * context, int indexCount, const XMMATRIX & worldMatrix, const XMMATRIX & viewMatrix, const XMMATRIX & projectionMatrix, std::vector< ID3D11ShaderResourceView*>* Textures, LightClass * light, void* shaderData)
 {
 	bool result;
 
 
 	// Set the shader parameters that it will use for rendering.
-	if(colour != nullptr)
-		result = SetShaderParameters(context, worldMatrix, viewMatrix, projectionMatrix, Sliders->at(0),*colour);
-	else
-		result = SetShaderParameters(context, worldMatrix, viewMatrix, projectionMatrix, Sliders->at(0), XMFLOAT4(1.0f,1.0f,1.0f,1.0f));
+	if(shaderData != 0)
+		result = SetShaderParameters(context, worldMatrix, viewMatrix, projectionMatrix, Textures->at(0),(SliderBuffer*)shaderData);
 	if (!result)
 	{
 		return false;
@@ -66,26 +64,6 @@ bool SliderShaderClass::Render(ID3D11DeviceContext * context, int indexCount, co
 
 	// Now render the prepared buffers with the shader.
 	RenderShader(context, indexCount);
-
-	return true;
-}
-
-
-bool SliderShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix,
-								const XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* Slider)
-{
-	bool result;
-
-
-	// Set the shader parameters that it will use for rendering.
-	result = SetShaderParameters(deviceContext, worldMatrix, viewMatrix, projectionMatrix, Slider, XMFLOAT4(1.0f,1.0f,1.0f,1.0f));
-	if(!result)
-	{
-		return false;
-	}
-
-	// Now render the prepared buffers with the shader.
-	RenderShader(deviceContext, indexCount);
 
 	return true;
 }
@@ -234,7 +212,7 @@ bool SliderShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR*
 	}
 
 	sliderBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-	sliderBufferDesc.ByteWidth = sizeof(ColourBuffer);
+	sliderBufferDesc.ByteWidth = sizeof(SliderBuffer) ;
 	sliderBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	sliderBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	sliderBufferDesc.MiscFlags = 0;
@@ -333,13 +311,13 @@ void SliderShaderClass::OutputShaderErrorMessage(ID3D10Blob* errorMessage, HWND 
 
 
 bool SliderShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix,
-											 const XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* Slider, XMFLOAT4 colour)
+											 const XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* Textures, SliderBuffer* sliderData)
 {
 	HRESULT result;
     D3D11_MAPPED_SUBRESOURCE mappedResource;
 	MatrixBufferType* dataPtr;
 	unsigned int bufferNumber;
-	ColourBuffer* dataPtr2;
+	SliderBuffer* dataPtr2;
 
 	// Xu's test line. Lock the constant buffer so it can be written to.
 	result = deviceContext->Map(m_matrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
@@ -362,9 +340,12 @@ bool SliderShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, 
 	//Get a ptr to the colour data
 	deviceContext->Map(m_sliderBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	//cast to buffer
-	dataPtr2 = (ColourBuffer*)mappedResource.pData;
+	dataPtr2 = (SliderBuffer*)mappedResource.pData;
 	//set data Local
-	dataPtr2->colour = colour;
+	dataPtr2->colour = sliderData->colour;
+
+	dataPtr2->UVClip = sliderData->UVClip;
+
 	//Free data
 	deviceContext->Unmap(m_sliderBuffer, 0);
 
@@ -376,7 +357,7 @@ bool SliderShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, 
     deviceContext->VSSetConstantBuffers(bufferNumber, 1, &m_matrixBuffer);
 
 	// Set shader Slider resource in the pixel shader.
-	deviceContext->PSSetShaderResources(0, 1, &Slider);
+	deviceContext->PSSetShaderResources(0, 1, &Textures);
 
 	deviceContext->PSSetConstantBuffers(0, 1, &m_sliderBuffer);
 

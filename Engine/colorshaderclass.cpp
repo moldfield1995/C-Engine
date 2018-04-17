@@ -47,7 +47,7 @@ void ColorShaderClass::Shutdown()
 	return;
 }
 
-bool ColorShaderClass::Render(ID3D11DeviceContext * context, int indexCount, const XMMATRIX & worldMatrix, const XMMATRIX & viewMatrix, const XMMATRIX & projectionMatrix, std::vector< ID3D11ShaderResourceView*>* textures, LightClass * light, XMFLOAT4* colour)
+bool ColorShaderClass::Render(ID3D11DeviceContext * context, int indexCount, const XMMATRIX & worldMatrix, const XMMATRIX & viewMatrix, const XMMATRIX & projectionMatrix, std::vector< ID3D11ShaderResourceView*>* textures, LightClass * light, void* shaderData)
 {
 	bool result;
 
@@ -61,26 +61,6 @@ bool ColorShaderClass::Render(ID3D11DeviceContext * context, int indexCount, con
 
 	// Now render the prepared buffers with the shader.
 	RenderShader(context, indexCount);
-
-	return true;
-}
-
-
-bool ColorShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, 
-							  const XMMATRIX& projectionMatrix)
-{
-	bool result;
-
-
-	// Set the shader parameters that it will use for rendering.
-	result = SetShaderParameters(deviceContext, worldMatrix, viewMatrix, projectionMatrix);
-	if(!result)
-	{
-		return false;
-	}
-
-	// Now render the prepared buffers with the shader.
-	RenderShader(deviceContext, indexCount);
 
 	return true;
 }

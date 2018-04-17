@@ -7,7 +7,7 @@
 PlayerControler* PlayerControler::instance = 0;
 
 
-PlayerControler::PlayerControler(float maxEnergey, float maxHP)
+PlayerControler::PlayerControler(float maxEnergey, float maxHP, PlayerUI *playerUI)
 	: hpLossPerHit(25.0f)
 	, energeyLossPerSecond(100.0f)
 	, restingPosition(0.0f,0.0f,5.0f)
@@ -16,6 +16,7 @@ PlayerControler::PlayerControler(float maxEnergey, float maxHP)
 {
 	currentEnergey = 0.0f;
 	currentHP = maxHP;
+	this->playerUI = playerUI;
 }
 
 PlayerControler::~PlayerControler()
@@ -34,9 +35,6 @@ void PlayerControler::Initalize()
 
 	//Hand Setup
 	FindHand(inputClass, 1.0f, hand);
-
-
-	//UI Setup
 
 
 	//SetInstance
@@ -65,6 +63,8 @@ void PlayerControler::Update()
 	currentEnergey += 2.0f * timeDelta;
 	if (currentEnergey > maxEnergey)
 		currentEnergey = maxEnergey;
+
+	playerUI->SetSliders(currentHP, currentEnergey);
 
 }
 

@@ -2,9 +2,10 @@
 #include "BasicMeshHitbox.h"
 #include "PlayerControler.h"
 #include "ShotManager.h"
-
-
-
+#include "lightshaderclass.h"
+#include "textureshaderclass.h"
+#include "PlayerUI.h"
+#include "ScoreManager.h"
 
 GamePlayScene::GamePlayScene()
 {
@@ -66,14 +67,15 @@ bool GamePlayScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 	m_UIMannager->Initalize(screenWidth, screenHeight);
 
 	Shader* shader = ShaderManagerClass::GetInstance()->GetShader<TextureShaderClass>();
-
+	//Start Creating Player
 	modelId = modelManager->AddModle(device, "../Engine/data/LizReddington/Ship1.obj");
 	textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/LizReddington/Ship1Uved.tga");
+	PlayerUI* playerUI = new PlayerUI(100.0f, 100.0f);
 
 	gameObject = new GameObject();
 	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f,180.0f,0.0f), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
 	gameObject->SetScale(Float3(0.01f, 0.01f, 0.01f));
-	gameObject->AddComponet(new PlayerControler(100.0f, 100.0f));
+	gameObject->AddComponet(new PlayerControler(100.0f, 100.0f,playerUI));
 	gameObject->AddComponet(new BasicMeshHitbox());
 
 
@@ -86,8 +88,15 @@ bool GamePlayScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 		gameObject->AddComponet(new ShotManager(shot));
 	}
 	m_GameObjects.push_back(gameObject);
+	//END Creating Player
 
-
+	//Creating UI Objects
+	gameObject = new GameObject();
+	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f, 180.0f, 0.0f), 0, 0, 0);
+	gameObject->AddComponet(playerUI);
+	gameObject->AddComponet(new ScoreManager);
+	m_GameObjects.push_back(gameObject);
+	//End Creating UI Objects
 
 	return true;
 }

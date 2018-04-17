@@ -209,7 +209,7 @@ int FontClass::BuildVertexArray(void* vertices, const char* sentence, float draw
 		}
 	}
 
-	m_fontWidth = drawX;
+	m_fontWidth = -drawX;
 	return index;
 }
 

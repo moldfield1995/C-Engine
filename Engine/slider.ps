@@ -2,7 +2,7 @@
 Texture2D shaderTexture;
 SamplerState SampleType;
 
-cbuffer ColourBuffer
+cbuffer ColourBuffer : register(b0)
 {
 	float4 colour;
 	float2 UVClip;
@@ -24,13 +24,9 @@ float4 SliderPixelShader(PixelInputType input) : SV_TARGET
     // Sample the pixel color from the texture using the sampler at this texture coordinate location.
     textureColor = shaderTexture.Sample(SampleType, input.tex);
 	textureColor = textureColor * colour;
-	if(input.tex.x < UVClip.x && input.tex.y < UVClip.y)
+	if(input.tex.x > UVClip.x)
 	{
-		textureColor.a = 0.0f;
-	}
-	else
-	{
-		textureColor.a = colour.a;
+		textureColor.a = 0.0;
 	}
 
     return textureColor;

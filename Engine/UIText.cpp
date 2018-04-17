@@ -216,3 +216,13 @@ void UIText::SetPosition(Float3 value, bool centerX, bool centerY)
 	if (centerY)
 		position.Y += font->GetFontHeight();
 }
+
+float UIText::GetWidth()
+{
+	return font->GetFontWidth() * scale.X;
+}
+
+float UIText::GetHight()
+{
+	return font->GetFontHeight() * scale.Y;
+}

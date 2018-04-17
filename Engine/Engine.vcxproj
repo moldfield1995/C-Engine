@@ -79,8 +79,6 @@
     <ClInclude Include="slidershaderclass.h" />
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="systemclass.h" />
-    <ClInclude Include="terrainshaderclass.h" />
-    <ClInclude Include="textclass.h" />
     <ClInclude Include="textureclass.h" />
     <ClInclude Include="texturemanagerclass.h" />
     <ClInclude Include="textureshaderclass.h" />
@@ -89,6 +87,7 @@
     <ClInclude Include="UIComponent.h" />
     <ClInclude Include="UIImage.h" />
     <ClInclude Include="UIMannager.h" />
+    <ClInclude Include="UISlider.h" />
     <ClInclude Include="UIText.h" />
     <ClInclude Include="Utills.h" />
   </ItemGroup>
@@ -140,8 +139,6 @@
     <ClCompile Include="slidershaderclass.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="systemclass.cpp" />
-    <ClCompile Include="terrainshaderclass.cpp" />
-    <ClCompile Include="textclass.cpp" />
     <ClCompile Include="textureclass.cpp" />
     <ClCompile Include="texturemanagerclass.cpp" />
     <ClCompile Include="textureshaderclass.cpp" />
@@ -150,6 +147,7 @@
     <ClCompile Include="UIComponent.cpp" />
     <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="UIMannager.cpp" />
+    <ClCompile Include="UISlider.cpp" />
     <ClCompile Include="UIText.cpp" />
     <ClCompile Include="Utills.cpp" />
   </ItemGroup>

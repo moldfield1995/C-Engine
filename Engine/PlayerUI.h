@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
-#include "UIImage.h"
+#include "UISlider.h"
+#include "UIText.h"
 class PlayerUI :
 	public Component
 {
@@ -15,6 +16,7 @@ public:
 	void SetSliders(float currentHP, float currentEnergey);
 private:
 	const float maxHp, maxEnergey;
-	UIImage *HpBar, *EnergeyBar;
+	UISlider *HpBar, *EnergeyBar;
+	UIText *HpText, *EnergeyText;
 };
 

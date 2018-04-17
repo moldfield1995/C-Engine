@@ -16,8 +16,10 @@ ScoreManager::~ScoreManager()
 
 void ScoreManager::Initalize()
 {
-	scoreText = new UIText(XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f), "Score: 0", PivotPosition::TopMiddle);
+	scoreText = new UIText(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), "Score: 0", PivotPosition::TopMiddle);
+	scoreText->SetPosition(Float3(-50.0f, 0.0f));
 	UIMannager::GetInstance()->AddComponet(scoreText);
+
 }
 
 void ScoreManager::Update()

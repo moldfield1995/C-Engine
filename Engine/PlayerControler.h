@@ -2,6 +2,7 @@
 #include "Component.h"
 #include "GameObject.h"
 #include "inputclass.h"
+#include "PlayerUI.h"
 
 using namespace Leap;
 
@@ -9,7 +10,7 @@ class PlayerControler :
 	public Component
 {
 public:
-	PlayerControler(float maxEnergey, float maxHP);
+	PlayerControler(float maxEnergey, float maxHP, PlayerUI* playerUI);
 	~PlayerControler();
 	void virtual Initalize();
 	void virtual Update();
@@ -33,7 +34,7 @@ private:
 	const float hpLossPerHit, energeyLossPerSecond, maxEnergey, maxHP;
 
 	//UI componet
-	
+	PlayerUI* playerUI;
 
 	static PlayerControler* instance;
 public:

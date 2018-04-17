@@ -20,6 +20,8 @@ public:
 
 	XMFLOAT4 GetColour();
 	void virtual SetColour(XMFLOAT4 value);
+	float GetWidth();
+	float GetHight();
 	//Exsposes the inherited SetPosition otherwise the compiler only sees SetPostion(Float3,bool,bool)
 	using UIComponent::SetPosition;
 	void SetPosition(Float3 value, bool centerX, bool centerY);

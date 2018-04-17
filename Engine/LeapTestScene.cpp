@@ -5,6 +5,8 @@
 #include "RotateObject.h"
 #include "HitBoxTest.h"
 #include "BasicMeshHitbox.h"
+#include "textureshaderclass.h"
+#include "bumpmapshaderclass.h"
 
 LeapTestScene::LeapTestScene()
 {

@@ -25,8 +25,6 @@ void UIImage::Initalize()
 	{
 		OutputDebugString(L"Failed to Initalize bitmapClass | Initalize | UIImage");
 	}
-	//delete textureFileName;
-	//textureFileName = 0;
 	shader = ShaderManagerClass::GetInstance()->GetShader<TextureShaderClass>();
 	textures = new std::vector<ID3D11ShaderResourceView*>();
 	textures->push_back(bitmapClass->GetTexture());
@@ -77,6 +75,20 @@ XMFLOAT4 UIImage::GetColour()
 void UIImage::SetColour(XMFLOAT4 value)
 {
 	colour = value;
+}
+
+float UIImage::GetWidth()
+{
+	int height, width;
+	bitmapClass->GetTextureSize(height, width);
+	return (float)width * scale.X;
+}
+
+float UIImage::GetHight()
+{
+	int height, width;
+	bitmapClass->GetTextureSize(height, width);
+	return (float)height * scale.Y;
 }
 
 void UIImage::SetPosition(Float3 value, bool centerX, bool centerY)

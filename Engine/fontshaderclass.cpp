@@ -49,13 +49,14 @@ void FontShaderClass::Shutdown()
 	return;
 }
 
-bool FontShaderClass::Render(ID3D11DeviceContext * context, int indexCount, const XMMATRIX & worldMatrix, const XMMATRIX & viewMatrix, const XMMATRIX & projectionMatrix, std::vector< ID3D11ShaderResourceView*>* textures, LightClass * light, XMFLOAT4* colour)
+bool FontShaderClass::Render(ID3D11DeviceContext * context, int indexCount, const XMMATRIX & worldMatrix, const XMMATRIX & viewMatrix, const XMMATRIX & projectionMatrix, std::vector< ID3D11ShaderResourceView*>* textures, LightClass * light, void* shaderData)
 {
 	bool result;
 
 
 	// Set the shader parameters that it will use for rendering.
-	result = SetShaderParameters(context, worldMatrix, viewMatrix, projectionMatrix, textures->at(0), *colour);
+
+	result = SetShaderParameters(context, worldMatrix, viewMatrix, projectionMatrix, textures->at(0), *(XMFLOAT4*)shaderData);
 	if (!result)
 	{
 		return false;
@@ -63,26 +64,6 @@ bool FontShaderClass::Render(ID3D11DeviceContext * context, int indexCount, cons
 
 	// Now render the prepared buffers with the shader.
 	RenderShader(context, indexCount);
-
-	return true;
-}
-
-
-bool FontShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, 
-							 const XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* texture, XMFLOAT4 pixelColor)
-{
-	bool result;
-
-
-	// Set the shader parameters that it will use for rendering.
-	result = SetShaderParameters(deviceContext, worldMatrix, viewMatrix, projectionMatrix, texture, pixelColor);
-	if(!result)
-	{
-		return false;
-	}
-
-	// Now render the prepared buffers with the shader.
-	RenderShader(deviceContext, indexCount);
 
 	return true;
 }

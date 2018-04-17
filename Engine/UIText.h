@@ -30,6 +30,8 @@ public:
 	
 	using UIComponent::SetPosition;
 	void SetPosition(Float3 value, bool centerX, bool centerY);
+	float GetWidth();
+	float GetHight();
 protected:
 	XMFLOAT4 pixleColour, shadowColour;
 	XMMATRIX shadowOffset;
