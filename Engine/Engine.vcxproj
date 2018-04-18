@@ -33,6 +33,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="applicationclass.h" />
+    <ClInclude Include="Astroid.h" />
+    <ClInclude Include="AstroidManager.h" />
     <ClInclude Include="AudioElement.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="BasicMeshHitbox.h" />
@@ -93,6 +95,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="applicationclass.cpp" />
+    <ClCompile Include="Astroid.cpp" />
+    <ClCompile Include="AstroidManager.cpp" />
     <ClCompile Include="AudioElement.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BasicMeshHitbox.cpp" />

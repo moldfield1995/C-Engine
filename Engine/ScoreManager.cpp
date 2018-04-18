@@ -19,7 +19,7 @@ void ScoreManager::Initalize()
 	scoreText = new UIText(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), "Score: 0", PivotPosition::TopMiddle);
 	scoreText->SetPosition(Float3(-50.0f, 0.0f));
 	UIMannager::GetInstance()->AddComponet(scoreText);
-
+	instance = this;
 }
 
 void ScoreManager::Update()
@@ -37,13 +37,13 @@ void ScoreManager::Destroy()
 void ScoreManager::AstroidKilled()
 {
 	currentScore += 100;
-	scoreText->UpdateString("Score: " + currentScore);
+	scoreText->UpdateString("Score: " + to_string(currentScore));
 }
 
 void ScoreManager::AstroidPassedPlayer()
 {
 	currentScore -= 200;
-	scoreText->UpdateString("Score: " + currentScore);
+	scoreText->UpdateString("Score: " + to_string(currentScore));
 }
 
 int ScoreManager::GetScore()

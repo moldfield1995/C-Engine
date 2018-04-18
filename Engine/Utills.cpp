@@ -33,3 +33,13 @@ bool Utills::FileExsits(const char * filelocation)
 	return _waccess(wtext, 6) != -1;
 	delete[] wtext;
 }
+
+float Utills::RandomFloat()
+{
+	return  (float)rand() / (float)(RAND_MAX);
+}
+
+float Utills::Lerp(float a, float b, float t)
+{
+	return (a + b) - (t * b);
+}

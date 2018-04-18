@@ -6,7 +6,7 @@
 #include "textureshaderclass.h"
 #include "PlayerUI.h"
 #include "ScoreManager.h"
-
+#include "AstroidManager.h"
 GamePlayScene::GamePlayScene()
 {
 	m_Camera = 0;
@@ -49,9 +49,9 @@ bool GamePlayScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 
 	// Initialize the light object.
 	m_Light->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
-	m_Light->SetAmbientColor(0.5f, 0.5f, 0.5f, 0.5f);
+	m_Light->SetAmbientColor(0.5f, 0.5f, 0.5f, 1.0f);
 	m_Light->SetSpecularColor(0.1f, 0.1f, 0.1f, 0.1f);
-	m_Light->SetDirection(0.5f, -1.0f, -0.5f);
+	m_Light->SetDirection(0.0f, -1.0f, 0.0f);
 
 	// Create the frustum object.
 	m_Frustum = new FrustumClass;
@@ -92,11 +92,28 @@ bool GamePlayScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHe
 
 	//Creating UI Objects
 	gameObject = new GameObject();
-	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f, 180.0f, 0.0f), 0, 0, 0);
+	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f, 0.0f, 0.0f), 0, 0, 0);
 	gameObject->AddComponet(playerUI);
 	gameObject->AddComponet(new ScoreManager);
 	m_GameObjects.push_back(gameObject);
 	//End Creating UI Objects
+
+	//Creating Astroid Manager
+	gameObject = new GameObject();
+	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f, 0.0f, 0.0f), 0, 0, 0);
+	{//Creates Astroid Manager
+		modelId = modelManager->AddModle(device, "../Engine/data/GooglePoly/Asteroid_One.obj");
+		textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/GooglePoly/Asteroids_BaseColor.tga");
+
+		GameObject* astroid = new GameObject();
+		astroid->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(90.0f, 0.0f, 0.0f), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
+		gameObject->AddComponet(new AstroidManager(astroid));
+	}
+
+	m_GameObjects.push_back(gameObject);
+	//End Creating Astroid Manager
+
+
 
 	return true;
 }

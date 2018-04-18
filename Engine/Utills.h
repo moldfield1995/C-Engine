@@ -15,5 +15,9 @@ public:
 	static void DebugString(const char* debugOutput);
 	//Checks if a file Exsits
 	static bool FileExsits(const char* filelocation);
+	//Creates a randomFloat 0-1
+	static float RandomFloat();
+	//lerps between a and b by t
+	static float Lerp(float a, float b, float t);
 };
 
