@@ -17,13 +17,12 @@ public:
 	LeapTestScene();
 	~LeapTestScene();
 
-	virtual bool Initialize(D3DClass*, int, int, float, TextureManagerClass*, ModelManager*, AudioManager*) ;
+	virtual bool Initialize() ;
 	virtual void Shutdown() ;
-	virtual bool Frame(D3DClass*, InputClass*, ShaderManagerClass*, TextureManagerClass*, ModelManager*, float, int, AudioManager*) ;
+	virtual bool Frame() ;
 
 protected:
-	virtual void HandleMovementInput(InputClass*, float);
-	virtual bool Render(D3DClass*, ShaderManagerClass*, TextureManagerClass*, ModelManager*);
+	virtual bool Render();
 
 private:
 	CameraClass* m_Camera;

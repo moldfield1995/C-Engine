@@ -72,7 +72,8 @@ void GameObject::Update()
 {
 	for each (Component* componet in m_Componets)
 	{
-		componet->Update();
+		if(componet->active)
+			componet->Update();
 	}
 }
 

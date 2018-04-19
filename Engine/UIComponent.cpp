@@ -25,6 +25,16 @@ void UIComponent::SetScale(Float3 value)
 	scale = value;
 }
 
+void UIComponent::SetRender(bool value)
+{
+	renders = value;
+}
+
+void UIComponent::SetActive(bool value)
+{
+	active = value;
+}
+
 Float3 UIComponent::GetPosition()
 {
 	return position;

@@ -31,7 +31,7 @@ void UIMannager::Update()
 			componets.erase(componets.begin() + i);
 			i++;
 		}
-		else
+		else if(componets[i]->active)
 			componets[i]->Update();
 	}
 }

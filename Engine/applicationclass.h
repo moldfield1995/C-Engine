@@ -36,7 +36,6 @@ enum class CurrentState
 {
 	SplashScreen,
 	MainMenu,
-	PauseScreen,
 	Level,
 };
 class ApplicationClass
@@ -54,12 +53,8 @@ private:
 	//bool ProcessColltion(TA::PreCollision & collision);
 	//Collition Triggers
 	bool static TA_CALL_BACK ProcessColltion(TA::PreCollision& collition);
-	//Loading and Scene settup
-	void shutDownFrountBuffer();
-	void shutDownBackBuffer();
 
-	static void InitaliseLevel(D3DClass* Direct3D, int screenWidth, int screenHeight, float screenDepth, TextureManagerClass* textureManager, ModelManager* modelManager, GameState* frountBuffer,AudioManager* AudioManager);
-
+	void CreateNextScene(GameState* newBuffer);
 
 	InputClass* m_Input;
 	D3DClass* m_Direct3D;
@@ -68,12 +63,10 @@ private:
 	TimerClass* m_Timer;
 	FpsClass* m_Fps;
 	GameState* m_FrountBuffer;
-	GameState* m_BackBuffer;
 	ModelManager* m_ModelManager;
 	FontManagerClass* m_FontManager;
 	int m_ScreenHeight, m_ScreenWidth;
 	CurrentState m_currentState;
-	bool m_activeThread;
 	AudioManager* m_AudioManager;
 	TA::Physics* m_taPhysics;
 };

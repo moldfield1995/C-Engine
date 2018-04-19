@@ -313,9 +313,15 @@
       <Filter>Header Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="AstroidManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Componets</Filter>
     </ClInclude>
     <ClInclude Include="Astroid.h">
+      <Filter>Header Files\Componets</Filter>
+    </ClInclude>
+    <ClInclude Include="HandCurser.h">
+      <Filter>Header Files\Componets</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -499,6 +505,12 @@
     </ClCompile>
     <ClCompile Include="Astroid.cpp">
       <Filter>Source Files\Componets</Filter>
+    </ClCompile>
+    <ClCompile Include="HandCurser.cpp">
+      <Filter>Source Files\Componets</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverScreen.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

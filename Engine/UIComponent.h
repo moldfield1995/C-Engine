@@ -36,6 +36,8 @@ public:
 	void virtual SetPosition(Float3 value);
 	void virtual SetRotation(Float3 value);
 	void virtual SetScale(Float3 value);
+	void SetRender(bool value);
+	void SetActive(bool value);
 
 	Float3 virtual GetPosition();
 	Float3 virtual GetRotation();

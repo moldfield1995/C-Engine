@@ -74,3 +74,8 @@ void PlayerUI::SetSliders(float currentHP, float currentEnergey)
 	HpBar->SetUVClip(currentHP / maxHp);
 	EnergeyBar->SetUVClip(currentEnergey / maxEnergey);
 }
+
+void PlayerUI::PlayerDied()
+{
+	SetOwnersKill(true);
+}

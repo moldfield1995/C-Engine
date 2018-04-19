@@ -14,6 +14,8 @@ public:
 	void virtual Destroy();
 
 	void SetSliders(float currentHP, float currentEnergey);
+
+	void PlayerDied();
 private:
 	const float maxHp, maxEnergey;
 	UISlider *HpBar, *EnergeyBar;

@@ -55,8 +55,10 @@
     <ClInclude Include="fpsclass.h" />
     <ClInclude Include="frustumclass.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameOverScreen.h" />
     <ClInclude Include="GamePlayScene.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="HandCurser.h" />
     <ClInclude Include="HandDesplay.h" />
     <ClInclude Include="HitBoxTest.h" />
     <ClInclude Include="inputclass.h" />
@@ -117,8 +119,10 @@
     <ClCompile Include="fpsclass.cpp" />
     <ClCompile Include="frustumclass.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameOverScreen.cpp" />
     <ClCompile Include="GamePlayScene.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="HandCurser.cpp" />
     <ClCompile Include="HandDesplay.cpp" />
     <ClCompile Include="HitBoxTest.cpp" />
     <ClCompile Include="inputclass.cpp" />

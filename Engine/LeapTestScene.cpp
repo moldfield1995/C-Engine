@@ -22,12 +22,18 @@ LeapTestScene::~LeapTestScene()
 {
 }
 
-bool LeapTestScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight, float screenDepth, TextureManagerClass* textureManager, ModelManager* modelManager, AudioManager* audioManager)
+bool LeapTestScene::Initialize()
 {
+	D3DClass *Direct3D = D3DClass::GetInstance();
 	ID3D11Device* device = Direct3D->GetDevice();
 	ID3D11DeviceContext* deviceContex = Direct3D->GetDeviceContext();
+	TextureManagerClass* textureManager = TextureManagerClass::GetInstance();
+	ModelManager* modelManager = ModelManager::GetInstance();
 	bool result = true;
-	int defaultNormal, modelId, textureID;
+	int defaultNormal, modelId, textureID, screenWidth, screenHeight;
+	float screenDepth, screenNear;
+	Direct3D->GetScreenReserlution(screenWidth, screenHeight);
+	Direct3D->GetScreenDepth(screenNear, screenDepth);
 	// Create the camera object.
 	m_Camera = new CameraClass;
 	if (!m_Camera)
@@ -162,25 +168,22 @@ void LeapTestScene::Shutdown()
 	m_UIMannager = 0;
 }
 
-bool LeapTestScene::Frame(D3DClass* Direct3D, InputClass* Input, ShaderManagerClass* ShaderManager, TextureManagerClass* TextureManager,
-	ModelManager* modelManager, float frameTime, int fps, AudioManager* audioManager)
+bool LeapTestScene::Frame()
 {
 	for each (GameObject* gameobject in m_GameObjects)
 	{
 		gameobject->Update();
 	}
 	m_UIMannager->Update();
-	Render(Direct3D, ShaderManager, TextureManager, modelManager);
+	Render();
 	return true;
 }
 
-void LeapTestScene::HandleMovementInput(InputClass* Input, float frameTime)
-{
-}
 
-bool LeapTestScene::Render(D3DClass* Direct3D, ShaderManagerClass* ShaderManager, TextureManagerClass* TextureManager, ModelManager* modelManager)
+bool LeapTestScene::Render()
 {
 	XMMATRIX worldMatrix, viewMatrix, projectionMatrix, baceViewMatrix, orthoMatrix;
+	D3DClass *Direct3D = D3DClass::GetInstance();
 	// Generate the view matrix based on the camera's position.
 	m_Camera->Render();
 

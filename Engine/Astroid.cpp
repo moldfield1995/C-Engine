@@ -22,7 +22,9 @@ void AstroidComponet::Update()
 {
 	if (owner->GetPosition().Z < zDeathPlain)
 	{
-		ScoreManager::GetInstance()->AstroidPassedPlayer();
+		ScoreManager* scoreManager = ScoreManager::GetInstance();
+		if (scoreManager)
+			scoreManager->AstroidPassedPlayer();
 		SetOwnersRender(false);
 		SetOwnersKill(true);
 	}
@@ -42,7 +44,9 @@ bool AstroidComponet::OnCollishon(const CollisonData * other)
 	SetOwnersKill(true);
 	if (other->CollisionLayer == CollisionLayer::Shot)
 	{
-		ScoreManager::GetInstance()->AstroidKilled();
+		ScoreManager* scoreManager = ScoreManager::GetInstance();
+		if(scoreManager)
+			scoreManager->AstroidKilled();
 	}
 
 	return true;

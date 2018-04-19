@@ -12,6 +12,7 @@
 enum class StateSwich{
 	Next,
 	Quit,
+	Reset,
 	Continue,
 };
 class GameState
@@ -21,16 +22,14 @@ public:
 	GameState(const GameState& other) {};
 	~GameState() {};
 
-	virtual bool Initialize(D3DClass*, int, int, float, TextureManagerClass*, ModelManager*, AudioManager*) = 0;
+	virtual bool Initialize() = 0;
 	virtual void Shutdown() = 0;
-	virtual bool Frame(D3DClass*, InputClass*, ShaderManagerClass*, TextureManagerClass*, ModelManager*, float, int,AudioManager*) = 0;
+	virtual bool Frame() = 0;
 	StateSwich SwitchState();
-	int GetLoadingLevel();
+	void SetSwitchState(StateSwich value);
 protected:
-	virtual void HandleMovementInput(InputClass*, float) = 0;
-	virtual bool Render(D3DClass*, ShaderManagerClass*, TextureManagerClass*, ModelManager*) = 0;
+	virtual bool Render() = 0;
 	StateSwich m_currentState;
-	void SetLoadingLevel(int level);
 private:
 	bool m_concurentAccsess;
 	int m_loadingLevel;

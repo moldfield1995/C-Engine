@@ -21,12 +21,18 @@ GamePlayScene::~GamePlayScene()
 {
 }
 
-bool GamePlayScene::Initialize(D3DClass* Direct3D, int screenWidth, int screenHeight, float screenDepth, TextureManagerClass* textureManager, ModelManager* modelManager, AudioManager* audioManager)
+bool GamePlayScene::Initialize()
 {
+	D3DClass *Direct3D = D3DClass::GetInstance();
 	ID3D11Device* device = Direct3D->GetDevice();
 	ID3D11DeviceContext* deviceContex = Direct3D->GetDeviceContext();
+	TextureManagerClass* textureManager = TextureManagerClass::GetInstance();
+	ModelManager* modelManager = ModelManager::GetInstance();
 	bool result = true;
-	int defaultNormal, modelId, textureID;
+	int defaultNormal, modelId, textureID, screenWidth, screenHeight;
+	float screenDepth, screenNear;
+	Direct3D->GetScreenReserlution(screenWidth, screenHeight);
+	Direct3D->GetScreenDepth(screenNear, screenDepth);
 	GameObject* gameObject = 0;
 	// Create the camera object.
 	m_Camera = new CameraClass;
@@ -122,25 +128,30 @@ void GamePlayScene::Shutdown()
 {
 }
 
-bool GamePlayScene::Frame(D3DClass* Direct3D, InputClass* Input, ShaderManagerClass* ShaderManager, TextureManagerClass* TextureManager,
-	ModelManager* modelManager, float frameTime, int fps, AudioManager* audioManager)
+bool GamePlayScene::Frame()
 {
-	for each (GameObject* gameobject in m_GameObjects)
+	for (int i = m_GameObjects.size(); i >= 0; i--)
 	{
-		gameobject->Update();
+		if (!m_GameObjects[i]->IsAlive())
+		{
+			m_GameObjects[i]->Destroy();
+			delete m_GameObjects[i];
+			m_GameObjects.erase(m_GameObjects.begin() + i);
+		}
+		else
+			m_GameObjects[i]->Update();
 	}
 	m_UIMannager->Update();
-	Render(Direct3D, ShaderManager, TextureManager, modelManager);
+	Render();
 	return true;
 }
 
-void GamePlayScene::HandleMovementInput(InputClass* Input, float frameTime)
-{
-}
 
-bool GamePlayScene::Render(D3DClass* Direct3D, ShaderManagerClass* ShaderManager, TextureManagerClass* TextureManager, ModelManager* modelManager)
+
+bool GamePlayScene::Render()
 {
 	XMMATRIX worldMatrix, viewMatrix, projectionMatrix, baceViewMatrix, orthoMatrix;
+	D3DClass* Direct3D = D3DClass::GetInstance();
 	// Generate the view matrix based on the camera's position.
 	m_Camera->Render();
 

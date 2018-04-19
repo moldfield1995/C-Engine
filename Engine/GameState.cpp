@@ -9,22 +9,15 @@ GameState::GameState()
 }
 
 
-void GameState::SetLoadingLevel(int level)
-{
-	m_concurentAccsess = true;
-	m_loadingLevel = level;
-	m_concurentAccsess = false;
-}
+
 
 StateSwich GameState::SwitchState()
 {
 	return m_currentState;
 }
 
-int GameState::GetLoadingLevel()
+void GameState::SetSwitchState(StateSwich value)
 {
-	if (!m_concurentAccsess)
-		return m_loadingLevel;
-	else
-		return -1;
+	m_currentState = value;
 }
+

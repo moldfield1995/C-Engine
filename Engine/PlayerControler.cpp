@@ -3,6 +3,8 @@
 #include "Collider.h"
 #include "UIText.h"
 #include "UIMannager.h"
+#include "GameOverScreen.h"
+
 
 PlayerControler* PlayerControler::instance = 0;
 
@@ -84,7 +86,9 @@ bool PlayerControler::OnCollishon(const CollisonData * other)
 		//Play sound
 		if (currentHP <= 0.0f)
 		{//GameOver
-
+			GameOverScreen::GetInstance()->DesplayGameOver();
+			SetOwnersKill(true);
+			playerUI->PlayerDied();
 		}
 	}
 	return true;
