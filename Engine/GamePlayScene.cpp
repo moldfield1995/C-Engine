@@ -130,7 +130,7 @@ void GamePlayScene::Shutdown()
 
 bool GamePlayScene::Frame()
 {
-	for (int i = m_GameObjects.size(); i >= 0; i--)
+	for (int i = m_GameObjects.size()-1; i >= 0; i--)
 	{
 		if (!m_GameObjects[i]->IsAlive())
 		{
