@@ -131,6 +131,33 @@ bool GamePlayScene::Initialize()
 
 void GamePlayScene::Shutdown()
 {
+	for each (GameObject* go in m_GameObjects)
+	{
+		go->Destroy();
+		delete go;
+		go = 0;
+	}
+	if (m_Camera)
+	{
+		delete m_Camera;
+		m_Camera = 0;
+	}
+	if (m_Frustum)
+	{
+		delete m_Frustum;
+		m_Frustum = 0;
+	}
+	if (m_Light)
+	{
+		delete m_Light;
+		m_Light = 0;
+	}
+	if (m_UIMannager)
+	{
+		m_UIMannager->Destroy();
+		delete m_UIMannager;
+		m_UIMannager = 0;
+	}
 }
 
 bool GamePlayScene::Frame()

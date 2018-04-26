@@ -66,6 +66,7 @@
     <ClInclude Include="lightclass.h" />
     <ClInclude Include="lightshader.h" />
     <ClInclude Include="lightshaderclass.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="ModelClass.h" />
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="PeformanceMonerting.h" />
@@ -131,6 +132,7 @@
     <ClCompile Include="lightshader.cpp" />
     <ClCompile Include="lightshaderclass.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="ModelClass.cpp" />
     <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="PeformanceMonerting.cpp" />

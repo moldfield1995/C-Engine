@@ -7,8 +7,8 @@
 AstroidManager::AstroidManager(GameObject* prefab)
 	: minSpawnAstroid (0.5f)
 	, maxSpawnAstroid(1.5f)
-	, minPosition(-10.0f,-10.0f,400.0f)
-	, maxPosition(10.0f,10.0f,400.0f)
+	, minPosition(-30.0f,-10.0f,400.0f)
+	, maxPosition(30.0f,30.0f,400.0f)
 	, astroidVelosity(0.0f,0.0f,-25.0f)
 {
 	prefabAstroid = prefab;

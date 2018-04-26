@@ -73,7 +73,7 @@ bool UIButton::CheckCollition(Float3 otherPos)
 	bitmapClass->GetTextureSize(height, width);
 	hitboxExstent.X += width;
 	hitboxExstent.Y -= height;
-	if ((otherPos.X >= position.X && otherPos.X <= hitboxExstent.X) && (otherPos.Y >= position.Y && otherPos.Y <= hitboxExstent.Y))
+	if ((otherPos.X >= position.X && otherPos.X <= hitboxExstent.X) && (otherPos.Y <= position.Y && otherPos.Y >= hitboxExstent.Y))
 		return true;
 
 	return false;

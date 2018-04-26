@@ -81,7 +81,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
     <None Include="color.ps">
       <Filter>Shader Files</Filter>
     </None>
@@ -136,6 +135,7 @@
     <None Include="slider.vs">
       <Filter>Shader Files</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="colorshaderclass.h">
@@ -322,6 +322,9 @@
       <Filter>Header Files\Componets</Filter>
     </ClInclude>
     <ClInclude Include="GameOverScreen.h">
+      <Filter>Header Files\Componets</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -510,6 +513,9 @@
       <Filter>Source Files\Componets</Filter>
     </ClCompile>
     <ClCompile Include="GameOverScreen.cpp">
+      <Filter>Source Files\Componets</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
