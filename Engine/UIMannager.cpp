@@ -29,7 +29,6 @@ void UIMannager::Update()
 			componets[i]->Destroy();
 			delete componets[i];
 			componets.erase(componets.begin() + i);
-			i++;
 		}
 		else if(componets[i]->active)
 			componets[i]->Update();

@@ -56,6 +56,9 @@ void ShotComponet::Shoot(Float3 position, Float3 direction)
 	dynamicObject->SetCollisionDisabled(false);
 	dynamicObject->SetLinearVelocity(direction.ToVec3());
 	dynamicObject->SetUpdateDisabled(false);
+	//If we are firing backwards set short lifetime
+	if (direction.Z < 0.0f)
+		currentLife = lifeTime * 0.9f;
 
 	SetOwnersRender(true);
 }

@@ -32,6 +32,12 @@ void ScoreManager::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX & 
 
 void ScoreManager::Destroy()
 {
+	instance = 0;
+	if (scoreText)
+	{
+		scoreText->Destroy();
+		scoreText = 0;
+	}
 }
 
 void ScoreManager::AstroidKilled()

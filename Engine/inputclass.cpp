@@ -242,7 +242,7 @@ void InputClass::ReadLeap()
 			XMVECTOR posvector = XMVectorSet(handpos.X, handpos.Y, handpos.Z, 1.0f);
 			XMVECTOR screenspace = XMVector3Project(posvector, 0.0f, 0.0f, screenWidth, screenHight, screenNear, screenDepth, projectionMatirx, viewMatrix, worldMatrix);
 			m_leapScreenPosition.X = screenspace.m128_f32[0];
-			m_leapScreenPosition.Y = screenspace.m128_f32[1];
+			m_leapScreenPosition.Y = -screenspace.m128_f32[1];
 		}
 	}
 }

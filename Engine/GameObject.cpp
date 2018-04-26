@@ -12,6 +12,7 @@ GameObject::GameObject()
 	m_KillGameObject = false;
 
 	m_Componets = std::vector<Component*>();
+	m_collishonObject = 0;
 }
 
 GameObject::GameObject(GameObject * go)
@@ -25,6 +26,7 @@ GameObject::GameObject(GameObject * go)
 	m_Componets = std::vector<Component*>();
 	m_textures = new std::vector<ID3D11ShaderResourceView*>();
 	m_colour = go->m_colour;
+	m_collishonObject = 0;
 	for each (ID3D11ShaderResourceView* texture in *go->m_textures)
 	{
 		m_textures->push_back(texture);
@@ -119,7 +121,7 @@ void GameObject::AddTexture(ID3D11ShaderResourceView * texture, int index)
 
 void GameObject::Destroy()
 {
-	for (int i = m_Componets.size(); 0 < i; i--)
+	for (int i = m_Componets.size()-1; 0 <= i; i--)
 	{
 		if (m_Componets[i] != nullptr)
 			m_Componets[i]->Destroy();
@@ -141,7 +143,6 @@ void GameObject::Destroy()
 	if (m_collishonObject)
 	{
 		TA::Physics::GetInstance().RemoveDynamicObject(m_collishonObject);
-		m_collishonObject->Release();
 		m_collishonObject = 0;
 	}
 }

@@ -7,6 +7,8 @@
 #include "PlayerUI.h"
 #include "ScoreManager.h"
 #include "AstroidManager.h"
+#include "GameOverScreen.h"
+
 GamePlayScene::GamePlayScene()
 {
 	m_Camera = 0;
@@ -119,7 +121,10 @@ bool GamePlayScene::Initialize()
 	m_GameObjects.push_back(gameObject);
 	//End Creating Astroid Manager
 
-
+	gameObject = new GameObject();
+	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f, 0.0f, 0.0f), 0, 0, 0);
+	gameObject->AddComponet(new GameOverScreen(this));
+	m_GameObjects.push_back(gameObject);
 
 	return true;
 }

@@ -148,13 +148,11 @@ void UIText::Destroy()
 	if (indexBuffer != 0)
 	{
 		indexBuffer->Release();
-		delete indexBuffer;
 		indexBuffer = 0;
 	}
 	if (vertexBuffer != 0)
 	{
 		vertexBuffer->Release();
-		delete vertexBuffer;
 		vertexBuffer = 0;
 	}
 	shader = 0;

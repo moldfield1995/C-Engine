@@ -67,15 +67,18 @@ void GameOverScreen::DesplayGameOver()
 {
 	UIMannager *uiManager = UIMannager::GetInstance();
 
-	backgroundImage = new UIImage("../Engine/data/UI/GameOverBackground.tga", PivotPosition::Center);
+	backgroundImage = new UIImage("../Engine/data/UI/GameOverBackground.tga", PivotPosition::TopLeft);
 	uiManager->AddComponet(backgroundImage);
 	scoreText = new UIText(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), "Final Score : " + std::to_string(ScoreManager::GetInstance()->GetScore()), PivotPosition::Center);
+	scoreText->SetPosition(Float3(-20.0f, -100.0f));
 	uiManager->AddComponet(scoreText);
 	resetButton = new UIButton("../Engine/data/UI/ResetButton.tga", PivotPosition::Center);
 	__hook(&UIButton::onClickTrigger, resetButton, &GameOverScreen::ResetGame);
+	resetButton->SetPosition(Float3(0.0f, -50.0f));
 	uiManager->AddComponet(resetButton);
 	menuButton = new UIButton("../Engine/data/UI/MainMenuButton.aga", PivotPosition::Center);
 	__hook(&UIButton::onClickTrigger, menuButton, &GameOverScreen::LoadMainMenu);
+	menuButton->SetPosition(Float3(0.0f, 50.0f));
 	uiManager->AddComponet(menuButton);
 	handCurser = new HandCurser("../Engine/data/UI/Cursor.tga");
 	owner->AddComponet(handCurser);
