@@ -7,7 +7,7 @@
 #include "Utills.h"
 #include "Collider.h"
 #include "GamePlayScene.h"
-
+#include "MainMenu.h"
 ApplicationClass::ApplicationClass()
 {
 	m_Input = 0;
@@ -148,14 +148,14 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 	m_AudioManager = new AudioManager();
 	m_AudioManager->Initialise(hinstance);
-	int au = m_AudioManager->AddAudio("../Engine/data/Music/1.wav");
+	int au = m_AudioManager->AddAudio("../Engine/data/Music/370801__romariogrande__space-chase.wav");
 
 
 
 	TA::Physics::CreateInstance();
 	m_taPhysics = &TA::Physics::GetInstance();
 	TA::AABB worldExstence;
-	worldExstence.Initialise(TA::Vec3(0.0f, 0.0f, 900.0f), TA::Vec3(1000.0f, 1000.0f, 1000.0f));
+	worldExstence.Initialise(TA::Vec3(0.0f, 0.0f, 900.0f), TA::Vec3(1000.0f, 1000.0f, 1500.0f));
 	m_taPhysics->SetWorldDimensions(worldExstence);
 	//We are in space, no graverty
 	m_taPhysics->SetGravity(TA::Vec3(0.0f, 0.0f, 0.0f));
@@ -164,14 +164,14 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 #if _BuildState_  ==0
 	m_AudioManager->Play(au, true);
 	// Create the zone object.
-	m_FrountBuffer = new SplashScreen();
+	m_FrountBuffer = new MainMenu();
 	if (!m_FrountBuffer)
 	{
 		return false;
 	}
-	m_currentState = CurrentState::SplashScreen;
+	m_currentState = CurrentState::MainMenu;
 	// Initialize the zone object.
-	result = m_FrountBuffer->Initialize(m_Direct3D, screenWidth, screenHeight, SCREEN_DEPTH, m_TextureManager, m_ModelManager, m_AudioManager);
+	result = m_FrountBuffer->Initialize();
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the zone object.", L"Error", MB_OK);
@@ -186,7 +186,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	}
 	m_currentState = CurrentState::Level;
 	// Initialize the zone object.
-	result = m_FrountBuffer->Initialize(m_Direct3D, screenWidth, screenHeight, SCREEN_DEPTH, m_TextureManager, m_ModelManager, m_AudioManager);
+	result = m_FrountBuffer->Initialize();
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the zone object.", L"Error", MB_OK);
@@ -305,17 +305,18 @@ bool ApplicationClass::Frame()
 		return false;
 	}
 
-	if (m_FrountBuffer->SwitchState() == StateSwich::Next)
+	switch (m_FrountBuffer->SwitchState())
 	{
+	case StateSwich::Next:
 		switch (m_currentState)
 		{
 		case CurrentState::SplashScreen:
 			m_currentState = CurrentState::MainMenu;
-			//CreateNextScene(new)
+			CreateNextScene(new MainMenu);
 			break;
 		case CurrentState::Level:
 			m_currentState = CurrentState::MainMenu;
-
+			CreateNextScene(new MainMenu);
 			break;
 		case CurrentState::MainMenu:
 			m_currentState = CurrentState::Level;
@@ -324,9 +325,26 @@ bool ApplicationClass::Frame()
 		default:
 			break;
 		}
-	}
-	else if (m_FrountBuffer->SwitchState() == StateSwich::Quit)
+		break;//End Next Swich
+	case StateSwich::Reset:
+		switch (m_currentState)
+		{
+		case CurrentState::Level:
+			CreateNextScene(new GamePlayScene);
+			break;
+		case CurrentState::MainMenu:
+			CreateNextScene(new MainMenu);
+			break;
+		default:
+			break;
+		}
+		break;//End Reset Swich
+	case StateSwich::Quit:
 		return false;
+		break;
+	default:
+		break;
+	}
 	return result;
 }
 //Called before the collion is processed, Returns if the collison should be ignored
@@ -353,7 +371,5 @@ void ApplicationClass::CreateNextScene(GameState * newBuffer)
 	m_FrountBuffer->Initialize();
 }
 
-
-//Needs to be fixed as there is a thread collison when loading assets (setting buffers on GPU) and rendering
 
 

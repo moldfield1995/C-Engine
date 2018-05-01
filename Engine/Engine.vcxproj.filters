@@ -325,7 +325,13 @@
       <Filter>Header Files\Componets</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyBoxRender.h">
+      <Filter>Header Files\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuComp.h">
+      <Filter>Header Files\Componets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -516,7 +522,13 @@
       <Filter>Source Files\Componets</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyBoxRender.cpp">
+      <Filter>Source Files\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuComp.cpp">
+      <Filter>Source Files\Componets</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

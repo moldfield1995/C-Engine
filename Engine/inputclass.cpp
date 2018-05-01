@@ -289,12 +289,12 @@ void InputClass::GetMouseRaw(int &mouseX, int &mouseY)
 //Returns if the key was pressed down this frame
 bool InputClass::KeyDown(unsigned short int key)
 {
-	return (m_keyboardState[key] & 0x80) && (!m_OldKeyboardState[key] & 0x80);
+	return (m_keyboardState[key] & 0x80) && !(m_OldKeyboardState[key] & 0x80);
 }
 //Returns if the key was releced this frame
 bool InputClass::KeyUp(unsigned short int key)
 {
-	return (!m_keyboardState[key] & 0x80) && (m_OldKeyboardState[key] & 0x80);
+	return !(m_keyboardState[key] & 0x80) && (m_OldKeyboardState[key] & 0x80);
 }
 //Returns if the key is down
 bool InputClass::Key(unsigned short int key)

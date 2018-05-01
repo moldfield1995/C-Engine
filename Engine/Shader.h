@@ -1,7 +1,7 @@
 #pragma once
-#include "lightclass.h"
+#include "d3dclass.h"
 #include <vector>
-
+#include "lightclass.h"
 //Updated In Final Year
 //Created By Matthew Oldfield
 

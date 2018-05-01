@@ -67,6 +67,7 @@
     <ClInclude Include="lightshader.h" />
     <ClInclude Include="lightshaderclass.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="MainMenuComp.h" />
     <ClInclude Include="ModelClass.h" />
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="PeformanceMonerting.h" />
@@ -79,6 +80,7 @@
     <ClInclude Include="shadermanagerclass.h" />
     <ClInclude Include="ShotComponet.h" />
     <ClInclude Include="ShotManager.h" />
+    <ClInclude Include="SkyBoxRender.h" />
     <ClInclude Include="skydomeclass.h" />
     <ClInclude Include="skydomeshaderclass.h" />
     <ClInclude Include="slidershaderclass.h" />
@@ -133,6 +135,7 @@
     <ClCompile Include="lightshaderclass.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="MainMenuComp.cpp" />
     <ClCompile Include="ModelClass.cpp" />
     <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="PeformanceMonerting.cpp" />
@@ -144,6 +147,7 @@
     <ClCompile Include="shadermanagerclass.cpp" />
     <ClCompile Include="ShotComponet.cpp" />
     <ClCompile Include="ShotManager.cpp" />
+    <ClCompile Include="SkyBoxRender.cpp" />
     <ClCompile Include="skydomeclass.cpp" />
     <ClCompile Include="skydomeshaderclass.cpp" />
     <ClCompile Include="slidershaderclass.cpp" />

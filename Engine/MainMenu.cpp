@@ -1,7 +1,7 @@
 #include "MainMenu.h"
 #include "textureshaderclass.h"
-
-
+#include "HandCurser.h"
+#include "MainMenuComp.h"
 MainMenu::MainMenu()
 {
 	m_Camera = 0;
@@ -70,8 +70,9 @@ bool MainMenu::Initialize()
 
 	gameObject = new GameObject();
 	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f, 0.0f, 0.0f), 0, 0, 0);
-	
-
+	gameObject->AddComponet(new MainMenuComp(this));
+	gameObject->AddComponet(new HandCurser("../Engine/data/UI/Cursor.tga"));
+	m_GameObjects.push_back(gameObject);
 
 	return true;
 }
@@ -150,5 +151,6 @@ bool MainMenu::Render()
 	}
 
 	m_UIMannager->Render(context, worldMatrix, baceViewMatrix, orthoMatrix);
+	Direct3D->EndScene();
 	return true;
 }

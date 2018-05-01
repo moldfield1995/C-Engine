@@ -6,7 +6,7 @@
 #include "GameObject.h"
 #include "UIMannager.h"
 #include <vector>
-
+#include "SkyBoxRender.h"
 
 class GamePlayScene :
 	public GameState
@@ -28,5 +28,6 @@ private:
 	LightClass* m_Light;
 	UIMannager* m_UIMannager;
 	std::vector<GameObject*> m_GameObjects;
+	SkyBoxRender* m_Skybox;
 };
 

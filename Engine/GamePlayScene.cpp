@@ -16,6 +16,7 @@ GamePlayScene::GamePlayScene()
 	m_GameObjects = std::vector<GameObject*>();
 	m_Light = 0;
 	m_UIMannager = 0;
+	m_Skybox = 0;
 }
 
 
@@ -75,6 +76,14 @@ bool GamePlayScene::Initialize()
 	m_UIMannager->Initalize(screenWidth, screenHeight);
 
 	Shader* shader = ShaderManagerClass::GetInstance()->GetShader<TextureShaderClass>();
+	modelId = modelManager->AddModle(device, "../Engine/data/Models/InvertedCube.obj");
+	textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/textures/Skybox.tga");
+
+	m_Skybox = new SkyBoxRender();
+	if (!m_Skybox)
+		return false;
+	m_Skybox->Initalize(modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
+
 	//Start Creating Player
 	modelId = modelManager->AddModle(device, "../Engine/data/LizReddington/Ship1.obj");
 	textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/LizReddington/Ship1Uved.tga");
@@ -200,6 +209,7 @@ bool GamePlayScene::Render()
 	// Clear the buffers to begin the scene.
 	Direct3D->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);
 	ID3D11DeviceContext* context = Direct3D->GetDeviceContext();
+	m_Skybox->Render(context, worldMatrix, viewMatrix, projectionMatrix);
 	for each (GameObject* gameobject in m_GameObjects)
 	{
 		gameobject->Render(context, worldMatrix, viewMatrix, projectionMatrix, m_Frustum, m_Light, *m_Camera);
