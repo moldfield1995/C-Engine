@@ -21,6 +21,7 @@ public:
 	static Float3 Cross(Float3 a, Float3 b);
 	//Usefull operators
 	void Set(float x, float y, float z);
+	void Traslate(Float3 other);
 	Float3 Normalize();
 	float Lenght();
 	Float3 operator* (Float3 other);

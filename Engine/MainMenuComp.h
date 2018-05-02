@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "GameState.h"
+#include "HandDesplay.h"
 class MainMenuComp :
 	public Component
 {
@@ -15,6 +16,9 @@ private:
 
 	void LoadGame();
 	void QuitGame();
+	void ShowLeapDebugHands();
+	void HideLeapDebugHands();
+
 
 	GameState * m_MainMenu;
 };

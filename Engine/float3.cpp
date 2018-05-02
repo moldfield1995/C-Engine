@@ -55,6 +55,13 @@ void Float3::Set(float x, float y, float z)
 	Z = z;
 }
 
+void Float3::Traslate(Float3 other)
+{
+	X += other.X;
+	Y += other.Y;
+	Z += other.Z;
+}
+
 Float3 Float3::Normalize()
 {
 	float lenght = Lenght();

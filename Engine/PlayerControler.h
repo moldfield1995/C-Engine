@@ -6,11 +6,13 @@
 
 using namespace Leap;
 
+class ShotManager;
+
 class PlayerControler :
 	public Component
 {
 public:
-	PlayerControler(float maxEnergey, float maxHP, PlayerUI* playerUI);
+	PlayerControler(float maxEnergey, float maxHP, PlayerUI* playerUI, ShotManager* shotManager);
 	~PlayerControler();
 	void virtual Initalize();
 	void virtual Update();
@@ -20,10 +22,11 @@ public:
 
 	void HitAstroid();
 	int GetCurrentHand();
+	void KilledAstroid();
 private:
 
 	void FindHand(InputClass* input, float timeDelta, Hand &hand);
-
+	bool CheckSuper(Hand &hand);
 	//Leap and possition
 	int currentHand;
 	Float3 leapToWorldScale, leapWorldOffset;
@@ -31,7 +34,10 @@ private:
 	const Float3 restingPosition;
 	//GamePlay
 	float currentEnergey, currentHP;
-	const float hpLossPerHit, energeyLossPerSecond, maxEnergey, maxHP;
+	const float hpLossPerHit, energeyLossPerSecond, maxEnergey, maxHP, energeyPerKill;
+	bool superActiveLastFrame;
+
+	ShotManager* shotManager;
 
 	//UI componet
 	PlayerUI* playerUI;

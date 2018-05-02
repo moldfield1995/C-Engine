@@ -2,6 +2,7 @@
 #include "Collider.h"
 #include "ScoreManager.h"
 #include "GameObject.h"
+#include "PlayerControler.h"
 
 AstroidComponet::AstroidComponet()
 	: zDeathPlain(-10.0f)
@@ -47,6 +48,10 @@ bool AstroidComponet::OnCollishon(const CollisonData * other)
 		ScoreManager* scoreManager = ScoreManager::GetInstance();
 		if(scoreManager)
 			scoreManager->AstroidKilled();
+		PlayerControler* player = PlayerControler::GetInstance();
+		if (player)
+			player->KilledAstroid();
+		GetOwnersDynamicObject()->SetCollisionDisabled(true);
 	}
 
 	return true;

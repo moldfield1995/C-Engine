@@ -4,21 +4,23 @@
 #include "UIText.h"
 #include "UIMannager.h"
 #include "GameOverScreen.h"
-
+#include "ShotManager.h"
 
 PlayerControler* PlayerControler::instance = 0;
 
 
-PlayerControler::PlayerControler(float maxEnergey, float maxHP, PlayerUI *playerUI)
+PlayerControler::PlayerControler(float maxEnergey, float maxHP, PlayerUI *playerUI, ShotManager* shotManager)
 	: hpLossPerHit(25.0f)
 	, energeyLossPerSecond(100.0f)
 	, restingPosition(0.0f,0.0f,5.0f)
 	, maxEnergey(maxEnergey)
 	, maxHP(maxHP)
+	, energeyPerKill(10.0f)
 {
 	currentEnergey = 0.0f;
 	currentHP = maxHP;
 	this->playerUI = playerUI;
+	this->shotManager = shotManager;
 }
 
 PlayerControler::~PlayerControler()
@@ -62,9 +64,35 @@ void PlayerControler::Update()
 	}
 	//End Position Setting
 
-	currentEnergey += 2.0f * timeDelta;
-	if (currentEnergey > maxEnergey)
-		currentEnergey = maxEnergey;
+	if (CheckSuper(leapHand))
+	{
+		if (!superActiveLastFrame)
+		{
+			shotManager->SetSuperState(true);
+			superActiveLastFrame = true;
+		}
+		if (currentEnergey <= 0.0f)
+		{
+			//Dose not set superActiveLastFrame as
+			//state would flipflop every frame
+			currentEnergey = 0.0f;
+			shotManager->SetSuperState(false);
+		}
+		else
+			currentEnergey -= energeyLossPerSecond * timeDelta;
+	}
+	else
+	{
+		if (superActiveLastFrame)
+		{
+			shotManager->SetSuperState(false);
+			superActiveLastFrame = false;
+		}
+		currentEnergey += 2.0f * timeDelta;
+		if (currentEnergey > maxEnergey)
+			currentEnergey = maxEnergey;
+	}
+
 
 	playerUI->SetSliders(currentHP, currentEnergey);
 
@@ -82,7 +110,10 @@ bool PlayerControler::OnCollishon(const CollisonData * other)
 {
 	if (other->CollisionLayer == CollisionLayer::Astroid)
 	{
-		currentHP -= hpLossPerHit;
+		if (currentEnergey >= hpLossPerHit)
+			currentEnergey -= hpLossPerHit;
+		else
+			currentHP -= hpLossPerHit;
 		//Play sound
 		if (currentHP <= 0.0f)
 		{//GameOver
@@ -102,6 +133,11 @@ void PlayerControler::HitAstroid()
 int PlayerControler::GetCurrentHand()
 {
 	return currentHand;
+}
+
+void PlayerControler::KilledAstroid()
+{
+	currentEnergey += energeyPerKill;
 }
 
 void PlayerControler::FindHand(InputClass * input, float timeDelta, Hand &hand)
@@ -128,6 +164,32 @@ void PlayerControler::FindHand(InputClass * input, float timeDelta, Hand &hand)
 		owner->SetPosition(Float3::Lerp(owner->GetPosition(), restingPosition, timeDelta));
 		owner->SetRotation(Float3::Lerp(owner->GetRotation(), rotationOffset, timeDelta));
 	}
+}
+
+bool PlayerControler::CheckSuper(Hand &hand)
+{
+	//Check to see if the provided hand exsits
+	//If not we assume that super is inactive
+	if (!hand.isValid())
+		return false;
+
+	int validFingersRetracted = 0;
+	FingerList fingers = hand.fingers();
+	for each (Finger finger in fingers)
+	{
+		if (finger.type() == Finger::TYPE_MIDDLE || finger.type() == Finger::TYPE_RING)
+		{
+			if (!finger.isExtended())
+			{
+				validFingersRetracted++;
+				if (validFingersRetracted == 2)
+					return true;
+			}
+			else
+				return false;
+		}
+	}
+	return false;
 }
 
 PlayerControler * PlayerControler::GetInstance()

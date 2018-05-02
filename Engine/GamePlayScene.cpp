@@ -8,6 +8,7 @@
 #include "ScoreManager.h"
 #include "AstroidManager.h"
 #include "GameOverScreen.h"
+#include "EnviromentAstroids.h"
 
 GamePlayScene::GamePlayScene()
 {
@@ -92,18 +93,22 @@ bool GamePlayScene::Initialize()
 	gameObject = new GameObject();
 	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f,180.0f,0.0f), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
 	gameObject->SetScale(Float3(0.01f, 0.01f, 0.01f));
-	gameObject->AddComponet(new PlayerControler(100.0f, 100.0f,playerUI));
-	gameObject->AddComponet(new BasicMeshHitbox());
-
-
-	{//Creates the shot manager 
+	
+	//Creates the shot manager 
+	ShotManager* shotmanager = 0;
+	{
 		modelId = modelManager->AddModle(device, "../Engine/data/Models/Sphere.obj");
 		textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/textures/Default.tga");
 
 		GameObject* shot = new GameObject();
 		shot->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(90.0f, 0.0f, 0.0f), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
-		gameObject->AddComponet(new ShotManager(shot));
+		shotmanager = new ShotManager(shot);
 	}
+
+	gameObject->AddComponet(new PlayerControler(100.0f, 100.0f,playerUI, shotmanager));
+	gameObject->AddComponet(new BasicMeshHitbox());
+	gameObject->AddComponet(shotmanager);
+
 	m_GameObjects.push_back(gameObject);
 	//END Creating Player
 
@@ -126,9 +131,22 @@ bool GamePlayScene::Initialize()
 		astroid->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(90.0f, 0.0f, 0.0f), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
 		gameObject->AddComponet(new AstroidManager(astroid));
 	}
-
 	m_GameObjects.push_back(gameObject);
 	//End Creating Astroid Manager
+
+	//Creating Enviroment Astroids
+	gameObject = new GameObject();
+	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f, 0.0f, 0.0f), 0, 0, 0);
+	{
+		modelId = modelManager->AddModle(device, "../Engine/data/GooglePoly/Asteroids.obj");
+		textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/GooglePoly/Asteroids_Dark.tga");
+		GameObject* astroid = new GameObject();
+		astroid->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(90.0f, 0.0f, 0.0f), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
+		astroid->SetScale(Float3(5.0f));
+		gameObject->AddComponet(new EnviromentAstroids(astroid,60.0f));
+	}
+	m_GameObjects.push_back(gameObject);
+	//End Creating Enviroment Astroids
 
 	gameObject = new GameObject();
 	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f, 0.0f, 0.0f), 0, 0, 0);

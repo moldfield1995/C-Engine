@@ -48,6 +48,7 @@
     <ClInclude Include="cpuclass.h" />
     <ClInclude Include="d3dclass.h" />
     <ClInclude Include="DebugDesplay.h" />
+    <ClInclude Include="EnviromentAstroids.h" />
     <ClInclude Include="float3.h" />
     <ClInclude Include="fontclass.h" />
     <ClInclude Include="fontmanagerclass.h" />
@@ -115,6 +116,7 @@
     <ClCompile Include="cpuclass.cpp" />
     <ClCompile Include="d3dclass.cpp" />
     <ClCompile Include="DebugDesplay.cpp" />
+    <ClCompile Include="EnviromentAstroids.cpp" />
     <ClCompile Include="float3.cpp" />
     <ClCompile Include="fontclass.cpp" />
     <ClCompile Include="fontmanagerclass.cpp" />

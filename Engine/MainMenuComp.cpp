@@ -18,13 +18,16 @@ void MainMenuComp::Initalize()
 	UIMannager* uiManager = UIMannager::GetInstance();
 	UIImage* image = new UIImage("../Engine/data/UI/MainMenuBackground.tga");
 	uiManager->AddComponet(image);
+	image = new UIImage("../Engine/data/UI/Logo.tga", PivotPosition::Center);
+	image->SetPosition(Float3(-150.0f, 300.0f));
+	uiManager->AddComponet(image);
 	UIButton* button = new UIButton("../Engine/data/UI/PlayButton.tga", PivotPosition::Center);
 	__hook(&UIButton::onClickTrigger, button, &MainMenuComp::LoadGame);
-	button->SetPosition(Float3(-150.0f, 0.0f));
+	button->SetPosition(Float3(-150.0f, -50.0f));
 	uiManager->AddComponet(button);
 	button = new UIButton("../Engine/data/UI/QuitButton.tga", PivotPosition::Center);
-	__hook(&UIButton::onClickTrigger, button, &MainMenuComp::LoadGame);
-	button->SetPosition(Float3(-150.0f, -150.0f));
+	__hook(&UIButton::onClickTrigger, button, &MainMenuComp::QuitGame);
+	button->SetPosition(Float3(-150.0f, -200.0f));
 	uiManager->AddComponet(button);
 }
 
@@ -49,4 +52,12 @@ void MainMenuComp::LoadGame()
 void MainMenuComp::QuitGame()
 {
 	m_MainMenu->SetSwitchState(StateSwich::Quit);
+}
+
+void MainMenuComp::ShowLeapDebugHands()
+{
+}
+
+void MainMenuComp::HideLeapDebugHands()
+{
 }

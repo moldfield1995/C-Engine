@@ -4,15 +4,15 @@
 #include "timerclass.h"
 #include "PlayerControler.h"
 
-ShotManager* ShotManager::instance = 0;
 
 ShotManager::ShotManager(GameObject* ShotPrefab)
-	: shotInterval(0.5f)
-	, superChargeTime(1.0f)
+	: shotInterval(0.75f)
+	, superInterval(0.1f)
 	, shotOffset(5.0f)
 	, shotSpeed(100.0f)
 {
 	shotPrefab = ShotPrefab;
+	superActive = false;
 }
 
 
@@ -25,13 +25,12 @@ void ShotManager::Initalize()
 	storedShots = std::vector<ShotComponet*>();
 	activeShots = std::vector<GameObject*>();
 	CreateShots(5);
-	timeToNextShot = shotInterval;
-	instance = this;
+	timeToNextShot = 0.0f;
 }
 
 void ShotManager::Update()
 {
-	timeToNextShot -= TimerClass::GetInstance()->GetFrameTime();
+	timeToNextShot += TimerClass::GetInstance()->GetFrameTime();
 	for (int i = activeShots.size() - 1; i >= 0; i--)
 	{
 		activeShots[i]->Update();
@@ -44,10 +43,10 @@ void ShotManager::Update()
 		}
 	}
 
-	if (timeToNextShot <= 0.0f)
+	if (timeToNextShot >= shotInterval || (superActive && timeToNextShot >= superInterval))
 	{
 		Shoot();
-		timeToNextShot = shotInterval;
+		timeToNextShot = 0.0f;
 	}
 }
 
@@ -75,11 +74,11 @@ void ShotManager::Destroy()
 	}
 }
 
-
-ShotManager * ShotManager::GetInstance()
+void ShotManager::SetSuperState(bool value)
 {
-	return instance;
+	superActive = value;
 }
+
 
 void ShotManager::Shoot()
 {
