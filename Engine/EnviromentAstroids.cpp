@@ -21,7 +21,7 @@ EnviromentAstroids::~EnviromentAstroids()
 void EnviromentAstroids::Initalize()
 {
 	float currentZ = 0.0f;
-	int arrayLength = (std::roundf(m_MaxZ / m_SpawnSepiration) * 2);
+	int arrayLength = (int)(std::roundf(m_MaxZ / m_SpawnSepiration) * 2);
 	m_Astroids = std::vector<GameObject*>(arrayLength);
 	GameObject* temp = 0;
 

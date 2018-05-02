@@ -24,7 +24,7 @@ bool MainMenu::Initialize()
 	TextureManagerClass* textureManager = TextureManagerClass::GetInstance();
 	ModelManager* modelManager = ModelManager::GetInstance();
 	bool result = true;
-	int defaultNormal, modelId, textureID, screenWidth, screenHeight;
+	int screenWidth, screenHeight;
 	float screenDepth, screenNear;
 	Direct3D->GetScreenReserlution(screenWidth, screenHeight);
 	Direct3D->GetScreenDepth(screenNear, screenDepth);

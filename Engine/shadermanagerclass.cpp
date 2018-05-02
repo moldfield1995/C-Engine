@@ -31,7 +31,6 @@ ShaderManagerClass::~ShaderManagerClass()
 
 bool ShaderManagerClass::Initialize(ID3D11Device* device, HWND hwnd)
 {
-	bool result;
 	m_shaders = vector<Shader*>();
 	CreateShader(new ColorShaderClass, device, hwnd);
 	CreateShader(new TextureShaderClass, device, hwnd);

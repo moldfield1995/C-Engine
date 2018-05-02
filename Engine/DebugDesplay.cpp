@@ -34,7 +34,7 @@ void DebugDesplay::Initalize()
 	
 
 	testButton = new UIButton("../Engine/data/textures/Button.tga");
-	testButton->SetPosition(Float3(screenWidth/2, 0.0f));
+	testButton->SetPosition(Float3(screenWidth/2.0f, 0.0f));
 	__hook(&UIButton::onClickTrigger, testButton, &DebugDesplay::ButtonClicked);
 	instance->AddComponet(testButton);
 }

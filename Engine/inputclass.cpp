@@ -299,14 +299,14 @@ bool InputClass::KeyUp(unsigned short int key)
 //Returns if the key is down
 bool InputClass::Key(unsigned short int key)
 {
-	return m_keyboardState[key] & 0x80;
+	return (m_keyboardState[key] & 0x80);
 }
 
 char InputClass::TypeCheck()
 {
 	for (unsigned short int i = 0; i < 256; i++)
 	{
-		if (m_keyboardState[i] & 0x80 && !m_OldKeyboardState[i] & 0x80)
+		if ((m_keyboardState[i] & 0x80) && !(m_OldKeyboardState[i] & 0x80))
 		{
 			return i;
 		}

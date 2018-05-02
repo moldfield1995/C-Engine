@@ -124,7 +124,6 @@ void FontClass::ReleaseFontData()
 
 bool FontClass::LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* filename)
 {
-	bool result;
 	TextureManagerClass* textureManager = TextureManagerClass::GetInstance();
 	if (textureManager->LoadTexture(device, deviceContext, filename, 111))
 	{
