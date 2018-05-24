@@ -11,25 +11,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include="bumpmap.ps" />
-    <None Include="bumpmap.vs" />
+    <None Include="bumpmapPixle.hlsl" />
+    <None Include="bumpmapVertex.hlsl" />
     <None Include="ClassDiagram.cd" />
-    <None Include="color.ps" />
-    <None Include="color.vs" />
-    <None Include="font.ps" />
-    <None Include="font.vs" />
-    <None Include="light.ps" />
-    <None Include="light.vs" />
-    <None Include="Shaderlight.ps" />
-    <None Include="Shaderlight.vs" />
-    <None Include="skydome.ps" />
-    <None Include="skydome.vs" />
-    <None Include="slider.ps" />
-    <None Include="slider.vs" />
-    <None Include="terrain.ps" />
-    <None Include="terrain.vs" />
-    <None Include="texture.ps" />
-    <None Include="texture.vs" />
+    <None Include="colorPixle.hlsl" />
+    <None Include="colorVertex.hlsl" />
+    <None Include="fontPixle.hlsl" />
+    <None Include="fontVertex.hlsl" />
+    <None Include="lightPixle.hlsl" />
+    <None Include="lightVertex.hlsl" />
+    <None Include="ShaderlightPixle.hlsl" />
+    <None Include="ShaderlightVertex.hlsl" />
+    <None Include="skydomePixle.hlsl" />
+    <None Include="skydomeVertex.hlsl" />
+    <None Include="sliderPixle.hlsl" />
+    <None Include="sliderVertex.hlsl" />
+    <None Include="texturePixle.hlsl" />
+    <None Include="textureVertex.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="applicationclass.h" />
@@ -48,6 +46,7 @@
     <ClInclude Include="cpuclass.h" />
     <ClInclude Include="d3dclass.h" />
     <ClInclude Include="DebugDesplay.h" />
+    <ClInclude Include="EnergeyPowerup.h" />
     <ClInclude Include="EnviromentAstroids.h" />
     <ClInclude Include="float3.h" />
     <ClInclude Include="fontclass.h" />
@@ -61,6 +60,7 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="HandCurser.h" />
     <ClInclude Include="HandDesplay.h" />
+    <ClInclude Include="HealthPowerup.h" />
     <ClInclude Include="HitBoxTest.h" />
     <ClInclude Include="inputclass.h" />
     <ClInclude Include="LeapTestScene.h" />
@@ -71,12 +71,18 @@
     <ClInclude Include="MainMenuComp.h" />
     <ClInclude Include="ModelClass.h" />
     <ClInclude Include="ModelManager.h" />
+    <ClInclude Include="MultiShotPowerup.h" />
+    <ClInclude Include="NegativePowerup.h" />
     <ClInclude Include="PeformanceMonerting.h" />
     <ClInclude Include="PlayerControler.h" />
     <ClInclude Include="PlayerUI.h" />
     <ClInclude Include="positionclass.h" />
+    <ClInclude Include="Powerup.h" />
+    <ClInclude Include="PowerupManager.h" />
+    <ClInclude Include="RandomPowerup.h" />
     <ClInclude Include="RotateObject.h" />
     <ClInclude Include="ScoreManager.h" />
+    <ClInclude Include="ScorePowerup.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="shadermanagerclass.h" />
     <ClInclude Include="ShotComponet.h" />
@@ -116,6 +122,7 @@
     <ClCompile Include="cpuclass.cpp" />
     <ClCompile Include="d3dclass.cpp" />
     <ClCompile Include="DebugDesplay.cpp" />
+    <ClCompile Include="EnergeyPowerup.cpp" />
     <ClCompile Include="EnviromentAstroids.cpp" />
     <ClCompile Include="float3.cpp" />
     <ClCompile Include="fontclass.cpp" />
@@ -129,6 +136,7 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="HandCurser.cpp" />
     <ClCompile Include="HandDesplay.cpp" />
+    <ClCompile Include="HealthPowerup.cpp" />
     <ClCompile Include="HitBoxTest.cpp" />
     <ClCompile Include="inputclass.cpp" />
     <ClCompile Include="LeapTestScene.cpp" />
@@ -140,12 +148,18 @@
     <ClCompile Include="MainMenuComp.cpp" />
     <ClCompile Include="ModelClass.cpp" />
     <ClCompile Include="ModelManager.cpp" />
+    <ClCompile Include="MultiShotPowerup.cpp" />
+    <ClCompile Include="NegativePowerup.cpp" />
     <ClCompile Include="PeformanceMonerting.cpp" />
     <ClCompile Include="PlayerControler.cpp" />
     <ClCompile Include="PlayerUI.cpp" />
     <ClCompile Include="positionclass.cpp" />
+    <ClCompile Include="Powerup.cpp" />
+    <ClCompile Include="PowerupManager.cpp" />
+    <ClCompile Include="RandomPowerup.cpp" />
     <ClCompile Include="RotateObject.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
+    <ClCompile Include="ScorePowerup.cpp" />
     <ClCompile Include="shadermanagerclass.cpp" />
     <ClCompile Include="ShotComponet.cpp" />
     <ClCompile Include="ShotManager.cpp" />
@@ -171,6 +185,18 @@
     <ProjectReference Include="..\TrueAxis\Projects\TA_VC8.vcxproj">
       <Project>{b6452181-1590-4be3-a968-6a84e7bbce32}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SpaceStarsPixel.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <FileType>Document</FileType>
+    </None>
+    <None Include="SpaceStarsVertex.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B582C848-8474-42F1-91EE-C5B948FE3486}</ProjectGuid>

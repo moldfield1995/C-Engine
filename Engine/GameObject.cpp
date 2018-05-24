@@ -27,6 +27,7 @@ GameObject::GameObject(GameObject * go)
 	m_textures = new std::vector<ID3D11ShaderResourceView*>();
 	m_colour = go->m_colour;
 	m_collishonObject = 0;
+	m_KillGameObject = false;
 	for each (ID3D11ShaderResourceView* texture in *go->m_textures)
 	{
 		m_textures->push_back(texture);

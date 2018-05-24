@@ -8,6 +8,7 @@ ScoreManager::ScoreManager()
 {
 	scoreText = 0;
 	currentScore = 0;
+	scoreMulityplier = 1;
 }
 
 ScoreManager::~ScoreManager()
@@ -42,7 +43,7 @@ void ScoreManager::Destroy()
 
 void ScoreManager::AstroidKilled()
 {
-	currentScore += 100;
+	currentScore += 100 * scoreMulityplier;
 	scoreText->UpdateString("Score: " + to_string(currentScore));
 }
 
@@ -55,6 +56,11 @@ void ScoreManager::AstroidPassedPlayer()
 int ScoreManager::GetScore()
 {
 	return currentScore;
+}
+
+void ScoreManager::AddScoreMulityplier(int value)
+{
+	scoreMulityplier += value;
 }
 
 ScoreManager * ScoreManager::GetInstance()

@@ -15,7 +15,6 @@ PlayerControler::PlayerControler(float maxEnergey, float maxHP, PlayerUI *player
 	, restingPosition(0.0f,0.0f,5.0f)
 	, maxEnergey(maxEnergey)
 	, maxHP(maxHP)
-	, energeyPerKill(10.0f)
 {
 	currentEnergey = 0.0f;
 	currentHP = maxHP;
@@ -125,19 +124,34 @@ bool PlayerControler::OnCollishon(const CollisonData * other)
 	return true;
 }
 
-void PlayerControler::HitAstroid()
-{
-	currentEnergey += 10.0f;
-}
+
 
 int PlayerControler::GetCurrentHand()
 {
 	return currentHand;
 }
 
-void PlayerControler::KilledAstroid()
+
+void PlayerControler::AddHp(float value)
 {
-	currentEnergey += energeyPerKill;
+	currentHP += value;
+	if (currentHP > maxHP)
+		currentHP = maxHP;
+	else if (currentHP <= 0.0f)
+	{//GameOver
+		GameOverScreen::GetInstance()->DesplayGameOver();
+		SetOwnersKill(true);
+		playerUI->PlayerDied();
+	}
+}
+
+void PlayerControler::AddEnergey(float value)
+{
+	currentEnergey += value;
+	if (currentEnergey > maxEnergey)
+		currentEnergey = maxEnergey;
+	else if (currentEnergey < 0)
+		currentEnergey = 0;
 }
 
 void PlayerControler::FindHand(InputClass * input, float timeDelta, Hand &hand)
@@ -173,17 +187,17 @@ bool PlayerControler::CheckSuper(Hand &hand)
 	if (!hand.isValid())
 		return false;
 
-	int validFingersRetracted = 0;
+	//int validFingersRetracted = 0;
 	FingerList fingers = hand.fingers();
 	for each (Finger finger in fingers)
 	{
-		if (finger.type() == Finger::TYPE_MIDDLE || finger.type() == Finger::TYPE_RING)
+		if (finger.type() == Finger::TYPE_THUMB)//(finger.type() == Finger::TYPE_MIDDLE || finger.type() == Finger::TYPE_RING)
 		{
 			if (!finger.isExtended())
 			{
-				validFingersRetracted++;
-				if (validFingersRetracted == 2)
-					return true;
+				//validFingersRetracted++;
+				//if (validFingersRetracted == 2)
+				return true;
 			}
 			else
 				return false;

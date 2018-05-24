@@ -79,63 +79,63 @@
     <Filter Include="Header Files\Componets\Debug">
       <UniqueIdentifier>{b9b90f4d-48d3-4bff-8811-9e65babcc1e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Componets\Powerups">
+      <UniqueIdentifier>{688afa77-c8b0-401d-8b6f-e622c0fa1639}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Componets\PowerupManager">
+      <UniqueIdentifier>{9d0afd14-03e0-4ae9-a2fb-40483b682749}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="color.ps">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="font.ps">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="light.ps">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="skydome.ps">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="terrain.ps">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="texture.ps">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="color.vs">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="font.vs">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="light.vs">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="skydome.vs">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="terrain.vs">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="texture.vs">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="Shaderlight.vs">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="Shaderlight.ps">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="bumpmap.ps">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="bumpmap.vs">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="slider.ps">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="slider.vs">
-      <Filter>Shader Files</Filter>
-    </None>
     <None Include="ClassDiagram.cd" />
+    <None Include="bumpmapPixle.hlsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="bumpmapVertex.hlsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="colorPixle.hlsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="fontPixle.hlsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="lightPixle.hlsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="ShaderlightPixle.hlsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="skydomePixle.hlsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="sliderPixle.hlsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="texturePixle.hlsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="colorVertex.hlsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="fontVertex.hlsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="lightVertex.hlsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="ShaderlightVertex.hlsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="skydomeVertex.hlsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="sliderVertex.hlsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="textureVertex.hlsl">
+      <Filter>Shader Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="colorshaderclass.h">
@@ -335,6 +335,30 @@
     </ClInclude>
     <ClInclude Include="EnviromentAstroids.h">
       <Filter>Header Files\Componets</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerupManager.h">
+      <Filter>Header Files\Componets\PowerupManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ScorePowerup.h">
+      <Filter>Header Files\Componets\PowerupManager</Filter>
+    </ClInclude>
+    <ClInclude Include="EnergeyPowerup.h">
+      <Filter>Header Files\Componets\PowerupManager</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthPowerup.h">
+      <Filter>Header Files\Componets\PowerupManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiShotPowerup.h">
+      <Filter>Header Files\Componets\PowerupManager</Filter>
+    </ClInclude>
+    <ClInclude Include="NegativePowerup.h">
+      <Filter>Header Files\Componets\PowerupManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Powerup.h">
+      <Filter>Header Files\Componets\PowerupManager</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomPowerup.h">
+      <Filter>Header Files\Componets\PowerupManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -536,5 +560,37 @@
     <ClCompile Include="EnviromentAstroids.cpp">
       <Filter>Source Files\Componets</Filter>
     </ClCompile>
+    <ClCompile Include="PowerupManager.cpp">
+      <Filter>Source Files\Componets\Powerups</Filter>
+    </ClCompile>
+    <ClCompile Include="ScorePowerup.cpp">
+      <Filter>Source Files\Componets\Powerups</Filter>
+    </ClCompile>
+    <ClCompile Include="EnergeyPowerup.cpp">
+      <Filter>Source Files\Componets\Powerups</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthPowerup.cpp">
+      <Filter>Source Files\Componets\Powerups</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiShotPowerup.cpp">
+      <Filter>Source Files\Componets\Powerups</Filter>
+    </ClCompile>
+    <ClCompile Include="NegativePowerup.cpp">
+      <Filter>Source Files\Componets\Powerups</Filter>
+    </ClCompile>
+    <ClCompile Include="Powerup.cpp">
+      <Filter>Source Files\Componets\Powerups</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomPowerup.cpp">
+      <Filter>Source Files\Componets\Powerups</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="SpaceStarsPixel.hlsl">
+      <Filter>Shader Files</Filter>
+    </FxCompile>
+    <FxCompile Include="SpaceStarsVertex.hlsl">
+      <Filter>Shader Files</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@
 #include "AstroidManager.h"
 #include "GameOverScreen.h"
 #include "EnviromentAstroids.h"
+#include "PowerupManager.h"
 
 GamePlayScene::GamePlayScene()
 {
@@ -106,7 +107,7 @@ bool GamePlayScene::Initialize()
 	}
 
 	gameObject->AddComponet(new PlayerControler(100.0f, 100.0f,playerUI, shotmanager));
-	gameObject->AddComponet(new BasicMeshHitbox());
+	gameObject->AddComponet(new BasicMeshHitbox(false, CollisionLayer::Player));
 	gameObject->AddComponet(shotmanager);
 
 	m_GameObjects.push_back(gameObject);
@@ -151,6 +152,14 @@ bool GamePlayScene::Initialize()
 	gameObject = new GameObject();
 	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f, 0.0f, 0.0f), 0, 0, 0);
 	gameObject->AddComponet(new GameOverScreen(this));
+	{
+		modelId = modelManager->AddModle(device, "../Engine/data/Models/Torus.obj");
+		textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/textures/Default.tga");
+		GameObject* outerRing = new GameObject();
+		outerRing->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
+		outerRing->SetScale(3.0f);
+		gameObject->AddComponet(new PowerupManager(outerRing));
+	}
 	m_GameObjects.push_back(gameObject);
 
 	return true;

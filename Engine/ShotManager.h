@@ -14,18 +14,26 @@ public:
 	void virtual Destroy();
 
 	void SetSuperState(bool value);
+
+	void SetMultyShot(bool value);
+
 private:
 
 	void Shoot();
 	void CreateShots(int amount);
-
+	void SpawnShot(Float3 position, Float3 velocity);
 	float timeToNextShot;
 	const float shotInterval, superInterval;
 	const float shotOffset, shotSpeed;
 	GameObject* shotPrefab;
-	bool superActive;
+	bool superActive, multiShotActive;
 
 	std::vector<GameObject*> activeShots;
 	std::vector<ShotComponet*> storedShots;
+
+
+	static ShotManager* instance;
+public:
+	static ShotManager* GetInstance();
 };
 

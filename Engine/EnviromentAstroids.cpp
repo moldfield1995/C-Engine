@@ -7,7 +7,7 @@ EnviromentAstroids::EnviromentAstroids(GameObject* prefab, float distanceBetween
 	, m_MaxZ(1000.0f)
 	, m_XOffset(80.0f)
 	, m_SpawnSepiration(distanceBetween)
-	, m_MovmentSpeed(-20.0f)
+	, m_MovmentSpeed(-120.0f)
 {
 	m_Prefab = prefab;
 	m_NextToCheck = 0;
@@ -44,13 +44,15 @@ void EnviromentAstroids::Initalize()
 void EnviromentAstroids::Update()
 {
 	//check current closet astroids
-	if (m_Astroids[m_NextToCheck]->GetPosition().Z <= m_MinZ)
+	float nextAstriodPositionZ = m_Astroids[(m_Astroids.size() - 1 + m_NextToCheck) % m_Astroids.size()]->GetPosition().Z + m_SpawnSepiration;
+	while (m_Astroids[m_NextToCheck]->GetPosition().Z <= m_MinZ)
 	{
-		m_Astroids[m_NextToCheck]->SetPosition(Float3(m_XOffset, 0.0f, m_MaxZ));
-		m_Astroids[m_NextToCheck+1]->SetPosition(Float3(-m_XOffset, 0.0f, m_MaxZ));
+		m_Astroids[m_NextToCheck]->SetPosition(Float3(m_XOffset, 0.0f, nextAstriodPositionZ));
+		m_Astroids[m_NextToCheck+1]->SetPosition(Float3(-m_XOffset, 0.0f, nextAstriodPositionZ ));
 		m_NextToCheck += 2;
 		if (m_NextToCheck >= m_Astroids.size())
 			m_NextToCheck = 0;
+		nextAstriodPositionZ += m_SpawnSepiration;
 	}
 	TimerClass* timer = TimerClass::GetInstance();
 	Float3 zMovment(0.0f,0.0f, m_MovmentSpeed * timer->GetFrameTime());

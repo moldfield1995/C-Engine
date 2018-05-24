@@ -3,6 +3,7 @@
 #include "ScoreManager.h"
 #include "GameObject.h"
 #include "PlayerControler.h"
+#include "PowerupManager.h"
 
 AstroidComponet::AstroidComponet()
 	: zDeathPlain(-10.0f)
@@ -24,8 +25,6 @@ void AstroidComponet::Update()
 	if (owner->GetPosition().Z < zDeathPlain)
 	{
 		ScoreManager* scoreManager = ScoreManager::GetInstance();
-		if (scoreManager)
-			scoreManager->AstroidPassedPlayer();
 		SetOwnersRender(false);
 		SetOwnersKill(true);
 	}
@@ -49,8 +48,9 @@ bool AstroidComponet::OnCollishon(const CollisonData * other)
 		if(scoreManager)
 			scoreManager->AstroidKilled();
 		PlayerControler* player = PlayerControler::GetInstance();
-		if (player)
-			player->KilledAstroid();
+		PowerupManager* powerup = PowerupManager::GetInstance();
+		if (powerup)
+			powerup->SpawnPowerup(owner->GetPosition(), GetOwnersDynamicObject()->GetLinearVelocity());
 		GetOwnersDynamicObject()->SetCollisionDisabled(true);
 	}
 

@@ -20,9 +20,11 @@ public:
 	void virtual Destroy();
 	bool virtual OnCollishon(const CollisonData* other);
 
-	void HitAstroid();
 	int GetCurrentHand();
-	void KilledAstroid();
+
+	void AddHp(float value);
+	void AddEnergey(float value);
+
 private:
 
 	void FindHand(InputClass* input, float timeDelta, Hand &hand);
@@ -34,7 +36,7 @@ private:
 	const Float3 restingPosition;
 	//GamePlay
 	float currentEnergey, currentHP;
-	const float hpLossPerHit, energeyLossPerSecond, maxEnergey, maxHP, energeyPerKill;
+	const float hpLossPerHit, energeyLossPerSecond, maxEnergey, maxHP;
 	bool superActiveLastFrame;
 
 	ShotManager* shotManager;

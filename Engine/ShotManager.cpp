@@ -4,6 +4,7 @@
 #include "timerclass.h"
 #include "PlayerControler.h"
 
+ShotManager* ShotManager::instance = 0;
 
 ShotManager::ShotManager(GameObject* ShotPrefab)
 	: shotInterval(0.75f)
@@ -13,6 +14,7 @@ ShotManager::ShotManager(GameObject* ShotPrefab)
 {
 	shotPrefab = ShotPrefab;
 	superActive = false;
+	multiShotActive = false;
 }
 
 
@@ -26,6 +28,7 @@ void ShotManager::Initalize()
 	activeShots = std::vector<GameObject*>();
 	CreateShots(5);
 	timeToNextShot = 0.0f;
+	instance = this;
 }
 
 void ShotManager::Update()
@@ -79,28 +82,50 @@ void ShotManager::SetSuperState(bool value)
 	superActive = value;
 }
 
+void ShotManager::SetMultyShot(bool value)
+{
+}
+
 
 void ShotManager::Shoot()
 {
-	if (storedShots.size() == 0)
+	if (storedShots.size() <= 3)
 		CreateShots(5);
-	ShotComponet* shot = storedShots[storedShots.size() - 1];
-	storedShots.pop_back();
 	//SetUp shot
 	int currentHand = PlayerControler::GetInstance()->GetCurrentHand();
 	Leap::Hand hand = InputClass::GetInstance()->GetLeapFrame().hand(currentHand);
-	if(!hand.isValid())//We have no Hand to get data from
-		shot->Shoot(owner->GetPosition() + (Float3(0.0f,0.0f,1.0f)* shotOffset), Float3(0.0f, 0.0f, 1.0f)*shotSpeed);
+	if (!hand.isValid())//We have no Hand to get data from
+	{
+		SpawnShot(owner->GetPosition() + (Float3(0.0f, 0.0f, 1.0f)* shotOffset), Float3(0.0f, 0.0f, 1.0f)*shotSpeed);
+		if (multiShotActive)
+		{
+			SpawnShot(owner->GetPosition() + (Float3(0.0f, 0.0f, 1.0f)* shotOffset), Float3(0.3f, 0.0f, 0.7f)*shotSpeed);
+			SpawnShot(owner->GetPosition() + (Float3(0.0f, 0.0f, 1.0f)* shotOffset), Float3(-0.3f, 0.0f, 0.7f)*shotSpeed);
+		}
+	}
 	else
 	{
 		Leap::Vector direction = hand.direction();
 		Float3 rotation = (Float3(direction.pitch(), direction.yaw(), -hand.palmNormal().roll())*RAD_TO_DEG);
 		Float3 shotVelosity = Float3(direction.x, direction.y, -direction.z);
-		shot->Shoot(owner->GetPosition() + (shotVelosity* shotOffset), shotVelosity*shotSpeed);
+		SpawnShot(owner->GetPosition() + (shotVelosity* shotOffset), shotVelosity*shotSpeed);
+		if (multiShotActive)
+		{
+			//shot left
+			XMVECTOR queturnion = XMQuaternionRotationRollPitchYaw(0.0f, 30.0f*DEG_TO_RAD, 0.0f);
+			XMVECTOR shotDirection = XMVectorSet(shotVelosity.X, shotVelosity.Y, shotVelosity.Z, 1.0f);
+			XMVECTOR rotatedVector = XMVector3Rotate(shotDirection, queturnion);
+			shotVelosity = Float3(XMVectorGetX(rotatedVector), XMVectorGetY(rotatedVector), XMVectorGetZ(rotatedVector)).Normalize();
+			SpawnShot(owner->GetPosition() + (shotVelosity* shotOffset), shotVelosity*shotSpeed);
+			//shot right
+			queturnion = XMQuaternionRotationRollPitchYaw(0.0f, -30.0f*DEG_TO_RAD, 0.0f);
+			rotatedVector = XMVector3Rotate(shotDirection, queturnion);
+			shotVelosity = Float3(XMVectorGetX(rotatedVector), XMVectorGetY(rotatedVector), XMVectorGetZ(rotatedVector)).Normalize();
+			SpawnShot(owner->GetPosition() + (shotVelosity* shotOffset), shotVelosity*shotSpeed);
+		}
 	}
 
 
-	activeShots.push_back(shot->GetOwner());
 }
 
 void ShotManager::CreateShots(int amount)
@@ -113,4 +138,17 @@ void ShotManager::CreateShots(int amount)
 		go->AddComponet(shotComponent);
 		storedShots.push_back(shotComponent);
 	}
+}
+
+void ShotManager::SpawnShot(Float3 position, Float3 velocity)
+{
+	ShotComponet* shot = storedShots[storedShots.size() - 1];
+	storedShots.pop_back();
+	shot->Shoot(position, velocity);
+	activeShots.push_back(shot->GetOwner());
+}
+
+ShotManager * ShotManager::GetInstance()
+{
+	return instance;
 }

@@ -17,11 +17,13 @@ public:
 	void AstroidPassedPlayer();
 	int GetScore();
 
+	void AddScoreMulityplier(int value);
+
 	static ScoreManager* GetInstance();
 private:
 	UIText * scoreText;
 	int currentScore;
-
+	int scoreMulityplier;
 	static ScoreManager* instance;
 };
 

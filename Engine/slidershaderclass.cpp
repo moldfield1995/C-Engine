@@ -31,7 +31,7 @@ bool SliderShaderClass::Initialize(ID3D11Device* device, HWND hwnd)
 
 
 	// Initialize the vertex and pixel shaders.
-	result = InitializeShader(device, hwnd, L"../Engine/slider.vs", L"../Engine/slider.ps");
+	result = InitializeShader(device, hwnd, L"../Engine/sliderVertex.hlsl", L"../Engine/sliderPixle.hlsl");
 	if(!result)
 	{
 		return false;
