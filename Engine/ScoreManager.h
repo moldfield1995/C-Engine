@@ -21,7 +21,7 @@ public:
 
 	static ScoreManager* GetInstance();
 private:
-	UIText * scoreText;
+	UIText * scoreText, *multyText;
 	int currentScore;
 	int scoreMulityplier;
 	static ScoreManager* instance;

@@ -7,7 +7,7 @@ EnviromentAstroids::EnviromentAstroids(GameObject* prefab, float distanceBetween
 	, m_MaxZ(1000.0f)
 	, m_XOffset(80.0f)
 	, m_SpawnSepiration(distanceBetween)
-	, m_MovmentSpeed(-120.0f)
+	, m_MovmentSpeed(-150.0f)
 {
 	m_Prefab = prefab;
 	m_NextToCheck = 0;

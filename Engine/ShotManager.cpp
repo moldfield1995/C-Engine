@@ -7,7 +7,7 @@
 ShotManager* ShotManager::instance = 0;
 
 ShotManager::ShotManager(GameObject* ShotPrefab)
-	: shotInterval(0.75f)
+	: shotInterval(0.5f)
 	, superInterval(0.1f)
 	, shotOffset(5.0f)
 	, shotSpeed(100.0f)
@@ -40,7 +40,7 @@ void ShotManager::Update()
 		if (!activeShots[i]->IsAlive())
 		{
 			ShotComponet* shot = activeShots[i]->GetComponent<ShotComponet>();
-			activeShots.erase(activeShots.begin() +i);
+			activeShots.erase(activeShots.begin() + i);
 			shot->Reset();
 			storedShots.push_back(shot);
 		}
@@ -84,6 +84,7 @@ void ShotManager::SetSuperState(bool value)
 
 void ShotManager::SetMultyShot(bool value)
 {
+	multiShotActive = value;
 }
 
 
@@ -99,28 +100,87 @@ void ShotManager::Shoot()
 		SpawnShot(owner->GetPosition() + (Float3(0.0f, 0.0f, 1.0f)* shotOffset), Float3(0.0f, 0.0f, 1.0f)*shotSpeed);
 		if (multiShotActive)
 		{
-			SpawnShot(owner->GetPosition() + (Float3(0.0f, 0.0f, 1.0f)* shotOffset), Float3(0.3f, 0.0f, 0.7f)*shotSpeed);
-			SpawnShot(owner->GetPosition() + (Float3(0.0f, 0.0f, 1.0f)* shotOffset), Float3(-0.3f, 0.0f, 0.7f)*shotSpeed);
+			SpawnShot(owner->GetPosition() + (Float3(0.0f, 0.0f, 1.0f)* shotOffset), Float3(0.1f, 0.0f, 0.9f)*shotSpeed);
+			SpawnShot(owner->GetPosition() + (Float3(0.0f, 0.0f, 1.0f)* shotOffset), Float3(-0.1f, 0.0f, 0.9f)*shotSpeed);
 		}
 	}
 	else
 	{
 		Leap::Vector direction = hand.direction();
-		Float3 rotation = (Float3(direction.pitch(), direction.yaw(), -hand.palmNormal().roll())*RAD_TO_DEG);
+		Float3 rotation = (Float3(direction.pitch(), direction.yaw(), -hand.palmNormal().roll()));
 		Float3 shotVelosity = Float3(direction.x, direction.y, -direction.z);
 		SpawnShot(owner->GetPosition() + (shotVelosity* shotOffset), shotVelosity*shotSpeed);
 		if (multiShotActive)
 		{
+			float offsetRot = 10.0f*DEG_TO_RAD;
+			float yMovment, xMovment;
 			//shot left
-			XMVECTOR queturnion = XMQuaternionRotationRollPitchYaw(0.0f, 30.0f*DEG_TO_RAD, 0.0f);
-			XMVECTOR shotDirection = XMVectorSet(shotVelosity.X, shotVelosity.Y, shotVelosity.Z, 1.0f);
-			XMVECTOR rotatedVector = XMVector3Rotate(shotDirection, queturnion);
-			shotVelosity = Float3(XMVectorGetX(rotatedVector), XMVectorGetY(rotatedVector), XMVectorGetZ(rotatedVector)).Normalize();
+			XMVECTOR queturnionLeftRight = XMQuaternionRotationRollPitchYaw(-rotation.X, rotation.Y + (10.0f*DEG_TO_RAD), rotation.Z);
+			XMVECTOR shotDirection = XMVectorSet(0.0f, 0.0f, 1.0f, 1.0f);
+			XMVECTOR rotatedVector = XMVector3Rotate(shotDirection, queturnionLeftRight);
+			{//handells roll movment for multi shots
+				float rollRotationDegrees = rotation.Z*RAD_TO_DEG;
+
+				float xRotationMovment = XMVectorGetX(rotatedVector) - direction.x;
+				if (rollRotationDegrees <= 90.0f)
+				{
+					yMovment = xRotationMovment * (rollRotationDegrees / 90.0f);
+					xMovment = xRotationMovment *  ((rollRotationDegrees / 90.0f)-1.0f);
+				}
+				else if (rollRotationDegrees <= 180.0f)
+				{
+					rollRotationDegrees -= 90.0f;
+					yMovment = xRotationMovment * (1.0f- (rollRotationDegrees / 90.0f));
+					xMovment = xRotationMovment * (rollRotationDegrees / 90.0f);
+				}
+				else if (rollRotationDegrees <= 270.0f)
+				{
+					rollRotationDegrees -= 180.0f;
+					yMovment = xRotationMovment * (rollRotationDegrees / 90.0f);
+					xMovment = xRotationMovment * ((rollRotationDegrees / 90.0f)-1.0f);
+				}
+				else if (rollRotationDegrees <= 360.0f)
+				{
+					rollRotationDegrees -= 270.0f;
+					yMovment = xRotationMovment * (1.0f - (rollRotationDegrees / 90.0f));
+					xMovment = xRotationMovment * (rollRotationDegrees / 90.0f);
+				}
+			}
+			shotVelosity = Float3(direction.x + xMovment, XMVectorGetY(rotatedVector)+ yMovment, XMVectorGetZ(rotatedVector)).Normalize();
 			SpawnShot(owner->GetPosition() + (shotVelosity* shotOffset), shotVelosity*shotSpeed);
 			//shot right
-			queturnion = XMQuaternionRotationRollPitchYaw(0.0f, -30.0f*DEG_TO_RAD, 0.0f);
-			rotatedVector = XMVector3Rotate(shotDirection, queturnion);
-			shotVelosity = Float3(XMVectorGetX(rotatedVector), XMVectorGetY(rotatedVector), XMVectorGetZ(rotatedVector)).Normalize();
+			queturnionLeftRight = XMQuaternionRotationRollPitchYaw(-rotation.X, rotation.Y + (-10.0f*DEG_TO_RAD), rotation.Z);
+			rotatedVector = XMVector3Rotate(shotDirection, queturnionLeftRight);
+			{//handells roll movment for multi shots
+				float rollRotationDegrees = rotation.Z*RAD_TO_DEG;
+
+				float xRotationMovment = XMVectorGetX(rotatedVector) - direction.x;
+				if (rollRotationDegrees <= 90.0f)
+				{
+					yMovment = xRotationMovment * (rollRotationDegrees / 90.0f);
+					xMovment = xRotationMovment * ((rollRotationDegrees / 90.0f) - 1.0f);
+				}
+				else if (rollRotationDegrees <= 180.0f)
+				{
+					rollRotationDegrees -= 90.0f;
+					yMovment = xRotationMovment * (1.0f - (rollRotationDegrees / 90.0f));
+					xMovment = xRotationMovment * (rollRotationDegrees / 90.0f);
+				}
+				else if (rollRotationDegrees <= 270.0f)
+				{
+					rollRotationDegrees -= 180.0f;
+					yMovment = xRotationMovment * (rollRotationDegrees / 90.0f);
+					xMovment = xRotationMovment * ((rollRotationDegrees / 90.0f) - 1.0f);
+				}
+				else if (rollRotationDegrees <= 360.0f)
+				{
+					rollRotationDegrees -= 270.0f;
+					yMovment = xRotationMovment * (1.0f - (rollRotationDegrees / 90.0f));
+					xMovment = xRotationMovment * (rollRotationDegrees / 90.0f);
+				}
+			}
+
+			shotVelosity = Float3(direction.x + xMovment, XMVectorGetY(rotatedVector) + yMovment, XMVectorGetZ(rotatedVector)).Normalize();
 			SpawnShot(owner->GetPosition() + (shotVelosity* shotOffset), shotVelosity*shotSpeed);
 		}
 	}

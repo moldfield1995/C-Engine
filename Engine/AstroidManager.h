@@ -17,8 +17,8 @@ private:
 	void LaunchAstroid();
 
 	const float minSpawnAstroid, maxSpawnAstroid;
-	const Float3 minPosition, maxPosition, astroidVelosity;
-
+	const Float3 minPosition, maxPosition;
+	Float3 astroidVelosity;
 	std::vector<AstroidComponet*> storedAstroids;
 	std::vector<GameObject*> activeAstroids;
 	GameObject* prefabAstroid;

@@ -10,6 +10,11 @@
 #include "GameOverScreen.h"
 #include "EnviromentAstroids.h"
 #include "PowerupManager.h"
+#include "lightshader.h"
+#include "DifficultyHandler.h"
+#include "WarpSpeed.h"
+#include "maskedTextureshaderclass.h"
+#include "Utills.h"
 
 GamePlayScene::GamePlayScene()
 {
@@ -86,15 +91,25 @@ bool GamePlayScene::Initialize()
 		return false;
 	m_Skybox->Initalize(modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
 
+		//WarpSpeed plane
+	modelId = modelManager->AddModle(device, "../Engine/data/Models/UvedPlane.obj");
+	gameObject = new GameObject();
+	gameObject->Initalize(Float3(0.0f, 0.0f, -9.0f), Float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(modelId), 0, 0);
+	gameObject->AddComponet(new WarpSpeed());
+	gameObject->SetScale(1.5f);
+	m_GameObjects.push_back(gameObject);
+
 	//Start Creating Player
 	modelId = modelManager->AddModle(device, "../Engine/data/LizReddington/Ship1.obj");
 	textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/LizReddington/Ship1Uved.tga");
 	PlayerUI* playerUI = new PlayerUI(100.0f, 100.0f);
 
 	gameObject = new GameObject();
-	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f,180.0f,0.0f), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
+	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f,180.0f,0.0f), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), ShaderManagerClass::GetInstance()->GetShader<MaskedTextureshaderclass>());
+	textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/LizReddington/Ship1UvedMask.tga");
+	gameObject->AddTexture(textureManager->GetTexture(textureID));
 	gameObject->SetScale(Float3(0.01f, 0.01f, 0.01f));
-	
+	gameObject->SetColour(XMFLOAT4(Utills::RandomFloat(), Utills::RandomFloat(), Utills::RandomFloat(), 1.0f));
 	//Creates the shot manager 
 	ShotManager* shotmanager = 0;
 	{
@@ -109,6 +124,7 @@ bool GamePlayScene::Initialize()
 	gameObject->AddComponet(new PlayerControler(100.0f, 100.0f,playerUI, shotmanager));
 	gameObject->AddComponet(new BasicMeshHitbox(false, CollisionLayer::Player));
 	gameObject->AddComponet(shotmanager);
+	gameObject->AddComponet(new DifficultyHandler());
 
 	m_GameObjects.push_back(gameObject);
 	//END Creating Player
@@ -143,8 +159,8 @@ bool GamePlayScene::Initialize()
 		textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/GooglePoly/Asteroids_Dark.tga");
 		GameObject* astroid = new GameObject();
 		astroid->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(90.0f, 0.0f, 0.0f), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
-		astroid->SetScale(Float3(5.0f));
-		gameObject->AddComponet(new EnviromentAstroids(astroid,60.0f));
+		astroid->SetScale(Float3(6.0f));
+		gameObject->AddComponet(new EnviromentAstroids(astroid,80.0f));
 	}
 	m_GameObjects.push_back(gameObject);
 	//End Creating Enviroment Astroids
@@ -153,11 +169,14 @@ bool GamePlayScene::Initialize()
 	gameObject->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f, 0.0f, 0.0f), 0, 0, 0);
 	gameObject->AddComponet(new GameOverScreen(this));
 	{
-		modelId = modelManager->AddModle(device, "../Engine/data/Models/Torus.obj");
-		textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/textures/Default.tga");
+		modelId = modelManager->AddModle(device, "../Engine/data/Models/PowerupRing.obj");
+		textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/textures/IconMap.tga");
 		GameObject* outerRing = new GameObject();
-		outerRing->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), shader);
-		outerRing->SetScale(3.0f);
+		outerRing->Initalize(Float3(0.0f, 0.0f, 0.0f), Float3(0.0f, 0.0f, 0.0f), modelManager->GetModel(modelId), textureManager->GetTexture(textureID), ShaderManagerClass::GetInstance()->GetShader<MaskedTextureshaderclass>());
+		textureID = textureManager->LoadTexture(device, deviceContex, "../Engine/data/textures/IconMapMask.tga");
+		outerRing->AddTexture(textureManager->GetTexture(textureID));
+
+		outerRing->SetScale(0.25f);
 		gameObject->AddComponet(new PowerupManager(outerRing));
 	}
 	m_GameObjects.push_back(gameObject);

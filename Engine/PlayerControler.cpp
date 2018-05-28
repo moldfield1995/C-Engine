@@ -10,7 +10,7 @@ PlayerControler* PlayerControler::instance = 0;
 
 
 PlayerControler::PlayerControler(float maxEnergey, float maxHP, PlayerUI *playerUI, ShotManager* shotManager)
-	: hpLossPerHit(25.0f)
+	: hpLossPerHit(10.0f)
 	, energeyLossPerSecond(100.0f)
 	, restingPosition(0.0f,0.0f,5.0f)
 	, maxEnergey(maxEnergey)

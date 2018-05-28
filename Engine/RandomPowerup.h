@@ -1,5 +1,6 @@
 #pragma once
 #include "Powerup.h"
+#include "timerclass.h"
 class RandomPowerup :
 	public Powerup
 {
@@ -12,5 +13,7 @@ public:
 	void virtual Destroy();
 
 	void virtual Activate();
+private:
+	TimerClass * timerClass;
 };
 

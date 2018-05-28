@@ -15,7 +15,7 @@ public:
 
 protected:
 	const float duration;
-	float timeToDisable;
+	static float timeToDisable;
 	bool activated;
 };
 

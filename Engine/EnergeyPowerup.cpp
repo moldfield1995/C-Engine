@@ -1,6 +1,6 @@
 #include "EnergeyPowerup.h"
 #include "PlayerControler.h"
-
+#include "GameObject.h"
 
 EnergeyPowerup::EnergeyPowerup(GameObject* innerObject, Float3 Velosity)
 	: Powerup(innerObject, Velosity)
@@ -16,6 +16,7 @@ EnergeyPowerup::~EnergeyPowerup()
 void EnergeyPowerup::Initalize()
 {
 	Powerup::Initalize();
+	owner->SetColour( XMFLOAT4(0.0f, 1.0f, 1.0f, 1.0f));
 }
 
 void EnergeyPowerup::Update()
@@ -36,6 +37,6 @@ void EnergeyPowerup::Destroy()
 
 void EnergeyPowerup::Activate()
 {
-	PlayerControler::GetInstance()->AddHp(energeyAmount);
+	PlayerControler::GetInstance()->AddEnergey(energeyAmount);
 	SetOwnersKill(true);
 }

@@ -4,10 +4,13 @@
 #include "GameObject.h"
 #include "PlayerControler.h"
 #include "PowerupManager.h"
+#include "Utills.h"
+#include "timerclass.h"
 
 AstroidComponet::AstroidComponet()
 	: zDeathPlain(-10.0f)
 {
+	rotation = Float3(Utills::RandomFloat(), Utills::RandomFloat(), Utills::RandomFloat()).Normalize() * 180.0f;
 }
 
 
@@ -28,6 +31,9 @@ void AstroidComponet::Update()
 		SetOwnersRender(false);
 		SetOwnersKill(true);
 	}
+	Float3 owenerRot = owner->GetRotation();
+	owenerRot = owenerRot + rotation * TimerClass::GetInstance()->GetFrameTime();
+	owner->SetRotation(owenerRot);
 }
 
 void AstroidComponet::Render(ID3D11DeviceContext * deviceContext, const XMMATRIX & worldMatrix, const XMMATRIX & viewMatrix, const XMMATRIX & projectionMatrix, FrustumClass * frustume, LightClass * light, CameraClass & camera)

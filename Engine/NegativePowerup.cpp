@@ -1,6 +1,6 @@
 #include "NegativePowerup.h"
 #include "PlayerControler.h"
-
+#include "GameObject.h"
 
 NegativePowerup::NegativePowerup(GameObject* innerObject, Float3 Velosity)
 	: Powerup(innerObject, Velosity)
@@ -16,6 +16,7 @@ NegativePowerup::~NegativePowerup()
 void NegativePowerup::Initalize()
 {
 	Powerup::Initalize();
+	owner->SetColour(XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f));
 }
 
 void NegativePowerup::Update()

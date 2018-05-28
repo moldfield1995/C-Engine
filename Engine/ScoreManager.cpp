@@ -20,6 +20,9 @@ void ScoreManager::Initalize()
 	scoreText = new UIText(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), "Score: 0", PivotPosition::TopMiddle);
 	scoreText->SetPosition(Float3(-50.0f, 0.0f));
 	UIMannager::GetInstance()->AddComponet(scoreText);
+	multyText = new UIText(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), "Score Multiplier: 1x", PivotPosition::TopMiddle);
+	multyText->SetPosition(Float3(-75.0f, -25.0f));
+	UIMannager::GetInstance()->AddComponet(multyText);
 	instance = this;
 }
 
@@ -61,6 +64,7 @@ int ScoreManager::GetScore()
 void ScoreManager::AddScoreMulityplier(int value)
 {
 	scoreMulityplier += value;
+	multyText->UpdateString("Score Multiplier : " + to_string(scoreMulityplier) + "x");
 }
 
 ScoreManager * ScoreManager::GetInstance()

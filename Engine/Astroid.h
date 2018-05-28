@@ -16,5 +16,6 @@ public:
 	void Launch(Float3 position, Float3 velosity);
 private:
 	const float zDeathPlain;
+	Float3 rotation;
 };
 

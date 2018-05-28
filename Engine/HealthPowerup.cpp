@@ -1,6 +1,6 @@
 #include "HealthPowerup.h"
 #include "PlayerControler.h"
-
+#include "GameObject.h"
 
 HealthPowerup::HealthPowerup(GameObject* innerObject, Float3 Velosity)
 	: Powerup(innerObject, Velosity)
@@ -16,6 +16,7 @@ HealthPowerup::~HealthPowerup()
 void HealthPowerup::Initalize()
 {
 	Powerup::Initalize();
+	owner->SetColour(XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f));
 }
 
 void HealthPowerup::Update()

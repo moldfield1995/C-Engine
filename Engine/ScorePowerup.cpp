@@ -2,6 +2,7 @@
 #include "ScoreManager.h"
 #include "timerclass.h"
 #include "Collider.h"
+#include "GameObject.h"
 
 ScorePowerup::ScorePowerup(GameObject* innerObject, Float3 Velosity)
 	: Powerup(innerObject, Velosity)
@@ -19,6 +20,7 @@ ScorePowerup::~ScorePowerup()
 void ScorePowerup::Initalize()
 {
 	Powerup::Initalize();
+	owner->SetColour(XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f));
 }
 
 void ScorePowerup::Update()
@@ -28,7 +30,7 @@ void ScorePowerup::Update()
 		ScoreManager::GetInstance()->AddScoreMulityplier(-2);
 		SetOwnersKill(true);
 	}
-	else //If we are not active see if we need to be destroyed
+	else if(!activated) //If we are not active see if we need to be destroyed
 		Powerup::Update();
 }
 

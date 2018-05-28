@@ -46,6 +46,7 @@
     <ClInclude Include="cpuclass.h" />
     <ClInclude Include="d3dclass.h" />
     <ClInclude Include="DebugDesplay.h" />
+    <ClInclude Include="DifficultyHandler.h" />
     <ClInclude Include="EnergeyPowerup.h" />
     <ClInclude Include="EnviromentAstroids.h" />
     <ClInclude Include="float3.h" />
@@ -69,6 +70,7 @@
     <ClInclude Include="lightshaderclass.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MainMenuComp.h" />
+    <ClInclude Include="maskedTextureshaderclass.h" />
     <ClInclude Include="ModelClass.h" />
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="MultiShotPowerup.h" />
@@ -80,6 +82,7 @@
     <ClInclude Include="Powerup.h" />
     <ClInclude Include="PowerupManager.h" />
     <ClInclude Include="RandomPowerup.h" />
+    <ClInclude Include="WarpSpeed.h" />
     <ClInclude Include="RotateObject.h" />
     <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="ScorePowerup.h" />
@@ -104,6 +107,7 @@
     <ClInclude Include="UISlider.h" />
     <ClInclude Include="UIText.h" />
     <ClInclude Include="Utills.h" />
+    <ClInclude Include="warpspeedshaderclass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="applicationclass.cpp" />
@@ -122,6 +126,7 @@
     <ClCompile Include="cpuclass.cpp" />
     <ClCompile Include="d3dclass.cpp" />
     <ClCompile Include="DebugDesplay.cpp" />
+    <ClCompile Include="DifficultyHandler.cpp" />
     <ClCompile Include="EnergeyPowerup.cpp" />
     <ClCompile Include="EnviromentAstroids.cpp" />
     <ClCompile Include="float3.cpp" />
@@ -146,6 +151,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MainMenuComp.cpp" />
+    <ClCompile Include="maskedTextureshaderclass.cpp" />
     <ClCompile Include="ModelClass.cpp" />
     <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="MultiShotPowerup.cpp" />
@@ -157,6 +163,7 @@
     <ClCompile Include="Powerup.cpp" />
     <ClCompile Include="PowerupManager.cpp" />
     <ClCompile Include="RandomPowerup.cpp" />
+    <ClCompile Include="WarpSpeed.cpp" />
     <ClCompile Include="RotateObject.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="ScorePowerup.cpp" />
@@ -180,6 +187,7 @@
     <ClCompile Include="UISlider.cpp" />
     <ClCompile Include="UIText.cpp" />
     <ClCompile Include="Utills.cpp" />
+    <ClCompile Include="warpspeedshaderclass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TrueAxis\Projects\TA_VC8.vcxproj">
@@ -195,6 +203,14 @@
     <None Include="SpaceStarsVertex.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maskedTexturePixle.hlsl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="maskedTextureVertex.hlsl">
       <FileType>Document</FileType>
     </None>
   </ItemGroup>

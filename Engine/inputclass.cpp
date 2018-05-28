@@ -13,7 +13,7 @@ InputClass::InputClass()
 	m_keyboard = 0;
 	m_mouse = 0;
 	m_leapToWorldScale = Float3(.04f, .04f, -.04f);
-	m_leapOffset = Float3(0.0f, -7.0f, 0.0f);
+	m_leapOffset = Float3(0.0f, -10.0f, 0.0f);
 }
 
 

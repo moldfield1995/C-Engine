@@ -136,6 +136,8 @@
     <None Include="textureVertex.hlsl">
       <Filter>Shader Files</Filter>
     </None>
+    <None Include="SpaceStarsPixel.hlsl" />
+    <None Include="SpaceStarsVertex.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="colorshaderclass.h">
@@ -359,6 +361,18 @@
     </ClInclude>
     <ClInclude Include="RandomPowerup.h">
       <Filter>Header Files\Componets\PowerupManager</Filter>
+    </ClInclude>
+    <ClInclude Include="DifficultyHandler.h">
+      <Filter>Header Files\Componets</Filter>
+    </ClInclude>
+    <ClInclude Include="warpspeedshaderclass.h">
+      <Filter>Header Files\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="WarpSpeed.h">
+      <Filter>Header Files\Componets</Filter>
+    </ClInclude>
+    <ClInclude Include="maskedTextureshaderclass.h">
+      <Filter>Header Files\Shaders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -584,12 +598,24 @@
     <ClCompile Include="RandomPowerup.cpp">
       <Filter>Source Files\Componets\Powerups</Filter>
     </ClCompile>
+    <ClCompile Include="DifficultyHandler.cpp">
+      <Filter>Source Files\Componets</Filter>
+    </ClCompile>
+    <ClCompile Include="warpspeedshaderclass.cpp">
+      <Filter>Source Files\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="WarpSpeed.cpp">
+      <Filter>Source Files\Componets</Filter>
+    </ClCompile>
+    <ClCompile Include="maskedTextureshaderclass.cpp">
+      <Filter>Source Files\Shaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="SpaceStarsPixel.hlsl">
+    <FxCompile Include="maskedTexturePixle.hlsl">
       <Filter>Shader Files</Filter>
     </FxCompile>
-    <FxCompile Include="SpaceStarsVertex.hlsl">
+    <FxCompile Include="maskedTextureVertex.hlsl">
       <Filter>Shader Files</Filter>
     </FxCompile>
   </ItemGroup>

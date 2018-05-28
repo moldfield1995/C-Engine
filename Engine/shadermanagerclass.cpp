@@ -10,6 +10,8 @@
 #include "lightshader.h"
 #include "bumpmapshaderclass.h"
 #include "slidershaderclass.h"
+#include "warpspeedshaderclass.h"
+#include "maskedTextureshaderclass.h"
 
 ShaderManagerClass* ShaderManagerClass::instance = 0;
 
@@ -40,6 +42,8 @@ bool ShaderManagerClass::Initialize(ID3D11Device* device, HWND hwnd)
 	CreateShader(new BumpMapShaderClass, device, hwnd);
 	CreateShader(new SkyDomeShaderClass, device, hwnd);
 	CreateShader(new SliderShaderClass, device, hwnd);
+	CreateShader(new WarpSpeedShaderClass, device, hwnd);
+	CreateShader(new MaskedTextureshaderclass, device, hwnd);
 	instance = this;
 
 	return true;

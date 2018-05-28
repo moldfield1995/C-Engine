@@ -3,13 +3,14 @@
 #include "BasicMeshHitbox.h"
 #include "Utills.h"
 #include "timerclass.h"
+#include "DifficultyHandler.h"
 
 AstroidManager::AstroidManager(GameObject* prefab)
-	: minSpawnAstroid (0.25f)
-	, maxSpawnAstroid(1.25f)
-	, minPosition(-15.0f,-20.0f,400.0f)
+	: minSpawnAstroid (0.75f)
+	, maxSpawnAstroid(2.25f)
+	, minPosition(-15.0f,-10.0f,400.0f)
 	, maxPosition(30.0f,30.0f,400.0f)
-	, astroidVelosity(0.0f,0.0f,-25.0f)
+	, astroidVelosity(0.0f,0.0f,-50.0f)
 {
 	prefabAstroid = prefab;
 }
@@ -45,7 +46,7 @@ void AstroidManager::Update()
 	if (nextAstroid <= 0.0f)
 	{
 		LaunchAstroid();
-		nextAstroid = Utills::Lerp(minSpawnAstroid, maxSpawnAstroid, Utills::RandomFloat());
+		nextAstroid = Utills::Lerp(minSpawnAstroid * (1/DifficultyHandler::GetDifficulty()), maxSpawnAstroid * (1 / DifficultyHandler::GetDifficulty()), Utills::RandomFloat());
 	}
 
 }
@@ -98,7 +99,7 @@ void AstroidManager::LaunchAstroid()
 	Float3 Possition = Float3(Utills::Lerp(minPosition.X, maxPosition.X, Utills::RandomFloat()),
 		Utills::Lerp(minPosition.Y, maxPosition.Y, Utills::RandomFloat()),
 		minPosition.Z);
-	astroid->Launch(Possition, astroidVelosity);
+	astroid->Launch(Possition, astroidVelosity * (0.25f * DifficultyHandler::GetDifficulty() + 0.75f));
 
 	activeAstroids.push_back(astroid->GetOwner());
 }

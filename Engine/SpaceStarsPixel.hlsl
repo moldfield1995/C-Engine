@@ -13,9 +13,11 @@ struct PixelInputType
 	float2 tex : TEXCOORD0;
 };
 
-const float2 resolution = { 1.0f,1.0f };
+static const float2 resolution = { 1.0f,1.0f };
 
-float4 main(PixelInputType input) : SV_TARGET
+static const float alpha = 0.01f;
+
+float4 SpaceStars(PixelInputType input) : SV_TARGET
 {
 	float t = time * speed;
 	float2 position = (input.tex.xy - resolution.xy * .5) / resolution.x;
@@ -33,8 +35,9 @@ float4 main(PixelInputType input) : SV_TARGET
 	//removes center
 	float center = abs(frac(dist) - 590.5);
 	dist = abs(frac(dist) - fade);
-
 	float outputAlpha = (1.0 / (dist)-center) * cos(0.7 * sin(t)) * adist / radDist / 30.0;
-	float4 outputColor = float4(color * outputAlpha,outputAlpha);
+	float4 outputColor = float4(color, outputAlpha);
+	//outputColor.a *= alpha;
+	outputColor.a = clamp(-(0.05f - distance(float2(0.5, 0.5f), input.tex.xy)),0.0f,1.0f )* outputAlpha;
 	return outputColor;
 }

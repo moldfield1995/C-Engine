@@ -16,40 +16,45 @@
 PowerupManager* PowerupManager::instance = 0;
 
 PowerupManager::PowerupManager(GameObject* powerupPrefab)
-	: spawnChanse(1.0f)
+	: spawnChanse(0.25f)
 	, powerupPrefab(powerupPrefab)
 {
 	ModelManager* modelManager = ModelManager::GetInstance();
-	ID3D11ShaderResourceView* texture = TextureManagerClass::GetInstance()->GetTexture(Utills::ParsString("../Engine/data/textures/Default.tga"));
+	ID3D11ShaderResourceView* texture = TextureManagerClass::GetInstance()->GetTexture(Utills::ParsString("../Engine/data/textures/IconMap.tga"));
 	ID3D11Device* device = D3DClass::GetInstance()->GetDevice();
 	Shader* textureShader = ShaderManagerClass::GetInstance()->GetShader<TextureShaderClass>();
 	Float3 zeroFloat = Float3(0.0f);
 	int modelId;
-	modelManager->AddModle(device, "../Engine/data/T1Assets/cubes.txt");
 
-	modelId = Utills::ParsString("../Engine/data/T1Assets/cubes.txt");
+	modelId = modelManager->AddModle(device, "../Engine/data/Models/HealthIcon.obj");
 	healthModel = new GameObject();
 	healthModel->Initalize(zeroFloat, zeroFloat, modelManager->GetModel(modelId), texture, textureShader);
+	healthModel->SetScale(0.75f);
 
-	modelId = Utills::ParsString("../Engine/data/T1Assets/cubes.txt");
+	modelId = modelManager->AddModle(device, "../Engine/data/Models/EnergeyIcon.obj");
 	powerModel = new GameObject();
 	powerModel->Initalize(zeroFloat, zeroFloat, modelManager->GetModel(modelId), texture, textureShader);
+	powerModel->SetScale(0.75f);
 
-	modelId = Utills::ParsString("../Engine/data/T1Assets/cubes.txt");
+	modelId = modelManager->AddModle(device, "../Engine/data/Models/2xIcon.obj");
 	scoreModel = new GameObject();
 	scoreModel->Initalize(zeroFloat, zeroFloat, modelManager->GetModel(modelId), texture, textureShader);
+	scoreModel->SetScale(0.75f);
 
-	modelId = Utills::ParsString("../Engine/data/T1Assets/cubes.txt");
+	modelId = modelManager->AddModle(device, "../Engine/data/Models/MultshotIcon.obj");
 	multishotModel = new GameObject();
 	multishotModel->Initalize(zeroFloat, zeroFloat, modelManager->GetModel(modelId), texture, textureShader);
+	multishotModel->SetScale(0.75f);
 
-	modelId = Utills::ParsString("../Engine/data/T1Assets/cubes.txt");
+	modelId = modelManager->AddModle(device, "../Engine/data/Models/NegativeIcon.obj");
 	negativeModel = new GameObject();
 	negativeModel->Initalize(zeroFloat, zeroFloat, modelManager->GetModel(modelId), texture, textureShader);
+	negativeModel->SetScale(0.75f);
 
-	modelId = Utills::ParsString("../Engine/data/T1Assets/cubes.txt");
+	modelId = modelManager->AddModle(device, "../Engine/data/Models/RandomIcon.obj");
 	randomModel = new GameObject();
 	randomModel->Initalize(zeroFloat, zeroFloat, modelManager->GetModel(modelId), texture, textureShader);
+	randomModel->SetScale(0.75f);
 }
 
 
