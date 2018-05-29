@@ -95,7 +95,7 @@ void UIImage::SetPosition(Float3 value, bool centerX, bool centerY)
 {
 	int height, width;
 	bitmapClass->GetTextureSize(height, width);
-	position = value + pivotOffset;
+	position = (value * relativeScreenSize) + pivotOffset;
 
 	if (centerX)
 		position.X -= width;

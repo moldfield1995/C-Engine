@@ -208,7 +208,7 @@ void UIText::SetShadowColour(XMFLOAT4 colour)
 
 void UIText::SetPosition(Float3 value, bool centerX, bool centerY)
 {
-	position = value + pivotOffset;
+	position = (value * relativeScreenSize) + pivotOffset;
 	if (centerX)
 		position.X -= font->GetFontWidth();
 	if (centerY)

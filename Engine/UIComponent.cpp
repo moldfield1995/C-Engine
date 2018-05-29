@@ -1,5 +1,7 @@
 #include "UIComponent.h"
 
+Float3 UIComponent::relativeScreenSize = Float3(1.0f);
+
 UIComponent::UIComponent(PivotPosition pivot)
 {
 	SetPivot(pivot);
@@ -12,7 +14,7 @@ UIComponent::UIComponent(PivotPosition pivot)
 
 void UIComponent::SetPosition(Float3 value)
 {
-	position = value + pivotOffset;
+	position = (value * relativeScreenSize) + pivotOffset;
 }
 
 void UIComponent::SetRotation(Float3 value)
@@ -97,4 +99,10 @@ void UIComponent::SetPivot(PivotPosition pivot)
 PivotPosition UIComponent::GetPivot()
 {
 	return pivot;
+}
+
+void UIComponent::SetRelitiveScreenSize(Float3 value)
+{
+	relativeScreenSize = value;
+	relativeScreenSize.Z = 0.0f;
 }

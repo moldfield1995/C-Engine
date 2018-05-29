@@ -24,7 +24,7 @@ void UIButton::Update()
 {
 	InputClass* instance = InputClass::GetInstance();
 	//Todo: check cursur/hand pos
-	if (CheckCollition(instance->GetLeapScreenPos()))
+	if (CheckCollition(instance->GetLeapScreenPos() * relativeScreenSize))
 	{
 		//check if a click has been made
 		Leap::Frame frame = instance->GetLeapFrame();
@@ -68,6 +68,7 @@ void UIButton::Destroy()
 bool UIButton::CheckCollition(Float3 otherPos)
 {
 	int height, width;
+	
 	//Todo: Coppys or refrences?
 	Float3 hitboxExstent = position;
 	bitmapClass->GetTextureSize(height, width);

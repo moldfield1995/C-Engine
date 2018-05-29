@@ -48,8 +48,11 @@ public:
 	void SetPivot(PivotPosition pivot);
 	PivotPosition GetPivot();
 
+	static void SetRelitiveScreenSize(Float3 relitiveScreenSize);
+
 protected:
 	Float3 position, rotation, scale, pivotOffset;
+	static Float3 relativeScreenSize;
 	bool renders, killComponet, active;
 	PivotPosition pivot;
 private:

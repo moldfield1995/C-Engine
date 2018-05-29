@@ -16,7 +16,7 @@
 PowerupManager* PowerupManager::instance = 0;
 
 PowerupManager::PowerupManager(GameObject* powerupPrefab)
-	: spawnChanse(0.25f)
+	: spawnChanse(0.50f)
 	, powerupPrefab(powerupPrefab)
 {
 	ModelManager* modelManager = ModelManager::GetInstance();
