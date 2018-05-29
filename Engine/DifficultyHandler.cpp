@@ -18,6 +18,7 @@ void DifficultyHandler::Initalize()
 	difficulty = 1.0f;
 	nextDifficulty = TimerClass::GetInstance()->GetTime() + 30.0f;
 	difficultyText = new UIText(XMFLOAT4(1.0f,1.0f,1.0f,1.0f), "Level: 1");
+	difficultyText->SetPosition(Float3(5.0f, 5.0f));
 	UIMannager::GetInstance()->AddComponet(difficultyText);
 }
 

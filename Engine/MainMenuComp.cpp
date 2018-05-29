@@ -1,7 +1,7 @@
 #include "MainMenuComp.h"
 #include "UIMannager.h"
 #include "UIButton.h"
-
+#include "UIText.h"
 
 MainMenuComp::MainMenuComp(GameState* gamestate)
 {
@@ -29,6 +29,19 @@ void MainMenuComp::Initalize()
 	__hook(&UIButton::onClickTrigger, button, &MainMenuComp::QuitGame);
 	button->SetPosition(Float3(-150.0f, -200.0f));
 	uiManager->AddComponet(button);
+
+	UIText *text = new UIText(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), "Assets Created by:", PivotPosition::BottemLeft);
+	text->SetPosition(Float3(10.0f, 100.0f));
+	uiManager->AddComponet(text);
+	text = new UIText(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), "Google Polly - Google - Astroids", PivotPosition::BottemLeft);
+	text->SetPosition(Float3(10.0f, 75.0f));
+	uiManager->AddComponet(text);
+	text = new UIText(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), "Google Polly - LizReddington - Ship", PivotPosition::BottemLeft);
+	text->SetPosition(Float3(10.0f, 50.0f));
+	uiManager->AddComponet(text);
+	text = new UIText(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), "Sam Dickinson - Powerups", PivotPosition::BottemLeft);
+	text->SetPosition(Float3(10.0f, 25.0f));
+	uiManager->AddComponet(text);
 }
 
 void MainMenuComp::Update()
